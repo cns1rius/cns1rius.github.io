@@ -694,38 +694,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
-    <title>git命令</title>
-    <url>/2022/11/git/</url>
-    <content><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git的一个隐藏文件，这时，本地库已经初始化完成.</p>
-<h2 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h2><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token punctuation">[</span>url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h1 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h1><h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>git add 命令可将该文件添加到暂存区。</p>
-<p>添加一个或多个文件到暂存区</p>
-<h2 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h2><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token punctuation">[</span>message<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>[message] 可以是一些备注信息。</p>
-<h2 id="status"><a href="#status" class="headerlink" title="status"></a>status</h2><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p>
-<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p>
-<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token parameter variable">-f</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><h2 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h2><p>显示所有远程仓库：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h2><p>git pull 命令用于从远程获取代码并合并本地的版本。 </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>远程分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>本地分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="push"><a href="#push" class="headerlink" title="push"></a>push</h2><p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>本地分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>远程分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hackthebox合集</title>
     <url>/2022/11/htb/</url>
     <content><![CDATA[<p>共做出三道题，前两道题wp正在补，但现在又有点想转去做vulnhub</p>
@@ -789,6 +757,38 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git命令</title>
+    <url>/2022/11/git/</url>
+    <content><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git的一个隐藏文件，这时，本地库已经初始化完成.</p>
+<h2 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h2><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token punctuation">[</span>url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h1><h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>git add 命令可将该文件添加到暂存区。</p>
+<p>添加一个或多个文件到暂存区</p>
+<h2 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h2><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token punctuation">[</span>message<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>[message] 可以是一些备注信息。</p>
+<h2 id="status"><a href="#status" class="headerlink" title="status"></a>status</h2><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p>
+<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token parameter variable">-f</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><h2 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h2><p>显示所有远程仓库：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h2><p>git pull 命令用于从远程获取代码并合并本地的版本。 </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>远程分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>本地分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="push"><a href="#push" class="headerlink" title="push"></a>push</h2><p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>本地分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>远程分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
