@@ -568,6 +568,39 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
+    <title>kali安装docker</title>
+    <url>/2022/11/docker/</url>
+    <content><![CDATA[<h1 id="kali安装docker"><a href="#kali安装docker" class="headerlink" title="kali安装docker"></a>kali安装docker</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">apt-get</span> update
+<span class="token function">apt-get</span> <span class="token function">install</span> docker-engine
+<span class="token comment"># 安装结束，打开docker服务</span>
+<span class="token function">service</span> <span class="token function">docker</span> start
+<span class="token comment"># 验证安装，运行测试样例</span>
+<span class="token function">docker</span> <span class="token parameter variable">--version</span>
+<span class="token function">docker</span> run hello-world
+<span class="token comment">#测试</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token parameter variable">--version</span>
+<span class="token function">docker</span> images
+<span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span>
+<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> <span class="token number">123</span> <span class="token parameter variable">-p</span> <span class="token number">127.0</span>.0.1:80:80 镜像名
+<span class="token function">docker</span> stop <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
+<h1 id="dockers底层原理"><a href="#dockers底层原理" class="headerlink" title="dockers底层原理"></a>dockers底层原理</h1><h2 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h2><blockquote>
+<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用Linux时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
+</blockquote>
+<h2 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h2><blockquote>
+<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br>如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I&#x2F;O 和网络带宽。<br><code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>kali</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2022/11/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
@@ -658,39 +691,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>kali安装docker</title>
-    <url>/2022/11/docker/</url>
-    <content><![CDATA[<h1 id="kali安装docker"><a href="#kali安装docker" class="headerlink" title="kali安装docker"></a>kali安装docker</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">apt-get</span> update
-<span class="token function">apt-get</span> <span class="token function">install</span> docker-engine
-<span class="token comment"># 安装结束，打开docker服务</span>
-<span class="token function">service</span> <span class="token function">docker</span> start
-<span class="token comment"># 验证安装，运行测试样例</span>
-<span class="token function">docker</span> <span class="token parameter variable">--version</span>
-<span class="token function">docker</span> run hello-world
-<span class="token comment">#测试</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token parameter variable">--version</span>
-<span class="token function">docker</span> images
-<span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span>
-<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> <span class="token number">123</span> <span class="token parameter variable">-p</span> <span class="token number">127.0</span>.0.1:80:80 镜像名
-<span class="token function">docker</span> stop <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
-<h1 id="dockers底层原理"><a href="#dockers底层原理" class="headerlink" title="dockers底层原理"></a>dockers底层原理</h1><h2 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h2><blockquote>
-<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用Linux时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
-</blockquote>
-<h2 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h2><blockquote>
-<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br>如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I&#x2F;O 和网络带宽。<br><code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>kali</tag>
-        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
