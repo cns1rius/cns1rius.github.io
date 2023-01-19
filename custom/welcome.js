@@ -1,6 +1,6 @@
 //首次访问弹窗
 if (localStorage.getItem("popWelcomeWindow") != "0") {
-    if (document.referrer == undefined || document.referrer.indexOf("yisous.xyz") != -1 || document.referrer.indexOf("ariasaka.top") != -1) { //改成自己域名，注意是referrer!!! qwq
+    if (document.referrer == undefined || document.referrer.indexOf("s1rius.gitee.io") != -1 || document.referrer.indexOf("cns1rius.gitee.io") != -1 || document.referrer.indexOf("s1rius.space") != -1 || document.referrer.indexOf("s1rius.vercel.app") != -1) { //改成自己域名，注意是referrer!!! qwq
         Snackbar.show({
             pos: "top-right",
             showAction: false,
@@ -144,27 +144,27 @@ console.log = function () { };
 console.error = function () { };
 console.warn = function () { };
 
-document.onkeydown = function (e) {
-    if (123 == e.keyCode || (e.ctrlKey && e.shiftKey && (74 === e.keyCode || 73 === e.keyCode || 67 === e.keyCode)) || (e.ctrlKey && 85 === e.keyCode)) return btf.snackbarShow("你真坏，不能打开控制台喔!"), event.keyCode = 0, event.returnValue = !1, !1
-};
-// 禁用js
+// document.onkeydown = function (e) {
+//     if (123 == e.keyCode || (e.ctrlKey && e.shiftKey && (74 === e.keyCode || 73 === e.keyCode || 67 === e.keyCode)) || (e.ctrlKey && 85 === e.keyCode)) return btf.snackbarShow("你真坏，不能打开控制台喔!"), event.keyCode = 0, event.returnValue = !1, !1
+// };
+// // 禁用js
 
-((function () {
-    var callbacks = [], timeLimit = 50, open = false; setInterval(loop, 1); return { addListener: function (fn) { callbacks.push(fn); }, cancleListenr: function (fn) { callbacks = callbacks.filter(function (v) { return v !== fn; }); } }
-    function loop() { var startTime = new Date(); debugger; if (new Date() - startTime > timeLimit) { if (!open) { callbacks.forEach(function (fn) { fn.call(null); }); } open = true; window.stop(); alert('你真坏，请关闭控制台！'); document.body.innerHTML = ""; } else { open = false; } }
-})()).addListener(function () { window.location.reload(); });
+// ((function () {
+//     var callbacks = [], timeLimit = 50, open = false; setInterval(loop, 1); return { addListener: function (fn) { callbacks.push(fn); }, cancleListenr: function (fn) { callbacks = callbacks.filter(function (v) { return v !== fn; }); } }
+//     function loop() { var startTime = new Date(); debugger; if (new Date() - startTime > timeLimit) { if (!open) { callbacks.forEach(function (fn) { fn.call(null); }); } open = true; window.stop(); alert('你真坏，请关闭控制台！'); document.body.innerHTML = ""; } else { open = false; } }
+// })()).addListener(function () { window.location.reload(); });
 
-function toDevtools() {
-    let num = 0;
-    let devtools = new Date();
-    devtools.toString = function () {
-        num++;
-        if (num > 1) {
-            alert('你真坏，请关闭控制台！')
-            window.location.href = "about:blank"
-            blast();
-        }
-    }
-    console.log('', devtools);
-}
-toDevtools();
+// function toDevtools() {
+//     let num = 0;
+//     let devtools = new Date();
+//     devtools.toString = function () {
+//         num++;
+//         if (num > 1) {
+//             alert('你真坏，请关闭控制台！')
+//             window.location.href = "about:blank"
+//             blast();
+//         }
+//     }
+//     console.log('', devtools);
+// }
+// toDevtools();
