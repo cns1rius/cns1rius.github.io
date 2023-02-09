@@ -661,6 +661,39 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
+    <title>kali安装docker</title>
+    <url>/2022/11/docker/</url>
+    <content><![CDATA[<h1 id="kali安装docker"><a href="#kali安装docker" class="headerlink" title="kali安装docker"></a>kali安装docker</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">apt-get</span> update
+<span class="token function">apt-get</span> <span class="token function">install</span> docker-engine
+<span class="token comment"># 安装结束，打开docker服务</span>
+<span class="token function">service</span> <span class="token function">docker</span> start
+<span class="token comment"># 验证安装，运行测试样例</span>
+<span class="token function">docker</span> <span class="token parameter variable">--version</span>
+<span class="token function">docker</span> run hello-world
+<span class="token comment">#测试</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token parameter variable">--version</span>
+<span class="token function">docker</span> images
+<span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span>
+<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> <span class="token number">123</span> <span class="token parameter variable">-p</span> <span class="token number">127.0</span>.0.1:80:80 镜像名
+<span class="token function">docker</span> stop <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
+<h1 id="dockers底层原理"><a href="#dockers底层原理" class="headerlink" title="dockers底层原理"></a>dockers底层原理</h1><h2 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h2><blockquote>
+<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用Linux时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
+</blockquote>
+<h2 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h2><blockquote>
+<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br>如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I&#x2F;O 和网络带宽。<br><code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>kali</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git命令</title>
     <url>/2022/11/git/</url>
     <content><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git的一个隐藏文件，这时，本地库已经初始化完成.</p>
@@ -693,36 +726,69 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
-    <title>kali安装docker</title>
-    <url>/2022/11/docker/</url>
-    <content><![CDATA[<h1 id="kali安装docker"><a href="#kali安装docker" class="headerlink" title="kali安装docker"></a>kali安装docker</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">apt-get</span> update
-<span class="token function">apt-get</span> <span class="token function">install</span> docker-engine
-<span class="token comment"># 安装结束，打开docker服务</span>
-<span class="token function">service</span> <span class="token function">docker</span> start
-<span class="token comment"># 验证安装，运行测试样例</span>
-<span class="token function">docker</span> <span class="token parameter variable">--version</span>
-<span class="token function">docker</span> run hello-world
-<span class="token comment">#测试</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token parameter variable">--version</span>
-<span class="token function">docker</span> images
-<span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span>
-<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> <span class="token number">123</span> <span class="token parameter variable">-p</span> <span class="token number">127.0</span>.0.1:80:80 镜像名
-<span class="token function">docker</span> stop <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
-<h1 id="dockers底层原理"><a href="#dockers底层原理" class="headerlink" title="dockers底层原理"></a>dockers底层原理</h1><h2 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h2><blockquote>
-<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用Linux时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
+    <title>hackthebox合集</title>
+    <url>/2022/11/htb/</url>
+    <content><![CDATA[<p>共做出三道题，前两道题wp正在补，但现在又有点想转去做vulnhub</p>
+<h1 id="easy"><a href="#easy" class="headerlink" title="easy"></a>easy</h1><h2 id="Shoppy"><a href="#Shoppy" class="headerlink" title="Shoppy"></a>Shoppy</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>老样子 先nmap扫下</p>
+<p>有22和80</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020162838813.png" alt="image-20221020162838813"></p>
+<p>然后将域名加入hosts</p>
+<p>子域名扫描</p>
+<p>可以使用gobuster或各种fuzz工具如wfuzz</p>
+<blockquote>
+<p>本来想用oneforall扫子域名，试了半天一堆错误，后来问学长，oneforall是调用了一堆子域名解析的</p>
 </blockquote>
-<h2 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h2><blockquote>
-<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br>如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I&#x2F;O 和网络带宽。<br><code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
-</blockquote>
+<p>扫到mattermost.shoppy.htb加进hosts</p>
+<p>打开发现是个登陆界面，先放着</p>
+<p>跑下主站的域名 发现有个&#x2F;admin</p>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>根据黑盒测试老套路，试试弱口令，不成功，试试万能密码跑下</p>
+<p>发现<code>admin&#39;||&#39;&#39;===&#39;</code>成功进入</p>
+<p>进入后发现搜索框，可进行大量尝试</p>
+<p>当搜索到admin后出现passwordhash</p>
+<p>继续尝试后发现搜索<code>admin&#39;||&#39;&#39;===&#39;</code>会出现两个hash</p>
+<p>使用hashcat爆破</p>
+<p><code>josh:remembermethisway</code></p>
+<p>然后进入之前扫到的那个子域名尝试登陆，成功</p>
+<p>又是htb经典频道页面</p>
+<p>翻找后发现</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020204113936-16662696771111.png" alt="image-20221020204113936"></p>
+<p>尝试使用ssh连接</p>
+<p>password:Sh0ppyBest@pp!</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020203942821.png" alt="image-20221020203942821"></p>
+<p>user get√</p>
+<h3 id="root"><a href="#root" class="headerlink" title="root"></a>root</h3><p>ssh进入后ls发现已经有老哥把经典linepeas传进去了</p>
+<p>开跑！</p>
+<p>然后爆出一堆cve先放一边</p>
+<p>还在后面看到一些password字段的文件去看看</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020205247703.png" alt="image-20221020205247703"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020210747666.png" alt="image-20221020210747666"></p>
+<p>password:Sample</p>
+<p>调用下密码管理器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020210823274.png" alt="image-20221020210823274"></p>
+<p>再次使用ssh登录deploy账户</p>
+<p>进入后又没啥思路了</p>
+<p>准备走cve了</p>
+<p>走前看了眼wp</p>
+<p>发现聊天页下面还有段话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211115093.png" alt="image-20221020211115093"></p>
+<p>发现docker部署尝试docker提权</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-v</span> /:/mnt <span class="token parameter variable">--rm</span> <span class="token parameter variable">-it</span> alpine <span class="token function">chroot</span> /mnt <span class="token function">sh</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211249861.png" alt="image-20221020211249861"></p>
+<p>其实后来想想 linpeas里出现了提示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211920140.png" alt="image-20221020211920140"></p>
+<p>deplay在root权限的docker组里，当时要是细看的话应该也能想到</p>
+<p>后面跟着wp做cve也懒得去试了</p>
+<p>最后给师傅们留下截图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020212137224.png" alt="image-20221020212137224"></p>
+<p>这回cve都没用，给个简单低评吧~</p>
 ]]></content>
       <categories>
         <category>ctf</category>
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>kali</tag>
-        <tag>docker</tag>
+        <tag>ctfshow</tag>
       </tags>
   </entry>
   <entry>
@@ -824,72 +890,6 @@ sig <span class="token operator">=</span> base64<span class="token punctuation">
       </tags>
   </entry>
   <entry>
-    <title>hackthebox合集</title>
-    <url>/2022/11/htb/</url>
-    <content><![CDATA[<p>共做出三道题，前两道题wp正在补，但现在又有点想转去做vulnhub</p>
-<h1 id="easy"><a href="#easy" class="headerlink" title="easy"></a>easy</h1><h2 id="Shoppy"><a href="#Shoppy" class="headerlink" title="Shoppy"></a>Shoppy</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>老样子 先nmap扫下</p>
-<p>有22和80</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020162838813.png" alt="image-20221020162838813"></p>
-<p>然后将域名加入hosts</p>
-<p>子域名扫描</p>
-<p>可以使用gobuster或各种fuzz工具如wfuzz</p>
-<blockquote>
-<p>本来想用oneforall扫子域名，试了半天一堆错误，后来问学长，oneforall是调用了一堆子域名解析的</p>
-</blockquote>
-<p>扫到mattermost.shoppy.htb加进hosts</p>
-<p>打开发现是个登陆界面，先放着</p>
-<p>跑下主站的域名 发现有个&#x2F;admin</p>
-<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>根据黑盒测试老套路，试试弱口令，不成功，试试万能密码跑下</p>
-<p>发现<code>admin&#39;||&#39;&#39;===&#39;</code>成功进入</p>
-<p>进入后发现搜索框，可进行大量尝试</p>
-<p>当搜索到admin后出现passwordhash</p>
-<p>继续尝试后发现搜索<code>admin&#39;||&#39;&#39;===&#39;</code>会出现两个hash</p>
-<p>使用hashcat爆破</p>
-<p><code>josh:remembermethisway</code></p>
-<p>然后进入之前扫到的那个子域名尝试登陆，成功</p>
-<p>又是htb经典频道页面</p>
-<p>翻找后发现</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020204113936-16662696771111.png" alt="image-20221020204113936"></p>
-<p>尝试使用ssh连接</p>
-<p>password:Sh0ppyBest@pp!</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020203942821.png" alt="image-20221020203942821"></p>
-<p>user get√</p>
-<h3 id="root"><a href="#root" class="headerlink" title="root"></a>root</h3><p>ssh进入后ls发现已经有老哥把经典linepeas传进去了</p>
-<p>开跑！</p>
-<p>然后爆出一堆cve先放一边</p>
-<p>还在后面看到一些password字段的文件去看看</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020205247703.png" alt="image-20221020205247703"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020210747666.png" alt="image-20221020210747666"></p>
-<p>password:Sample</p>
-<p>调用下密码管理器</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020210823274.png" alt="image-20221020210823274"></p>
-<p>再次使用ssh登录deploy账户</p>
-<p>进入后又没啥思路了</p>
-<p>准备走cve了</p>
-<p>走前看了眼wp</p>
-<p>发现聊天页下面还有段话</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211115093.png" alt="image-20221020211115093"></p>
-<p>发现docker部署尝试docker提权</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-v</span> /:/mnt <span class="token parameter variable">--rm</span> <span class="token parameter variable">-it</span> alpine <span class="token function">chroot</span> /mnt <span class="token function">sh</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211249861.png" alt="image-20221020211249861"></p>
-<p>其实后来想想 linpeas里出现了提示</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211920140.png" alt="image-20221020211920140"></p>
-<p>deplay在root权限的docker组里，当时要是细看的话应该也能想到</p>
-<p>后面跟着wp做cve也懒得去试了</p>
-<p>最后给师傅们留下截图</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020212137224.png" alt="image-20221020212137224"></p>
-<p>这回cve都没用，给个简单低评吧~</p>
-]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfshow</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux动态加载</title>
     <url>/2022/11/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
     <content><![CDATA[<h2 id="linux动态加载"><a href="#linux动态加载" class="headerlink" title="linux动态加载"></a>linux动态加载</h2><h1 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h1><p>先给了755<br>他自己传了flag 等于告诉我们在哪了<br>然后限到了644<br>不想让我们直接看</p>
@@ -961,7 +961,12 @@ sig <span class="token operator">=</span> base64<span class="token punctuation">
 </blockquote>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="token string">"javascript:alert(/bmfx/)"</span>>bmfx&lt;/a> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>19关</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx\"<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token selector">catch(e)</span><span class="token punctuation">&#123;</span><span class="token function">alert</span><span class="token punctuation">(</span>/bmfx/<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>//%26width=998%26height=998<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx\"<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token selector">catch(e)</span><span class="token punctuation">&#123;</span><span class="token function">alert</span><span class="token punctuation">(</span>/bmfx/<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>//%26width=998%26height=998<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<script>
+setTimeout(function () {
+    alert('xss');
+}, 1000);
+</script>]]></content>
       <categories>
         <category>ctf</category>
       </categories>
