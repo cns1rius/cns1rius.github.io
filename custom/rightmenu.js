@@ -172,7 +172,7 @@ function popupMenu() {
         if (el.tagName == 'A') {
             $('#menu-to').show()
             rmf.open = function () {
-                if (el.href.indexOf("http://") == -1 && el.href.indexOf("https://") == -1 || el.href.indexOf("yisous.xyz") != -1) {
+                if (el.href.indexOf("http://") == -1 && el.href.indexOf("https://") == -1 || el.href.indexOf("s1rius.gitee.io") != -1) {
                     pjax.loadUrl(el.href)
                 }
                 else {
