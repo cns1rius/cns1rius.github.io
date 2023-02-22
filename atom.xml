@@ -6,7 +6,7 @@
   <link href="http://s1rius.gitee.io/atom.xml" rel="self"/>
   
   <link href="http://s1rius.gitee.io/"/>
-  <updated>2022-12-30T08:25:21.716Z</updated>
+  <updated>2023-02-22T11:28:16.469Z</updated>
   <id>http://s1rius.gitee.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>22年10月末</title>
+    <link href="http://s1rius.gitee.io/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/"/>
+    <id>http://s1rius.gitee.io/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</id>
+    <published>2023-02-22T11:23:41.005Z</published>
+    <updated>2023-02-22T11:28:16.469Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;python-特性&quot;&gt;&lt;a href=&quot;#python-特性&quot; class=&quot;headerlink&quot; title=&quot;python 特性&quot;&gt;&lt;/a&gt;python</summary>
+        
+      
+    
+    
+    
+    <category term="ctf" scheme="http://s1rius.gitee.io/categories/ctf/"/>
+    
+    
+    <category term="web" scheme="http://s1rius.gitee.io/tags/web/"/>
+    
+    <category term="python" scheme="http://s1rius.gitee.io/tags/python/"/>
+    
+    <category term="沙箱逃逸" scheme="http://s1rius.gitee.io/tags/%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
+    
+    <category term="PyJail" scheme="http://s1rius.gitee.io/tags/PyJail/"/>
+    
+  </entry>
   
   <entry>
     <title>2022 unctf wp</title>
