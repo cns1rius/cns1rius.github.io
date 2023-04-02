@@ -482,9 +482,9 @@
     
     <category term="web" scheme="http://s1rius.space/tags/web/"/>
     
-    <category term="ctfhub" scheme="http://s1rius.space/tags/ctfhub/"/>
-    
     <category term="rce" scheme="http://s1rius.space/tags/rce/"/>
+    
+    <category term="ctfhub" scheme="http://s1rius.space/tags/ctfhub/"/>
     
   </entry>
   
