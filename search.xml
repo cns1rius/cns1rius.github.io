@@ -497,99 +497,6 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
-    <title>ctfshow黑盒测试</title>
-    <url>/2022/11/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
-<p>然后再点点看看功能</p>
-<p>发现文章页的格式为</p>
-<p><code>page_n.php</code></p>
-<p>猜测为sql注入</p>
-<p>直接在n处注入无效</p>
-<p>尝试<code>?id=</code>处注入</p>
-<p>发现报错</p>
-<p><code>file_get_contents(1&#39;.php)</code></p>
-<p><img src= "/img/image-20221018212038190.png" alt="image-20221018212038190"></p>
-<p>直接读取flag<code>?id=flag</code></p>
-<p>flag出现</p>
-<h1 id="web381"><a href="#web381" class="headerlink" title="web381"></a>web381</h1><p>再次尝试上题思路，发现无回显</p>
-<p>再次翻看源码</p>
-<p>发现到css文件中出现了一个特殊地址</p>
-<p><img src= "/img/image-20221018212406542.png" alt="image-20221018212406542"></p>
-<p>尝试打开，之后回退文件地址</p>
-<p>直到退至&#x2F;alsckdfy&#x2F;出现flag</p>
-<blockquote>
-<p>一些文件的调用可能会来自某些特殊的地址</p>
-<p>如本题中后台和前站共用同一个css文件</p>
-<p>其他如通过cdn、图床等溯源回网上仓库（github等）</p>
-<p>即可查到源码，或找到后台等特殊地址</p>
-</blockquote>
-<h1 id="web382-383"><a href="#web382-383" class="headerlink" title="web382-383"></a>web382-383</h1><p>继续访问上题出现的后台地址</p>
-<p>发现出现了个后台登陆界面</p>
-<p>既然难度是梯度上升</p>
-<p>可以考虑弱密码或者万能密码</p>
-<p>进入</p>
-<p>flag get√</p>
-<h1 id="web384"><a href="#web384" class="headerlink" title="web384"></a>web384</h1><blockquote>
-<p>hint:密码前2位是小写字母，后三位是数字</p>
-</blockquote>
-<p>再次进入后台登录页面</p>
-<p>用户名肯定是admin</p>
-<p>然后就是爆破密码</p>
-<p>方法一：写个脚本生成密码字典</p>
-<p>方法二：使用burp爆破时</p>
-<p>将password设为两个变量</p>
-<p><img src= "/img/image-20221019153048062.png" alt="image-20221019153048062"></p>
-<p>$1设置成小写字母长度：2</p>
-<p><img src= "/img/image-20221019153017681.png" alt="image-20221019153017681"></p>
-<p>$2设置成3位数字</p>
-<p><img src= "/img/image-20221019153029106.png" alt="image-20221019153029106"></p>
-<p><code>password=xy123</code></p>
-<h1 id="web385"><a href="#web385" class="headerlink" title="web385"></a>web385</h1><p>登陆界面进不去</p>
-<p>扫目录</p>
-<p>发现有install没删</p>
-<p>重置管理员密码</p>
-<p><img src= "/img/image-20221028144108992.png" alt="image-20221028144108992"></p>
-<blockquote>
-<p>一些网页模板的安装通常通过&#x2F;install目录进行安装</p>
-<p>部分开发人员忘记删除install等目录就会暴露出一些特殊的功能点</p>
-<p>如重置密码功能点</p>
-<p>模板名、版本号、配置信息等敏感信息</p>
-</blockquote>
-<p>重置后密码为admin888</p>
-<h1 id="web386"><a href="#web386" class="headerlink" title="web386"></a>web386</h1><p>再次访问install发现有个lock.bat给锁定住了</p>
-<p><img src= "/img/image-20221028151039705.png" alt="image-20221028151039705"></p>
-<p>最开始几道题是前端用了后端文件</p>
-<p>这题回去访问前端的同名文件 即本来应该调用的前端页面</p>
-<p>发现第一行注释</p>
-<p><img src= "/img/image-20221028150737179.png" alt="image-20221028150737179"></p>
-<p>访问clear ：“清理成功”</p>
-<p>回想到，install里的lock，直接删</p>
-<p><code>clear.php?file=./install/lock.dat</code></p>
-<p>这次访问install能重置了</p>
-<p><img src= "/img/image-20221028151345438.png" alt="image-20221028151345438"></p>
-<p>返回后台登录初始账户</p>
-<h1 id="387"><a href="#387" class="headerlink" title="387"></a>387</h1><p>发现robots</p>
-<p><img src= "/img/image-20221028151846193.png" alt="image-20221028151846193"></p>
-<p>提示debug，访问</p>
-<p>提示file不存在</p>
-<p>尝试get进去个file</p>
-<p><img src= "/img/image-20221028152040695.png" alt="image-20221028152040695"></p>
-<p><img src= "/img/image-20221028152143283.png" alt="image-20221028152143283"></p>
-<p>使用log执行命令将lock删除</p>
-<p><code>&lt;?php unlink(&#39;/var/www/html/install/lock.dat&#39;)；?&gt;</code></p>
-<p><img src= "/img/image-20221028155008033.png" alt="image-20221028155008033"></p>
-<p>还有种执行方式是将命令通过读取文件显示回显</p>
-<p><code>&lt;?php system(&#39;==shell== &gt; /var/www/html/1.txt&#39;);?&gt;</code></p>
-]]></content>
-      <categories>
-        <category>ctf</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfshow</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfhub-rce</title>
     <url>/2022/11/ctfhub-rce/</url>
     <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行ping和远程代码执行evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是RCE漏洞</strong>。相当于直接操控服务器电脑的cmd命令行！高危漏洞！</p>
@@ -727,6 +634,99 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
         <tag>web</tag>
         <tag>ctfhub</tag>
         <tag>rce</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfshow黑盒测试</title>
+    <url>/2022/11/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
+<p>然后再点点看看功能</p>
+<p>发现文章页的格式为</p>
+<p><code>page_n.php</code></p>
+<p>猜测为sql注入</p>
+<p>直接在n处注入无效</p>
+<p>尝试<code>?id=</code>处注入</p>
+<p>发现报错</p>
+<p><code>file_get_contents(1&#39;.php)</code></p>
+<p><img src= "/img/image-20221018212038190.png" alt="image-20221018212038190"></p>
+<p>直接读取flag<code>?id=flag</code></p>
+<p>flag出现</p>
+<h1 id="web381"><a href="#web381" class="headerlink" title="web381"></a>web381</h1><p>再次尝试上题思路，发现无回显</p>
+<p>再次翻看源码</p>
+<p>发现到css文件中出现了一个特殊地址</p>
+<p><img src= "/img/image-20221018212406542.png" alt="image-20221018212406542"></p>
+<p>尝试打开，之后回退文件地址</p>
+<p>直到退至&#x2F;alsckdfy&#x2F;出现flag</p>
+<blockquote>
+<p>一些文件的调用可能会来自某些特殊的地址</p>
+<p>如本题中后台和前站共用同一个css文件</p>
+<p>其他如通过cdn、图床等溯源回网上仓库（github等）</p>
+<p>即可查到源码，或找到后台等特殊地址</p>
+</blockquote>
+<h1 id="web382-383"><a href="#web382-383" class="headerlink" title="web382-383"></a>web382-383</h1><p>继续访问上题出现的后台地址</p>
+<p>发现出现了个后台登陆界面</p>
+<p>既然难度是梯度上升</p>
+<p>可以考虑弱密码或者万能密码</p>
+<p>进入</p>
+<p>flag get√</p>
+<h1 id="web384"><a href="#web384" class="headerlink" title="web384"></a>web384</h1><blockquote>
+<p>hint:密码前2位是小写字母，后三位是数字</p>
+</blockquote>
+<p>再次进入后台登录页面</p>
+<p>用户名肯定是admin</p>
+<p>然后就是爆破密码</p>
+<p>方法一：写个脚本生成密码字典</p>
+<p>方法二：使用burp爆破时</p>
+<p>将password设为两个变量</p>
+<p><img src= "/img/image-20221019153048062.png" alt="image-20221019153048062"></p>
+<p>$1设置成小写字母长度：2</p>
+<p><img src= "/img/image-20221019153017681.png" alt="image-20221019153017681"></p>
+<p>$2设置成3位数字</p>
+<p><img src= "/img/image-20221019153029106.png" alt="image-20221019153029106"></p>
+<p><code>password=xy123</code></p>
+<h1 id="web385"><a href="#web385" class="headerlink" title="web385"></a>web385</h1><p>登陆界面进不去</p>
+<p>扫目录</p>
+<p>发现有install没删</p>
+<p>重置管理员密码</p>
+<p><img src= "/img/image-20221028144108992.png" alt="image-20221028144108992"></p>
+<blockquote>
+<p>一些网页模板的安装通常通过&#x2F;install目录进行安装</p>
+<p>部分开发人员忘记删除install等目录就会暴露出一些特殊的功能点</p>
+<p>如重置密码功能点</p>
+<p>模板名、版本号、配置信息等敏感信息</p>
+</blockquote>
+<p>重置后密码为admin888</p>
+<h1 id="web386"><a href="#web386" class="headerlink" title="web386"></a>web386</h1><p>再次访问install发现有个lock.bat给锁定住了</p>
+<p><img src= "/img/image-20221028151039705.png" alt="image-20221028151039705"></p>
+<p>最开始几道题是前端用了后端文件</p>
+<p>这题回去访问前端的同名文件 即本来应该调用的前端页面</p>
+<p>发现第一行注释</p>
+<p><img src= "/img/image-20221028150737179.png" alt="image-20221028150737179"></p>
+<p>访问clear ：“清理成功”</p>
+<p>回想到，install里的lock，直接删</p>
+<p><code>clear.php?file=./install/lock.dat</code></p>
+<p>这次访问install能重置了</p>
+<p><img src= "/img/image-20221028151345438.png" alt="image-20221028151345438"></p>
+<p>返回后台登录初始账户</p>
+<h1 id="387"><a href="#387" class="headerlink" title="387"></a>387</h1><p>发现robots</p>
+<p><img src= "/img/image-20221028151846193.png" alt="image-20221028151846193"></p>
+<p>提示debug，访问</p>
+<p>提示file不存在</p>
+<p>尝试get进去个file</p>
+<p><img src= "/img/image-20221028152040695.png" alt="image-20221028152040695"></p>
+<p><img src= "/img/image-20221028152143283.png" alt="image-20221028152143283"></p>
+<p>使用log执行命令将lock删除</p>
+<p><code>&lt;?php unlink(&#39;/var/www/html/install/lock.dat&#39;)；?&gt;</code></p>
+<p><img src= "/img/image-20221028155008033.png" alt="image-20221028155008033"></p>
+<p>还有种执行方式是将命令通过读取文件显示回显</p>
+<p><code>&lt;?php system(&#39;==shell== &gt; /var/www/html/1.txt&#39;);?&gt;</code></p>
+]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfshow</tag>
       </tags>
   </entry>
   <entry>
