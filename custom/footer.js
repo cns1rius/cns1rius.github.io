@@ -41,8 +41,8 @@ footer 上的 HTML 内容：
     let blogCreateTime = Date.now() - 1638288000000;
     
     // 白天和晚上时 footer 上的内容：
-    const footerDay = `<img class='boardsign'src='https://img.shields.io/badge/s1rius-摸鱼中-6adea8?style=social&logo=cakephp'title='距离月入25k也就还差一个大佬带我~'><br/>小破站在各种灾难中苟活了<span id="create-time"></span><i id="heartbeat"class='fas fa-heartbeat'></i><br/>欢迎参观我的&nbsp;Space✨<br/>人若无名，便可专心练剑🗡<br/><div id="upyun"onclick="javascript:location.href='https:/\\/www.upyun.com/'">本网站由<img src= "https://s1rius.space/img/upyun.png"/>提供CDN加速服务</div>`;
-    const footerNight = `<img class='boardsign'src='https://img.shields.io/badge/s1rius-打烊休息啦-6adea8?style=social&logo=coffeescript'title='下班了就该开开心心的玩耍，嘿嘿~'><br/>小破站在各种灾难中苟活了<span id="create-time"></span><i id="heartbeat"class='fas fa-heartbeat'></i><br/>欢迎参观我的&nbsp;Space✨<br/><div id="upyun"onclick="javascript:location.href='https:/\\/www.upyun.com/'">本网站由<img src= "https://s1rius.space/img/upyun.png"/>提供CDN加速服务</div>`;
+    const footerDay = `<img class='boardsign'src='https://img.shields.io/badge/s1rius-摸鱼中-6adea8?style=social&logo=cakephp'title='距离月入25k也就还差一个大佬带我~'><br/>小破站在各种灾难中苟活了<span id="create-time"></span><i id="heartbeat"class='fas fa-heartbeat'></i><br/>欢迎参观我的&nbsp;Space✨<br/>人若无名，便可专心练剑🗡<br/><div id="upyun"onclick="javascript:location.href='https:/\\/www.upyun.com/'">本网站由<img src= "https://s1rius.space/img/custom/upyun.png"/>提供CDN加速服务</div>`;
+    const footerNight = `<img class='boardsign'src='https://img.shields.io/badge/s1rius-打烊休息啦-6adea8?style=social&logo=coffeescript'title='下班了就该开开心心的玩耍，嘿嘿~'><br/>小破站在各种灾难中苟活了<span id="create-time"></span><i id="heartbeat"class='fas fa-heartbeat'></i><br/>欢迎参观我的&nbsp;Space✨<br/><div id="upyun"onclick="javascript:location.href='https:/\\/www.upyun.com/'">本网站由<img src= "https://s1rius.space/img/custom/upyun.png"/>提供CDN加速服务</div>`;
     
     // 生成类似 xxx 天 x 小时 x 分钟 x 秒 的字符串
     function getBlogAgeString() {
