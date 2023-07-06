@@ -6,7 +6,7 @@
   <link href="http://s1rius.space/atom.xml" rel="self"/>
   
   <link href="http://s1rius.space/"/>
-  <updated>2023-04-02T13:37:28.861Z</updated>
+  <updated>2023-07-06T13:52:54.351Z</updated>
   <id>http://s1rius.space/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>22年10月末</title>
+    <link href="http://s1rius.space/2023/07/---CTF%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93---/"/>
+    <id>http://s1rius.space/2023/07/---CTF%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93---/</id>
+    <published>2023-07-06T13:49:00.068Z</published>
+    <updated>2023-07-06T13:52:54.351Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="资源" scheme="http://s1rius.space/categories/%E8%B5%84%E6%BA%90/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>终端便捷ssh（免密）连接</title>
@@ -468,7 +485,7 @@
     <link href="http://s1rius.space/2023/07/22%E5%B9%B410%E6%9C%88%E6%9C%AB/"/>
     <id>http://s1rius.space/2023/07/22%E5%B9%B410%E6%9C%88%E6%9C%AB/</id>
     <published>2023-07-06T12:36:46.915Z</published>
-    <updated>2023-04-02T13:37:28.857Z</updated>
+    <updated>2023-07-06T13:53:03.447Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
