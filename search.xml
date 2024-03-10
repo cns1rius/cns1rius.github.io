@@ -20,6 +20,33 @@
       </categories>
   </entry>
   <entry>
+    <title>ctfhub-彩蛋</title>
+    <url>/2023/07/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[<h1 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h1><p>一开始的想法是工具一共有8页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页limit都是12 但offset在变化<br>于是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为1000到6、7千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
+<h1 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h1><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述"></p>
+<h1 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h1><p>在web-ssrf中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post最后一行介绍</p>
+<h1 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h1><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
+<blockquote>
+<p>彩蛋	关键词	egg	ctfhub	CTFHub	拿来把你	CTFer 自己人 ……</p>
+</blockquote>
+<p>到底没想到竟然是flag</p>
+<h1 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h1><p>只找到了前半部分<br>分别在题目提交和wp提交页面的最后</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">ctfhub</span><span class="token punctuation">&#123;</span>029e02eb3a1
+	e8c49b1132b5
+	15b652a5f3a8
+	62013<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢anweilx的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是base64然后再转url 一个是hex解码<br>第三行是俩页面的图片隐写 丢进winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
+<h1 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h1><p>剩余皆可在对应页面搜索egg即可获得</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bypass disable_function</title>
     <url>/2023/07/Bypass%20disable_function/</url>
     <content><![CDATA[<h1 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h1><p>时间紧 于是先采用最省时的方法<br>先蚁剑连<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"><br>发现打不开flag文件<br>要使用蚁剑插件<code>绕过disabled function</code></p>
@@ -222,33 +249,6 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       <tags>
         <tag>web</tag>
         <tag>提权</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2023/07/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[<h1 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h1><p>一开始的想法是工具一共有8页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页limit都是12 但offset在变化<br>于是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为1000到6、7千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
-<h1 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h1><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述"></p>
-<h1 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h1><p>在web-ssrf中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post最后一行介绍</p>
-<h1 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h1><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
-<blockquote>
-<p>彩蛋	关键词	egg	ctfhub	CTFHub	拿来把你	CTFer 自己人 ……</p>
-</blockquote>
-<p>到底没想到竟然是flag</p>
-<h1 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h1><p>只找到了前半部分<br>分别在题目提交和wp提交页面的最后</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">ctfhub</span><span class="token punctuation">&#123;</span>029e02eb3a1
-	e8c49b1132b5
-	15b652a5f3a8
-	62013<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢anweilx的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是base64然后再转url 一个是hex解码<br>第三行是俩页面的图片隐写 丢进winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
-<h1 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h1><p>剩余皆可在对应页面搜索egg即可获得</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
       </tags>
   </entry>
   <entry>
@@ -496,6 +496,99 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
+    <title>ctfshow黑盒测试</title>
+    <url>/2023/07/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
+<p>然后再点点看看功能</p>
+<p>发现文章页的格式为</p>
+<p><code>page_n.php</code></p>
+<p>猜测为sql注入</p>
+<p>直接在n处注入无效</p>
+<p>尝试<code>?id=</code>处注入</p>
+<p>发现报错</p>
+<p><code>file_get_contents(1&#39;.php)</code></p>
+<p><img src= "/img/image-20221018212038190.png" alt="image-20221018212038190"></p>
+<p>直接读取flag<code>?id=flag</code></p>
+<p>flag出现</p>
+<h1 id="web381"><a href="#web381" class="headerlink" title="web381"></a>web381</h1><p>再次尝试上题思路，发现无回显</p>
+<p>再次翻看源码</p>
+<p>发现到css文件中出现了一个特殊地址</p>
+<p><img src= "/img/image-20221018212406542.png" alt="image-20221018212406542"></p>
+<p>尝试打开，之后回退文件地址</p>
+<p>直到退至&#x2F;alsckdfy&#x2F;出现flag</p>
+<blockquote>
+<p>一些文件的调用可能会来自某些特殊的地址</p>
+<p>如本题中后台和前站共用同一个css文件</p>
+<p>其他如通过cdn、图床等溯源回网上仓库（github等）</p>
+<p>即可查到源码，或找到后台等特殊地址</p>
+</blockquote>
+<h1 id="web382-383"><a href="#web382-383" class="headerlink" title="web382-383"></a>web382-383</h1><p>继续访问上题出现的后台地址</p>
+<p>发现出现了个后台登陆界面</p>
+<p>既然难度是梯度上升</p>
+<p>可以考虑弱密码或者万能密码</p>
+<p>进入</p>
+<p>flag get√</p>
+<h1 id="web384"><a href="#web384" class="headerlink" title="web384"></a>web384</h1><blockquote>
+<p>hint:密码前2位是小写字母，后三位是数字</p>
+</blockquote>
+<p>再次进入后台登录页面</p>
+<p>用户名肯定是admin</p>
+<p>然后就是爆破密码</p>
+<p>方法一：写个脚本生成密码字典</p>
+<p>方法二：使用burp爆破时</p>
+<p>将password设为两个变量</p>
+<p><img src= "/img/image-20221019153048062.png" alt="image-20221019153048062"></p>
+<p>$1设置成小写字母长度：2</p>
+<p><img src= "/img/image-20221019153017681.png" alt="image-20221019153017681"></p>
+<p>$2设置成3位数字</p>
+<p><img src= "/img/image-20221019153029106.png" alt="image-20221019153029106"></p>
+<p><code>password=xy123</code></p>
+<h1 id="web385"><a href="#web385" class="headerlink" title="web385"></a>web385</h1><p>登陆界面进不去</p>
+<p>扫目录</p>
+<p>发现有install没删</p>
+<p>重置管理员密码</p>
+<p><img src= "/img/image-20221028144108992.png" alt="image-20221028144108992"></p>
+<blockquote>
+<p>一些网页模板的安装通常通过&#x2F;install目录进行安装</p>
+<p>部分开发人员忘记删除install等目录就会暴露出一些特殊的功能点</p>
+<p>如重置密码功能点</p>
+<p>模板名、版本号、配置信息等敏感信息</p>
+</blockquote>
+<p>重置后密码为admin888</p>
+<h1 id="web386"><a href="#web386" class="headerlink" title="web386"></a>web386</h1><p>再次访问install发现有个lock.bat给锁定住了</p>
+<p><img src= "/img/image-20221028151039705.png" alt="image-20221028151039705"></p>
+<p>最开始几道题是前端用了后端文件</p>
+<p>这题回去访问前端的同名文件 即本来应该调用的前端页面</p>
+<p>发现第一行注释</p>
+<p><img src= "/img/image-20221028150737179.png" alt="image-20221028150737179"></p>
+<p>访问clear ：“清理成功”</p>
+<p>回想到，install里的lock，直接删</p>
+<p><code>clear.php?file=./install/lock.dat</code></p>
+<p>这次访问install能重置了</p>
+<p><img src= "/img/image-20221028151345438.png" alt="image-20221028151345438"></p>
+<p>返回后台登录初始账户</p>
+<h1 id="387"><a href="#387" class="headerlink" title="387"></a>387</h1><p>发现robots</p>
+<p><img src= "/img/image-20221028151846193.png" alt="image-20221028151846193"></p>
+<p>提示debug，访问</p>
+<p>提示file不存在</p>
+<p>尝试get进去个file</p>
+<p><img src= "/img/image-20221028152040695.png" alt="image-20221028152040695"></p>
+<p><img src= "/img/image-20221028152143283.png" alt="image-20221028152143283"></p>
+<p>使用log执行命令将lock删除</p>
+<p><code>&lt;?php unlink(&#39;/var/www/html/install/lock.dat&#39;)；?&gt;</code></p>
+<p><img src= "/img/image-20221028155008033.png" alt="image-20221028155008033"></p>
+<p>还有种执行方式是将命令通过读取文件显示回显</p>
+<p><code>&lt;?php system(&#39;==shell== &gt; /var/www/html/1.txt&#39;);?&gt;</code></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfshow</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfhub-rce</title>
     <url>/2023/07/ctfhub-rce/</url>
     <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行ping和远程代码执行evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是RCE漏洞</strong>。相当于直接操控服务器电脑的cmd命令行！高危漏洞！</p>
@@ -633,99 +726,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
         <tag>web</tag>
         <tag>ctfhub</tag>
         <tag>rce</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfshow黑盒测试</title>
-    <url>/2023/07/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
-<p>然后再点点看看功能</p>
-<p>发现文章页的格式为</p>
-<p><code>page_n.php</code></p>
-<p>猜测为sql注入</p>
-<p>直接在n处注入无效</p>
-<p>尝试<code>?id=</code>处注入</p>
-<p>发现报错</p>
-<p><code>file_get_contents(1&#39;.php)</code></p>
-<p><img src= "/img/image-20221018212038190.png" alt="image-20221018212038190"></p>
-<p>直接读取flag<code>?id=flag</code></p>
-<p>flag出现</p>
-<h1 id="web381"><a href="#web381" class="headerlink" title="web381"></a>web381</h1><p>再次尝试上题思路，发现无回显</p>
-<p>再次翻看源码</p>
-<p>发现到css文件中出现了一个特殊地址</p>
-<p><img src= "/img/image-20221018212406542.png" alt="image-20221018212406542"></p>
-<p>尝试打开，之后回退文件地址</p>
-<p>直到退至&#x2F;alsckdfy&#x2F;出现flag</p>
-<blockquote>
-<p>一些文件的调用可能会来自某些特殊的地址</p>
-<p>如本题中后台和前站共用同一个css文件</p>
-<p>其他如通过cdn、图床等溯源回网上仓库（github等）</p>
-<p>即可查到源码，或找到后台等特殊地址</p>
-</blockquote>
-<h1 id="web382-383"><a href="#web382-383" class="headerlink" title="web382-383"></a>web382-383</h1><p>继续访问上题出现的后台地址</p>
-<p>发现出现了个后台登陆界面</p>
-<p>既然难度是梯度上升</p>
-<p>可以考虑弱密码或者万能密码</p>
-<p>进入</p>
-<p>flag get√</p>
-<h1 id="web384"><a href="#web384" class="headerlink" title="web384"></a>web384</h1><blockquote>
-<p>hint:密码前2位是小写字母，后三位是数字</p>
-</blockquote>
-<p>再次进入后台登录页面</p>
-<p>用户名肯定是admin</p>
-<p>然后就是爆破密码</p>
-<p>方法一：写个脚本生成密码字典</p>
-<p>方法二：使用burp爆破时</p>
-<p>将password设为两个变量</p>
-<p><img src= "/img/image-20221019153048062.png" alt="image-20221019153048062"></p>
-<p>$1设置成小写字母长度：2</p>
-<p><img src= "/img/image-20221019153017681.png" alt="image-20221019153017681"></p>
-<p>$2设置成3位数字</p>
-<p><img src= "/img/image-20221019153029106.png" alt="image-20221019153029106"></p>
-<p><code>password=xy123</code></p>
-<h1 id="web385"><a href="#web385" class="headerlink" title="web385"></a>web385</h1><p>登陆界面进不去</p>
-<p>扫目录</p>
-<p>发现有install没删</p>
-<p>重置管理员密码</p>
-<p><img src= "/img/image-20221028144108992.png" alt="image-20221028144108992"></p>
-<blockquote>
-<p>一些网页模板的安装通常通过&#x2F;install目录进行安装</p>
-<p>部分开发人员忘记删除install等目录就会暴露出一些特殊的功能点</p>
-<p>如重置密码功能点</p>
-<p>模板名、版本号、配置信息等敏感信息</p>
-</blockquote>
-<p>重置后密码为admin888</p>
-<h1 id="web386"><a href="#web386" class="headerlink" title="web386"></a>web386</h1><p>再次访问install发现有个lock.bat给锁定住了</p>
-<p><img src= "/img/image-20221028151039705.png" alt="image-20221028151039705"></p>
-<p>最开始几道题是前端用了后端文件</p>
-<p>这题回去访问前端的同名文件 即本来应该调用的前端页面</p>
-<p>发现第一行注释</p>
-<p><img src= "/img/image-20221028150737179.png" alt="image-20221028150737179"></p>
-<p>访问clear ：“清理成功”</p>
-<p>回想到，install里的lock，直接删</p>
-<p><code>clear.php?file=./install/lock.dat</code></p>
-<p>这次访问install能重置了</p>
-<p><img src= "/img/image-20221028151345438.png" alt="image-20221028151345438"></p>
-<p>返回后台登录初始账户</p>
-<h1 id="387"><a href="#387" class="headerlink" title="387"></a>387</h1><p>发现robots</p>
-<p><img src= "/img/image-20221028151846193.png" alt="image-20221028151846193"></p>
-<p>提示debug，访问</p>
-<p>提示file不存在</p>
-<p>尝试get进去个file</p>
-<p><img src= "/img/image-20221028152040695.png" alt="image-20221028152040695"></p>
-<p><img src= "/img/image-20221028152143283.png" alt="image-20221028152143283"></p>
-<p>使用log执行命令将lock删除</p>
-<p><code>&lt;?php unlink(&#39;/var/www/html/install/lock.dat&#39;)；?&gt;</code></p>
-<p><img src= "/img/image-20221028155008033.png" alt="image-20221028155008033"></p>
-<p>还有种执行方式是将命令通过读取文件显示回显</p>
-<p><code>&lt;?php system(&#39;==shell== &gt; /var/www/html/1.txt&#39;);?&gt;</code></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfshow</tag>
       </tags>
   </entry>
   <entry>
@@ -1017,6 +1017,57 @@ sig <span class="token operator">=</span> base64<span class="token punctuation">
       </tags>
   </entry>
   <entry>
+    <title>xss-lab</title>
+    <url>/2023/07/xsslab/</url>
+    <content><![CDATA[<h1 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h1><p>没啥好说的<br>直接alert<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254223669-151.png" alt="在这里插入图片描述"></p>
+<h1 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h1><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+//改后是
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1111<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……>//
+1111"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……这是输入的部分
+前后闭合<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h1><p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254225731-154.png" alt="在这里插入图片描述"><br>用了htmlspeialchars()函数	&lt;&gt;”都被过滤<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254227235-157.png" alt="在这里插入图片描述">二者都写可以</p>
+<h1 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h1><p>和上面一样</p>
+<h1 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h1><p>on 和 script都被过滤<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254229213-160.png" alt="在这里插入图片描述">这里用javascript:伪协议<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254230943-163.png" alt="在这里插入图片描述">出来的链接就是答案</p>
+<h1 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h1><p>可以大小写绕过</p>
+<h1 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h1><p>把特殊字符便空了<br>可以双写绕过</p>
+<h1 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h1><p>这关卡的死死的<br>要编码绕过<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254233662-166.png"></p>
+<h1 id="level-9"><a href="#level-9" class="headerlink" title="level  9"></a>level  9</h1><p>strpos函数看是否有http:&#x2F;&#x2F;<br>验证是否为安全连接<br>但是没有限定位置<br>要编码下<br>还要把http:&#x2F;&#x2F;放最后面用&#x2F;&#x2F;注释掉<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254238979-169.png" alt="在这里插入图片描述"></p>
+<h1 id="level-10-13"><a href="#level-10-13" class="headerlink" title="level 10-13"></a>level 10-13</h1><p>页面没有注入点<br>看源代码发现隐藏的表单<br>要改为文本框text</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">type=<span class="token string">"text"</span> onclick=<span class="token string">"alert(1)"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>后面几关都要改t_sort<br>因为后端获取t_sort和user-agent等<br>要从相应注入点注入<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254242198-172.png" alt="在这里插入图片描述"></p>
+<h1 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h1><blockquote>
+<p>exif xss漏洞，exif是可交换图像文件格式（英语：Exchangeable image file format，官方简称Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到exif的相关属性。</p>
+<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br>甚至有些照片能看到经纬度<br>这关要用到<br><a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br>但是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254247114-178.png" alt="在这里插入图片描述"><br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254245020-175.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h1 id="level-15"><a href="#level-15" class="headerlink" title="level 15"></a>level 15</h1><h1 id="level-16"><a href="#level-16" class="headerlink" title="level 16"></a>level 16</h1><p>对script、&#x2F;、空格进行了转换<br>空格不可以就用换行符</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;a%0atype=<span class="token string">"text"</span>%0a<span class="token string">"alert"</span>><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="level-17-18"><a href="#level-17-18" class="headerlink" title="level 17-18"></a>level 17-18</h1><p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254252815-181.png" alt="在这里插入图片描述"><br>火狐不支持swf格式<br>把链接加网页上显示出这样<br>很奇怪<br>开始整套娃了<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254256501-184.png" alt="在这里插入图片描述"></p>
+<p>要找个支持flash的浏览器才能正常打开<br>17-20关都能用flash xss<br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br>但这里先用别的办法<br>以18关为例<br>注入点可以在arg02<br>但是你连swf都没有哪来的moouseover哪<br>所以得url连接一下</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token operator">/</span>xss<span class="token operator">-</span>labs<span class="token operator">/</span>level18<span class="token punctuation">.</span>php<span class="token operator">/</span>xsf02<span class="token punctuation">.</span>swf?a<span class="token operator">=</span>?arg01<span class="token operator">=</span>a<span class="token operator">&amp;</span>arg02<span class="token operator">=</span><span class="token operator">%</span>20onmouseover<span class="token operator">=</span>javascript<span class="token punctuation">:</span>alert<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254258261-187.png" alt="在这里插入图片描述"></p>
+<h1 id="level-19-20"><a href="#level-19-20" class="headerlink" title="level 19-20"></a>level 19-20</h1><p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS漏洞快速上手</a><br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br><a href="https://github.com/jindrapetrik/jpexs-decompiler">flash反编译工具</a><br>以下是大佬的payload</p>
+<blockquote>
+<p>卑微小杨在线emo<br>flash反编译也不懂<br>等有空了再研究吧<br>好多困难等着被克服那<br>这次没支持flash的浏览器真没法做</p>
+<p>18关</p>
+</blockquote>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="token string">"javascript:alert(/bmfx/)"</span>>bmfx&lt;/a> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>19关</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx\"<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token selector">catch(e)</span><span class="token punctuation">&#123;</span><span class="token function">alert</span><span class="token punctuation">(</span>/bmfx/<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>//%26width=998%26height=998<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<script>
+setTimeout(function () {
+    alert('xss');
+}, 1000);
+</script>]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xss</tag>
+        <tag>xss-lab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>终端便捷ssh（免密）连接</title>
     <url>/2023/07/%E5%85%8D%E5%AF%86ssh%E7%99%BB%E5%BD%95/</url>
     <content><![CDATA[<h1 id="普通ssh方法"><a href="#普通ssh方法" class="headerlink" title="普通ssh方法"></a>普通ssh方法</h1><p>物理机ssh连接虚拟机</p>
@@ -1079,57 +1130,6 @@ The key's randomart image is:
       <tags>
         <tag>web</tag>
         <tag>ssh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xss-lab</title>
-    <url>/2023/07/xsslab/</url>
-    <content><![CDATA[<h1 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h1><p>没啥好说的<br>直接alert<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254223669-151.png" alt="在这里插入图片描述"></p>
-<h1 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h1><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-//改后是
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>keyword</span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1111<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……>//
-1111"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>……这是输入的部分
-前后闭合<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h1><p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254225731-154.png" alt="在这里插入图片描述"><br>用了htmlspeialchars()函数	&lt;&gt;”都被过滤<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254227235-157.png" alt="在这里插入图片描述">二者都写可以</p>
-<h1 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h1><p>和上面一样</p>
-<h1 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h1><p>on 和 script都被过滤<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254229213-160.png" alt="在这里插入图片描述">这里用javascript:伪协议<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254230943-163.png" alt="在这里插入图片描述">出来的链接就是答案</p>
-<h1 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h1><p>可以大小写绕过</p>
-<h1 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h1><p>把特殊字符便空了<br>可以双写绕过</p>
-<h1 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h1><p>这关卡的死死的<br>要编码绕过<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254233662-166.png"></p>
-<h1 id="level-9"><a href="#level-9" class="headerlink" title="level  9"></a>level  9</h1><p>strpos函数看是否有http:&#x2F;&#x2F;<br>验证是否为安全连接<br>但是没有限定位置<br>要编码下<br>还要把http:&#x2F;&#x2F;放最后面用&#x2F;&#x2F;注释掉<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254238979-169.png" alt="在这里插入图片描述"></p>
-<h1 id="level-10-13"><a href="#level-10-13" class="headerlink" title="level 10-13"></a>level 10-13</h1><p>页面没有注入点<br>看源代码发现隐藏的表单<br>要改为文本框text</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css">type=<span class="token string">"text"</span> onclick=<span class="token string">"alert(1)"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>后面几关都要改t_sort<br>因为后端获取t_sort和user-agent等<br>要从相应注入点注入<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254242198-172.png" alt="在这里插入图片描述"></p>
-<h1 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h1><blockquote>
-<p>exif xss漏洞，exif是可交换图像文件格式（英语：Exchangeable image file format，官方简称Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到exif的相关属性。</p>
-<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br>甚至有些照片能看到经纬度<br>这关要用到<br><a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br>但是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254247114-178.png" alt="在这里插入图片描述"><br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254245020-175.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<h1 id="level-15"><a href="#level-15" class="headerlink" title="level 15"></a>level 15</h1><h1 id="level-16"><a href="#level-16" class="headerlink" title="level 16"></a>level 16</h1><p>对script、&#x2F;、空格进行了转换<br>空格不可以就用换行符</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;a%0atype=<span class="token string">"text"</span>%0a<span class="token string">"alert"</span>><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="level-17-18"><a href="#level-17-18" class="headerlink" title="level 17-18"></a>level 17-18</h1><p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254252815-181.png" alt="在这里插入图片描述"><br>火狐不支持swf格式<br>把链接加网页上显示出这样<br>很奇怪<br>开始整套娃了<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254256501-184.png" alt="在这里插入图片描述"></p>
-<p>要找个支持flash的浏览器才能正常打开<br>17-20关都能用flash xss<br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br>但这里先用别的办法<br>以18关为例<br>注入点可以在arg02<br>但是你连swf都没有哪来的moouseover哪<br>所以得url连接一下</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token operator">/</span>xss<span class="token operator">-</span>labs<span class="token operator">/</span>level18<span class="token punctuation">.</span>php<span class="token operator">/</span>xsf02<span class="token punctuation">.</span>swf?a<span class="token operator">=</span>?arg01<span class="token operator">=</span>a<span class="token operator">&amp;</span>arg02<span class="token operator">=</span><span class="token operator">%</span>20onmouseover<span class="token operator">=</span>javascript<span class="token punctuation">:</span>alert<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254258261-187.png" alt="在这里插入图片描述"></p>
-<h1 id="level-19-20"><a href="#level-19-20" class="headerlink" title="level 19-20"></a>level 19-20</h1><p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS漏洞快速上手</a><br><a href="https://www.secpulse.com/archives/44299.html">flash xss原理</a><br><a href="https://github.com/jindrapetrik/jpexs-decompiler">flash反编译工具</a><br>以下是大佬的payload</p>
-<blockquote>
-<p>卑微小杨在线emo<br>flash反编译也不懂<br>等有空了再研究吧<br>好多困难等着被克服那<br>这次没支持flash的浏览器真没法做</p>
-<p>18关</p>
-</blockquote>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="token string">"javascript:alert(/bmfx/)"</span>>bmfx&lt;/a> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>19关</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">http</span><span class="token punctuation">:</span>//10.0.1.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx\"<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token selector">catch(e)</span><span class="token punctuation">&#123;</span><span class="token function">alert</span><span class="token punctuation">(</span>/bmfx/<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>//%26width=998%26height=998<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<script>
-setTimeout(function () {
-    alert('xss');
-}, 1000);
-</script>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xss</tag>
-        <tag>xss-lab</tag>
       </tags>
   </entry>
   <entry>
