@@ -8,17 +8,6 @@
  */
 
 /*!
- * Sizzle CSS Selector Engine v2.3.10
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
- * Released under the MIT license
- * https://js.foundation/
- *
- * Date: 2023-02-14
- */
-
-/*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
@@ -39,6 +28,8 @@
  * @author Matt C [matt@artemisbot.uk]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github
  */
 
 /**
@@ -52,6 +43,32 @@
  * @author j433866 [j433866@gmail.com]
  * @copyright Crown Copyright 2019
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
+ */
+
+/**
+ * @author n1474335 [n1474335@gmail.com]
+ * @copyright Crown Copyright 2016
+ * @license Apache-2.0
+ *
+ * Modified by Raka-loah
+ */
+
+/**
+ * @author n1474335 [n1474335@gmail.com]
+ * @copyright Crown Copyright 2016
+ * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github
+ */
+
+/**
+ * @author n1474335 [n1474335@gmail.com]
+ * @copyright Crown Copyright 2016
+ * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -94,6 +111,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2023
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github
  */
 
 /**
@@ -112,6 +131,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github
  */
 
 /**
@@ -120,6 +141,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2022
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -176,6 +199,7 @@
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
  *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -237,7 +261,7 @@
  */
 
 /**!
- * Sortable 1.15.0
+ * Sortable 1.15.2
  * @author	RubaXa   <trash@rubaxa.org>
  * @author	owenm    <owen23355@gmail.com>
  * @license MIT
@@ -255,4 +279,4 @@
 
 //! moment.js locale configuration
 
-//! version : 0.5.41
+//! version : 0.5.44

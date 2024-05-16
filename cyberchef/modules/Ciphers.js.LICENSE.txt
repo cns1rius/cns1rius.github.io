@@ -58,24 +58,32 @@
  * @author Flavio Diez [flaviofdiez+cyberchef@gmail.com]
  * @copyright Crown Copyright 2020
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author Jarmo van Lenthe [github.com/jarmovanlenthe]
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author Matt C [matt@artemisbot.uk]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author Matt C [matt@artemisbot.uk]
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -83,6 +91,8 @@
  * @author gchq77703 []
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -90,12 +100,16 @@
  * @author gchq77703 []
  * @copyright Crown Copyright 2020
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author Matt C [me@mitt.dev]
  * @copyright Crown Copyright 2020
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -108,18 +122,46 @@
  * @author dolphinOnKeys [robin@weird.io]
  * @copyright Crown Copyright 2022
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n with towel in hand
+ */
+
+/**
+ * @author joostrijneveld [joost@joostrijneveld.nl]
+ * @copyright Crown Copyright 2022
+ * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
+ */
+
+/**
+ * @author joostrijneveld [joost@joostrijneveld.nl]
+ * @copyright Crown Copyright 2024
+ * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
+ */
+
+/**
+ * @author joostrijneveld [joost@joostrijneveld.nl]
+ * @copyright Crown Copyright 2024
+ * @license Apache-2.0
  */
 
 /**
  * @author mikecat
  * @copyright Crown Copyright 2022
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author n1073645 [n1073645@gmail.com]
  * @copyright Crown Copyright 2020
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -133,18 +175,30 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
+ */
+
+/**
+ * @author n1474335 [n1474335@gmail.com]
+ * @copyright Crown Copyright 2016
+ * @license Apache-2.0
  */
 
 /**
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2023
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author swesven
  * @copyright 2021
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -153,6 +207,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github
  */
 
 /**
@@ -172,6 +228,7 @@
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
  *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -243,6 +300,7 @@
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
  *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -260,6 +318,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -286,6 +346,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /** @preserve

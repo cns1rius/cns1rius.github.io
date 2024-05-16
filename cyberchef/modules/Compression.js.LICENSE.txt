@@ -10,21 +10,35 @@
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
 
 /**
+ * @author 0xThiebaut [thiebaut.dev]
+ * @copyright Crown Copyright 2023
+ * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
+ */
+
+/**
  * @author Matt C [me@mitt.dev]
  * @copyright Crown Copyright 2019
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author Matt C [me@mitt.dev]
  * @copyright Crown Copyright 2022
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author crespyl [peter@crespyl.net]
  * @copyright Peter Jacobs 2021
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -44,18 +58,30 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
+ */
+
+/**
+ * @author n1474335 [n1474335@gmail.com]
+ * @copyright Crown Copyright 2016
+ * @license Apache-2.0
  */
 
 /**
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2022
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author tlwr [toby@toby.codes]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -64,6 +90,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github
  */
 
 /**
@@ -120,6 +148,7 @@
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
  *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**

@@ -37,6 +37,8 @@ PERFORMANCE OF THIS SOFTWARE.
  * @author Danh4 [dan.h4@ncsc.gov.uk]
  * @copyright Crown Copyright 2020
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -49,12 +51,16 @@ PERFORMANCE OF THIS SOFTWARE.
  * @author dmfj [dominic@dmfj.io]
  * @copyright Crown Copyright 2020
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
  * @author jarrodconnolly [jarrod@nestedquotes.ca]
  * @copyright Crown Copyright 2019
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -74,6 +80,8 @@ PERFORMANCE OF THIS SOFTWARE.
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -82,6 +90,8 @@ PERFORMANCE OF THIS SOFTWARE.
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github
  */
 
 /**
@@ -138,6 +148,7 @@ PERFORMANCE OF THIS SOFTWARE.
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
  *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**

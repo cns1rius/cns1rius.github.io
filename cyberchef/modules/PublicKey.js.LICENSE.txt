@@ -11,9 +11,6 @@
 /*! (c) Tom Wu | http://www-cs-students.stanford.edu/~tjw/jsbn/
  */
 
-/*! (c) Tom Wu, Kenji Urushima | http://www-cs-students.stanford.edu/~tjw/jsbn/
- */
-
 /*! Mike Samuel (c) 2009 | code.google.com/p/json-sans-eval
  */
 
@@ -28,10 +25,26 @@
  */
 
 /**
+ * @author jkataja
+ * @copyright Crown Copyright 2023
+ * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
+ */
+
+/**
  * @author n1474335 [n1474335@gmail.com]
  * @author Matt C [matt@artemisbot.uk]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ */
+
+/**
+ * @author n1474335 [n1474335@gmail.com]
+ * @copyright Crown Copyright 2016
+ * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -46,6 +59,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github
  */
 
 /**
@@ -102,6 +117,7 @@
  * @copyright Crown Copyright 2018
  * @license Apache-2.0
  *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -119,6 +135,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2016
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
