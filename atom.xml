@@ -6,7 +6,7 @@
   <link href="http://s1rius.space/atom.xml" rel="self"/>
   
   <link href="http://s1rius.space/"/>
-  <updated>2024-05-16T12:47:40.258Z</updated>
+  <updated>2024-05-16T14:07:34.001Z</updated>
   <id>http://s1rius.space/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://s1rius.space/2024/05/untiAoi/"/>
     <id>http://s1rius.space/2024/05/untiAoi/</id>
     <published>2024-05-16T12:14:57.150Z</published>
-    <updated>2024-05-16T12:47:40.258Z</updated>
+    <updated>2024-05-16T14:07:34.001Z</updated>
     
     
       
@@ -100,7 +100,7 @@
     <link href="http://s1rius.space/2023/07/---CTF%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93---/"/>
     <id>http://s1rius.space/2023/07/---CTF%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93---/</id>
     <published>2023-07-06T13:49:00.068Z</published>
-    <updated>2023-07-06T14:01:16.164Z</updated>
+    <updated>2024-05-16T14:06:14.208Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -117,7 +117,7 @@
     <link href="http://s1rius.space/2023/07/%E5%85%8D%E5%AF%86ssh%E7%99%BB%E5%BD%95/"/>
     <id>http://s1rius.space/2023/07/%E5%85%8D%E5%AF%86ssh%E7%99%BB%E5%BD%95/</id>
     <published>2023-07-06T12:36:46.922Z</published>
-    <updated>2023-07-13T13:21:44.852Z</updated>
+    <updated>2024-05-16T14:07:26.698Z</updated>
     
     
     <summary type="html">终端便捷ssh（免密）连接</summary>
@@ -535,14 +535,14 @@
     <link href="http://s1rius.space/2023/07/ctfhub-rce/"/>
     <id>http://s1rius.space/2023/07/ctfhub-rce/</id>
     <published>2023-07-06T12:36:46.916Z</published>
-    <updated>2023-07-13T12:57:27.724Z</updated>
+    <updated>2024-05-16T14:06:37.202Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;rce：远程代码执行漏洞&lt;br&gt;分为远程命令执行ping和远程代码执行evel。&lt;br&gt;&lt;strong&gt;其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是RCE漏洞&lt;/strong&gt;。相当于直接操控服务器电脑的cmd命令行</summary>
+    <summary type="html">&lt;p&gt;rce：远程代码执行漏洞&lt;br&gt;分为远程命令执行 ping 和远程代码执行 evel。&lt;br&gt;&lt;strong&gt;其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞&lt;/strong&gt;。相当于直接操控服务器电脑的</summary>
         
       
     
