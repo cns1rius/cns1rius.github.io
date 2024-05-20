@@ -171,22 +171,36 @@ console.log = function () {};
 console.error = function () {};
 console.warn = function () {};
 
-document.onkeydown = function (e) {
-  if (
-    123 == e.keyCode ||
-    (e.ctrlKey &&
-      e.shiftKey &&
-      (74 === e.keyCode || 73 === e.keyCode || 67 === e.keyCode)) ||
-    (e.ctrlKey && 85 === e.keyCode)
-  )
-    return (
-      btf.snackbarShow("你真坏，不能打开控制台喔!"),
-      (event.keyCode = 0),
-      (event.returnValue = !1),
-      !1
-    );
-};
-// 禁用js
+// 阻止特定键盘事件
+document.addEventListener(
+  "keydown",
+  function (e) {
+    if (
+      (e.ctrlKey &&
+        e.shiftKey &&
+        ["I", "J", "C", "i", "j", "c"].includes(e.key)) ||
+      (e.ctrlKey && ["u", "U"].includes(e.key)) ||
+      e.key === "F12"
+    ) {
+      e.preventDefault();
+      btf.snackbarShow("你真坏，不能打开控制台喔!");
+      return false;
+    }
+  },
+  true
+);
+
+// 阻止Ctrl+鼠标右键
+document.addEventListener(
+  "contextmenu",
+  function (e) {
+    if (e.ctrlKey) {
+      e.preventDefault();
+      btf.snackbarShow("你真坏，不能打开控制台喔!");
+    }
+  },
+  true
+);
 
 (function () {
   var callbacks = [],
