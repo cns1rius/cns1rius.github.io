@@ -2,7 +2,7 @@
 用于托管 footer 上的一些会随着时间改变的内容
 footer 上的 HTML 内容：
 白天的：
-<img class='boardsign' src= 'https://img.shields.io/badge/s1rius-摸鱼中-6adea8?style=social&logo=cakephp' title='距离月入25k也就还差一个大佬带我~'>
+<img class='boardsign' src='https://img.shields.io/badge/s1rius-摸鱼中-6adea8?style=social&logo=cakephp' title='距离月入25k也就还差一个大佬带我~'>
 <br/>
 小破站在各种灾难中苟活了<span id="create-time"></span>
 <i id="heartbeat" class='fas fa-heartbeat'></i>
@@ -11,17 +11,17 @@ footer 上的 HTML 内容：
 <br/>
 人若无名，便可专心练剑🗡
 <br/>
-<div id="upyun" onclick="javascript:location.href='https:/\/www.upyun.com/'" style="display: flex; align-items: center; justify-content: center;">本网站由<img class="entered loading" style="width: 5rem; transform: translateY(-0.1rem);" src= "https://s1rius.space/img/custom/upyun.png" data-ll-status="loading">提供CDN加速服务</div>
+<div id="upyun" onclick="javascript:location.href='https:/\/www.upyun.com/'" style="display: flex; align-items: center; justify-content: center;">本网站由<img class="entered loading" style="width: 5rem; transform: translateY(-0.1rem);" src="https://s1rius.space/img/custom/upyun.png" data-ll-status="loading">提供CDN加速服务</div>
 
 晚上的：
-<img class='boardsign' src= 'https://img.shields.io/badge/s1rius-打烊休息啦-6adea8?style=social&logo=coffeescript' title='下班了就该开开心心的玩耍，嘿嘿~'>
+<img class='boardsign' src='https://img.shields.io/badge/s1rius-打烊休息啦-6adea8?style=social&logo=coffeescript' title='下班了就该开开心心的玩耍，嘿嘿~'>
 <br/>
 小破站在各种灾难中苟活了<span id="create-time"></span>
 <i id="heartbeat" class='fas fa-heartbeat'></i>
 <br/>
 欢迎参观我的 Space✨
 <br/>
-<div id="upyun" onclick="javascript:location.href='https:/\/www.upyun.com/'" style="display: flex; align-items: center; justify-content: center;">本网站由<img class="entered loading" style="width: 5rem; transform: translateY(-0.1rem);" src= "https://s1rius.space/img/custom/upyun.png" data-ll-status="loading">提供CDN加速服务</div>
+<div id="upyun" onclick="javascript:location.href='https:/\/www.upyun.com/'" style="display: flex; align-items: center; justify-content: center;">本网站由<img class="entered loading" style="width: 5rem; transform: translateY(-0.1rem);" src="https://s1rius.space/img/custom/upyun.png" data-ll-status="loading">提供CDN加速服务</div>
 */
 (function (outerDocument) {
   // 博客从现在距创建时间
