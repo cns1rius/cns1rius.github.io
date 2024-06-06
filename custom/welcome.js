@@ -179,8 +179,8 @@ document.addEventListener(
       (e.ctrlKey &&
         e.shiftKey &&
         ["I", "J", "C", "i", "j", "c"].includes(e.key)) ||
-      (e.ctrlKey && ["u", "U"].includes(e.key)) // ||
-      // e.key === "F12"
+      (e.ctrlKey && ["u", "U"].includes(e.key)) ||
+      e.key === "F12"
     ) {
       e.preventDefault();
       btf.snackbarShow("你真坏，不能打开控制台喔!");
