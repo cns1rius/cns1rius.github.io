@@ -450,33 +450,6 @@
     
     
     <entry>
-      <title>git命令</title>
-      <link href="/2023/07/git/"/>
-      <url>/2023/07/git/</url>
-      
-        <content type="html"><![CDATA[<h2 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.</p><h3 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h3><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone [url]</span><br></pre></td></tr></table></figure><h2 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h2><h3 id="add"><a href="#add" class="headerlink" title="add"></a>add</h3><p>git add 命令可将该文件添加到暂存区。</p><p>添加一个或多个文件到暂存区</p><h3 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h3><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m [message]</span><br></pre></td></tr></table></figure><p>[message] 可以是一些备注信息。</p><h3 id="status"><a href="#status" class="headerlink" title="status"></a>status</h3><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p><h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p><h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mv [file] [newfile]</span><br></pre></td></tr></table></figure><p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mv -f [file] [newfile]</span><br></pre></td></tr></table></figure><h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h2><h3 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h3><p>显示所有远程仓库：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure><h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h3><p>git pull 命令用于从远程获取代码并合并本地的版本。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span><br></pre></td></tr></table></figure><h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><p>git push 命用于从将本地的分支版本上传到远程并合并。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> web </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> web </tag>
-            
-            <tag> git </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>kali安装docker</title>
       <link href="/2023/07/docker/"/>
       <url>/2023/07/docker/</url>
@@ -498,6 +471,33 @@
             <tag> kali </tag>
             
             <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git命令</title>
+      <link href="/2023/07/git/"/>
+      <url>/2023/07/git/</url>
+      
+        <content type="html"><![CDATA[<h2 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.</p><h3 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h3><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone [url]</span><br></pre></td></tr></table></figure><h2 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h2><h3 id="add"><a href="#add" class="headerlink" title="add"></a>add</h3><p>git add 命令可将该文件添加到暂存区。</p><p>添加一个或多个文件到暂存区</p><h3 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h3><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m [message]</span><br></pre></td></tr></table></figure><p>[message] 可以是一些备注信息。</p><h3 id="status"><a href="#status" class="headerlink" title="status"></a>status</h3><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p><h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p><h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mv [file] [newfile]</span><br></pre></td></tr></table></figure><p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mv -f [file] [newfile]</span><br></pre></td></tr></table></figure><h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h2><h3 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h3><p>显示所有远程仓库：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure><h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h3><p>git pull 命令用于从远程获取代码并合并本地的版本。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span><br></pre></td></tr></table></figure><h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><p>git push 命用于从将本地的分支版本上传到远程并合并。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+            <tag> git </tag>
             
         </tags>
       
