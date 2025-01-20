@@ -6,7 +6,7 @@
   <link href="http://s1rius.space/atom.xml" rel="self"/>
   
   <link href="http://s1rius.space/"/>
-  <updated>2024-12-25T09:44:53.192Z</updated>
+  <updated>2025-01-20T01:45:31.849Z</updated>
   <id>http://s1rius.space/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://s1rius.space/2024/12/XXE/"/>
     <id>http://s1rius.space/2024/12/XXE/</id>
     <published>2024-12-25T08:54:05.780Z</published>
-    <updated>2024-12-25T09:44:53.192Z</updated>
+    <updated>2025-01-20T01:45:31.849Z</updated>
     
     
     <summary type="html">未完结草稿</summary>
@@ -65,7 +65,7 @@
     <link href="http://s1rius.space/2024/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/"/>
     <id>http://s1rius.space/2024/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</id>
     <published>2024-12-25T08:54:05.779Z</published>
-    <updated>2023-07-13T13:21:44.857Z</updated>
+    <updated>2025-01-20T01:44:49.757Z</updated>
     
     
       
@@ -91,7 +91,7 @@
     <link href="http://s1rius.space/2024/12/xsslab/"/>
     <id>http://s1rius.space/2024/12/xsslab/</id>
     <published>2024-12-25T08:54:05.779Z</published>
-    <updated>2024-05-20T09:27:37.109Z</updated>
+    <updated>2025-01-20T01:45:27.837Z</updated>
     
     
       
@@ -150,41 +150,11 @@
   </entry>
   
   <entry>
-    <title>upload-labs</title>
-    <link href="http://s1rius.space/2024/12/upload-labs/"/>
-    <id>http://s1rius.space/2024/12/upload-labs/</id>
-    <published>2024-12-25T08:54:05.778Z</published>
-    <updated>2024-05-20T09:27:37.075Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;pass-01&quot;&gt;&lt;a href=&quot;#pass-01&quot; class=&quot;headerlink&quot; title=&quot;pass-01&quot;&gt;&lt;/a&gt;pass-01&lt;/h2&gt;&lt;p&gt;前端 js 过滤&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    <category term="web" scheme="http://s1rius.space/categories/web/"/>
-    
-    
-    <category term="web" scheme="http://s1rius.space/tags/web/"/>
-    
-    <category term="upload" scheme="http://s1rius.space/tags/upload/"/>
-    
-    <category term="upload-labs" scheme="http://s1rius.space/tags/upload-labs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>SSTI模板注入</title>
     <link href="http://s1rius.space/2024/12/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/"/>
     <id>http://s1rius.space/2024/12/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</id>
     <published>2024-12-25T08:54:05.777Z</published>
-    <updated>2024-05-20T09:27:37.110Z</updated>
+    <updated>2025-01-20T01:41:29.016Z</updated>
     
     
       
@@ -269,7 +239,7 @@
     <link href="http://s1rius.space/2024/12/sqli-lab/"/>
     <id>http://s1rius.space/2024/12/sqli-lab/</id>
     <published>2024-12-25T08:54:05.776Z</published>
-    <updated>2024-05-20T09:27:37.162Z</updated>
+    <updated>2025-01-20T01:41:07.011Z</updated>
     
     
       
@@ -423,6 +393,34 @@
   </entry>
   
   <entry>
+    <title>git命令</title>
+    <link href="http://s1rius.space/2024/12/git/"/>
+    <id>http://s1rius.space/2024/12/git/</id>
+    <published>2024-12-25T08:54:05.773Z</published>
+    <updated>2025-01-19T10:47:27.355Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;创建仓库命令&quot;&gt;&lt;a href=&quot;#创建仓库命令&quot; class=&quot;headerlink&quot; title=&quot;创建仓库命令&quot;&gt;&lt;/a&gt;创建仓库命令&lt;/h2&gt;&lt;h3 id=&quot;init&quot;&gt;&lt;a href=&quot;#init&quot; class=&quot;headerlink&quot; title=&quot;init&quot;&gt;&lt;/a&gt;init&lt;/h3&gt;&lt;p&gt;git init 命令用于在目录中创建新的 Git 仓库。&lt;br&gt;在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.&lt;/p&gt;
+&lt;h3 id=&quot;clone&quot;&gt;&lt;a href=&quot;#clone&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="web" scheme="http://s1rius.space/categories/web/"/>
+    
+    
+    <category term="web" scheme="http://s1rius.space/tags/web/"/>
+    
+    <category term="git" scheme="http://s1rius.space/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>kali安装docker</title>
     <link href="http://s1rius.space/2024/12/docker/"/>
     <id>http://s1rius.space/2024/12/docker/</id>
@@ -448,34 +446,6 @@
     <category term="kali" scheme="http://s1rius.space/tags/kali/"/>
     
     <category term="docker" scheme="http://s1rius.space/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git命令</title>
-    <link href="http://s1rius.space/2024/12/git/"/>
-    <id>http://s1rius.space/2024/12/git/</id>
-    <published>2024-12-25T08:54:05.773Z</published>
-    <updated>2025-01-19T10:47:27.355Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;创建仓库命令&quot;&gt;&lt;a href=&quot;#创建仓库命令&quot; class=&quot;headerlink&quot; title=&quot;创建仓库命令&quot;&gt;&lt;/a&gt;创建仓库命令&lt;/h2&gt;&lt;h3 id=&quot;init&quot;&gt;&lt;a href=&quot;#init&quot; class=&quot;headerlink&quot; title=&quot;init&quot;&gt;&lt;/a&gt;init&lt;/h3&gt;&lt;p&gt;git init 命令用于在目录中创建新的 Git 仓库。&lt;br&gt;在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.&lt;/p&gt;
-&lt;h3 id=&quot;clone&quot;&gt;&lt;a href=&quot;#clone&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="web" scheme="http://s1rius.space/categories/web/"/>
-    
-    
-    <category term="web" scheme="http://s1rius.space/tags/web/"/>
-    
-    <category term="git" scheme="http://s1rius.space/tags/git/"/>
     
   </entry>
   
