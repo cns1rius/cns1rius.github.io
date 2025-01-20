@@ -6,7 +6,7 @@
   <link href="http://s1rius.space/atom.xml" rel="self"/>
   
   <link href="http://s1rius.space/"/>
-  <updated>2025-01-20T01:48:20.495Z</updated>
+  <updated>2025-01-20T02:54:35.907Z</updated>
   <id>http://s1rius.space/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue gin合并部署(完美方案)</title>
+    <link href="http://s1rius.space/2025/01/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/"/>
+    <id>http://s1rius.space/2025/01/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</id>
+    <published>2025-01-20T02:54:55.033Z</published>
+    <updated>2025-01-20T02:54:35.907Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;目前vue与gin的项目基本都是前后端分离部署&lt;/p&gt;
+&lt;p&gt;二者合并部署的教程非常少，且各有各的问题&lt;/p&gt;
+&lt;p&gt;结合各个教程后 找到一种比较完美的合并部署方案&lt;/p&gt;
+&lt;h2 id=&quot;vue&quot;&gt;&lt;a href=&quot;#vue&quot; class=&quot;headerlink&quot; title=&quot;vue&quot;&gt;&lt;/a&gt;vue&lt;/h2&gt;&lt;p&gt;使用axios时进行如下配置&lt;/p&gt;
+&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    <category term="web" scheme="http://s1rius.space/categories/web/"/>
+    
+    
+    <category term="vue" scheme="http://s1rius.space/tags/vue/"/>
+    
+    <category term="gin" scheme="http://s1rius.space/tags/gin/"/>
+    
+    <category term="golang" scheme="http://s1rius.space/tags/golang/"/>
+    
+  </entry>
   
   <entry>
     <title>xxe</title>
@@ -567,6 +600,23 @@
   </entry>
   
   <entry>
+    <title>22年10月末</title>
+    <link href="http://s1rius.space/2024/12/22%E5%B9%B410%E6%9C%88%E6%9C%AB/"/>
+    <id>http://s1rius.space/2024/12/22%E5%B9%B410%E6%9C%88%E6%9C%AB/</id>
+    <published>2024-12-25T08:54:05.770Z</published>
+    <updated>2023-07-06T13:53:03.447Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="随笔" scheme="http://s1rius.space/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>2022 unctf wp</title>
     <link href="http://s1rius.space/2024/12/2022unctf%20wp/"/>
     <id>http://s1rius.space/2024/12/2022unctf%20wp/</id>
@@ -588,23 +638,6 @@
     
     
     <category term="unctf" scheme="http://s1rius.space/tags/unctf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>22年10月末</title>
-    <link href="http://s1rius.space/2024/12/22%E5%B9%B410%E6%9C%88%E6%9C%AB/"/>
-    <id>http://s1rius.space/2024/12/22%E5%B9%B410%E6%9C%88%E6%9C%AB/</id>
-    <published>2024-12-25T08:54:05.770Z</published>
-    <updated>2023-07-06T13:53:03.447Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    <category term="随笔" scheme="http://s1rius.space/categories/%E9%9A%8F%E7%AC%94/"/>
-    
     
   </entry>
   
