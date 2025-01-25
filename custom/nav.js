@@ -1,3 +1,9 @@
+/*
+ * @Author: s1rius
+ * @Date: 2025-01-22 08:59:05
+ * @LastEditTime: 2025-01-25 09:21:11
+ * @Description: https://s1rius.space/
+ */
 document.addEventListener("pjax:complete", tonav);
 document.addEventListener("DOMContentLoaded", tonav);
 //响应pjax
@@ -25,7 +31,7 @@ function tonav() {
   });
   //修复没有弄右键菜单的童鞋无法回顶部的问题
   document.getElementById("page-name").innerText =
-    document.title.split(" | Fomalhaut🥝")[0];
+    document.title.split(" | s1rius")[0];
 }
 
 function scrollToTop() {
