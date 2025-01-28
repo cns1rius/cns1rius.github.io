@@ -1,25 +1,27 @@
-if (
-  document.referrer == "" ||
-  document.referrer.indexOf("s1rius.space") != -1 ||
-  document.referrer.indexOf("cns1rius.github.io") != -1 ||
-  document.referrer.indexOf("s1rius.vercel.app") != -1
-) {
-  //改成自己域名，注意是referrer!!! qwq
-  Snackbar.show({
-    pos: "top-right",
-    showAction: false,
-    text: "欢迎访问本站！",
-  });
-} else {
-  const url = new URL(document.referrer);
-  Snackbar.show({
-    pos: "top-right",
-    showAction: false,
-    text: `欢迎来自${url.host}的童鞋访问本站！`,
-  });
-  localStorage.setItem("popWelcomeWindow", "1");
+if (sessionStorage.getItem("popWelcomeWindow") != "1") {
+  if (
+    document.referrer == "" ||
+    document.referrer.indexOf("s1rius.space") != -1 ||
+    document.referrer.indexOf("cns1rius.github.io") != -1 ||
+    document.referrer.indexOf("s1rius.vercel.app") != -1
+  ) {
+    //改成自己域名，注意是referrer!!! qwq
+    Snackbar.show({
+      pos: "top-right",
+      showAction: false,
+      text: "欢迎访问本站！",
+    });
+  } else {
+    const url = new URL(document.referrer);
+    Snackbar.show({
+      pos: "top-right",
+      showAction: false,
+      text: `欢迎来自${url.host}的童鞋访问本站！`,
+    });
+    localStorage.setItem("popWelcomeWindow", "1");
+  }
 }
-if (sessionStorage.getItem("popCookieWindow") != "0") {
+if (sessionStorage.getItem("popCookieWindow") != "1") {
   setTimeout(function () {
     Snackbar.show({
       text: "本站使用Cookie和本地/会话存储保证浏览体验和网站统计",
@@ -32,7 +34,7 @@ if (sessionStorage.getItem("popCookieWindow") != "0") {
   }, 3000);
 }
 //不在弹出Cookie提醒
-sessionStorage.setItem("popCookieWindow", "0");
+sessionStorage.setItem("popCookieWindow", "1");
 
 //自带上文浏览器提示
 
@@ -97,7 +99,7 @@ function setCookies(obj, limitTime) {
 function getCookie(name) {
   var arr,
     reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-  if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
+  if ((arr = document.cookie.match(reg))) return decodeURIComponent(arr[2]);
   else return null;
 }
 if (getCookie("browsertc") != 1) {
