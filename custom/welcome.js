@@ -1,4 +1,6 @@
-if (sessionStorage.getItem("popWelcomeWindow") != "1") {
+let welcomeFlag = Math.random();
+
+if (sessionStorage.getItem("popWelcomeWindow") != welcomeFlag) {
   if (
     document.referrer == "" ||
     document.referrer.indexOf("s1rius.space") != -1 ||
@@ -18,10 +20,10 @@ if (sessionStorage.getItem("popWelcomeWindow") != "1") {
       showAction: false,
       text: `欢迎来自${url.host}的童鞋访问本站！`,
     });
-    localStorage.setItem("popWelcomeWindow", "1");
+    localStorage.setItem("popWelcomeWindow", welcomeFlag);
   }
 }
-if (sessionStorage.getItem("popCookieWindow") != "1") {
+if (sessionStorage.getItem("popCookieWindow") != welcomeFlag) {
   setTimeout(function () {
     Snackbar.show({
       text: "本站使用Cookie和本地/会话存储保证浏览体验和网站统计",
@@ -34,7 +36,7 @@ if (sessionStorage.getItem("popCookieWindow") != "1") {
   }, 3000);
 }
 //不在弹出Cookie提醒
-sessionStorage.setItem("popCookieWindow", "1");
+sessionStorage.setItem("popCookieWindow", welcomeFlag);
 
 //自带上文浏览器提示
 
