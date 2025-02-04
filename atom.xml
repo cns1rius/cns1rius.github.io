@@ -65,7 +65,7 @@
 &lt;p&gt;下载后是流量包&lt;/p&gt;
 &lt;p&gt;流量包存在明文 flag&lt;/p&gt;
 &lt;p&gt;（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/./img/image-20240421174259759.png&quot;</summary>
+&lt;p&gt;&lt;img src=</summary>
         
       
     
@@ -343,10 +343,8 @@
       
         
         
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/img/12ec799b41b544eb83db7a111956c0cb.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;护网杯-2018-easy-tornado&quot;&gt;&lt;a href=&quot;#护网杯-2018-easy-tornado&quot; class=&quot;headerlink&quot; title=&quot;[护网杯 2018]easy_tornado&quot;&gt;&lt;/a&gt;[护网杯 2018]easy_tornado&lt;/h2&gt;&lt;p&gt;ssti 注入点在 msg&lt;br&gt;注入49出现 orz 应该是有过滤&lt;/p&gt;
-1正常
-&lt;p&gt;hint 里缺 cookie_secret&lt;br&gt;该项在</summary>
+    <summary type="html">&lt;p&gt;&lt;img src= &quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&quot; data-lazy-src=&quot;/img/12ec799b41b544eb83db7a111956c0cb.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;护网杯-2018-easy-tornado&quot;&gt;&lt;a href=&quot;#护网杯-2018-easy-tornado&quot; class=&quot;headerlink&quot; title=&quot;[护网杯 2018]easy_tornado&quot;&gt;&lt;/a&gt;[护网杯</summary>
         
       
     
@@ -436,7 +434,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;LD-PRELOAD&quot;&gt;&lt;a href=&quot;#LD-PRELOAD&quot; class=&quot;headerlink&quot; title=&quot;LD_PRELOAD&quot;&gt;&lt;/a&gt;LD_PRELOAD&lt;/h2&gt;&lt;p&gt;时间紧 于是先采用最省时的方法&lt;br&gt;先蚁剑连&lt;br&gt;&lt;img src=&quot;/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;发现打不开 flag</summary>
+    <summary type="html">&lt;h2 id=&quot;LD-PRELOAD&quot;&gt;&lt;a href=&quot;#LD-PRELOAD&quot; class=&quot;headerlink&quot; title=&quot;LD_PRELOAD&quot;&gt;&lt;/a&gt;LD_PRELOAD&lt;/h2&gt;&lt;p&gt;时间紧 于是先采用最省时的方法&lt;br&gt;先蚁剑连&lt;br&gt;&lt;img src= &quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&quot;</summary>
         
       
     
@@ -528,8 +526,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;level-1&quot;&gt;&lt;a href=&quot;#level-1&quot; class=&quot;headerlink&quot; title=&quot;level 1&quot;&gt;&lt;/a&gt;level 1&lt;/h2&gt;&lt;p&gt;没啥好说的&lt;br&gt;直接 alert&lt;br&gt;&lt;img src=&quot;/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254223669-151.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;level-2&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h2 id=&quot;level-1&quot;&gt;&lt;a href=&quot;#level-1&quot; class=&quot;headerlink&quot; title=&quot;level 1&quot;&gt;&lt;/a&gt;level 1&lt;/h2&gt;&lt;p&gt;没啥好说的&lt;br&gt;直接 alert&lt;br&gt;&lt;img src= &quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&quot;</summary>
         
       
     
@@ -619,7 +616,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;工具-彩蛋&quot;&gt;&lt;a href=&quot;#工具-彩蛋&quot; class=&quot;headerlink&quot; title=&quot;工具 彩蛋&quot;&gt;&lt;/a&gt;工具 彩蛋&lt;/h2&gt;&lt;p&gt;一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页&lt;br&gt;抓包后发现不管哪一页 limit 都是 12 但 offset 在变化&lt;br&gt;于是&lt;br&gt;&lt;img</summary>
+    <summary type="html">&lt;h2 id=&quot;工具-彩蛋&quot;&gt;&lt;a href=&quot;#工具-彩蛋&quot; class=&quot;headerlink&quot; title=&quot;工具 彩蛋&quot;&gt;&lt;/a&gt;工具 彩蛋&lt;/h2&gt;&lt;p&gt;一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页&lt;br&gt;抓包后发现不管哪一页 limit 都是 12 但 offset 在变化&lt;br&gt;于是&lt;br&gt;&lt;img src= &quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&quot;</summary>
         
       
     
@@ -674,8 +671,8 @@
       
         
         
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png&quot; alt=&quot;点击并拖拽以移动&quot;&gt;&lt;/p&gt;
-&lt;p&gt;我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022</summary>
+    <summary type="html">&lt;p&gt;&lt;img src= &quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&quot; data-lazy-src=&quot;/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png&quot; alt=&quot;点击并拖拽以移动&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送</summary>
         
       
     
