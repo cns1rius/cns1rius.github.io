@@ -1,4 +1,4 @@
-let welcomeFlag = Math.random();
+let welcomeFlag = Math.floor(Math.random() * 100);
 
 if (sessionStorage.getItem("popWelcomeWindow") != welcomeFlag) {
   if (
@@ -8,32 +8,20 @@ if (sessionStorage.getItem("popWelcomeWindow") != welcomeFlag) {
     document.referrer.indexOf("s1rius.vercel.app") != -1
   ) {
     //改成自己域名，注意是referrer!!! qwq
-    Snackbar.show({
-      pos: "top-right",
-      showAction: false,
-      text: "欢迎访问本站！",
-    });
+    btf.snackbarShow("欢迎访问本站！", undefined, undefined, 5000);
   } else {
     const url = new URL(document.referrer);
-    Snackbar.show({
-      pos: "top-right",
-      showAction: false,
-      text: `欢迎来自${url.host}的童鞋访问本站！`,
-    });
+    btf.snackbarShow(`欢迎来自${url.host}的童鞋访问本站！`);
     localStorage.setItem("popWelcomeWindow", welcomeFlag);
   }
 }
 if (sessionStorage.getItem("popCookieWindow") != welcomeFlag) {
   setTimeout(function () {
-    Snackbar.show({
-      text: "本站使用Cookie和本地/会话存储保证浏览体验和网站统计",
-      pos: "bottom-right",
-      actionText: "查看博客声明",
-      onActionClick: function (element) {
-        window.open("/license");
-      },
-    });
-  }, 3000);
+    btf.snackbarShow(
+      "本站使用Cookie和本地/会话存储保证浏览体验和网站统计",
+      "bottom-right"
+    );
+  }, 5000);
 }
 //不在弹出Cookie提醒
 sessionStorage.setItem("popCookieWindow", welcomeFlag);
@@ -41,13 +29,7 @@ sessionStorage.setItem("popCookieWindow", welcomeFlag);
 //自带上文浏览器提示
 
 function browserTC() {
-  btf.snackbarShow("");
-  Snackbar.show({
-    text: "浏览器版本较低，网站样式可能错乱",
-    actionText: "关闭",
-    duration: "6000",
-    pos: "bottom-right",
-  });
+  btf.snackbarShow("浏览器版本较低，网站样式可能错乱", "bottom-right");
 }
 function browserVersion() {
   var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
