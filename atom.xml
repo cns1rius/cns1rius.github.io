@@ -6,7 +6,7 @@
   <link href="https://s1rius.space/atom.xml" rel="self"/>
   
   <link href="https://s1rius.space/"/>
-  <updated>2024-12-25T16:00:00.000Z</updated>
+  <updated>2025-01-22T00:59:06.790Z</updated>
   <id>https://s1rius.space/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hackthebox合集</title>
+    <link href="https://s1rius.space/2025/01/htb/"/>
+    <id>https://s1rius.space/2025/01/htb/</id>
+    <published>2025-01-22T00:59:06.790Z</published>
+    <updated>2025-01-22T00:59:06.790Z</updated>
+    
+    
+    <summary type="html">hackthebox合集</summary>
+    
+    
+    
+    <category term="内网" scheme="https://s1rius.space/categories/%E5%86%85%E7%BD%91/"/>
+    
+    
+    <category term="web" scheme="https://s1rius.space/tags/web/"/>
+    
+    <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
+    
+    <category term="htb-Shoppy" scheme="https://s1rius.space/tags/htb-Shoppy/"/>
+    
+    <category term="htb-Cat" scheme="https://s1rius.space/tags/htb-Cat/"/>
+    
+  </entry>
   
   <entry>
     <title>vue gin合并部署(完美方案)</title>
@@ -264,27 +289,6 @@
     
     <category term="随笔" scheme="https://s1rius.space/categories/%E9%9A%8F%E7%AC%94/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>hackthebox合集</title>
-    <link href="https://s1rius.space/2022/10/htb/"/>
-    <id>https://s1rius.space/2022/10/htb/</id>
-    <published>2022-10-22T16:00:00.000Z</published>
-    <updated>2022-10-22T16:00:00.000Z</updated>
-    
-    
-    <summary type="html">hackthebox合集</summary>
-    
-    
-    
-    <category term="内网" scheme="https://s1rius.space/categories/%E5%86%85%E7%BD%91/"/>
-    
-    
-    <category term="web" scheme="https://s1rius.space/tags/web/"/>
-    
-    <category term="ctfshow" scheme="https://s1rius.space/tags/ctfshow/"/>
     
   </entry>
   
