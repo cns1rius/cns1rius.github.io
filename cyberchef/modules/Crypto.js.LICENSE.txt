@@ -240,10 +240,10 @@
 /**
  * CyberChef - The Cyber Swiss Army Knife
  *
- * @copyright Crown Copyright 2016
+ * @copyright Crown Copyright 2016-2025
  * @license Apache-2.0
  *
- *   Copyright 2016 Crown Copyright
+ *   Copyright 2016-2025 Crown Copyright
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -303,6 +303,8 @@
  *
  * JA4 Copyright 2023 FoxIO, LLC.
  * @license BSD-3-Clause
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
@@ -329,6 +331,8 @@
  * @author n1474335 [n1474335@gmail.com]
  * @copyright Crown Copyright 2024
  * @license Apache-2.0
+ *
+ * Modified by Raka-loah@github for zh-CN i18n
  */
 
 /**
