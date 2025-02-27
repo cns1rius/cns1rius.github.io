@@ -33,9 +33,9 @@
     
     <category term="web" scheme="https://s1rius.space/tags/web/"/>
     
-    <category term="htb-Cat" scheme="https://s1rius.space/tags/htb-Cat/"/>
-    
     <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
+    
+    <category term="htb-Cat" scheme="https://s1rius.space/tags/htb-Cat/"/>
     
   </entry>
   
@@ -299,9 +299,9 @@
     
     <category term="web" scheme="https://s1rius.space/tags/web/"/>
     
-    <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
-    
     <category term="htb-Shoppy" scheme="https://s1rius.space/tags/htb-Shoppy/"/>
+    
+    <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
     
   </entry>
   
