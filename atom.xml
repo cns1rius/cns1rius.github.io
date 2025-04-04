@@ -56,9 +56,9 @@
     
     <category term="web" scheme="https://s1rius.space/tags/web/"/>
     
-    <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
-    
     <category term="htb-Cat" scheme="https://s1rius.space/tags/htb-Cat/"/>
+    
+    <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
     
   </entry>
   
@@ -251,9 +251,9 @@
     <category term="web" scheme="https://s1rius.space/categories/web/"/>
     
     
-    <category term="unctf" scheme="https://s1rius.space/tags/unctf/"/>
-    
     <category term="web" scheme="https://s1rius.space/tags/web/"/>
+    
+    <category term="unctf" scheme="https://s1rius.space/tags/unctf/"/>
     
     <category term="misc" scheme="https://s1rius.space/tags/misc/"/>
     
@@ -322,9 +322,9 @@
     
     <category term="web" scheme="https://s1rius.space/tags/web/"/>
     
-    <category term="htb-Shoppy" scheme="https://s1rius.space/tags/htb-Shoppy/"/>
-    
     <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
+    
+    <category term="htb-Shoppy" scheme="https://s1rius.space/tags/htb-Shoppy/"/>
     
   </entry>
   
