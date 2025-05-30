@@ -562,6 +562,89 @@ aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
       </tags>
   </entry>
   <entry>
+    <title>PyJail python沙箱逃逸探究</title>
+    <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
+    <content><![CDATA[<h2 id="python-特性"><a class="markdownIt-Anchor" href="#python-特性"></a> python 特性</h2>
+<p>在 python 中，类均继承自<code>object</code>基类；</p>
+<h3 id="python-魔术方法"><a class="markdownIt-Anchor" href="#python-魔术方法"></a> python 魔术方法</h3>
+<ul>
+<li><code>__init__</code>：构造函数。这个在实例化类的时候就会用到，一般是接受类初始化的参数，并且进行一系列初始化操作。</li>
+<li><code>__len__</code>：返回对象的长度。</li>
+<li><code>__str__</code>：返回对象的字符串表示。对一个对象<code>a</code>使用<code>str(a)</code>时，会尝试调用<code>a.__str__()</code>。相似地，还有<code>__int__</code>魔术方法也用于类型转换，不过较少使用。</li>
+<li><code>__getitem__</code>：根据索引返回对象的某个元素。对一个对象<code>a</code>使用<code>a[1]</code>时，会尝试调用<code>a.__getitem__(1)</code>。</li>
+<li><code>__add__</code>、<code>__sub__</code>、<code>__mul__</code>、<code>__div__</code>、<code>__mod__</code>：算术运算，加减乘除模。如对一个对象<code>a</code>使用<code>a+b</code>时，会尝试调用<code>a.__add__(b)</code>。相应地，对于有些运算，对象需放在后面（第二个操作数）的，则需实现<code>__radd__</code>、<code>__rsub__</code>、<code>__rmul__</code>、<code>__rdiv__</code>、<code>__rmod__</code>，如椭圆曲线上的点的倍点运算<code>G -&gt; d * G</code>，就可以通过实现<code>__rmul__</code>来实现。</li>
+<li><code>__and__</code>，<code>__or__</code>、<code>__xor__</code>：逻辑运算，和算术运算类似；</li>
+<li><code>__eq__</code>，<code>__ne__</code>、<code>__lt__</code>、<code>__gt__</code>、<code>__le__</code>、<code>__ge__</code>：比较运算，和算术运算类似；例如<code>'贵州' &gt; '广西'</code>，就会转而调用<code>'贵州'.__gt__('广西')</code>；</li>
+<li><code>__getattr__</code>：对象是否含有某属性。如果我们对对象<code>a</code>所对应的类实现了该方法，那么在调用未实现的<code>a.b</code>时，就会转而调用<code>a.__getattr__(b)</code>。这也等价于用函数的方法调用：<code>getattr(a, 'b')</code>。有<code>__getattr__</code>，自然也有对应的<code>__setattr__</code>；</li>
+<li><code>__subclasses__</code>：返回当前类的所有子类。一般是用在<code>object</code>类中，在<code>object.__subclasses__()</code>中，我们可以找到<code>os</code>模块中的类，然后再找到<code>os</code>，并且执行<code>os.system</code>，实现 RCE。</li>
+</ul>
+<h3 id="python-魔术属性"><a class="markdownIt-Anchor" href="#python-魔术属性"></a> python 魔术属性</h3>
+<ul>
+<li>
+<p><code>__dict__</code>：可以查看内部所有属性名和属性值组成的字典。</p>
+</li>
+<li>
+<p><code>__doc__</code>：类的帮助文档。默认类均有帮助文档。对于自定义的类，需要我们自己实现。</p>
+</li>
+<li>
+<p><code>__class__</code>：返回当前对象所属的类。如<code>''.__class__</code>会返回<code>&lt;class 'str'&gt;</code>。拿到类之后，就可以通过构造函数生成新的对象，如<code>''.__class__(4396)</code>，就等价于<code>str(4396)</code>，即<code>'4396'</code>；</p>
+</li>
+<li>
+<p><code>__base__</code>：返回当前类的基类。如<code>str.__base__</code>会返回<code>&lt;class 'object'&gt;</code>；</p>
+</li>
+</ul>
+<h3 id="其他内置函数和变量"><a class="markdownIt-Anchor" href="#其他内置函数和变量"></a> 其他内置函数和变量</h3>
+<ul>
+<li><code>dir</code>：查看对象的所有属性和方法。在我们没有思路的时候，可以通过该函数查看所有可以利用的方法；此外，在题目禁用引号以及小数点时，也可以先用拿到类所有可用方法，再索引到方法名，并且通过<code>getattr</code>来拿到目标方法。</li>
+<li><code>chr</code>、<code>ord</code>：字符与 ASCII 码转换函数，能帮我们绕过一些 WAF</li>
+<li><code>globals</code>：返回所有全局变量的函数；</li>
+<li><code>locals</code>：返回所有局部变量的函数；</li>
+<li><code>__import__</code>：载入模块的函数。例如<code>import os</code>等价于<code>os = __import__('os')</code>；</li>
+<li><code>__name__</code>：该变量指示当前运行环境位于哪个模块中。如我们 python 一般写的<code>if __name__ == '__main__':</code>，就是来判断是否是直接运行该脚本。如果是从另外的地方 import 的该脚本的话，那<code>__name__</code>就不为<code>__main__</code>，就不会执行之后的代码。更多参考<a href="https://link.zhihu.com/?target=https%3A//www.geeksforgeeks.org/__name__-a-special-variable-in-python/">这里</a>；</li>
+<li><code>__builtins__</code>：包含当前运行环境中默认的所有函数与类。如上面所介绍的所有默认函数，如<code>str</code>、<code>chr</code>、<code>ord</code>、<code>dict</code>、<code>dir</code>等。在 pyjail 的沙箱中，往往<code>__builtins__</code>被置为<code>None</code>，因此我们不能利用上述的函数。所以一种思路就是我们可以先通过类的基类和子类拿到<code>__builtins__</code>，再<code>__import__('os').system('sh')</code>进行 RCE；</li>
+<li><code>__file__</code>：该变量指示当前运行代码所在路径。如<code>open(__file__).read()</code>就是读取当前运行的 python 文件代码。需要注意的是，<strong>该变量仅在运行代码文件时会产生，在运行交互式终端时不会有此变量</strong>；</li>
+<li><code>_</code>：该变量返回上一次运行的 python 语句结果。需要注意的是，<strong>该变量仅在运行交互式终端时会产生，在运行代码文件时不会有此变量</strong>。</li>
+</ul>
+<h2 id="waf"><a class="markdownIt-Anchor" href="#waf"></a> WAF</h2>
+<h3 id="过滤"><a class="markdownIt-Anchor" href="#过滤"></a> 过滤<code>[]</code></h3>
+<p>使用<code>pop</code>、<code>__getitem__</code> 代替</p>
+<p>例如：<code>a.__getitem__(0)</code>、<code>&#123;&quot;a&quot;: 1&#125;.pop(&quot;a&quot;)</code></p>
+<p>或使用 next 等指针指向(类似无参 RCE 特殊函数遍历)</p>
+<p>需要去别的是 python 需要使用迭代器<code>iter(object[, sentinel])</code>作为传入函数</p>
+<h3 id="过滤字符"><a class="markdownIt-Anchor" href="#过滤字符"></a> 过滤字符</h3>
+<h6 id="chr-函数构造字符"><a class="markdownIt-Anchor" href="#chr-函数构造字符"></a> <code>chr()</code> 函数构造字符</h6>
+<h4 id="利用输出"><a class="markdownIt-Anchor" href="#利用输出"></a> 利用输出</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span>(().__class__.__new__)[i]+……</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="built_in">print</span>(<span class="built_in">str</span>(().__class__.__new__))</span><br><span class="line">&lt;built-<span class="keyword">in</span> method __new__ of <span class="built_in">type</span> <span class="built_in">object</span> at <span class="number">0x00007FFF01FE8AB0</span>&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="过滤数字"><a class="markdownIt-Anchor" href="#过滤数字"></a> 过滤数字</h3>
+<ul>
+<li>0：<code>int(bool([]))</code>、<code>Flase</code>、<code>len([])</code>、<code>any(())</code></li>
+<li>1：<code>int(bool([&quot;&quot;]))</code>、<code>True</code>、<code>all(())</code>、<code>int(list(list(dict(a၁=())).pop()).pop())</code></li>
+<li>len：len(str({}.keys))</li>
+<li>1.0：<code>float(True)</code></li>
+<li>-1：<code>~0</code></li>
+</ul>
+<h3 id="过滤特殊字符"><a class="markdownIt-Anchor" href="#过滤特殊字符"></a> 过滤特殊字符</h3>
+<p>str 被过滤<code>type('')()</code>、<code>format()</code> 即可。同理，<code>int</code>、<code>list</code> 都可以用 <code>type</code> 构造出来。</p>
+<h3 id="non-ascii-identifiers"><a class="markdownIt-Anchor" href="#non-ascii-identifiers"></a> Non-ASCII Identifiers</h3>
+<p>在 python3 中支持 Non-ASCII Identifies 并且所有都会被转换成 unicode 的 NFKC（也就是标准模式）。我们可以用斜体或者花体各种各样的与标准字母相像的来进行导包操作。</p>
+<blockquote>
+<h4 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接"></a> 参考链接</h4>
+<p><a href="https://zhuanlan.zhihu.com/p/578966149">PyJail python 沙箱逃逸探究·总览</a></p>
+<p><a href="http://twe1v3.top/2023/02/pyjail-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E3%80%90CV%E3%80%91/#more">pyjail-学习总结【CV】 | TWe1v3</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>python</tag>
+        <tag>沙箱逃逸</tag>
+        <tag>PyJail</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bypass disable_function</title>
     <url>/2022/05/Bypass%20disable_function/</url>
     <content><![CDATA[<h2 id="ld_preload"><a class="markdownIt-Anchor" href="#ld_preload"></a> LD_PRELOAD</h2>
@@ -707,6 +790,34 @@ handler 指向 RequestHandler<br />
       </tags>
   </entry>
   <entry>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
+<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
+<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
+<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
+<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
+<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
+<p>新建项目 C#里面最后一项</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png" /></p>
+<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
+<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动" /></p>
+<p>这个插件是为后面设置背景图片准备</p>
+<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动" /></p>
+<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动" /></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>visual studio 2022</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>xxe</title>
     <url>/2022/12/XXE/</url>
     <content><![CDATA[<h2 id="xxe"><a class="markdownIt-Anchor" href="#xxe"></a> XXE</h2>
@@ -739,117 +850,6 @@ handler 指向 RequestHandler<br />
         <tag>web</tag>
         <tag>xxe</tag>
         <tag>buuctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PyJail python沙箱逃逸探究</title>
-    <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
-    <content><![CDATA[<h2 id="python-特性"><a class="markdownIt-Anchor" href="#python-特性"></a> python 特性</h2>
-<p>在 python 中，类均继承自<code>object</code>基类；</p>
-<h3 id="python-魔术方法"><a class="markdownIt-Anchor" href="#python-魔术方法"></a> python 魔术方法</h3>
-<ul>
-<li><code>__init__</code>：构造函数。这个在实例化类的时候就会用到，一般是接受类初始化的参数，并且进行一系列初始化操作。</li>
-<li><code>__len__</code>：返回对象的长度。</li>
-<li><code>__str__</code>：返回对象的字符串表示。对一个对象<code>a</code>使用<code>str(a)</code>时，会尝试调用<code>a.__str__()</code>。相似地，还有<code>__int__</code>魔术方法也用于类型转换，不过较少使用。</li>
-<li><code>__getitem__</code>：根据索引返回对象的某个元素。对一个对象<code>a</code>使用<code>a[1]</code>时，会尝试调用<code>a.__getitem__(1)</code>。</li>
-<li><code>__add__</code>、<code>__sub__</code>、<code>__mul__</code>、<code>__div__</code>、<code>__mod__</code>：算术运算，加减乘除模。如对一个对象<code>a</code>使用<code>a+b</code>时，会尝试调用<code>a.__add__(b)</code>。相应地，对于有些运算，对象需放在后面（第二个操作数）的，则需实现<code>__radd__</code>、<code>__rsub__</code>、<code>__rmul__</code>、<code>__rdiv__</code>、<code>__rmod__</code>，如椭圆曲线上的点的倍点运算<code>G -&gt; d * G</code>，就可以通过实现<code>__rmul__</code>来实现。</li>
-<li><code>__and__</code>，<code>__or__</code>、<code>__xor__</code>：逻辑运算，和算术运算类似；</li>
-<li><code>__eq__</code>，<code>__ne__</code>、<code>__lt__</code>、<code>__gt__</code>、<code>__le__</code>、<code>__ge__</code>：比较运算，和算术运算类似；例如<code>'贵州' &gt; '广西'</code>，就会转而调用<code>'贵州'.__gt__('广西')</code>；</li>
-<li><code>__getattr__</code>：对象是否含有某属性。如果我们对对象<code>a</code>所对应的类实现了该方法，那么在调用未实现的<code>a.b</code>时，就会转而调用<code>a.__getattr__(b)</code>。这也等价于用函数的方法调用：<code>getattr(a, 'b')</code>。有<code>__getattr__</code>，自然也有对应的<code>__setattr__</code>；</li>
-<li><code>__subclasses__</code>：返回当前类的所有子类。一般是用在<code>object</code>类中，在<code>object.__subclasses__()</code>中，我们可以找到<code>os</code>模块中的类，然后再找到<code>os</code>，并且执行<code>os.system</code>，实现 RCE。</li>
-</ul>
-<h3 id="python-魔术属性"><a class="markdownIt-Anchor" href="#python-魔术属性"></a> python 魔术属性</h3>
-<ul>
-<li>
-<p><code>__dict__</code>：可以查看内部所有属性名和属性值组成的字典。</p>
-</li>
-<li>
-<p><code>__doc__</code>：类的帮助文档。默认类均有帮助文档。对于自定义的类，需要我们自己实现。</p>
-</li>
-<li>
-<p><code>__class__</code>：返回当前对象所属的类。如<code>''.__class__</code>会返回<code>&lt;class 'str'&gt;</code>。拿到类之后，就可以通过构造函数生成新的对象，如<code>''.__class__(4396)</code>，就等价于<code>str(4396)</code>，即<code>'4396'</code>；</p>
-</li>
-<li>
-<p><code>__base__</code>：返回当前类的基类。如<code>str.__base__</code>会返回<code>&lt;class 'object'&gt;</code>；</p>
-</li>
-</ul>
-<h3 id="其他内置函数和变量"><a class="markdownIt-Anchor" href="#其他内置函数和变量"></a> 其他内置函数和变量</h3>
-<ul>
-<li><code>dir</code>：查看对象的所有属性和方法。在我们没有思路的时候，可以通过该函数查看所有可以利用的方法；此外，在题目禁用引号以及小数点时，也可以先用拿到类所有可用方法，再索引到方法名，并且通过<code>getattr</code>来拿到目标方法。</li>
-<li><code>chr</code>、<code>ord</code>：字符与 ASCII 码转换函数，能帮我们绕过一些 WAF</li>
-<li><code>globals</code>：返回所有全局变量的函数；</li>
-<li><code>locals</code>：返回所有局部变量的函数；</li>
-<li><code>__import__</code>：载入模块的函数。例如<code>import os</code>等价于<code>os = __import__('os')</code>；</li>
-<li><code>__name__</code>：该变量指示当前运行环境位于哪个模块中。如我们 python 一般写的<code>if __name__ == '__main__':</code>，就是来判断是否是直接运行该脚本。如果是从另外的地方 import 的该脚本的话，那<code>__name__</code>就不为<code>__main__</code>，就不会执行之后的代码。更多参考<a href="https://link.zhihu.com/?target=https%3A//www.geeksforgeeks.org/__name__-a-special-variable-in-python/">这里</a>；</li>
-<li><code>__builtins__</code>：包含当前运行环境中默认的所有函数与类。如上面所介绍的所有默认函数，如<code>str</code>、<code>chr</code>、<code>ord</code>、<code>dict</code>、<code>dir</code>等。在 pyjail 的沙箱中，往往<code>__builtins__</code>被置为<code>None</code>，因此我们不能利用上述的函数。所以一种思路就是我们可以先通过类的基类和子类拿到<code>__builtins__</code>，再<code>__import__('os').system('sh')</code>进行 RCE；</li>
-<li><code>__file__</code>：该变量指示当前运行代码所在路径。如<code>open(__file__).read()</code>就是读取当前运行的 python 文件代码。需要注意的是，<strong>该变量仅在运行代码文件时会产生，在运行交互式终端时不会有此变量</strong>；</li>
-<li><code>_</code>：该变量返回上一次运行的 python 语句结果。需要注意的是，<strong>该变量仅在运行交互式终端时会产生，在运行代码文件时不会有此变量</strong>。</li>
-</ul>
-<h2 id="waf"><a class="markdownIt-Anchor" href="#waf"></a> WAF</h2>
-<h3 id="过滤"><a class="markdownIt-Anchor" href="#过滤"></a> 过滤<code>[]</code></h3>
-<p>使用<code>pop</code>、<code>__getitem__</code> 代替</p>
-<p>例如：<code>a.__getitem__(0)</code>、<code>&#123;&quot;a&quot;: 1&#125;.pop(&quot;a&quot;)</code></p>
-<p>或使用 next 等指针指向(类似无参 RCE 特殊函数遍历)</p>
-<p>需要去别的是 python 需要使用迭代器<code>iter(object[, sentinel])</code>作为传入函数</p>
-<h3 id="过滤字符"><a class="markdownIt-Anchor" href="#过滤字符"></a> 过滤字符</h3>
-<h6 id="chr-函数构造字符"><a class="markdownIt-Anchor" href="#chr-函数构造字符"></a> <code>chr()</code> 函数构造字符</h6>
-<h4 id="利用输出"><a class="markdownIt-Anchor" href="#利用输出"></a> 利用输出</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span>(().__class__.__new__)[i]+……</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="built_in">print</span>(<span class="built_in">str</span>(().__class__.__new__))</span><br><span class="line">&lt;built-<span class="keyword">in</span> method __new__ of <span class="built_in">type</span> <span class="built_in">object</span> at <span class="number">0x00007FFF01FE8AB0</span>&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="过滤数字"><a class="markdownIt-Anchor" href="#过滤数字"></a> 过滤数字</h3>
-<ul>
-<li>0：<code>int(bool([]))</code>、<code>Flase</code>、<code>len([])</code>、<code>any(())</code></li>
-<li>1：<code>int(bool([&quot;&quot;]))</code>、<code>True</code>、<code>all(())</code>、<code>int(list(list(dict(a၁=())).pop()).pop())</code></li>
-<li>len：len(str({}.keys))</li>
-<li>1.0：<code>float(True)</code></li>
-<li>-1：<code>~0</code></li>
-</ul>
-<h3 id="过滤特殊字符"><a class="markdownIt-Anchor" href="#过滤特殊字符"></a> 过滤特殊字符</h3>
-<p>str 被过滤<code>type('')()</code>、<code>format()</code> 即可。同理，<code>int</code>、<code>list</code> 都可以用 <code>type</code> 构造出来。</p>
-<h3 id="non-ascii-identifiers"><a class="markdownIt-Anchor" href="#non-ascii-identifiers"></a> Non-ASCII Identifiers</h3>
-<p>在 python3 中支持 Non-ASCII Identifies 并且所有都会被转换成 unicode 的 NFKC（也就是标准模式）。我们可以用斜体或者花体各种各样的与标准字母相像的来进行导包操作。</p>
-<blockquote>
-<h4 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接"></a> 参考链接</h4>
-<p><a href="https://zhuanlan.zhihu.com/p/578966149">PyJail python 沙箱逃逸探究·总览</a></p>
-<p><a href="http://twe1v3.top/2023/02/pyjail-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E3%80%90CV%E3%80%91/#more">pyjail-学习总结【CV】 | TWe1v3</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>python</tag>
-        <tag>沙箱逃逸</tag>
-        <tag>PyJail</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
-<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
-<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
-<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
-<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
-<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
-<p>新建项目 C#里面最后一项</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png" /></p>
-<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
-<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动" /></p>
-<p>这个插件是为后面设置背景图片准备</p>
-<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动" /></p>
-<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动" /></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
       </tags>
   </entry>
   <entry>
@@ -896,80 +896,6 @@ handler 指向 RequestHandler<br />
         <tag>awd</tag>
         <tag>长城杯</tag>
         <tag>铁人三项</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub-rce</title>
-    <url>/2022/04/ctfhub-rce/</url>
-    <content><![CDATA[<p>rce：远程代码执行漏洞<br />
-分为远程命令执行 ping 和远程代码执行 evel。<br />
-<strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞</strong>。相当于直接操控服务器电脑的 cmd 命令行！高危漏洞！</p>
-<h2 id="eval-执行"><a class="markdownIt-Anchor" href="#eval-执行"></a> eval 执行</h2>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>传参给 cmd 来 eval</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">/?cmd=<span class="title function_ invoke__">system</span>(<span class="string">&quot;ls /&quot;</span>);<span class="comment">//此处因为根目录无flag 所以看上一级目录</span></span><br></pre></td></tr></table></figure>
-<p>找到后 再 cat /flag_****</p>
-<h2 id="文件包含"><a class="markdownIt-Anchor" href="#文件包含"></a> 文件包含</h2>
-<p>这里使用 strpos 函数</p>
-<blockquote>
-<p>strpos:查找字符串首次出现的位置</p>
-<p>int strpos ( string $haystack , mixed $needle [, int $offset = 0 ] )</p>
-</blockquote>
-<p>题目使用</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">strpos</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>],<span class="string">&quot;flag&quot;</span>))&#123;<span class="comment">//无flag字符即可运行</span></span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>来包含文件，而下方给出的 shell.txt 含有 eval 漏洞</p>
-<p>于是包含它（shell.txt 没有“flag”字符 所以这里 strpos 没影响）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218182857507.png" alt="image-20220218182857507" /></p>
-<p>通过 get(包含文件) post(传参)并用来得到 flag</p>
-<h2 id="php-info"><a class="markdownIt-Anchor" href="#php-info"></a> php info</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">	if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">         &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    	&#125;&#125;</span><br><span class="line">else &#123;</span><br><span class="line">    highlight_file(__FILE__);&#125;?&gt;</span><br><span class="line">&lt;hr&gt;i don&#x27;t have shell, how to get flag? &lt;br&gt;&lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<p>点击 phpinfo 链接 可查看 php 环境</p>
-<h3 id="phpinput"><a class="markdownIt-Anchor" href="#phpinput"></a> php://input</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*php:// — 访问各个输入/输出流（I/O streams）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">php://input是个可以访问请求的原始数据的只读流。</span></span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218162728184.png" alt="image-20220218162728184" /></p>
-<h2 id="读取源代码"><a class="markdownIt-Anchor" href="#读取源代码"></a> 读取源代码</h2>
-<p>看环境 无法使用 php://input</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;])) &#123;</span><br><span class="line">    if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>但还必须是 php://开头</p>
-<h3 id="phpfilter"><a class="markdownIt-Anchor" href="#phpfilter"></a> <a href="https://www.php.net/manual/zh/wrappers.php.php">php://filter</a></h3>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219174206504.png" alt="image-20220219174206504" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219112308277.png" alt="image-20220219112308277" /></p>
-<h2 id="远程包含"><a class="markdownIt-Anchor" href="#远程包含"></a> 远程包含</h2>
-<p>同 phpinfo 做法相同</p>
-<h2 id="命令注入"><a class="markdownIt-Anchor" href="#命令注入"></a> 命令注入</h2>
-<p>输入命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">127.0.0.1;ls</span><br></pre></td></tr></table></figure>
-<p>然后 cat 时出现了问题</p>
-<p>输出被限制了</p>
-<p>于是用管道符号来限制输出 base64</p>
-<p>得到后再解码</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218170811553.png" alt="image-20220218170811553" /></p>
-<h2 id="过滤-cat"><a class="markdownIt-Anchor" href="#过滤-cat"></a> 过滤 cat</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/cat/&quot;, $ip, $m)) &#123;//过滤了cat</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">    if ($res) &#123;</span><br><span class="line">        print_r($res);</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">	show_source(__FILE__);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="more"><a class="markdownIt-Anchor" href="#more"></a> more</h2>
-<p>Linux more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">more <span class="section">[-dlfpcsu]</span> <span class="section">[-num]</span> <span class="section">[+/pattern]</span> <span class="section">[+linenum]</span> <span class="section">[fileNames..]</span></span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171602745.png" alt="image-20220218171602745" /></p>
-<h2 id="过滤空格"><a class="markdownIt-Anchor" href="#过滤空格"></a> 过滤空格</h2>
-<p>在 linux 里空格可用&lt; 或 ${IFS}代替</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171910282.png" alt="image-20220218171910282" /></p>
-<h2 id="过滤运算符"><a class="markdownIt-Anchor" href="#过滤运算符"></a> 过滤运算符</h2>
-<p>cat [file]|base64 还可以用 base64 [file]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/(\||\&amp;)/&quot;, $ip, $m)) &#123;</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219104650896.png" alt="image-20220219104650896" /></p>
-<h2 id="综合练习"><a class="markdownIt-Anchor" href="#综合练习"></a> 综合练习</h2>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">!<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/(\||&amp;|;| |\/|cat|flag|ctfhub)/&quot;</span>, <span class="variable">$ip</span></span><br></pre></td></tr></table></figure>
-<p>;可以用%0a(url 编码) cat 用 base64 flag 用正则 f*** *lag 等 空格用 ${IFS}</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219105932534.png" alt="image-20220219105932534" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110644693.png" alt="image-20220219110644693" /><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110736333.png" alt="image-20220219110736333" /></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>rce</tag>
       </tags>
   </entry>
   <entry>
@@ -1099,32 +1025,77 @@ handler 指向 RequestHandler<br />
       </tags>
   </entry>
   <entry>
-    <title>kali安装docker</title>
-    <url>/2022/03/docker/</url>
-    <content><![CDATA[<h2 id="kali-安装-docker"><a class="markdownIt-Anchor" href="#kali-安装-docker"></a> kali 安装 docker</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker-engine</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 安装结束，打开docker服务</span></span></span><br><span class="line">service docker start</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 验证安装，运行测试样例</span></span></span><br><span class="line">docker --version</span><br><span class="line">docker run hello-world</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">测试</span></span><br></pre></td></tr></table></figure>
-<h2 id="docker-常用命令"><a class="markdownIt-Anchor" href="#docker-常用命令"></a> docker 常用命令</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version</span><br><span class="line">docker images</span><br><span class="line">docker ps -a</span><br><span class="line">docker run -d --name 123 -p 127.0.0.1:80:80 镜像名</span><br><span class="line">docker stop 123</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
-<h2 id="dockers-底层原理"><a class="markdownIt-Anchor" href="#dockers-底层原理"></a> dockers 底层原理</h2>
-<h3 id="namespaces"><a class="markdownIt-Anchor" href="#namespaces"></a> Namespaces</h3>
+    <title>ctfhub-rce</title>
+    <url>/2022/04/ctfhub-rce/</url>
+    <content><![CDATA[<p>rce：远程代码执行漏洞<br />
+分为远程命令执行 ping 和远程代码执行 evel。<br />
+<strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞</strong>。相当于直接操控服务器电脑的 cmd 命令行！高危漏洞！</p>
+<h2 id="eval-执行"><a class="markdownIt-Anchor" href="#eval-执行"></a> eval 执行</h2>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>传参给 cmd 来 eval</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">/?cmd=<span class="title function_ invoke__">system</span>(<span class="string">&quot;ls /&quot;</span>);<span class="comment">//此处因为根目录无flag 所以看上一级目录</span></span><br></pre></td></tr></table></figure>
+<p>找到后 再 cat /flag_****</p>
+<h2 id="文件包含"><a class="markdownIt-Anchor" href="#文件包含"></a> 文件包含</h2>
+<p>这里使用 strpos 函数</p>
 <blockquote>
-<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
+<p>strpos:查找字符串首次出现的位置</p>
+<p>int strpos ( string $haystack , mixed $needle [, int $offset = 0 ] )</p>
 </blockquote>
-<h3 id="cgroups"><a class="markdownIt-Anchor" href="#cgroups"></a> CGroups</h3>
-<blockquote>
-<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br />
-如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I/O 和网络带宽。<br />
-<code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
-</blockquote>
+<p>题目使用</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">strpos</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>],<span class="string">&quot;flag&quot;</span>))&#123;<span class="comment">//无flag字符即可运行</span></span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>来包含文件，而下方给出的 shell.txt 含有 eval 漏洞</p>
+<p>于是包含它（shell.txt 没有“flag”字符 所以这里 strpos 没影响）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218182857507.png" alt="image-20220218182857507" /></p>
+<p>通过 get(包含文件) post(传参)并用来得到 flag</p>
+<h2 id="php-info"><a class="markdownIt-Anchor" href="#php-info"></a> php info</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">	if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">         &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    	&#125;&#125;</span><br><span class="line">else &#123;</span><br><span class="line">    highlight_file(__FILE__);&#125;?&gt;</span><br><span class="line">&lt;hr&gt;i don&#x27;t have shell, how to get flag? &lt;br&gt;&lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>点击 phpinfo 链接 可查看 php 环境</p>
+<h3 id="phpinput"><a class="markdownIt-Anchor" href="#phpinput"></a> php://input</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*php:// — 访问各个输入/输出流（I/O streams）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">php://input是个可以访问请求的原始数据的只读流。</span></span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218162728184.png" alt="image-20220218162728184" /></p>
+<h2 id="读取源代码"><a class="markdownIt-Anchor" href="#读取源代码"></a> 读取源代码</h2>
+<p>看环境 无法使用 php://input</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">if (isset($_GET[&#x27;file&#x27;])) &#123;</span><br><span class="line">    if ( substr($_GET[&quot;file&quot;], 0, 6) === &quot;php://&quot; ) &#123;</span><br><span class="line">        include($_GET[&quot;file&quot;]);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &quot;Hacker!!!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>但还必须是 php://开头</p>
+<h3 id="phpfilter"><a class="markdownIt-Anchor" href="#phpfilter"></a> <a href="https://www.php.net/manual/zh/wrappers.php.php">php://filter</a></h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219174206504.png" alt="image-20220219174206504" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219112308277.png" alt="image-20220219112308277" /></p>
+<h2 id="远程包含"><a class="markdownIt-Anchor" href="#远程包含"></a> 远程包含</h2>
+<p>同 phpinfo 做法相同</p>
+<h2 id="命令注入"><a class="markdownIt-Anchor" href="#命令注入"></a> 命令注入</h2>
+<p>输入命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">127.0.0.1;ls</span><br></pre></td></tr></table></figure>
+<p>然后 cat 时出现了问题</p>
+<p>输出被限制了</p>
+<p>于是用管道符号来限制输出 base64</p>
+<p>得到后再解码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218170811553.png" alt="image-20220218170811553" /></p>
+<h2 id="过滤-cat"><a class="markdownIt-Anchor" href="#过滤-cat"></a> 过滤 cat</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/cat/&quot;, $ip, $m)) &#123;//过滤了cat</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">    if ($res) &#123;</span><br><span class="line">        print_r($res);</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/pre&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">	show_source(__FILE__);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="more"><a class="markdownIt-Anchor" href="#more"></a> more</h2>
+<p>Linux more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">more <span class="section">[-dlfpcsu]</span> <span class="section">[-num]</span> <span class="section">[+/pattern]</span> <span class="section">[+linenum]</span> <span class="section">[fileNames..]</span></span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171602745.png" alt="image-20220218171602745" /></p>
+<h2 id="过滤空格"><a class="markdownIt-Anchor" href="#过滤空格"></a> 过滤空格</h2>
+<p>在 linux 里空格可用&lt; 或 ${IFS}代替</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171910282.png" alt="image-20220218171910282" /></p>
+<h2 id="过滤运算符"><a class="markdownIt-Anchor" href="#过滤运算符"></a> 过滤运算符</h2>
+<p>cat [file]|base64 还可以用 base64 [file]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$res = FALSE;</span><br><span class="line">if (isset($_GET[&#x27;ip&#x27;]) &amp;&amp; $_GET[&#x27;ip&#x27;]) &#123;</span><br><span class="line">    $ip = $_GET[&#x27;ip&#x27;];</span><br><span class="line">    $m = [];</span><br><span class="line">    if (!preg_match_all(&quot;/(\||\&amp;)/&quot;, $ip, $m)) &#123;</span><br><span class="line">        $cmd = &quot;ping -c 4 &#123;$ip&#125;&quot;;</span><br><span class="line">        exec($cmd, $res);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $res = $m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219104650896.png" alt="image-20220219104650896" /></p>
+<h2 id="综合练习"><a class="markdownIt-Anchor" href="#综合练习"></a> 综合练习</h2>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">!<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/(\||&amp;|;| |\/|cat|flag|ctfhub)/&quot;</span>, <span class="variable">$ip</span></span><br></pre></td></tr></table></figure>
+<p>;可以用%0a(url 编码) cat 用 base64 flag 用正则 f*** *lag 等 空格用 ${IFS}</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219105932534.png" alt="image-20220219105932534" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110644693.png" alt="image-20220219110644693" /><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110736333.png" alt="image-20220219110736333" /></p>
 ]]></content>
       <categories>
-        <category>教程</category>
+        <category>web</category>
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>kali</tag>
-        <tag>docker</tag>
+        <tag>ctfhub</tag>
+        <tag>rce</tag>
       </tags>
   </entry>
   <entry>
@@ -1225,6 +1196,35 @@ handler 指向 RequestHandler<br />
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装docker</title>
+    <url>/2022/03/docker/</url>
+    <content><![CDATA[<h2 id="kali-安装-docker"><a class="markdownIt-Anchor" href="#kali-安装-docker"></a> kali 安装 docker</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker-engine</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 安装结束，打开docker服务</span></span></span><br><span class="line">service docker start</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 验证安装，运行测试样例</span></span></span><br><span class="line">docker --version</span><br><span class="line">docker run hello-world</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">测试</span></span><br></pre></td></tr></table></figure>
+<h2 id="docker-常用命令"><a class="markdownIt-Anchor" href="#docker-常用命令"></a> docker 常用命令</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version</span><br><span class="line">docker images</span><br><span class="line">docker ps -a</span><br><span class="line">docker run -d --name 123 -p 127.0.0.1:80:80 镜像名</span><br><span class="line">docker stop 123</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.runoob.com/docker/docker-command-manual.html">其他常用命令见菜鸟教程</a></p>
+<h2 id="dockers-底层原理"><a class="markdownIt-Anchor" href="#dockers-底层原理"></a> dockers 底层原理</h2>
+<h3 id="namespaces"><a class="markdownIt-Anchor" href="#namespaces"></a> Namespaces</h3>
+<blockquote>
+<p>命名空间是 Linux 为我们提供的<code>用于分离进程树、网络接口、挂载点以及进程间通信等资源</code>的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。</p>
+</blockquote>
+<h3 id="cgroups"><a class="markdownIt-Anchor" href="#cgroups"></a> CGroups</h3>
+<blockquote>
+<p>我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们<code>提供物理资源上的隔离</code>，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。<br />
+如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I/O 和网络带宽。<br />
+<code>在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>kali</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -1425,6 +1425,36 @@ handler 指向 RequestHandler<br />
       </tags>
   </entry>
   <entry>
+    <title>力扣 394.字符串解码 特殊解</title>
+    <url>/2025/02/leetcode%20394/</url>
+    <content><![CDATA[<p><a href="https://leetcode.cn/problems/decode-string">394.字符串解码</a></p>
+<blockquote>
+<p>一种独创的 不用辅助栈的解(笑)</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/1740056281-lJvikC-image.png" alt="lc394-shot" /></p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>不用栈 遍历字符串转 python 表达式 eval 直出</p>
+<h2 id="解题过程"><a class="markdownIt-Anchor" href="#解题过程"></a> 解题过程</h2>
+<p>对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行</p>
+<p>那么对于四个例子我们可以转换成代码中注释部分的表达式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;3*(&quot;a&quot;) + 2*(&quot;bc&quot;)&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;3*(&quot;a&quot;+2*(&quot;c&quot;))&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;2*(&quot;abc&quot;)+3*(&quot;cd&quot;)+&quot;ef&quot;&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;&quot;abc&quot;+3*(&quot;cd&quot;)+&quot;xyz&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="复杂度"><a class="markdownIt-Anchor" href="#复杂度"></a> 复杂度</h2>
+<ul>
+<li>时间复杂度: O(n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<h2 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decodeString</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        func = <span class="string">&#x27;&#x27;</span> <span class="comment"># 用于存表达式</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="keyword">if</span> s[i].isdigit():</span><br><span class="line">                <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> s[i - <span class="number">1</span>].isdigit():</span><br><span class="line">                    func += <span class="string">&quot;+&quot;</span></span><br><span class="line">                func += s[i]</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&quot;[&quot;</span>:</span><br><span class="line">                func += <span class="string">&quot;*(&quot;</span></span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&quot;]&quot;</span>:</span><br><span class="line">                func += <span class="string">&quot;)&quot;</span></span><br><span class="line">                <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(s) - <span class="number">1</span> <span class="keyword">and</span> s[i + <span class="number">1</span>] != <span class="string">&quot;]&quot;</span> <span class="keyword">and</span> <span class="keyword">not</span> s[i + <span class="number">1</span>].isdigit():</span><br><span class="line">                    func += <span class="string">&quot;+&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">or</span> <span class="keyword">not</span> s[i - <span class="number">1</span>].isalpha():</span><br><span class="line">                    func += <span class="string">&#x27;&quot;&#x27;</span></span><br><span class="line">                func += s[i]</span><br><span class="line">                <span class="keyword">if</span> i == <span class="built_in">len</span>(s) - <span class="number">1</span> <span class="keyword">or</span> <span class="keyword">not</span> s[i + <span class="number">1</span>].isalpha():</span><br><span class="line">                    func += <span class="string">&#x27;&quot;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(func)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">eval</span>(func)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfhub-jwt</title>
     <url>/2022/09/jwt/</url>
     <content><![CDATA[<h2 id="基础知识"><a class="markdownIt-Anchor" href="#基础知识"></a> 基础知识</h2>
@@ -1489,36 +1519,6 @@ handler 指向 RequestHandler<br />
         <tag>web</tag>
         <tag>jwt</tag>
         <tag>json web token</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>力扣 394.字符串解码 特殊解</title>
-    <url>/2025/02/leetcode%20394/</url>
-    <content><![CDATA[<p><a href="https://leetcode.cn/problems/decode-string">394.字符串解码</a></p>
-<blockquote>
-<p>一种独创的 不用辅助栈的解(笑)</p>
-</blockquote>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/1740056281-lJvikC-image.png" alt="lc394-shot" /></p>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<p>不用栈 遍历字符串转 python 表达式 eval 直出</p>
-<h2 id="解题过程"><a class="markdownIt-Anchor" href="#解题过程"></a> 解题过程</h2>
-<p>对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行</p>
-<p>那么对于四个例子我们可以转换成代码中注释部分的表达式</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;3*(&quot;a&quot;) + 2*(&quot;bc&quot;)&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;3*(&quot;a&quot;+2*(&quot;c&quot;))&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;2*(&quot;abc&quot;)+3*(&quot;cd&quot;)+&quot;ef&quot;&#x27;</span>)</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;&quot;abc&quot;+3*(&quot;cd&quot;)+&quot;xyz&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="复杂度"><a class="markdownIt-Anchor" href="#复杂度"></a> 复杂度</h2>
-<ul>
-<li>时间复杂度: O(n)</li>
-<li>空间复杂度: O(n)</li>
-</ul>
-<h2 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decodeString</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        func = <span class="string">&#x27;&#x27;</span> <span class="comment"># 用于存表达式</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="keyword">if</span> s[i].isdigit():</span><br><span class="line">                <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> s[i - <span class="number">1</span>].isdigit():</span><br><span class="line">                    func += <span class="string">&quot;+&quot;</span></span><br><span class="line">                func += s[i]</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&quot;[&quot;</span>:</span><br><span class="line">                func += <span class="string">&quot;*(&quot;</span></span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&quot;]&quot;</span>:</span><br><span class="line">                func += <span class="string">&quot;)&quot;</span></span><br><span class="line">                <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(s) - <span class="number">1</span> <span class="keyword">and</span> s[i + <span class="number">1</span>] != <span class="string">&quot;]&quot;</span> <span class="keyword">and</span> <span class="keyword">not</span> s[i + <span class="number">1</span>].isdigit():</span><br><span class="line">                    func += <span class="string">&quot;+&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">or</span> <span class="keyword">not</span> s[i - <span class="number">1</span>].isalpha():</span><br><span class="line">                    func += <span class="string">&#x27;&quot;&#x27;</span></span><br><span class="line">                func += s[i]</span><br><span class="line">                <span class="keyword">if</span> i == <span class="built_in">len</span>(s) - <span class="number">1</span> <span class="keyword">or</span> <span class="keyword">not</span> s[i + <span class="number">1</span>].isalpha():</span><br><span class="line">                    func += <span class="string">&#x27;&quot;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(func)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">eval</span>(func)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1920,51 +1920,6 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
       </tags>
   </entry>
   <entry>
-    <title>vue gin合并部署(完美方案)</title>
-    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
-<p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
-<p>二者合并部署的教程非常少，且各有各的问题</p>
-<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
-<h2 id="vue"><a class="markdownIt-Anchor" href="#vue"></a> vue</h2>
-<p>使用 axios 时进行如下配置</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">`<span class="subst">$&#123;currentDomain&#125;</span>/api`</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span> &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
-<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
-<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
-<p>同时</p>
-<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 其他参数</span></span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="comment">// port: 8080,</span></span><br><span class="line">    <span class="comment">// open: true,</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://localhost:5731&quot;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-<p>方便一部送到位</p>
-<h2 id="gin"><a class="markdownIt-Anchor" href="#gin"></a> gin</h2>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">❯ tree</span><br><span class="line">文件夹 <span class="selector-tag">PATH</span> 列表</span><br><span class="line">卷序列号为 AE05-<span class="number">588</span>D</span><br><span class="line">C:.</span><br><span class="line">├─main.go</span><br><span class="line">├─其他</span><br><span class="line">└─vue <span class="comment">/* 可改 */</span></span><br><span class="line">    └─assets</span><br></pre></td></tr></table></figure>
-<p>main.go 添加 embed 和路由</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//go:embed  vue/index.html</span></span><br><span class="line"><span class="keyword">var</span> indexHtml []<span class="type">byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//go:embed  vue/*</span></span><br><span class="line"><span class="keyword">var</span> vue embed.FS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 其他设置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置允许跨域 方便dev联调</span></span><br><span class="line">	r.Use(cors.New(cors.Config&#123;</span><br><span class="line">		AllowOrigins:     []<span class="type">string</span>&#123;<span class="string">&quot;*&quot;</span>&#125;, <span class="comment">// 允许的域名</span></span><br><span class="line">		AllowMethods:     []<span class="type">string</span>&#123;<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>&#125;,</span><br><span class="line">		AllowHeaders:     []<span class="type">string</span>&#123;<span class="string">&quot;Origin&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Cache-Control&quot;</span>&#125;,</span><br><span class="line">		AllowCredentials: <span class="literal">true</span>,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 配置vue路由</span></span><br><span class="line">	assets, _ := fs.Sub(vue, <span class="string">&quot;vue/assets&quot;</span>)</span><br><span class="line">	r.StaticFS(<span class="string">&quot;/assets&quot;</span>, http.FS(assets))</span><br><span class="line">	icon, _ := fs.ReadFile(vue, <span class="string">&quot;vue/favicon.ico&quot;</span>)</span><br><span class="line">	r.GET(<span class="string">&quot;/favicon.ico&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123; c.Data(<span class="number">200</span>, <span class="string">&quot;image/x-icon&quot;</span>, icon) &#125;)</span><br><span class="line">	r.NoRoute(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.Data(<span class="number">200</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>, indexHtml)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他路由</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
-<p>vue 中设置的 router 会被 build 进 js</p>
-<p>通过 js 获取 url 来切换页面</p>
-<p>对未使用 embed 的方法同理，参考代码自行设置</p>
-<h3 id="embed"><a class="markdownIt-Anchor" href="#embed"></a> embed</h3>
-<p>对于使用<code>embed</code>的</p>
-<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
-<blockquote>
-<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
-</blockquote>
-<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
-<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-        <tag>gin</tag>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>upload-labs</title>
     <url>/2022/03/upload-labs/</url>
     <content><![CDATA[<h2 id="pass-01"><a class="markdownIt-Anchor" href="#pass-01"></a> pass-01</h2>
@@ -2126,6 +2081,51 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
         <tag>web</tag>
         <tag>upload</tag>
         <tag>upload-labs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue gin合并部署(完美方案)</title>
+    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
+<p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
+<p>二者合并部署的教程非常少，且各有各的问题</p>
+<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
+<h2 id="vue"><a class="markdownIt-Anchor" href="#vue"></a> vue</h2>
+<p>使用 axios 时进行如下配置</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">`<span class="subst">$&#123;currentDomain&#125;</span>/api`</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span> &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
+<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
+<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
+<p>同时</p>
+<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 其他参数</span></span><br><span class="line">  <span class="attr">server</span>: &#123;</span><br><span class="line">    <span class="comment">// port: 8080,</span></span><br><span class="line">    <span class="comment">// open: true,</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://localhost:5731&quot;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;preview&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite preview&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+<p>方便一部送到位</p>
+<h2 id="gin"><a class="markdownIt-Anchor" href="#gin"></a> gin</h2>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">❯ tree</span><br><span class="line">文件夹 <span class="selector-tag">PATH</span> 列表</span><br><span class="line">卷序列号为 AE05-<span class="number">588</span>D</span><br><span class="line">C:.</span><br><span class="line">├─main.go</span><br><span class="line">├─其他</span><br><span class="line">└─vue <span class="comment">/* 可改 */</span></span><br><span class="line">    └─assets</span><br></pre></td></tr></table></figure>
+<p>main.go 添加 embed 和路由</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//go:embed  vue/index.html</span></span><br><span class="line"><span class="keyword">var</span> indexHtml []<span class="type">byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//go:embed  vue/*</span></span><br><span class="line"><span class="keyword">var</span> vue embed.FS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 其他设置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置允许跨域 方便dev联调</span></span><br><span class="line">	r.Use(cors.New(cors.Config&#123;</span><br><span class="line">		AllowOrigins:     []<span class="type">string</span>&#123;<span class="string">&quot;*&quot;</span>&#125;, <span class="comment">// 允许的域名</span></span><br><span class="line">		AllowMethods:     []<span class="type">string</span>&#123;<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>&#125;,</span><br><span class="line">		AllowHeaders:     []<span class="type">string</span>&#123;<span class="string">&quot;Origin&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Cache-Control&quot;</span>&#125;,</span><br><span class="line">		AllowCredentials: <span class="literal">true</span>,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 配置vue路由</span></span><br><span class="line">	assets, _ := fs.Sub(vue, <span class="string">&quot;vue/assets&quot;</span>)</span><br><span class="line">	r.StaticFS(<span class="string">&quot;/assets&quot;</span>, http.FS(assets))</span><br><span class="line">	icon, _ := fs.ReadFile(vue, <span class="string">&quot;vue/favicon.ico&quot;</span>)</span><br><span class="line">	r.GET(<span class="string">&quot;/favicon.ico&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123; c.Data(<span class="number">200</span>, <span class="string">&quot;image/x-icon&quot;</span>, icon) &#125;)</span><br><span class="line">	r.NoRoute(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.Data(<span class="number">200</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>, indexHtml)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他路由</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
+<p>vue 中设置的 router 会被 build 进 js</p>
+<p>通过 js 获取 url 来切换页面</p>
+<p>对未使用 embed 的方法同理，参考代码自行设置</p>
+<h3 id="embed"><a class="markdownIt-Anchor" href="#embed"></a> embed</h3>
+<p>对于使用<code>embed</code>的</p>
+<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
+<blockquote>
+<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
+</blockquote>
+<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
+<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>gin</tag>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
