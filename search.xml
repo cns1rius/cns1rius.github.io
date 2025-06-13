@@ -2038,8 +2038,7 @@ handler 指向 RequestHandler<br />
 <figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #B392F0">git</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">pull</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">远程主机</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">远程分支</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span><span style="color: #9ECBFF">:</span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">本地分支</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>
 <h3 id="push"><a class="markdownIt-Anchor" href="#push"></a> push</h3>
 <p>git push 命用于从将本地的分支版本上传到远程并合并。</p>
-<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #B392F0">git</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">push</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">远程主机</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">本地分支</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span><span style="color: #9ECBFF">:</span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">远程分支</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>
-]]></content>
+<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #B392F0">git</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">push</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">远程主机</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">本地分支</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span><span style="color: #9ECBFF">:</span><span style="color: #F97583">&lt;</span><span style="color: #9ECBFF">远程分支</span><span style="color: #E1E4E8">名</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>]]></content>
       <categories>
         <category>web</category>
       </categories>
@@ -2353,8 +2352,7 @@ handler 指向 RequestHandler<br />
 <span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">len</span><span style="color: #E1E4E8">(s) </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">or</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">+</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isalpha():</span></span>
 <span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;&quot;&#39;</span></span>
 <span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(func)</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(func)</span></span></code></pre></div></div></figure>
-]]></content>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(func)</span></span></code></pre></div></div></figure>]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -3114,8 +3112,7 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
 <span class="line"><span style="color: #E1E4E8">		</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;&lt;/font&gt;&quot;</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"><span style="color: #E1E4E8">		}</span></span>
 <span class="line"><span style="color: #E1E4E8">}</span></span>
-<span class="line"><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
-]]></content>
+<span class="line"><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>]]></content>
       <categories>
         <category>web</category>
       </categories>
@@ -3734,8 +3731,7 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
 <span class="line"><span style="color: #E1E4E8">Content-Disposition: form-data; name=&quot;submit&quot;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #E1E4E8">上传</span></span>
-<span class="line"><span style="color: #E1E4E8">-----------------------------131314876217456529963542266439--</span></span></code></pre></div></div></figure>
-]]></content>
+<span class="line"><span style="color: #E1E4E8">-----------------------------131314876217456529963542266439--</span></span></code></pre></div></div></figure>]]></content>
       <categories>
         <category>web</category>
       </categories>
@@ -3945,8 +3941,7 @@ flash 反编译也不懂<br />
 setTimeout(function () {
     alert('xss');
 }, 1000);
-</script>
-]]></content>
+</script>]]></content>
       <categories>
         <category>web</category>
       </categories>
