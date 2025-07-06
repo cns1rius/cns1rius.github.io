@@ -871,243 +871,6 @@ flag get<br />
       </categories>
   </entry>
   <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[<h2 id="工具-彩蛋"><a class="markdownIt-Anchor" href="#工具-彩蛋"></a> 工具 彩蛋</h2>
-<p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br />
-抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br />
-于是<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述" />这样设置参数<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述" />在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述" />在最后一行</p>
-<h2 id="首页-彩蛋"><a class="markdownIt-Anchor" href="#首页-彩蛋"></a> 首页 彩蛋</h2>
-<p><a href="https://api.ctfhub.com">api</a>中间框内隐藏着两行字<br />
-ctfhub{c18732f48a96c40d40a06e74b1305706}<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述" /></p>
-<h2 id="题目入口-彩蛋"><a class="markdownIt-Anchor" href="#题目入口-彩蛋"></a> 题目入口 彩蛋</h2>
-<p>在 web-ssrf 中间那一列的某些题传参错误时会出现<br />
-详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post 最后一行介绍</p>
-<h2 id="公众号"><a class="markdownIt-Anchor" href="#公众号"></a> 公众号</h2>
-<p>公众号彩蛋坑的一批！<br />
-首先要先绑定<br />
-然后点彩蛋<br />
-它提示要回复正确的关键词<br />
-我*#@%<br />
-我回复过</p>
-<blockquote>
-<p>彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……</p>
-</blockquote>
-<p>到底没想到竟然是 flag</p>
-<h2 id="投稿提交-彩蛋"><a class="markdownIt-Anchor" href="#投稿提交-彩蛋"></a> 投稿提交 彩蛋</h2>
-<p>只找到了前半部分<br />
-分别在题目提交和 wp 提交页面的最后</p>
-<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">ctfhub{029</span><span style="color: #79B8FF">e</span><span style="color: #E1E4E8">02</span><span style="color: #79B8FF">eb</span><span style="color: #E1E4E8">3</span><span style="color: #79B8FF">a</span><span style="color: #E1E4E8">1</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">e</span><span style="color: #E1E4E8">8</span><span style="color: #79B8FF">c</span><span style="color: #E1E4E8">49</span><span style="color: #79B8FF">b</span><span style="color: #E1E4E8">1132</span><span style="color: #79B8FF">b</span><span style="color: #E1E4E8">5</span></span>
-<span class="line"><span style="color: #E1E4E8">	15</span><span style="color: #79B8FF">b</span><span style="color: #E1E4E8">652</span><span style="color: #79B8FF">a</span><span style="color: #E1E4E8">5</span><span style="color: #79B8FF">f</span><span style="color: #E1E4E8">3</span><span style="color: #79B8FF">a</span><span style="color: #E1E4E8">8</span></span>
-<span class="line"><span style="color: #E1E4E8">	62013}</span></span></code></pre></div></div></figure>
-<p>最后这个彩蛋剩余部分也没找到<br />
-网上搜了下才明白：感谢 anweilx 的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br />
-第一行是俩页面的最后有<br />
-第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是 base64 然后再转 url 一个是 hex 解码<br />
-第三行是俩页面的图片隐写 丢进 winhex<br />
-第四行有提示<br />
-aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
-<h2 id="其他彩蛋"><a class="markdownIt-Anchor" href="#其他彩蛋"></a> 其他彩蛋</h2>
-<p>剩余皆可在对应页面搜索 egg 即可获得</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSTI模板注入</title>
-    <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述" /></p>
-<h2 id="护网杯-2018easy_tornado"><a class="markdownIt-Anchor" href="#护网杯-2018easy_tornado"></a> [护网杯 2018]easy_tornado</h2>
-<p>ssti 注入点在 msg<br />
-注入49出现 orz 应该是有过滤</p>
-1正常
-<p>hint 里缺 cookie_secret<br />
-该项在 handler.settings</p>
-<blockquote>
-<p>Handler 这个对象，Handler 指向的处理当前这个页面的 RequestHandler 对象<br />
-RequestHandler 中并没有 settings 这个属性，与 RequestHandler 关联的 Application 对象（Requestion.application）才有 setting 这个属性<br />
-handler 指向 RequestHandler<br />
-而 RequestHandler.settings 又指向 self.application.settings<br />
-所有 handler.settings 就指向 RequestHandler.application.settings 了！</p>
-</blockquote>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/ac2991bc7e1e4e64b87451461cb17916.png" alt="在这里插入图片描述" />然后按 hint 里的 MD5 加密过后传参<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3ee21ded82d8493baba4f8b5b940927a.png" alt="在这里插入图片描述" /></p>
-<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">?</span><span style="color: #E1E4E8">filename=/fllllllllllllag&amp;filehash</span><span style="color: #F97583">=</span><span style="color: #9ECBFF">ff92d5623223cadc00efabfc7676f9fe</span></span></code></pre></div></div></figure>
-<p>filehash 不同 请自行加密<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/c860336ae81a4d6e8c52328bf1ae378c.png" alt="在这里插入图片描述" /></p>
-<h2 id="bjdctf2020the-mystery-of-ip"><a class="markdownIt-Anchor" href="#bjdctf2020the-mystery-of-ip"></a> [BJDCTF2020]The mystery of ip</h2>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/ec82c70c7fdf49b698f9095bda0d1662.png" alt="在这里插入图片描述" /></p>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">require_once</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;header.php&#39;</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">require_once</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;./libs/Smarty.class.php&#39;</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #E1E4E8">	$smarty </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">Smarty</span><span style="color: #E1E4E8">();</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">empty</span><span style="color: #E1E4E8">($_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_CLIENT_IP&#39;</span><span style="color: #E1E4E8">]))</span></span>
-<span class="line"><span style="color: #E1E4E8">	{</span></span>
-<span class="line"><span style="color: #E1E4E8">		   $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_CLIENT_IP&#39;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">	}</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">elseif</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">empty</span><span style="color: #E1E4E8">($_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span style="color: #E1E4E8">]))</span></span>
-<span class="line"><span style="color: #E1E4E8">	{</span></span>
-<span class="line"><span style="color: #E1E4E8">	    $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">	}</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">else</span></span>
-<span class="line"><span style="color: #E1E4E8">	{</span></span>
-<span class="line"><span style="color: #E1E4E8">	    $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;REMOTE_ADDR&#39;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">	}</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #6A737D">//$your_ip = $smarty-&gt;display(&quot;string:&quot;.$ip);</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">container panel1</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">row</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">jumbotron pan</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">					&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">form-group log</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">						&lt;label&gt;&lt;h2&gt;Your IP is : &quot;</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #E1E4E8">	$smarty</span><span style="color: #F97583">-&gt;</span><span style="color: #B392F0">display</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;string:&quot;</span><span style="color: #F97583">.</span><span style="color: #E1E4E8">$ip);</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;				&lt;/h2&gt;&lt;/label&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">					&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">			&lt;/div&gt;&quot;</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/eb0e52d7b7f74ac1bb74f7c38b4ca72f.png" alt="在这里插入图片描述" /></p>
-<h2 id="bjdctf2020cookie-is-so-stable"><a class="markdownIt-Anchor" href="#bjdctf2020cookie-is-so-stable"></a> [BJDCTF2020]Cookie is so stable</h2>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/f568432cbffb4e5f9603858a0cfa797d.png" alt="在这里插入图片描述" /></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>SSTI</tag>
-        <tag>模板注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
-<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
-<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
-<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
-<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
-<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
-<p>新建项目 C#里面最后一项</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png" /></p>
-<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
-<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动" /></p>
-<p>这个插件是为后面设置背景图片准备</p>
-<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动" /></p>
-<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动" /></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PyJail python沙箱逃逸探究</title>
-    <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
-    <content><![CDATA[<h2 id="python-特性"><a class="markdownIt-Anchor" href="#python-特性"></a> python 特性</h2>
-<p>在 python 中，类均继承自<code>object</code>基类；</p>
-<h3 id="python-魔术方法"><a class="markdownIt-Anchor" href="#python-魔术方法"></a> python 魔术方法</h3>
-<ul>
-<li><code>__init__</code>：构造函数。这个在实例化类的时候就会用到，一般是接受类初始化的参数，并且进行一系列初始化操作。</li>
-<li><code>__len__</code>：返回对象的长度。</li>
-<li><code>__str__</code>：返回对象的字符串表示。对一个对象<code>a</code>使用<code>str(a)</code>时，会尝试调用<code>a.__str__()</code>。相似地，还有<code>__int__</code>魔术方法也用于类型转换，不过较少使用。</li>
-<li><code>__getitem__</code>：根据索引返回对象的某个元素。对一个对象<code>a</code>使用<code>a[1]</code>时，会尝试调用<code>a.__getitem__(1)</code>。</li>
-<li><code>__add__</code>、<code>__sub__</code>、<code>__mul__</code>、<code>__div__</code>、<code>__mod__</code>：算术运算，加减乘除模。如对一个对象<code>a</code>使用<code>a+b</code>时，会尝试调用<code>a.__add__(b)</code>。相应地，对于有些运算，对象需放在后面（第二个操作数）的，则需实现<code>__radd__</code>、<code>__rsub__</code>、<code>__rmul__</code>、<code>__rdiv__</code>、<code>__rmod__</code>，如椭圆曲线上的点的倍点运算<code>G -&gt; d * G</code>，就可以通过实现<code>__rmul__</code>来实现。</li>
-<li><code>__and__</code>，<code>__or__</code>、<code>__xor__</code>：逻辑运算，和算术运算类似；</li>
-<li><code>__eq__</code>，<code>__ne__</code>、<code>__lt__</code>、<code>__gt__</code>、<code>__le__</code>、<code>__ge__</code>：比较运算，和算术运算类似；例如<code>'贵州' &gt; '广西'</code>，就会转而调用<code>'贵州'.__gt__('广西')</code>；</li>
-<li><code>__getattr__</code>：对象是否含有某属性。如果我们对对象<code>a</code>所对应的类实现了该方法，那么在调用未实现的<code>a.b</code>时，就会转而调用<code>a.__getattr__(b)</code>。这也等价于用函数的方法调用：<code>getattr(a, 'b')</code>。有<code>__getattr__</code>，自然也有对应的<code>__setattr__</code>；</li>
-<li><code>__subclasses__</code>：返回当前类的所有子类。一般是用在<code>object</code>类中，在<code>object.__subclasses__()</code>中，我们可以找到<code>os</code>模块中的类，然后再找到<code>os</code>，并且执行<code>os.system</code>，实现 RCE。</li>
-</ul>
-<h3 id="python-魔术属性"><a class="markdownIt-Anchor" href="#python-魔术属性"></a> python 魔术属性</h3>
-<ul>
-<li>
-<p><code>__dict__</code>：可以查看内部所有属性名和属性值组成的字典。</p>
-</li>
-<li>
-<p><code>__doc__</code>：类的帮助文档。默认类均有帮助文档。对于自定义的类，需要我们自己实现。</p>
-</li>
-<li>
-<p><code>__class__</code>：返回当前对象所属的类。如<code>''.__class__</code>会返回<code>&lt;class 'str'&gt;</code>。拿到类之后，就可以通过构造函数生成新的对象，如<code>''.__class__(4396)</code>，就等价于<code>str(4396)</code>，即<code>'4396'</code>；</p>
-</li>
-<li>
-<p><code>__base__</code>：返回当前类的基类。如<code>str.__base__</code>会返回<code>&lt;class 'object'&gt;</code>；</p>
-</li>
-</ul>
-<h3 id="其他内置函数和变量"><a class="markdownIt-Anchor" href="#其他内置函数和变量"></a> 其他内置函数和变量</h3>
-<ul>
-<li><code>dir</code>：查看对象的所有属性和方法。在我们没有思路的时候，可以通过该函数查看所有可以利用的方法；此外，在题目禁用引号以及小数点时，也可以先用拿到类所有可用方法，再索引到方法名，并且通过<code>getattr</code>来拿到目标方法。</li>
-<li><code>chr</code>、<code>ord</code>：字符与 ASCII 码转换函数，能帮我们绕过一些 WAF</li>
-<li><code>globals</code>：返回所有全局变量的函数；</li>
-<li><code>locals</code>：返回所有局部变量的函数；</li>
-<li><code>__import__</code>：载入模块的函数。例如<code>import os</code>等价于<code>os = __import__('os')</code>；</li>
-<li><code>__name__</code>：该变量指示当前运行环境位于哪个模块中。如我们 python 一般写的<code>if __name__ == '__main__':</code>，就是来判断是否是直接运行该脚本。如果是从另外的地方 import 的该脚本的话，那<code>__name__</code>就不为<code>__main__</code>，就不会执行之后的代码。更多参考<a href="https://link.zhihu.com/?target=https%3A//www.geeksforgeeks.org/__name__-a-special-variable-in-python/">这里</a>；</li>
-<li><code>__builtins__</code>：包含当前运行环境中默认的所有函数与类。如上面所介绍的所有默认函数，如<code>str</code>、<code>chr</code>、<code>ord</code>、<code>dict</code>、<code>dir</code>等。在 pyjail 的沙箱中，往往<code>__builtins__</code>被置为<code>None</code>，因此我们不能利用上述的函数。所以一种思路就是我们可以先通过类的基类和子类拿到<code>__builtins__</code>，再<code>__import__('os').system('sh')</code>进行 RCE；</li>
-<li><code>__file__</code>：该变量指示当前运行代码所在路径。如<code>open(__file__).read()</code>就是读取当前运行的 python 文件代码。需要注意的是，<strong>该变量仅在运行代码文件时会产生，在运行交互式终端时不会有此变量</strong>；</li>
-<li><code>_</code>：该变量返回上一次运行的 python 语句结果。需要注意的是，<strong>该变量仅在运行交互式终端时会产生，在运行代码文件时不会有此变量</strong>。</li>
-</ul>
-<h2 id="waf"><a class="markdownIt-Anchor" href="#waf"></a> WAF</h2>
-<h3 id="过滤"><a class="markdownIt-Anchor" href="#过滤"></a> 过滤<code>[]</code></h3>
-<p>使用<code>pop</code>、<code>__getitem__</code> 代替</p>
-<p>例如：<code>a.__getitem__(0)</code>、<code>&#123;&quot;a&quot;: 1&#125;.pop(&quot;a&quot;)</code></p>
-<p>或使用 next 等指针指向(类似无参 RCE 特殊函数遍历)</p>
-<p>需要去别的是 python 需要使用迭代器<code>iter(object[, sentinel])</code>作为传入函数</p>
-<h3 id="过滤字符"><a class="markdownIt-Anchor" href="#过滤字符"></a> 过滤字符</h3>
-<h6 id="chr-函数构造字符"><a class="markdownIt-Anchor" href="#chr-函数构造字符"></a> <code>chr()</code> 函数构造字符</h6>
-<h4 id="利用输出"><a class="markdownIt-Anchor" href="#利用输出"></a> 利用输出</h4>
-<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">(().</span><span style="color: #79B8FF">__class__</span><span style="color: #E1E4E8">.</span><span style="color: #79B8FF">__new__</span><span style="color: #E1E4E8">)[i]</span><span style="color: #F97583">+</span><span style="color: #E1E4E8">……</span></span></code></pre></div></div></figure>
-<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&gt;&gt;&gt;</span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">(().</span><span style="color: #79B8FF">__class__</span><span style="color: #E1E4E8">.</span><span style="color: #79B8FF">__new__</span><span style="color: #E1E4E8">))</span></span>
-<span class="line"><span style="color: #F97583">&lt;</span><span style="color: #E1E4E8">built</span><span style="color: #F97583">-in</span><span style="color: #E1E4E8"> method </span><span style="color: #79B8FF">__new__</span><span style="color: #E1E4E8"> of </span><span style="color: #79B8FF">type</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">object</span><span style="color: #E1E4E8"> at </span><span style="color: #F97583">0x</span><span style="color: #79B8FF">00007FFF01FE8AB0</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>
-<h3 id="过滤数字"><a class="markdownIt-Anchor" href="#过滤数字"></a> 过滤数字</h3>
-<ul>
-<li>0：<code>int(bool([]))</code>、<code>Flase</code>、<code>len([])</code>、<code>any(())</code></li>
-<li>1：<code>int(bool([&quot;&quot;]))</code>、<code>True</code>、<code>all(())</code>、<code>int(list(list(dict(a၁=())).pop()).pop())</code></li>
-<li>len：len(str({}.keys))</li>
-<li>1.0：<code>float(True)</code></li>
-<li>-1：<code>~0</code></li>
-</ul>
-<h3 id="过滤特殊字符"><a class="markdownIt-Anchor" href="#过滤特殊字符"></a> 过滤特殊字符</h3>
-<p>str 被过滤<code>type('')()</code>、<code>format()</code> 即可。同理，<code>int</code>、<code>list</code> 都可以用 <code>type</code> 构造出来。</p>
-<h3 id="non-ascii-identifiers"><a class="markdownIt-Anchor" href="#non-ascii-identifiers"></a> Non-ASCII Identifiers</h3>
-<p>在 python3 中支持 Non-ASCII Identifies 并且所有都会被转换成 unicode 的 NFKC（也就是标准模式）。我们可以用斜体或者花体各种各样的与标准字母相像的来进行导包操作。</p>
-<blockquote>
-<h4 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接"></a> 参考链接</h4>
-<p><a href="https://zhuanlan.zhihu.com/p/578966149">PyJail python 沙箱逃逸探究·总览</a></p>
-<p><a href="http://twe1v3.top/2023/02/pyjail-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E3%80%90CV%E3%80%91/#more">pyjail-学习总结【CV】 | TWe1v3</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>python</tag>
-        <tag>沙箱逃逸</tag>
-        <tag>PyJail</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bypass disable_function</title>
     <url>/2022/05/Bypass%20disable_function/</url>
     <content><![CDATA[<h2 id="ld_preload"><a class="markdownIt-Anchor" href="#ld_preload"></a> LD_PRELOAD</h2>
@@ -1351,49 +1114,240 @@ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped
       </tags>
   </entry>
   <entry>
-    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
-    <url>/2024/05/awdwp/</url>
-    <content><![CDATA[<p>(未整理完)</p>
-<h2 id="cfs"><a class="markdownIt-Anchor" href="#cfs"></a> CFS</h2>
-<h4 id="misc1"><a class="markdownIt-Anchor" href="#misc1"></a> misc1</h4>
-<p>备份文件泄露</p>
-<p>下载后是流量包</p>
-<p>流量包存在明文 flag</p>
-<p>（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20240421174259759.png" alt="image-20240421174259759" /></p>
-<h4 id="misc2"><a class="markdownIt-Anchor" href="#misc2"></a> misc2</h4>
-<p>流量里还有一个 flag.zip</p>
-<p>导出后</p>
-<p>爆破得密码为 123456</p>
-<h4 id="web"><a class="markdownIt-Anchor" href="#web"></a> web</h4>
-<p>存在 rce 查看解析目录后 echo 一句话木马进去</p>
-<p>连接后 cat /flag 啥啥啥.txt</p>
-<p>flag get</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20240421175236.png" alt="屏幕截图 2024-04-21 175236" /></p>
-<h2 id="awd"><a class="markdownIt-Anchor" href="#awd"></a> AWD</h2>
-<p>题目附件备份：</p>
-<p><a href="/files/php.7z">php</a></p>
-<p><a href="/files/jsp.7z">java1</a></p>
-<p><a href="/files/java.7z">java2</a></p>
-<h4 id="php"><a class="markdownIt-Anchor" href="#php"></a> php</h4>
-<p>hook 流量发现一个 php 路径穿越</p>
-<p><code>/frontend/ajax/getfile?file=../../../../../../flag.txt</code></p>
-<p>修复：</p>
-<p>将/和.等用于路径穿越的字符过滤置空</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20240421182144415.png" alt="image-20240421182144415" /></p>
-<h4 id="java1"><a class="markdownIt-Anchor" href="#java1"></a> java1</h4>
-<p>一个 java</p>
-<p><code>/forget.jsp?cmd1=cat+/flag.txt</code></p>
-<p>修复 把 cmd1 字段改成复杂密码 使攻击者无法连接</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20240421182841159.png" alt="image-20240421182841159" /></p>
+    <title>ctfhub-彩蛋</title>
+    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[<h2 id="工具-彩蛋"><a class="markdownIt-Anchor" href="#工具-彩蛋"></a> 工具 彩蛋</h2>
+<p>一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页<br />
+抓包后发现不管哪一页 limit 都是 12 但 offset 在变化<br />
+于是<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254043338-28.png" alt="在这里插入图片描述" />这样设置参数<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254045357-31.png" alt="在这里插入图片描述" />在长度为 1000 到 6、7 千左右随便一个双击后 <code>点击响应</code> 看<code>响应</code>包<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254048636-34.png" alt="在这里插入图片描述" />在最后一行</p>
+<h2 id="首页-彩蛋"><a class="markdownIt-Anchor" href="#首页-彩蛋"></a> 首页 彩蛋</h2>
+<p><a href="https://api.ctfhub.com">api</a>中间框内隐藏着两行字<br />
+ctfhub{c18732f48a96c40d40a06e74b1305706}<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254050970-37.png" alt="在这里插入图片描述" /></p>
+<h2 id="题目入口-彩蛋"><a class="markdownIt-Anchor" href="#题目入口-彩蛋"></a> 题目入口 彩蛋</h2>
+<p>在 web-ssrf 中间那一列的某些题传参错误时会出现<br />
+详情见<a href="https://blog.csdn.net/qq_62414126/article/details/122881838">ctfhub-ssrf</a>post 最后一行介绍</p>
+<h2 id="公众号"><a class="markdownIt-Anchor" href="#公众号"></a> 公众号</h2>
+<p>公众号彩蛋坑的一批！<br />
+首先要先绑定<br />
+然后点彩蛋<br />
+它提示要回复正确的关键词<br />
+我*#@%<br />
+我回复过</p>
+<blockquote>
+<p>彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……</p>
+</blockquote>
+<p>到底没想到竟然是 flag</p>
+<h2 id="投稿提交-彩蛋"><a class="markdownIt-Anchor" href="#投稿提交-彩蛋"></a> 投稿提交 彩蛋</h2>
+<p>只找到了前半部分<br />
+分别在题目提交和 wp 提交页面的最后</p>
+<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">ctfhub{029</span><span style="color: #79B8FF">e</span><span style="color: #E1E4E8">02</span><span style="color: #79B8FF">eb</span><span style="color: #E1E4E8">3</span><span style="color: #79B8FF">a</span><span style="color: #E1E4E8">1</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">e</span><span style="color: #E1E4E8">8</span><span style="color: #79B8FF">c</span><span style="color: #E1E4E8">49</span><span style="color: #79B8FF">b</span><span style="color: #E1E4E8">1132</span><span style="color: #79B8FF">b</span><span style="color: #E1E4E8">5</span></span>
+<span class="line"><span style="color: #E1E4E8">	15</span><span style="color: #79B8FF">b</span><span style="color: #E1E4E8">652</span><span style="color: #79B8FF">a</span><span style="color: #E1E4E8">5</span><span style="color: #79B8FF">f</span><span style="color: #E1E4E8">3</span><span style="color: #79B8FF">a</span><span style="color: #E1E4E8">8</span></span>
+<span class="line"><span style="color: #E1E4E8">	62013}</span></span></code></pre></div></div></figure>
+<p>最后这个彩蛋剩余部分也没找到<br />
+网上搜了下才明白：感谢 anweilx 的<a href="https://www.cnblogs.com/anweilx/p/12493000.html">wp</a><br />
+第一行是俩页面的最后有<br />
+第二行是在俩页面源码 分别搜<code>奖励</code> 在上面那行一个是 base64 然后再转 url 一个是 hex 解码<br />
+第三行是俩页面的图片隐写 丢进 winhex<br />
+第四行有提示<br />
+aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
+<h2 id="其他彩蛋"><a class="markdownIt-Anchor" href="#其他彩蛋"></a> 其他彩蛋</h2>
+<p>剩余皆可在对应页面搜索 egg 即可获得</p>
 ]]></content>
       <categories>
-        <category>awd</category>
+        <category>web</category>
       </categories>
       <tags>
-        <tag>awd</tag>
-        <tag>长城杯</tag>
-        <tag>铁人三项</tag>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PyJail python沙箱逃逸探究</title>
+    <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
+    <content><![CDATA[<h2 id="python-特性"><a class="markdownIt-Anchor" href="#python-特性"></a> python 特性</h2>
+<p>在 python 中，类均继承自<code>object</code>基类；</p>
+<h3 id="python-魔术方法"><a class="markdownIt-Anchor" href="#python-魔术方法"></a> python 魔术方法</h3>
+<ul>
+<li><code>__init__</code>：构造函数。这个在实例化类的时候就会用到，一般是接受类初始化的参数，并且进行一系列初始化操作。</li>
+<li><code>__len__</code>：返回对象的长度。</li>
+<li><code>__str__</code>：返回对象的字符串表示。对一个对象<code>a</code>使用<code>str(a)</code>时，会尝试调用<code>a.__str__()</code>。相似地，还有<code>__int__</code>魔术方法也用于类型转换，不过较少使用。</li>
+<li><code>__getitem__</code>：根据索引返回对象的某个元素。对一个对象<code>a</code>使用<code>a[1]</code>时，会尝试调用<code>a.__getitem__(1)</code>。</li>
+<li><code>__add__</code>、<code>__sub__</code>、<code>__mul__</code>、<code>__div__</code>、<code>__mod__</code>：算术运算，加减乘除模。如对一个对象<code>a</code>使用<code>a+b</code>时，会尝试调用<code>a.__add__(b)</code>。相应地，对于有些运算，对象需放在后面（第二个操作数）的，则需实现<code>__radd__</code>、<code>__rsub__</code>、<code>__rmul__</code>、<code>__rdiv__</code>、<code>__rmod__</code>，如椭圆曲线上的点的倍点运算<code>G -&gt; d * G</code>，就可以通过实现<code>__rmul__</code>来实现。</li>
+<li><code>__and__</code>，<code>__or__</code>、<code>__xor__</code>：逻辑运算，和算术运算类似；</li>
+<li><code>__eq__</code>，<code>__ne__</code>、<code>__lt__</code>、<code>__gt__</code>、<code>__le__</code>、<code>__ge__</code>：比较运算，和算术运算类似；例如<code>'贵州' &gt; '广西'</code>，就会转而调用<code>'贵州'.__gt__('广西')</code>；</li>
+<li><code>__getattr__</code>：对象是否含有某属性。如果我们对对象<code>a</code>所对应的类实现了该方法，那么在调用未实现的<code>a.b</code>时，就会转而调用<code>a.__getattr__(b)</code>。这也等价于用函数的方法调用：<code>getattr(a, 'b')</code>。有<code>__getattr__</code>，自然也有对应的<code>__setattr__</code>；</li>
+<li><code>__subclasses__</code>：返回当前类的所有子类。一般是用在<code>object</code>类中，在<code>object.__subclasses__()</code>中，我们可以找到<code>os</code>模块中的类，然后再找到<code>os</code>，并且执行<code>os.system</code>，实现 RCE。</li>
+</ul>
+<h3 id="python-魔术属性"><a class="markdownIt-Anchor" href="#python-魔术属性"></a> python 魔术属性</h3>
+<ul>
+<li>
+<p><code>__dict__</code>：可以查看内部所有属性名和属性值组成的字典。</p>
+</li>
+<li>
+<p><code>__doc__</code>：类的帮助文档。默认类均有帮助文档。对于自定义的类，需要我们自己实现。</p>
+</li>
+<li>
+<p><code>__class__</code>：返回当前对象所属的类。如<code>''.__class__</code>会返回<code>&lt;class 'str'&gt;</code>。拿到类之后，就可以通过构造函数生成新的对象，如<code>''.__class__(4396)</code>，就等价于<code>str(4396)</code>，即<code>'4396'</code>；</p>
+</li>
+<li>
+<p><code>__base__</code>：返回当前类的基类。如<code>str.__base__</code>会返回<code>&lt;class 'object'&gt;</code>；</p>
+</li>
+</ul>
+<h3 id="其他内置函数和变量"><a class="markdownIt-Anchor" href="#其他内置函数和变量"></a> 其他内置函数和变量</h3>
+<ul>
+<li><code>dir</code>：查看对象的所有属性和方法。在我们没有思路的时候，可以通过该函数查看所有可以利用的方法；此外，在题目禁用引号以及小数点时，也可以先用拿到类所有可用方法，再索引到方法名，并且通过<code>getattr</code>来拿到目标方法。</li>
+<li><code>chr</code>、<code>ord</code>：字符与 ASCII 码转换函数，能帮我们绕过一些 WAF</li>
+<li><code>globals</code>：返回所有全局变量的函数；</li>
+<li><code>locals</code>：返回所有局部变量的函数；</li>
+<li><code>__import__</code>：载入模块的函数。例如<code>import os</code>等价于<code>os = __import__('os')</code>；</li>
+<li><code>__name__</code>：该变量指示当前运行环境位于哪个模块中。如我们 python 一般写的<code>if __name__ == '__main__':</code>，就是来判断是否是直接运行该脚本。如果是从另外的地方 import 的该脚本的话，那<code>__name__</code>就不为<code>__main__</code>，就不会执行之后的代码。更多参考<a href="https://link.zhihu.com/?target=https%3A//www.geeksforgeeks.org/__name__-a-special-variable-in-python/">这里</a>；</li>
+<li><code>__builtins__</code>：包含当前运行环境中默认的所有函数与类。如上面所介绍的所有默认函数，如<code>str</code>、<code>chr</code>、<code>ord</code>、<code>dict</code>、<code>dir</code>等。在 pyjail 的沙箱中，往往<code>__builtins__</code>被置为<code>None</code>，因此我们不能利用上述的函数。所以一种思路就是我们可以先通过类的基类和子类拿到<code>__builtins__</code>，再<code>__import__('os').system('sh')</code>进行 RCE；</li>
+<li><code>__file__</code>：该变量指示当前运行代码所在路径。如<code>open(__file__).read()</code>就是读取当前运行的 python 文件代码。需要注意的是，<strong>该变量仅在运行代码文件时会产生，在运行交互式终端时不会有此变量</strong>；</li>
+<li><code>_</code>：该变量返回上一次运行的 python 语句结果。需要注意的是，<strong>该变量仅在运行交互式终端时会产生，在运行代码文件时不会有此变量</strong>。</li>
+</ul>
+<h2 id="waf"><a class="markdownIt-Anchor" href="#waf"></a> WAF</h2>
+<h3 id="过滤"><a class="markdownIt-Anchor" href="#过滤"></a> 过滤<code>[]</code></h3>
+<p>使用<code>pop</code>、<code>__getitem__</code> 代替</p>
+<p>例如：<code>a.__getitem__(0)</code>、<code>&#123;&quot;a&quot;: 1&#125;.pop(&quot;a&quot;)</code></p>
+<p>或使用 next 等指针指向(类似无参 RCE 特殊函数遍历)</p>
+<p>需要去别的是 python 需要使用迭代器<code>iter(object[, sentinel])</code>作为传入函数</p>
+<h3 id="过滤字符"><a class="markdownIt-Anchor" href="#过滤字符"></a> 过滤字符</h3>
+<h6 id="chr-函数构造字符"><a class="markdownIt-Anchor" href="#chr-函数构造字符"></a> <code>chr()</code> 函数构造字符</h6>
+<h4 id="利用输出"><a class="markdownIt-Anchor" href="#利用输出"></a> 利用输出</h4>
+<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">(().</span><span style="color: #79B8FF">__class__</span><span style="color: #E1E4E8">.</span><span style="color: #79B8FF">__new__</span><span style="color: #E1E4E8">)[i]</span><span style="color: #F97583">+</span><span style="color: #E1E4E8">……</span></span></code></pre></div></div></figure>
+<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&gt;&gt;&gt;</span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">(().</span><span style="color: #79B8FF">__class__</span><span style="color: #E1E4E8">.</span><span style="color: #79B8FF">__new__</span><span style="color: #E1E4E8">))</span></span>
+<span class="line"><span style="color: #F97583">&lt;</span><span style="color: #E1E4E8">built</span><span style="color: #F97583">-in</span><span style="color: #E1E4E8"> method </span><span style="color: #79B8FF">__new__</span><span style="color: #E1E4E8"> of </span><span style="color: #79B8FF">type</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">object</span><span style="color: #E1E4E8"> at </span><span style="color: #F97583">0x</span><span style="color: #79B8FF">00007FFF01FE8AB0</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>
+<h3 id="过滤数字"><a class="markdownIt-Anchor" href="#过滤数字"></a> 过滤数字</h3>
+<ul>
+<li>0：<code>int(bool([]))</code>、<code>Flase</code>、<code>len([])</code>、<code>any(())</code></li>
+<li>1：<code>int(bool([&quot;&quot;]))</code>、<code>True</code>、<code>all(())</code>、<code>int(list(list(dict(a၁=())).pop()).pop())</code></li>
+<li>len：len(str({}.keys))</li>
+<li>1.0：<code>float(True)</code></li>
+<li>-1：<code>~0</code></li>
+</ul>
+<h3 id="过滤特殊字符"><a class="markdownIt-Anchor" href="#过滤特殊字符"></a> 过滤特殊字符</h3>
+<p>str 被过滤<code>type('')()</code>、<code>format()</code> 即可。同理，<code>int</code>、<code>list</code> 都可以用 <code>type</code> 构造出来。</p>
+<h3 id="non-ascii-identifiers"><a class="markdownIt-Anchor" href="#non-ascii-identifiers"></a> Non-ASCII Identifiers</h3>
+<p>在 python3 中支持 Non-ASCII Identifies 并且所有都会被转换成 unicode 的 NFKC（也就是标准模式）。我们可以用斜体或者花体各种各样的与标准字母相像的来进行导包操作。</p>
+<blockquote>
+<h4 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接"></a> 参考链接</h4>
+<p><a href="https://zhuanlan.zhihu.com/p/578966149">PyJail python 沙箱逃逸探究·总览</a></p>
+<p><a href="http://twe1v3.top/2023/02/pyjail-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E3%80%90CV%E3%80%91/#more">pyjail-学习总结【CV】 | TWe1v3</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>python</tag>
+        <tag>沙箱逃逸</tag>
+        <tag>PyJail</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
+<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
+<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
+<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
+<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
+<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
+<p>新建项目 C#里面最后一项</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png" /></p>
+<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
+<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动" /></p>
+<p>这个插件是为后面设置背景图片准备</p>
+<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动" /></p>
+<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动" /></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>visual studio 2022</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSTI模板注入</title>
+    <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述" /></p>
+<h2 id="护网杯-2018easy_tornado"><a class="markdownIt-Anchor" href="#护网杯-2018easy_tornado"></a> [护网杯 2018]easy_tornado</h2>
+<p>ssti 注入点在 msg<br />
+注入49出现 orz 应该是有过滤</p>
+1正常
+<p>hint 里缺 cookie_secret<br />
+该项在 handler.settings</p>
+<blockquote>
+<p>Handler 这个对象，Handler 指向的处理当前这个页面的 RequestHandler 对象<br />
+RequestHandler 中并没有 settings 这个属性，与 RequestHandler 关联的 Application 对象（Requestion.application）才有 setting 这个属性<br />
+handler 指向 RequestHandler<br />
+而 RequestHandler.settings 又指向 self.application.settings<br />
+所有 handler.settings 就指向 RequestHandler.application.settings 了！</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/ac2991bc7e1e4e64b87451461cb17916.png" alt="在这里插入图片描述" />然后按 hint 里的 MD5 加密过后传参<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3ee21ded82d8493baba4f8b5b940927a.png" alt="在这里插入图片描述" /></p>
+<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">?</span><span style="color: #E1E4E8">filename=/fllllllllllllag&amp;filehash</span><span style="color: #F97583">=</span><span style="color: #9ECBFF">ff92d5623223cadc00efabfc7676f9fe</span></span></code></pre></div></div></figure>
+<p>filehash 不同 请自行加密<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/c860336ae81a4d6e8c52328bf1ae378c.png" alt="在这里插入图片描述" /></p>
+<h2 id="bjdctf2020the-mystery-of-ip"><a class="markdownIt-Anchor" href="#bjdctf2020the-mystery-of-ip"></a> [BJDCTF2020]The mystery of ip</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/ec82c70c7fdf49b698f9095bda0d1662.png" alt="在这里插入图片描述" /></p>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">require_once</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;header.php&#39;</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">require_once</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;./libs/Smarty.class.php&#39;</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">	$smarty </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">Smarty</span><span style="color: #E1E4E8">();</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">empty</span><span style="color: #E1E4E8">($_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_CLIENT_IP&#39;</span><span style="color: #E1E4E8">]))</span></span>
+<span class="line"><span style="color: #E1E4E8">	{</span></span>
+<span class="line"><span style="color: #E1E4E8">		   $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_CLIENT_IP&#39;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">	}</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">elseif</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">empty</span><span style="color: #E1E4E8">($_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span style="color: #E1E4E8">]))</span></span>
+<span class="line"><span style="color: #E1E4E8">	{</span></span>
+<span class="line"><span style="color: #E1E4E8">	    $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">	}</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">else</span></span>
+<span class="line"><span style="color: #E1E4E8">	{</span></span>
+<span class="line"><span style="color: #E1E4E8">	    $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;REMOTE_ADDR&#39;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">	}</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #6A737D">//$your_ip = $smarty-&gt;display(&quot;string:&quot;.$ip);</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">container panel1</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">row</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">jumbotron pan</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">					&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">form-group log</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">						&lt;label&gt;&lt;h2&gt;Your IP is : &quot;</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">	$smarty</span><span style="color: #F97583">-&gt;</span><span style="color: #B392F0">display</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;string:&quot;</span><span style="color: #F97583">.</span><span style="color: #E1E4E8">$ip);</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;				&lt;/h2&gt;&lt;/label&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">					&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">			&lt;/div&gt;&quot;</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/eb0e52d7b7f74ac1bb74f7c38b4ca72f.png" alt="在这里插入图片描述" /></p>
+<h2 id="bjdctf2020cookie-is-so-stable"><a class="markdownIt-Anchor" href="#bjdctf2020cookie-is-so-stable"></a> [BJDCTF2020]Cookie is so stable</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/f568432cbffb4e5f9603858a0cfa797d.png" alt="在这里插入图片描述" /></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>SSTI</tag>
+        <tag>模板注入</tag>
       </tags>
   </entry>
   <entry>
@@ -1488,6 +1442,198 @@ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped
         <tag>web</tag>
         <tag>xxe</tag>
         <tag>buuctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
+    <url>/2024/05/awdwp/</url>
+    <content><![CDATA[<p>(未整理完)</p>
+<h2 id="cfs"><a class="markdownIt-Anchor" href="#cfs"></a> CFS</h2>
+<h4 id="misc1"><a class="markdownIt-Anchor" href="#misc1"></a> misc1</h4>
+<p>备份文件泄露</p>
+<p>下载后是流量包</p>
+<p>流量包存在明文 flag</p>
+<p>（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20240421174259759.png" alt="image-20240421174259759" /></p>
+<h4 id="misc2"><a class="markdownIt-Anchor" href="#misc2"></a> misc2</h4>
+<p>流量里还有一个 flag.zip</p>
+<p>导出后</p>
+<p>爆破得密码为 123456</p>
+<h4 id="web"><a class="markdownIt-Anchor" href="#web"></a> web</h4>
+<p>存在 rce 查看解析目录后 echo 一句话木马进去</p>
+<p>连接后 cat /flag 啥啥啥.txt</p>
+<p>flag get</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20240421175236.png" alt="屏幕截图 2024-04-21 175236" /></p>
+<h2 id="awd"><a class="markdownIt-Anchor" href="#awd"></a> AWD</h2>
+<p>题目附件备份：</p>
+<p><a href="/files/php.7z">php</a></p>
+<p><a href="/files/jsp.7z">java1</a></p>
+<p><a href="/files/java.7z">java2</a></p>
+<h4 id="php"><a class="markdownIt-Anchor" href="#php"></a> php</h4>
+<p>hook 流量发现一个 php 路径穿越</p>
+<p><code>/frontend/ajax/getfile?file=../../../../../../flag.txt</code></p>
+<p>修复：</p>
+<p>将/和.等用于路径穿越的字符过滤置空</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20240421182144415.png" alt="image-20240421182144415" /></p>
+<h4 id="java1"><a class="markdownIt-Anchor" href="#java1"></a> java1</h4>
+<p>一个 java</p>
+<p><code>/forget.jsp?cmd1=cat+/flag.txt</code></p>
+<p>修复 把 cmd1 字段改成复杂密码 使攻击者无法连接</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20240421182841159.png" alt="image-20240421182841159" /></p>
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>长城杯</tag>
+        <tag>铁人三项</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-rce</title>
+    <url>/2022/04/ctfhub-rce/</url>
+    <content><![CDATA[<p>rce：远程代码执行漏洞<br />
+分为远程命令执行 ping 和远程代码执行 evel。<br />
+<strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞</strong>。相当于直接操控服务器电脑的 cmd 命令行！高危漏洞！</p>
+<h2 id="eval-执行"><a class="markdownIt-Anchor" href="#eval-执行"></a> eval 执行</h2>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">isset</span><span style="color: #E1E4E8">($_REQUEST[</span><span style="color: #9ECBFF">&#39;cmd&#39;</span><span style="color: #E1E4E8">])){</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">($_REQUEST[</span><span style="color: #9ECBFF">&#39;cmd&#39;</span><span style="color: #E1E4E8">]);</span></span>
+<span class="line"><span style="color: #E1E4E8">    }</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">else</span><span style="color: #E1E4E8">{</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">highlight_file</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">__FILE__</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">    }</span></span>
+<span class="line"><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
+<p>传参给 cmd 来 eval</p>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">/?</span><span style="color: #79B8FF">cmd</span><span style="color: #F97583">=</span><span style="color: #79B8FF">system</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;ls /&quot;</span><span style="color: #E1E4E8">);</span><span style="color: #6A737D">//此处因为根目录无flag 所以看上一级目录</span></span></code></pre></div></div></figure>
+<p>找到后 再 cat /flag_****</p>
+<h2 id="文件包含"><a class="markdownIt-Anchor" href="#文件包含"></a> 文件包含</h2>
+<p>这里使用 strpos 函数</p>
+<blockquote>
+<p>strpos:查找字符串首次出现的位置</p>
+<p>int strpos ( string $haystack , mixed $needle [, int $offset = 0 ] )</p>
+</blockquote>
+<p>题目使用</p>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">!</span><span style="color: #79B8FF">strpos</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&quot;file&quot;</span><span style="color: #E1E4E8">],</span><span style="color: #9ECBFF">&quot;flag&quot;</span><span style="color: #E1E4E8">)){</span><span style="color: #6A737D">//无flag字符即可运行</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">include</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&quot;file&quot;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">}</span></span></code></pre></div></div></figure>
+<p>来包含文件，而下方给出的 shell.txt 含有 eval 漏洞</p>
+<p>于是包含它（shell.txt 没有“flag”字符 所以这里 strpos 没影响）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218182857507.png" alt="image-20220218182857507" /></p>
+<p>通过 get(包含文件) post(传参)并用来得到 flag</p>
+<h2 id="php-info"><a class="markdownIt-Anchor" href="#php-info"></a> php info</h2>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
+<span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #79B8FF">isset</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&#39;file&#39;</span><span style="color: #E1E4E8">])){</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> ( </span><span style="color: #79B8FF">substr</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&quot;file&quot;</span><span style="color: #E1E4E8">], </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">, </span><span style="color: #79B8FF">6</span><span style="color: #E1E4E8">) </span><span style="color: #F97583">===</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;php://&quot;</span><span style="color: #E1E4E8"> ) {</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">include</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&quot;file&quot;</span><span style="color: #E1E4E8">]);</span></span>
+<span class="line"><span style="color: #E1E4E8">         }</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;Hacker!!!&quot;</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">    	}}</span></span>
+<span class="line"><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #79B8FF">highlight_file</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">__FILE__</span><span style="color: #E1E4E8">);}</span><span style="color: #F97583">?&gt;</span></span>
+<span class="line"><span style="color: #F97583">&lt;</span><span style="color: #79B8FF">hr</span><span style="color: #F97583">&gt;</span><span style="color: #79B8FF">i</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">don</span><span style="color: #9ECBFF">&#39;t have shell, how to get flag? &lt;br&gt;&lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo&lt;/a&gt;</span></span></code></pre></div></div></figure>
+<p>点击 phpinfo 链接 可查看 php 环境</p>
+<h3 id="phpinput"><a class="markdownIt-Anchor" href="#phpinput"></a> php://input</h3>
+<figure class="shiki c++"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #6A737D">/*php:// — 访问各个输入/输出流（I/O streams）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A737D">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A737D">php://input是个可以访问请求的原始数据的只读流。</span></span></code></pre></div></div></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218162728184.png" alt="image-20220218162728184" /></p>
+<h2 id="读取源代码"><a class="markdownIt-Anchor" href="#读取源代码"></a> 读取源代码</h2>
+<p>看环境 无法使用 php://input</p>
+<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #E1E4E8">php</span></span>
+<span class="line"><span style="color: #B392F0">error_reporting(E_ALL</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #B392F0">isset($_GET[</span><span style="color: #B392F0">&#39;file&#39;</span><span style="color: #B392F0">]</span><span style="color: #E1E4E8">)) {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> ( </span><span style="color: #B392F0">substr($_GET[</span><span style="color: #B392F0">&quot;file&quot;</span><span style="color: #B392F0">],</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">0</span><span style="color: #9ECBFF">,</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">6</span><span style="color: #E1E4E8">) === </span><span style="color: #9ECBFF">&quot;php://&quot;</span><span style="color: #E1E4E8"> ) {</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #B392F0">include($_GET[</span><span style="color: #B392F0">&quot;file&quot;</span><span style="color: #B392F0">]</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">    } </span><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;Hacker!!!&quot;</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">    }</span></span>
+<span class="line"><span style="color: #E1E4E8">} else {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">highlight_file(__FILE__</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">}</span></span>
+<span class="line"><span style="color: #B392F0">?&gt;</span></span></code></pre></div></div></figure>
+<p>但还必须是 php://开头</p>
+<h3 id="phpfilter"><a class="markdownIt-Anchor" href="#phpfilter"></a> <a href="https://www.php.net/manual/zh/wrappers.php.php">php://filter</a></h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219174206504.png" alt="image-20220219174206504" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219112308277.png" alt="image-20220219112308277" /></p>
+<h2 id="远程包含"><a class="markdownIt-Anchor" href="#远程包含"></a> 远程包含</h2>
+<p>同 phpinfo 做法相同</p>
+<h2 id="命令注入"><a class="markdownIt-Anchor" href="#命令注入"></a> 命令注入</h2>
+<p>输入命令</p>
+<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #B392F0">127.0.0.1</span><span style="color: #E1E4E8">;</span><span style="color: #B392F0">ls</span></span></code></pre></div></div></figure>
+<p>然后 cat 时出现了问题</p>
+<p>输出被限制了</p>
+<p>于是用管道符号来限制输出 base64</p>
+<p>得到后再解码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218170811553.png" alt="image-20220218170811553" /></p>
+<h2 id="过滤-cat"><a class="markdownIt-Anchor" href="#过滤-cat"></a> 过滤 cat</h2>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
+<span class="line"><span style="color: #E1E4E8">$res </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">FALSE</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #79B8FF">isset</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">]) </span><span style="color: #F97583">&amp;&amp;</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">]) {</span></span>
+<span class="line"><span style="color: #E1E4E8">    $ip </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">    $m </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> [];</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">preg_match_all</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/</span><span style="color: #DBEDFF">cat</span><span style="color: #9ECBFF">/&quot;</span><span style="color: #E1E4E8">, $ip, $m)) {</span><span style="color: #6A737D">//过滤了cat</span></span>
+<span class="line"><span style="color: #E1E4E8">        $cmd </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;ping -c 4 {</span><span style="color: #E1E4E8">$ip</span><span style="color: #9ECBFF">}&quot;</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">exec</span><span style="color: #E1E4E8">($cmd, $res);</span></span>
+<span class="line"><span style="color: #E1E4E8">    }</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        $res </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> $m;</span></span>
+<span class="line"><span style="color: #E1E4E8">    }</span></span>
+<span class="line"><span style="color: #E1E4E8">}</span></span>
+<span class="line"><span style="color: #F97583">?&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F97583">&lt;</span><span style="color: #79B8FF">pre</span><span style="color: #F97583">&gt;</span></span>
+<span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> ($res) {</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">print_r</span><span style="color: #E1E4E8">($res);</span></span>
+<span class="line"><span style="color: #E1E4E8">    }</span></span>
+<span class="line"><span style="color: #F97583">?&gt;</span></span>
+<span class="line"><span style="color: #F97583">&lt;/</span><span style="color: #79B8FF">pre</span><span style="color: #F97583">&gt;</span></span>
+<span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">show_source</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">__FILE__</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #F97583">?&gt;</span></span>
+<span class="line"><span style="color: #F97583">&lt;/</span><span style="color: #79B8FF">body</span><span style="color: #F97583">&gt;</span></span>
+<span class="line"><span style="color: #F97583">&lt;/</span><span style="color: #79B8FF">html</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>
+<h2 id="more"><a class="markdownIt-Anchor" href="#more"></a> more</h2>
+<p>Linux more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
+<figure class="shiki ini"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">more [-dlfpcsu] [-num] [+/pattern] [+linenum] [fileNames..]</span></span></code></pre></div></div></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171602745.png" alt="image-20220218171602745" /></p>
+<h2 id="过滤空格"><a class="markdownIt-Anchor" href="#过滤空格"></a> 过滤空格</h2>
+<p>在 linux 里空格可用&lt; 或 ${IFS}代替</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171910282.png" alt="image-20220218171910282" /></p>
+<h2 id="过滤运算符"><a class="markdownIt-Anchor" href="#过滤运算符"></a> 过滤运算符</h2>
+<p>cat [file]|base64 还可以用 base64 [file]</p>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
+<span class="line"><span style="color: #E1E4E8">$res </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">FALSE</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #79B8FF">isset</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">]) </span><span style="color: #F97583">&amp;&amp;</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">]) {</span></span>
+<span class="line"><span style="color: #E1E4E8">    $ip </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">    $m </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> [];</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">preg_match_all</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/</span><span style="color: #DBEDFF">(\||\&amp;)</span><span style="color: #9ECBFF">/&quot;</span><span style="color: #E1E4E8">, $ip, $m)) {</span></span>
+<span class="line"><span style="color: #E1E4E8">        $cmd </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;ping -c 4 {</span><span style="color: #E1E4E8">$ip</span><span style="color: #9ECBFF">}&quot;</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">exec</span><span style="color: #E1E4E8">($cmd, $res);</span></span>
+<span class="line"><span style="color: #E1E4E8">    } </span><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        $res </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> $m;</span></span>
+<span class="line"><span style="color: #E1E4E8">    }</span></span>
+<span class="line"><span style="color: #E1E4E8">}</span></span>
+<span class="line"><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219104650896.png" alt="image-20220219104650896" /></p>
+<h2 id="综合练习"><a class="markdownIt-Anchor" href="#综合练习"></a> 综合练习</h2>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">!</span><span style="color: #79B8FF">preg_match_all</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/</span><span style="color: #DBEDFF">(\||&amp;|;| |\/|cat|flag|ctfhub)</span><span style="color: #9ECBFF">/&quot;</span><span style="color: #E1E4E8">, $ip</span></span></code></pre></div></div></figure>
+<p>;可以用%0a(url 编码) cat 用 base64 flag 用正则 f*** *lag 等 空格用 ${IFS}</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219105932534.png" alt="image-20220219105932534" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110644693.png" alt="image-20220219110644693" /><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110736333.png" alt="image-20220219110736333" /></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>rce</tag>
       </tags>
   </entry>
   <entry>
@@ -1714,152 +1860,6 @@ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped
       </tags>
   </entry>
   <entry>
-    <title>ctfhub-rce</title>
-    <url>/2022/04/ctfhub-rce/</url>
-    <content><![CDATA[<p>rce：远程代码执行漏洞<br />
-分为远程命令执行 ping 和远程代码执行 evel。<br />
-<strong>其实这就是一个接口，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统，这就是 RCE 漏洞</strong>。相当于直接操控服务器电脑的 cmd 命令行！高危漏洞！</p>
-<h2 id="eval-执行"><a class="markdownIt-Anchor" href="#eval-执行"></a> eval 执行</h2>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">isset</span><span style="color: #E1E4E8">($_REQUEST[</span><span style="color: #9ECBFF">&#39;cmd&#39;</span><span style="color: #E1E4E8">])){</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">($_REQUEST[</span><span style="color: #9ECBFF">&#39;cmd&#39;</span><span style="color: #E1E4E8">]);</span></span>
-<span class="line"><span style="color: #E1E4E8">    }</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">else</span><span style="color: #E1E4E8">{</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">highlight_file</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">__FILE__</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #E1E4E8">    }</span></span>
-<span class="line"><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
-<p>传参给 cmd 来 eval</p>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">/?</span><span style="color: #79B8FF">cmd</span><span style="color: #F97583">=</span><span style="color: #79B8FF">system</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;ls /&quot;</span><span style="color: #E1E4E8">);</span><span style="color: #6A737D">//此处因为根目录无flag 所以看上一级目录</span></span></code></pre></div></div></figure>
-<p>找到后 再 cat /flag_****</p>
-<h2 id="文件包含"><a class="markdownIt-Anchor" href="#文件包含"></a> 文件包含</h2>
-<p>这里使用 strpos 函数</p>
-<blockquote>
-<p>strpos:查找字符串首次出现的位置</p>
-<p>int strpos ( string $haystack , mixed $needle [, int $offset = 0 ] )</p>
-</blockquote>
-<p>题目使用</p>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">!</span><span style="color: #79B8FF">strpos</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&quot;file&quot;</span><span style="color: #E1E4E8">],</span><span style="color: #9ECBFF">&quot;flag&quot;</span><span style="color: #E1E4E8">)){</span><span style="color: #6A737D">//无flag字符即可运行</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">include</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&quot;file&quot;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">}</span></span></code></pre></div></div></figure>
-<p>来包含文件，而下方给出的 shell.txt 含有 eval 漏洞</p>
-<p>于是包含它（shell.txt 没有“flag”字符 所以这里 strpos 没影响）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218182857507.png" alt="image-20220218182857507" /></p>
-<p>通过 get(包含文件) post(传参)并用来得到 flag</p>
-<h2 id="php-info"><a class="markdownIt-Anchor" href="#php-info"></a> php info</h2>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
-<span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #79B8FF">isset</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&#39;file&#39;</span><span style="color: #E1E4E8">])){</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> ( </span><span style="color: #79B8FF">substr</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&quot;file&quot;</span><span style="color: #E1E4E8">], </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">, </span><span style="color: #79B8FF">6</span><span style="color: #E1E4E8">) </span><span style="color: #F97583">===</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;php://&quot;</span><span style="color: #E1E4E8"> ) {</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">include</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&quot;file&quot;</span><span style="color: #E1E4E8">]);</span></span>
-<span class="line"><span style="color: #E1E4E8">         }</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;Hacker!!!&quot;</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #E1E4E8">    	}}</span></span>
-<span class="line"><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #79B8FF">highlight_file</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">__FILE__</span><span style="color: #E1E4E8">);}</span><span style="color: #F97583">?&gt;</span></span>
-<span class="line"><span style="color: #F97583">&lt;</span><span style="color: #79B8FF">hr</span><span style="color: #F97583">&gt;</span><span style="color: #79B8FF">i</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">don</span><span style="color: #9ECBFF">&#39;t have shell, how to get flag? &lt;br&gt;&lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo&lt;/a&gt;</span></span></code></pre></div></div></figure>
-<p>点击 phpinfo 链接 可查看 php 环境</p>
-<h3 id="phpinput"><a class="markdownIt-Anchor" href="#phpinput"></a> php://input</h3>
-<figure class="shiki c++"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #6A737D">/*php:// — 访问各个输入/输出流（I/O streams）</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A737D">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，   内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A737D">php://input是个可以访问请求的原始数据的只读流。</span></span></code></pre></div></div></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218162728184.png" alt="image-20220218162728184" /></p>
-<h2 id="读取源代码"><a class="markdownIt-Anchor" href="#读取源代码"></a> 读取源代码</h2>
-<p>看环境 无法使用 php://input</p>
-<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #E1E4E8">php</span></span>
-<span class="line"><span style="color: #B392F0">error_reporting(E_ALL</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #B392F0">isset($_GET[</span><span style="color: #B392F0">&#39;file&#39;</span><span style="color: #B392F0">]</span><span style="color: #E1E4E8">)) {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> ( </span><span style="color: #B392F0">substr($_GET[</span><span style="color: #B392F0">&quot;file&quot;</span><span style="color: #B392F0">],</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">0</span><span style="color: #9ECBFF">,</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">6</span><span style="color: #E1E4E8">) === </span><span style="color: #9ECBFF">&quot;php://&quot;</span><span style="color: #E1E4E8"> ) {</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #B392F0">include($_GET[</span><span style="color: #B392F0">&quot;file&quot;</span><span style="color: #B392F0">]</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #E1E4E8">    } </span><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;Hacker!!!&quot;</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #E1E4E8">    }</span></span>
-<span class="line"><span style="color: #E1E4E8">} else {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">highlight_file(__FILE__</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #E1E4E8">}</span></span>
-<span class="line"><span style="color: #B392F0">?&gt;</span></span></code></pre></div></div></figure>
-<p>但还必须是 php://开头</p>
-<h3 id="phpfilter"><a class="markdownIt-Anchor" href="#phpfilter"></a> <a href="https://www.php.net/manual/zh/wrappers.php.php">php://filter</a></h3>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219174206504.png" alt="image-20220219174206504" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219112308277.png" alt="image-20220219112308277" /></p>
-<h2 id="远程包含"><a class="markdownIt-Anchor" href="#远程包含"></a> 远程包含</h2>
-<p>同 phpinfo 做法相同</p>
-<h2 id="命令注入"><a class="markdownIt-Anchor" href="#命令注入"></a> 命令注入</h2>
-<p>输入命令</p>
-<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #B392F0">127.0.0.1</span><span style="color: #E1E4E8">;</span><span style="color: #B392F0">ls</span></span></code></pre></div></div></figure>
-<p>然后 cat 时出现了问题</p>
-<p>输出被限制了</p>
-<p>于是用管道符号来限制输出 base64</p>
-<p>得到后再解码</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218170811553.png" alt="image-20220218170811553" /></p>
-<h2 id="过滤-cat"><a class="markdownIt-Anchor" href="#过滤-cat"></a> 过滤 cat</h2>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
-<span class="line"><span style="color: #E1E4E8">$res </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">FALSE</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #79B8FF">isset</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">]) </span><span style="color: #F97583">&amp;&amp;</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">]) {</span></span>
-<span class="line"><span style="color: #E1E4E8">    $ip </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">    $m </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> [];</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">preg_match_all</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/</span><span style="color: #DBEDFF">cat</span><span style="color: #9ECBFF">/&quot;</span><span style="color: #E1E4E8">, $ip, $m)) {</span><span style="color: #6A737D">//过滤了cat</span></span>
-<span class="line"><span style="color: #E1E4E8">        $cmd </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;ping -c 4 {</span><span style="color: #E1E4E8">$ip</span><span style="color: #9ECBFF">}&quot;</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">exec</span><span style="color: #E1E4E8">($cmd, $res);</span></span>
-<span class="line"><span style="color: #E1E4E8">    }</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        $res </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> $m;</span></span>
-<span class="line"><span style="color: #E1E4E8">    }</span></span>
-<span class="line"><span style="color: #E1E4E8">}</span></span>
-<span class="line"><span style="color: #F97583">?&gt;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #F97583">&lt;</span><span style="color: #79B8FF">pre</span><span style="color: #F97583">&gt;</span></span>
-<span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> ($res) {</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">print_r</span><span style="color: #E1E4E8">($res);</span></span>
-<span class="line"><span style="color: #E1E4E8">    }</span></span>
-<span class="line"><span style="color: #F97583">?&gt;</span></span>
-<span class="line"><span style="color: #F97583">&lt;/</span><span style="color: #79B8FF">pre</span><span style="color: #F97583">&gt;</span></span>
-<span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">show_source</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">__FILE__</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #F97583">?&gt;</span></span>
-<span class="line"><span style="color: #F97583">&lt;/</span><span style="color: #79B8FF">body</span><span style="color: #F97583">&gt;</span></span>
-<span class="line"><span style="color: #F97583">&lt;/</span><span style="color: #79B8FF">html</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>
-<h2 id="more"><a class="markdownIt-Anchor" href="#more"></a> more</h2>
-<p>Linux more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。</p>
-<figure class="shiki ini"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">more [-dlfpcsu] [-num] [+/pattern] [+linenum] [fileNames..]</span></span></code></pre></div></div></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171602745.png" alt="image-20220218171602745" /></p>
-<h2 id="过滤空格"><a class="markdownIt-Anchor" href="#过滤空格"></a> 过滤空格</h2>
-<p>在 linux 里空格可用&lt; 或 ${IFS}代替</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218171910282.png" alt="image-20220218171910282" /></p>
-<h2 id="过滤运算符"><a class="markdownIt-Anchor" href="#过滤运算符"></a> 过滤运算符</h2>
-<p>cat [file]|base64 还可以用 base64 [file]</p>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
-<span class="line"><span style="color: #E1E4E8">$res </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">FALSE</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #79B8FF">isset</span><span style="color: #E1E4E8">($_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">]) </span><span style="color: #F97583">&amp;&amp;</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">]) {</span></span>
-<span class="line"><span style="color: #E1E4E8">    $ip </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> $_GET[</span><span style="color: #9ECBFF">&#39;ip&#39;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">    $m </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> [];</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">preg_match_all</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/</span><span style="color: #DBEDFF">(\||\&amp;)</span><span style="color: #9ECBFF">/&quot;</span><span style="color: #E1E4E8">, $ip, $m)) {</span></span>
-<span class="line"><span style="color: #E1E4E8">        $cmd </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;ping -c 4 {</span><span style="color: #E1E4E8">$ip</span><span style="color: #9ECBFF">}&quot;</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">exec</span><span style="color: #E1E4E8">($cmd, $res);</span></span>
-<span class="line"><span style="color: #E1E4E8">    } </span><span style="color: #F97583">else</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        $res </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> $m;</span></span>
-<span class="line"><span style="color: #E1E4E8">    }</span></span>
-<span class="line"><span style="color: #E1E4E8">}</span></span>
-<span class="line"><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219104650896.png" alt="image-20220219104650896" /></p>
-<h2 id="综合练习"><a class="markdownIt-Anchor" href="#综合练习"></a> 综合练习</h2>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">!</span><span style="color: #79B8FF">preg_match_all</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/</span><span style="color: #DBEDFF">(\||&amp;|;| |\/|cat|flag|ctfhub)</span><span style="color: #9ECBFF">/&quot;</span><span style="color: #E1E4E8">, $ip</span></span></code></pre></div></div></figure>
-<p>;可以用%0a(url 编码) cat 用 base64 flag 用正则 f*** *lag 等 空格用 ${IFS}</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219105932534.png" alt="image-20220219105932534" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110644693.png" alt="image-20220219110644693" /><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:%5CUsers%5CCNsirius%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220219110736333.png" alt="image-20220219110736333" /></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>rce</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2023/01/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h2 id="web380"><a class="markdownIt-Anchor" href="#web380"></a> web380</h2>
@@ -2048,78 +2048,6 @@ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped
       </tags>
   </entry>
   <entry>
-    <title>htb-Shoppy</title>
-    <url>/2022/10/htb-Shoppy/</url>
-    <content><![CDATA[<blockquote>
-<p>共做出三道题，前两道题 wp 正在补，但现在又有点想转去做 vulntarget</p>
-</blockquote>
-<h2 id="shoppy"><a class="markdownIt-Anchor" href="#shoppy"></a> Shoppy</h2>
-<h3 id="信息收集"><a class="markdownIt-Anchor" href="#信息收集"></a> 信息收集</h3>
-<p>老样子 先 nmap 扫下</p>
-<p>有 22 和 80</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020162838813.png" alt="image-20221020162838813" /></p>
-<p>然后将域名加入 hosts</p>
-<p>子域名扫描</p>
-<p>可以使用 gobuster 或各种 fuzz 工具如 wfuzz</p>
-<blockquote>
-<p>本来想用 oneforall 扫子域名，试了半天一堆错误，后来问学长，oneforall 是调用了一堆子域名解析的</p>
-</blockquote>
-<p>扫到 mattermost.shoppy.htb 加进 hosts</p>
-<p>打开发现是个登陆界面，先放着</p>
-<p>跑下主站的域名 发现有个/admin</p>
-<h3 id="登录"><a class="markdownIt-Anchor" href="#登录"></a> 登录</h3>
-<p>根据黑盒测试老套路，试试弱口令，不成功，试试万能密码跑下</p>
-<p>发现<code>admin'||''==='</code>成功进入</p>
-<p>进入后发现搜索框，可进行大量尝试</p>
-<p>当搜索到 admin 后出现 passwordhash</p>
-<p>继续尝试后发现搜索<code>admin'||''==='</code>会出现两个 hash</p>
-<p>使用 hashcat 爆破</p>
-<p><code>josh:remembermethisway</code></p>
-<p>然后进入之前扫到的那个子域名尝试登陆，成功</p>
-<p>又是 htb 经典频道页面</p>
-<p>翻找后发现</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020204113936-16662696771111.png" alt="image-20221020204113936" /></p>
-<p>尝试使用 ssh 连接</p>
-<p>password:Sh0ppyBest@pp!</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020203942821.png" alt="image-20221020203942821" /></p>
-<p>user get√</p>
-<h3 id="root"><a class="markdownIt-Anchor" href="#root"></a> root</h3>
-<p>ssh 进入后 ls 发现已经有老哥把经典 linepeas 传进去了</p>
-<p>开跑！</p>
-<p>然后爆出一堆 cve 先放一边</p>
-<p>还在后面看到一些 password 字段的文件去看看</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020205247703.png" alt="image-20221020205247703" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020210747666.png" alt="image-20221020210747666" /></p>
-<p>password:Sample</p>
-<p>调用下密码管理器</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020210823274.png" alt="image-20221020210823274" /></p>
-<p>再次使用 ssh 登录 deploy 账户</p>
-<p>进入后又没啥思路了</p>
-<p>准备走 cve 了</p>
-<p>走前看了眼 wp</p>
-<p>发现聊天页下面还有段话</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211115093.png" alt="image-20221020211115093" /></p>
-<p>发现 docker 部署尝试 docker 提权</p>
-<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #B392F0">docker</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">run</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">-v</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">/:/mnt</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">--rm</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">-it</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">alpine</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">chroot</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">/mnt</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">sh</span></span></code></pre></div></div></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211249861.png" alt="image-20221020211249861" /></p>
-<p>其实后来想想 linpeas 里出现了提示</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211920140.png" alt="image-20221020211920140" /></p>
-<p>deplay 在 root 权限的 docker 组里，当时要是细看的话应该也能想到</p>
-<p>后面跟着 wp 做 cve 也懒得去试了</p>
-<p>最后给师傅们留下截图</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020212137224.png" alt="image-20221020212137224" /></p>
-<p>这回 cve 都没用，给个简单低评吧~</p>
-]]></content>
-      <categories>
-        <category>htb</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>htb-Shoppy</tag>
-        <tag>HackTheBox</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>htb-Cat</title>
     <url>/2025/02/htb-Cat/</url>
     <content><![CDATA[<h2 id="cat"><a class="markdownIt-Anchor" href="#cat"></a> Cat</h2>
@@ -2199,8 +2127,80 @@ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>HackTheBox</tag>
         <tag>htb-Cat</tag>
+        <tag>HackTheBox</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>htb-Shoppy</title>
+    <url>/2022/10/htb-Shoppy/</url>
+    <content><![CDATA[<blockquote>
+<p>共做出三道题，前两道题 wp 正在补，但现在又有点想转去做 vulntarget</p>
+</blockquote>
+<h2 id="shoppy"><a class="markdownIt-Anchor" href="#shoppy"></a> Shoppy</h2>
+<h3 id="信息收集"><a class="markdownIt-Anchor" href="#信息收集"></a> 信息收集</h3>
+<p>老样子 先 nmap 扫下</p>
+<p>有 22 和 80</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020162838813.png" alt="image-20221020162838813" /></p>
+<p>然后将域名加入 hosts</p>
+<p>子域名扫描</p>
+<p>可以使用 gobuster 或各种 fuzz 工具如 wfuzz</p>
+<blockquote>
+<p>本来想用 oneforall 扫子域名，试了半天一堆错误，后来问学长，oneforall 是调用了一堆子域名解析的</p>
+</blockquote>
+<p>扫到 mattermost.shoppy.htb 加进 hosts</p>
+<p>打开发现是个登陆界面，先放着</p>
+<p>跑下主站的域名 发现有个/admin</p>
+<h3 id="登录"><a class="markdownIt-Anchor" href="#登录"></a> 登录</h3>
+<p>根据黑盒测试老套路，试试弱口令，不成功，试试万能密码跑下</p>
+<p>发现<code>admin'||''==='</code>成功进入</p>
+<p>进入后发现搜索框，可进行大量尝试</p>
+<p>当搜索到 admin 后出现 passwordhash</p>
+<p>继续尝试后发现搜索<code>admin'||''==='</code>会出现两个 hash</p>
+<p>使用 hashcat 爆破</p>
+<p><code>josh:remembermethisway</code></p>
+<p>然后进入之前扫到的那个子域名尝试登陆，成功</p>
+<p>又是 htb 经典频道页面</p>
+<p>翻找后发现</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020204113936-16662696771111.png" alt="image-20221020204113936" /></p>
+<p>尝试使用 ssh 连接</p>
+<p>password:Sh0ppyBest@pp!</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020203942821.png" alt="image-20221020203942821" /></p>
+<p>user get√</p>
+<h3 id="root"><a class="markdownIt-Anchor" href="#root"></a> root</h3>
+<p>ssh 进入后 ls 发现已经有老哥把经典 linepeas 传进去了</p>
+<p>开跑！</p>
+<p>然后爆出一堆 cve 先放一边</p>
+<p>还在后面看到一些 password 字段的文件去看看</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020205247703.png" alt="image-20221020205247703" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020210747666.png" alt="image-20221020210747666" /></p>
+<p>password:Sample</p>
+<p>调用下密码管理器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020210823274.png" alt="image-20221020210823274" /></p>
+<p>再次使用 ssh 登录 deploy 账户</p>
+<p>进入后又没啥思路了</p>
+<p>准备走 cve 了</p>
+<p>走前看了眼 wp</p>
+<p>发现聊天页下面还有段话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211115093.png" alt="image-20221020211115093" /></p>
+<p>发现 docker 部署尝试 docker 提权</p>
+<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #B392F0">docker</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">run</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">-v</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">/:/mnt</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">--rm</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">-it</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">alpine</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">chroot</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">/mnt</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">sh</span></span></code></pre></div></div></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211249861.png" alt="image-20221020211249861" /></p>
+<p>其实后来想想 linpeas 里出现了提示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020211920140.png" alt="image-20221020211920140" /></p>
+<p>deplay 在 root 权限的 docker 组里，当时要是细看的话应该也能想到</p>
+<p>后面跟着 wp 做 cve 也懒得去试了</p>
+<p>最后给师傅们留下截图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221020212137224.png" alt="image-20221020212137224" /></p>
+<p>这回 cve 都没用，给个简单低评吧~</p>
+]]></content>
+      <categories>
+        <category>htb</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>HackTheBox</tag>
+        <tag>htb-Shoppy</tag>
       </tags>
   </entry>
   <entry>
@@ -3204,106 +3204,6 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
       </tags>
   </entry>
   <entry>
-    <title>vue gin合并部署(完美方案)</title>
-    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
-<p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
-<p>二者合并部署的教程非常少，且各有各的问题</p>
-<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
-<h2 id="vue"><a class="markdownIt-Anchor" href="#vue"></a> vue</h2>
-<p>使用 axios 时进行如下配置</p>
-<figure class="shiki typescript"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">request</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> axios.</span><span style="color: #B392F0">create</span><span style="color: #E1E4E8">({</span></span>
-<span class="line"><span style="color: #E1E4E8">  baseURL: </span><span style="color: #9ECBFF">`${</span><span style="color: #E1E4E8">currentDomain</span><span style="color: #9ECBFF">}/api`</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">  timeout: </span><span style="color: #79B8FF">5000</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">  headers: { </span><span style="color: #9ECBFF">&quot;Cache-Control&quot;</span><span style="color: #E1E4E8">: </span><span style="color: #9ECBFF">&quot;no-cache&quot;</span><span style="color: #E1E4E8"> },</span></span>
-<span class="line"><span style="color: #E1E4E8">});</span></span></code></pre></div></div></figure>
-<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
-<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
-<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
-<p>同时</p>
-<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
-<figure class="shiki ts"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">defineConfig</span><span style="color: #E1E4E8">({</span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #6A737D">// 其他参数</span></span>
-<span class="line"><span style="color: #E1E4E8">  server: {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// port: 8080,</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// open: true,</span></span>
-<span class="line"><span style="color: #E1E4E8">    proxy: {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #9ECBFF">&quot;/api&quot;</span><span style="color: #E1E4E8">: {</span></span>
-<span class="line"><span style="color: #E1E4E8">        target: </span><span style="color: #9ECBFF">&quot;http://localhost:5731&quot;</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">        changeOrigin: </span><span style="color: #79B8FF">true</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #6A737D">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span>
-<span class="line"><span style="color: #E1E4E8">      },</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
-<span class="line"><span style="color: #E1E4E8">  },</span></span>
-<span class="line"><span style="color: #E1E4E8">});</span></span></code></pre></div></div></figure>
-<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
-<figure class="shiki json"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #9ECBFF">&quot;scripts&quot;</span><span style="color: #E1E4E8">: {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #79B8FF">&quot;dev&quot;</span><span style="color: #E1E4E8">: </span><span style="color: #9ECBFF">&quot;vite&quot;</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #79B8FF">&quot;build&quot;</span><span style="color: #E1E4E8">: </span><span style="color: #9ECBFF">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #79B8FF">&quot;preview&quot;</span><span style="color: #E1E4E8">: </span><span style="color: #9ECBFF">&quot;vite preview&quot;</span></span>
-<span class="line"><span style="color: #E1E4E8">  },</span></span></code></pre></div></div></figure>
-<p>方便一部送到位</p>
-<h2 id="gin"><a class="markdownIt-Anchor" href="#gin"></a> gin</h2>
-<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">❯ tree</span></span>
-<span class="line"><span style="color: #E1E4E8">文件夹 </span><span style="color: #85E89D">PATH</span><span style="color: #E1E4E8"> 列表</span></span>
-<span class="line"><span style="color: #E1E4E8">卷序列号为 AE05-588D</span></span>
-<span class="line"><span style="color: #E1E4E8">C:.</span></span>
-<span class="line"><span style="color: #E1E4E8">├─</span><span style="color: #85E89D">main</span><span style="color: #B392F0">.go</span></span>
-<span class="line"><span style="color: #E1E4E8">├─其他</span></span>
-<span class="line"><span style="color: #E1E4E8">└─vue </span><span style="color: #6A737D">/* 可改 */</span></span>
-<span class="line"><span style="color: #E1E4E8">    └─assets</span></span></code></pre></div></div></figure>
-<p>main.go 添加 embed 和路由</p>
-<figure class="shiki go"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #6A737D">//go:embed  vue/index.html</span></span>
-<span class="line"><span style="color: #F97583">var</span><span style="color: #E1E4E8"> indexHtml []</span><span style="color: #F97583">byte</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A737D">//go:embed  vue/*</span></span>
-<span class="line"><span style="color: #F97583">var</span><span style="color: #E1E4E8"> vue embed.FS</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #F97583">func</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">main</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #6A737D">// 其他设置</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// 配置允许跨域 方便dev联调</span></span>
-<span class="line"><span style="color: #E1E4E8">	r.</span><span style="color: #79B8FF">Use</span><span style="color: #E1E4E8">(cors.</span><span style="color: #79B8FF">New</span><span style="color: #E1E4E8">(cors.Config{</span></span>
-<span class="line"><span style="color: #E1E4E8">		AllowOrigins:     []</span><span style="color: #F97583">string</span><span style="color: #E1E4E8">{</span><span style="color: #9ECBFF">&quot;*&quot;</span><span style="color: #E1E4E8">}, </span><span style="color: #6A737D">// 允许的域名</span></span>
-<span class="line"><span style="color: #E1E4E8">		AllowMethods:     []</span><span style="color: #F97583">string</span><span style="color: #E1E4E8">{</span><span style="color: #9ECBFF">&quot;GET&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;POST&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;PUT&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;DELETE&quot;</span><span style="color: #E1E4E8">},</span></span>
-<span class="line"><span style="color: #E1E4E8">		AllowHeaders:     []</span><span style="color: #F97583">string</span><span style="color: #E1E4E8">{</span><span style="color: #9ECBFF">&quot;Origin&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;Content-Type&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;Authorization&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;Cache-Control&quot;</span><span style="color: #E1E4E8">},</span></span>
-<span class="line"><span style="color: #E1E4E8">		AllowCredentials: </span><span style="color: #79B8FF">true</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">	}))</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #6A737D">// 配置vue路由</span></span>
-<span class="line"><span style="color: #E1E4E8">	assets, _ </span><span style="color: #F97583">:=</span><span style="color: #E1E4E8"> fs.</span><span style="color: #79B8FF">Sub</span><span style="color: #E1E4E8">(vue, </span><span style="color: #9ECBFF">&quot;vue/assets&quot;</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #E1E4E8">	r.</span><span style="color: #79B8FF">StaticFS</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/assets&quot;</span><span style="color: #E1E4E8">, http.</span><span style="color: #79B8FF">FS</span><span style="color: #E1E4E8">(assets))</span></span>
-<span class="line"><span style="color: #E1E4E8">	icon, _ </span><span style="color: #F97583">:=</span><span style="color: #E1E4E8"> fs.</span><span style="color: #79B8FF">ReadFile</span><span style="color: #E1E4E8">(vue, </span><span style="color: #9ECBFF">&quot;vue/favicon.ico&quot;</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #E1E4E8">	r.</span><span style="color: #79B8FF">GET</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/favicon.ico&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #F97583">func</span><span style="color: #E1E4E8">(c </span><span style="color: #F97583">*</span><span style="color: #E1E4E8">gin.Context) { c.</span><span style="color: #79B8FF">Data</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">200</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;image/x-icon&quot;</span><span style="color: #E1E4E8">, icon) })</span></span>
-<span class="line"><span style="color: #E1E4E8">	r.</span><span style="color: #79B8FF">NoRoute</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">func</span><span style="color: #E1E4E8">(c </span><span style="color: #F97583">*</span><span style="color: #E1E4E8">gin.Context) {</span></span>
-<span class="line"><span style="color: #E1E4E8">		c.</span><span style="color: #79B8FF">Data</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">200</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;text/html; charset=utf-8&quot;</span><span style="color: #E1E4E8">, indexHtml)</span></span>
-<span class="line"><span style="color: #E1E4E8">	})</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// 其他路由</span></span>
-<span class="line"><span style="color: #E1E4E8">}</span></span></code></pre></div></div></figure>
-<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
-<p>vue 中设置的 router 会被 build 进 js</p>
-<p>通过 js 获取 url 来切换页面</p>
-<p>对未使用 embed 的方法同理，参考代码自行设置</p>
-<h3 id="embed"><a class="markdownIt-Anchor" href="#embed"></a> embed</h3>
-<p>对于使用<code>embed</code>的</p>
-<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
-<blockquote>
-<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
-</blockquote>
-<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
-<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-        <tag>gin</tag>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>upload-labs</title>
     <url>/2022/03/upload-labs/</url>
     <content><![CDATA[<h2 id="pass-01"><a class="markdownIt-Anchor" href="#pass-01"></a> pass-01</h2>
@@ -3839,6 +3739,106 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
         <tag>web</tag>
         <tag>upload</tag>
         <tag>upload-labs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue gin合并部署(完美方案)</title>
+    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
+<p>目前 vue 与 gin 的项目基本都是前后端分离部署</p>
+<p>二者合并部署的教程非常少，且各有各的问题</p>
+<p>结合各个教程后 找到一种比较完美的合并部署方案</p>
+<h2 id="vue"><a class="markdownIt-Anchor" href="#vue"></a> vue</h2>
+<p>使用 axios 时进行如下配置</p>
+<figure class="shiki typescript"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">request</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> axios.</span><span style="color: #B392F0">create</span><span style="color: #E1E4E8">({</span></span>
+<span class="line"><span style="color: #E1E4E8">  baseURL: </span><span style="color: #9ECBFF">`${</span><span style="color: #E1E4E8">currentDomain</span><span style="color: #9ECBFF">}/api`</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">  timeout: </span><span style="color: #79B8FF">5000</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">  headers: { </span><span style="color: #9ECBFF">&quot;Cache-Control&quot;</span><span style="color: #E1E4E8">: </span><span style="color: #9ECBFF">&quot;no-cache&quot;</span><span style="color: #E1E4E8"> },</span></span>
+<span class="line"><span style="color: #E1E4E8">});</span></span></code></pre></div></div></figure>
+<p>对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（<strong>必须</strong>）</p>
+<p>并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL</p>
+<p>headers 的设置是为了 vue dev 环境下，前后端的联调</p>
+<p>同时</p>
+<p>为了 dev 联调避免出现跨域问题，还应添加代理</p>
+<figure class="shiki ts"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">defineConfig</span><span style="color: #E1E4E8">({</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #6A737D">// 其他参数</span></span>
+<span class="line"><span style="color: #E1E4E8">  server: {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// port: 8080,</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// open: true,</span></span>
+<span class="line"><span style="color: #E1E4E8">    proxy: {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #9ECBFF">&quot;/api&quot;</span><span style="color: #E1E4E8">: {</span></span>
+<span class="line"><span style="color: #E1E4E8">        target: </span><span style="color: #9ECBFF">&quot;http://localhost:5731&quot;</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">        changeOrigin: </span><span style="color: #79B8FF">true</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #6A737D">// rewrite: (path) =&gt; path.replace(/^\/api/, &quot;&quot;), // 移除 /api 前缀 根据前后端代码 自行修改</span></span>
+<span class="line"><span style="color: #E1E4E8">      },</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  },</span></span>
+<span class="line"><span style="color: #E1E4E8">});</span></span></code></pre></div></div></figure>
+<p>额外配置 build 后任务，将构建好的 dist 复制到后端目录下</p>
+<figure class="shiki json"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #9ECBFF">&quot;scripts&quot;</span><span style="color: #E1E4E8">: {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #79B8FF">&quot;dev&quot;</span><span style="color: #E1E4E8">: </span><span style="color: #9ECBFF">&quot;vite&quot;</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #79B8FF">&quot;build&quot;</span><span style="color: #E1E4E8">: </span><span style="color: #9ECBFF">&quot;vite build &amp;&amp; robocopy ./dist 后端路径/vue /e /z /r:0&quot;</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #79B8FF">&quot;preview&quot;</span><span style="color: #E1E4E8">: </span><span style="color: #9ECBFF">&quot;vite preview&quot;</span></span>
+<span class="line"><span style="color: #E1E4E8">  },</span></span></code></pre></div></div></figure>
+<p>方便一部送到位</p>
+<h2 id="gin"><a class="markdownIt-Anchor" href="#gin"></a> gin</h2>
+<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">❯ tree</span></span>
+<span class="line"><span style="color: #E1E4E8">文件夹 </span><span style="color: #85E89D">PATH</span><span style="color: #E1E4E8"> 列表</span></span>
+<span class="line"><span style="color: #E1E4E8">卷序列号为 AE05-588D</span></span>
+<span class="line"><span style="color: #E1E4E8">C:.</span></span>
+<span class="line"><span style="color: #E1E4E8">├─</span><span style="color: #85E89D">main</span><span style="color: #B392F0">.go</span></span>
+<span class="line"><span style="color: #E1E4E8">├─其他</span></span>
+<span class="line"><span style="color: #E1E4E8">└─vue </span><span style="color: #6A737D">/* 可改 */</span></span>
+<span class="line"><span style="color: #E1E4E8">    └─assets</span></span></code></pre></div></div></figure>
+<p>main.go 添加 embed 和路由</p>
+<figure class="shiki go"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #6A737D">//go:embed  vue/index.html</span></span>
+<span class="line"><span style="color: #F97583">var</span><span style="color: #E1E4E8"> indexHtml []</span><span style="color: #F97583">byte</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A737D">//go:embed  vue/*</span></span>
+<span class="line"><span style="color: #F97583">var</span><span style="color: #E1E4E8"> vue embed.FS</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F97583">func</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">main</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #6A737D">// 其他设置</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// 配置允许跨域 方便dev联调</span></span>
+<span class="line"><span style="color: #E1E4E8">	r.</span><span style="color: #79B8FF">Use</span><span style="color: #E1E4E8">(cors.</span><span style="color: #79B8FF">New</span><span style="color: #E1E4E8">(cors.Config{</span></span>
+<span class="line"><span style="color: #E1E4E8">		AllowOrigins:     []</span><span style="color: #F97583">string</span><span style="color: #E1E4E8">{</span><span style="color: #9ECBFF">&quot;*&quot;</span><span style="color: #E1E4E8">}, </span><span style="color: #6A737D">// 允许的域名</span></span>
+<span class="line"><span style="color: #E1E4E8">		AllowMethods:     []</span><span style="color: #F97583">string</span><span style="color: #E1E4E8">{</span><span style="color: #9ECBFF">&quot;GET&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;POST&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;PUT&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;DELETE&quot;</span><span style="color: #E1E4E8">},</span></span>
+<span class="line"><span style="color: #E1E4E8">		AllowHeaders:     []</span><span style="color: #F97583">string</span><span style="color: #E1E4E8">{</span><span style="color: #9ECBFF">&quot;Origin&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;Content-Type&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;Authorization&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;Cache-Control&quot;</span><span style="color: #E1E4E8">},</span></span>
+<span class="line"><span style="color: #E1E4E8">		AllowCredentials: </span><span style="color: #79B8FF">true</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">	}))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #6A737D">// 配置vue路由</span></span>
+<span class="line"><span style="color: #E1E4E8">	assets, _ </span><span style="color: #F97583">:=</span><span style="color: #E1E4E8"> fs.</span><span style="color: #79B8FF">Sub</span><span style="color: #E1E4E8">(vue, </span><span style="color: #9ECBFF">&quot;vue/assets&quot;</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #E1E4E8">	r.</span><span style="color: #79B8FF">StaticFS</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/assets&quot;</span><span style="color: #E1E4E8">, http.</span><span style="color: #79B8FF">FS</span><span style="color: #E1E4E8">(assets))</span></span>
+<span class="line"><span style="color: #E1E4E8">	icon, _ </span><span style="color: #F97583">:=</span><span style="color: #E1E4E8"> fs.</span><span style="color: #79B8FF">ReadFile</span><span style="color: #E1E4E8">(vue, </span><span style="color: #9ECBFF">&quot;vue/favicon.ico&quot;</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #E1E4E8">	r.</span><span style="color: #79B8FF">GET</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;/favicon.ico&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #F97583">func</span><span style="color: #E1E4E8">(c </span><span style="color: #F97583">*</span><span style="color: #E1E4E8">gin.Context) { c.</span><span style="color: #79B8FF">Data</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">200</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;image/x-icon&quot;</span><span style="color: #E1E4E8">, icon) })</span></span>
+<span class="line"><span style="color: #E1E4E8">	r.</span><span style="color: #79B8FF">NoRoute</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">func</span><span style="color: #E1E4E8">(c </span><span style="color: #F97583">*</span><span style="color: #E1E4E8">gin.Context) {</span></span>
+<span class="line"><span style="color: #E1E4E8">		c.</span><span style="color: #79B8FF">Data</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">200</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;text/html; charset=utf-8&quot;</span><span style="color: #E1E4E8">, indexHtml)</span></span>
+<span class="line"><span style="color: #E1E4E8">	})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// 其他路由</span></span>
+<span class="line"><span style="color: #E1E4E8">}</span></span></code></pre></div></div></figure>
+<p>使用<code>r.NoRoute</code>将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等</p>
+<p>vue 中设置的 router 会被 build 进 js</p>
+<p>通过 js 获取 url 来切换页面</p>
+<p>对未使用 embed 的方法同理，参考代码自行设置</p>
+<h3 id="embed"><a class="markdownIt-Anchor" href="#embed"></a> embed</h3>
+<p>对于使用<code>embed</code>的</p>
+<p>由于<code>StaticFS</code>和<code>embed</code>的底层代码逻辑</p>
+<blockquote>
+<p>在前端根目录的文件一般不多，这里只有<code>index.html</code>和 icon 文件</p>
+</blockquote>
+<p>可通过单独获取、或通过<code>fs.ReadFile</code>获取，分别参考<code>index.html</code>和<code>favicon.ico</code></p>
+<p>对于前端其他文件，需要通过<code>fs.Sub</code>下移到对应目录后才能通过<code>r.StaticFS(&quot;/assets&quot;, http.FS(assets))</code>配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>gin</tag>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
