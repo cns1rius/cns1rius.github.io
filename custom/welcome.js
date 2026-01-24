@@ -1,18 +1,3 @@
-if (
-  window.location.host != "s1rius.space" &&
-  window.location.hostname != "localhost"
-) {
-  // 使用新域名和当前URL的pathname, search(查询参数), 和 hash(锚点)创建新的URL
-  var mainUrl =
-    "https://s1rius.space" +
-    window.location.pathname +
-    window.location.search +
-    window.location.hash;
-
-  // 跳转到新的URL
-  window.location.href = mainUrl;
-}
-
 let welcomeFlag = Math.floor(Math.random() * 100);
 
 if (sessionStorage.getItem("popWelcomeWindow") != welcomeFlag) {

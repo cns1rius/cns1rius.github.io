@@ -1,11 +1,4 @@
-/*
- * @Author: s1rius
- * @Date: 2025-02-23 21:56:23
- * @LastEditTime: 2025-02-26 13:01:15
- * @Description: https://s1rius.space/
- */
-
-if (window.location.hostname != "localhost") {
+if (window.location.hostname !== "localhost") {
   // 重写console方法
   console.log = function () {};
   console.error = function () {};
