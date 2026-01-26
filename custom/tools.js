@@ -6,6 +6,7 @@
  */
 
 const option = null;
+const botPattern = /(Googlebot|Baiduspider|bingbot|Bytespider|360Spider|Sogou|YisouSpider|YandexBot|Yeti|Applebot|Slurp|DuckDuckBot|AhrefsBot|DotBot|SemrushBot|MJ12bot|PetalBot|GPTBot|OAI-SearchBot|ClaudeBot|Mediapartners-Google|AdsBot-Google|Diffbot|spider|Crawler|bot)/i
 // 定义 getScript 函数
 const getScript = (url, attr = {}) =>
   new Promise((resolve, reject) => {
@@ -23,6 +24,14 @@ const getScript = (url, attr = {}) =>
 
 // 定义 runTrack 函数
 const runTrack = () => {
+  const botMatch = navigator.userAgent.match(botPattern)[0]
+  if (botMatch) {
+    const targetPath = (window.location.pathname + window.location.search + window.location.hash).substring(0, 499)
+    umami.track('Crawler', {
+      bot: botMatch,
+      path: targetPath
+    })
+  }
   umami.track((props) => ({
     ...props,
     url:
