@@ -6,7 +6,7 @@
   <link href="https://s1rius.space/atom.xml" rel="self"/>
   
   <link href="https://s1rius.space/"/>
-  <updated>2025-12-27T14:00:00.000Z</updated>
+  <updated>2026-01-27T04:00:00.000Z</updated>
   <id>https://s1rius.space/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>arch + niri + noctalia-shell安装记录</title>
+    <link href="https://s1rius.space/2026/01/arch/"/>
+    <id>https://s1rius.space/2026/01/arch/</id>
+    <published>2026-01-27T04:00:00.000Z</published>
+    <updated>2026-01-27T04:00:00.000Z</updated>
+    
+    
+    <summary type="html">arch + niri + noctalia-shell安装记录</summary>
+    
+    
+    
+    <category term="随笔" scheme="https://s1rius.space/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="linux arch wayland niri noctalia shell" scheme="https://s1rius.space/tags/linux-arch-wayland-niri-noctalia-shell/"/>
+    
+  </entry>
   
   <entry>
     <title>115上传 浏览器限制解除</title>
@@ -125,9 +144,9 @@
     
     <category term="web" scheme="https://s1rius.space/tags/web/"/>
     
-    <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
-    
     <category term="htb-Cat" scheme="https://s1rius.space/tags/htb-Cat/"/>
+    
+    <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
     
   </entry>
   
@@ -391,9 +410,9 @@
     
     <category term="web" scheme="https://s1rius.space/tags/web/"/>
     
-    <category term="htb-Shoppy" scheme="https://s1rius.space/tags/htb-Shoppy/"/>
-    
     <category term="HackTheBox" scheme="https://s1rius.space/tags/HackTheBox/"/>
+    
+    <category term="htb-Shoppy" scheme="https://s1rius.space/tags/htb-Shoppy/"/>
     
   </entry>
   
