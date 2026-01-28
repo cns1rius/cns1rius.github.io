@@ -31,7 +31,17 @@
     <category term="随笔" scheme="https://blog.s1rius.space/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-    <category term="linux arch wayland niri noctalia shell" scheme="https://blog.s1rius.space/tags/linux-arch-wayland-niri-noctalia-shell/"/>
+    <category term="linux" scheme="https://blog.s1rius.space/tags/linux/"/>
+    
+    <category term="arch" scheme="https://blog.s1rius.space/tags/arch/"/>
+    
+    <category term="wayland" scheme="https://blog.s1rius.space/tags/wayland/"/>
+    
+    <category term="niri" scheme="https://blog.s1rius.space/tags/niri/"/>
+    
+    <category term="noctalia" scheme="https://blog.s1rius.space/tags/noctalia/"/>
+    
+    <category term="shell" scheme="https://blog.s1rius.space/tags/shell/"/>
     
   </entry>
   
@@ -566,8 +576,8 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;kali-安装-docker&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#kali-安装-docker&quot;&gt;&lt;/a&gt; kali 安装 docker&lt;/h2&gt;
-&lt;figure class=&quot;shiki shell&quot;&gt;&lt;div class=&#39;codeblock&#39;&gt;&lt;div class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span</summary>
+    <summary type="html">&lt;h2 id=&quot;kali-安装-docker&quot;&gt;kali 安装 docker&lt;/h2&gt;
+&lt;figure class=&quot;shiki shell&quot;&gt;&lt;div class=&#39;codeblock&#39;&gt;&lt;div class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span</summary>
         
       
     
@@ -684,7 +694,7 @@
       
         
         
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/img/csdn_16-1689254207258-133.png&quot; alt=&quot;点击并拖拽以移动&quot; /&gt;&lt;/p&gt;
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/img/csdn_16-1689254207258-133.png&quot; alt=&quot;点击并拖拽以移动&quot;&gt;&lt;/p&gt;
 &lt;p&gt;我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。&lt;/p&gt;
 &lt;p&gt;这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022</summary>
         
