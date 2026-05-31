@@ -11,7 +11,27 @@
   <rights>All rights reserved 2026, s1rius</rights>
   <subtitle>天狼的个人空间</subtitle>
   <title>s1rius' space</title>
-  <updated>2026-02-15T06:00:00.000Z</updated>
+  <updated>2026-05-31T10:00:00.000Z</updated>
+  <entry>
+    <author>
+      <name>s1rius</name>
+    </author>
+    <category term="教程" scheme="https://blog.s1rius.space/categories/%E6%95%99%E7%A8%8B/"/>
+    <category term="TailScale" scheme="https://blog.s1rius.space/tags/TailScale/"/>
+    <category term="中继" scheme="https://blog.s1rius.space/tags/%E4%B8%AD%E7%BB%A7/"/>
+    <category term="fofa" scheme="https://blog.s1rius.space/tags/fofa/"/>
+    <content>
+      <![CDATA[<p><img src="https://s1rius.space/img/cover/tailscale.webp" alt="白嫖TailScale中继" /></p>
+白嫖TailScale中继]]>
+    </content>
+    <id>https://blog.s1rius.space/2026/05/%E7%99%BD%E5%AB%96TailScale%E4%B8%AD%E7%BB%A7/</id>
+    <link href="https://blog.s1rius.space/2026/05/%E7%99%BD%E5%AB%96TailScale%E4%B8%AD%E7%BB%A7/" rel="alternate"/>
+    <link href="https://s1rius.space/img/cover/tailscale.webp" rel="enclosure" type="image/webp"/>
+    <published>2026-05-31T10:00:00.000Z</published>
+    <summary>白嫖TailScale中继</summary>
+    <title>白嫖TailScale中继</title>
+    <updated>2026-05-31T10:00:00.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>s1rius</name>
@@ -520,15 +540,15 @@ xss-lab]]>
     <category term="docker" scheme="https://blog.s1rius.space/tags/docker/"/>
     <content>
       <![CDATA[<p><img src="https://s1rius.space/img/cover/img_812_1100x619_96_null_normal.webp" alt="kali安装docker" /></p>
-<h2 id="kali-安装-docker">kali 安装 docker</h2><figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span]]>
+<h2 id="kali-安装-docker"><a class="markdownIt-Anchor" href="#kali-安装-docker"></a> kali 安装 docker</h2><figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span]]>
     </content>
     <id>https://blog.s1rius.space/2022/03/docker/</id>
     <link href="https://blog.s1rius.space/2022/03/docker/" rel="alternate"/>
     <link href="https://s1rius.space/img/cover/img_812_1100x619_96_null_normal.webp" rel="enclosure" type="image/webp"/>
     <published>2022-03-09T16:00:00.000Z</published>
     <summary>
-      <![CDATA[<h2 id="kali-安装-docker">kali 安装 docker</h2>
-<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span]]>
+      <![CDATA[<h2 id="kali-安装-docker"><a class="markdownIt-Anchor" href="#kali-安装-docker"></a> kali 安装 docker</h2>
+<figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span]]>
     </summary>
     <title>kali安装docker</title>
     <updated>2022-03-09T16:00:00.000Z</updated>
@@ -618,14 +638,14 @@ git命令]]>
     <category term="教程" scheme="https://blog.s1rius.space/categories/%E6%95%99%E7%A8%8B/"/>
     <category term="visual studio 2022" scheme="https://blog.s1rius.space/tags/visual-studio-2022/"/>
     <content>
-      <![CDATA[<p><img src="/img/csdn_16-1689254207258-133.png" alt="点击并拖拽以移动"></p><p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p><p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022]]>
+      <![CDATA[<p><img src="/img/csdn_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p><p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p><p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022]]>
     </content>
     <id>https://blog.s1rius.space/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</id>
     <link href="https://blog.s1rius.space/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/" rel="alternate"/>
     <link href="https://s1rius.space/img/cover/img_156_1222x821_350.011993408203_null_normal.webp" rel="enclosure" type="image/webp"/>
     <published>2021-12-09T16:00:00.000Z</published>
     <summary>
-      <![CDATA[<p><img src="/img/csdn_16-1689254207258-133.png" alt="点击并拖拽以移动"></p>
+      <![CDATA[<p><img src="/img/csdn_16-1689254207258-133.png" alt="点击并拖拽以移动" /></p>
 <p>我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。</p>
 <p>这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022]]>
     </summary>
