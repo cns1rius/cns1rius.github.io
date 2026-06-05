@@ -1,43 +1,72 @@
 /*
  * @Author: s1rius
  * @Date: 2025-01-22 08:59:05
- * @LastEditTime: 2025-01-25 09:21:11
  * @Description: https://s1rius.space/
  */
-document.addEventListener("pjax:complete", tonav);
-document.addEventListener("DOMContentLoaded", tonav);
-//响应pjax
-function tonav() {
-  document
-    .getElementById("name-container")
-    .setAttribute("style", "display:none");
-  var position = $(window).scrollTop();
-  $(window).scroll(function () {
-    var scroll = $(window).scrollTop();
-    if (scroll > position) {
-      document.getElementById("name-container").setAttribute("style", "");
-      document
-        .getElementsByClassName("menus_items")[1]
-        .setAttribute("style", "display:none!important");
-    } else {
-      document
-        .getElementsByClassName("menus_items")[1]
-        .setAttribute("style", "");
-      document
-        .getElementById("name-container")
-        .setAttribute("style", "display:none");
-    }
-    position = scroll;
-  });
-  //修复没有弄右键菜单的童鞋无法回顶部的问题
-  document.getElementById("page-name").innerText =
-    document.title.split(" | s1rius")[0];
-}
+(function () {
+  let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  let ticking = false;
 
-function scrollToTop() {
-  document.getElementsByClassName("menus_items")[1].setAttribute("style", "");
-  document
-    .getElementById("name-container")
-    .setAttribute("style", "display:none");
-  btf.scrollToDest(0, 500);
-}
+  function getMenuItems() {
+    return document.getElementsByClassName("menus_items")[1];
+  }
+
+  function hideNameContainer() {
+    const nameContainer = document.getElementById("name-container");
+    if (nameContainer) nameContainer.style.display = "none";
+  }
+
+  function showNameContainer() {
+    const nameContainer = document.getElementById("name-container");
+    if (nameContainer) nameContainer.style.display = "";
+  }
+
+  function setMenuVisible(visible) {
+    const menuItems = getMenuItems();
+    if (menuItems) {
+      menuItems.style.setProperty("display", visible ? "" : "none", visible ? "" : "important");
+    }
+  }
+
+  function updateNavTitle() {
+    const pageName = document.getElementById("page-name");
+    if (!pageName) return;
+    pageName.innerText = document.title.split(" | s1rius")[0];
+  }
+
+  function onScroll() {
+    const currentScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    if (currentScrollY > lastScrollY) {
+      showNameContainer();
+      setMenuVisible(false);
+    } else {
+      setMenuVisible(true);
+      hideNameContainer();
+    }
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  function requestScrollUpdate() {
+    if (!ticking) {
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }
+
+  function initNav() {
+    hideNameContainer();
+    updateNavTitle();
+    lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  }
+
+  window.scrollToTop = function () {
+    setMenuVisible(true);
+    hideNameContainer();
+    btf.scrollToDest(0, 500);
+  };
+
+  document.addEventListener("DOMContentLoaded", initNav);
+  document.addEventListener("pjax:complete", initNav);
+  window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+})();

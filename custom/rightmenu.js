@@ -1,346 +1,341 @@
-//22.12.8 update：add mask
-//22.12.9 update: add search in this page
-function setMask() {
-  //设置遮罩层
-  if (document.getElementsByClassName("rmMask")[0] != undefined) {
-    return document.getElementsByClassName("rmMask")[0];
-  }
-  mask = document.createElement("div");
-  mask.className = "rmMask";
-  mask.style.width = window.innerWidth + "px";
-  mask.style.height = window.innerHeight + "px";
-  mask.style.background = "#fff";
-  mask.style.opacity = ".0";
-  mask.style.position = "fixed";
-  mask.style.top = "0";
-  mask.style.left = "0";
-  mask.style.zIndex = 998;
-  document.body.appendChild(mask);
-  document.getElementById("rightMenu").style.zIndex = 19198;
-  return mask;
-}
-
-function insertAtCursor(myField, myValue) {
-  //IE 浏览器
-  if (document.selection) {
-    myField.focus();
-    sel = document.selection.createRange();
-    sel.text = myValue;
-    sel.select();
+(function () {
+  if (window.__rightMenuAbortController) {
+    window.__rightMenuAbortController.abort();
   }
 
-  //FireFox、Chrome等
-  else if (myField.selectionStart || myField.selectionStart == "0") {
-    var startPos = myField.selectionStart;
-    var endPos = myField.selectionEnd;
+  const controller = new AbortController();
+  const signal = controller.signal;
+  window.__rightMenuAbortController = controller;
 
-    // 保存滚动条
-    var restoreTop = myField.scrollTop;
-    myField.value =
-      myField.value.substring(0, startPos) +
-      myValue +
-      myField.value.substring(endPos, myField.value.length);
+  const mobileRe =
+    /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i;
 
-    if (restoreTop > 0) {
-      myField.scrollTop = restoreTop;
+  const rmf = (window.rmf = window.rmf || {});
+  let currentTarget = null;
+  let mask = null;
+
+  function byId(id) {
+    return document.getElementById(id);
+  }
+
+  function all(selector) {
+    return Array.from(document.querySelectorAll(selector));
+  }
+
+  function show(el) {
+    if (el) el.style.display = "block";
+  }
+
+  function hide(el) {
+    if (el) el.style.display = "none";
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text);
+      return;
     }
 
-    myField.focus();
-    myField.selectionStart = startPos + myValue.length;
-    myField.selectionEnd = startPos + myValue.length;
-  } else {
-    myField.value += myValue;
-    myField.focus();
-  }
-}
-let rmf = {};
-rmf.showRightMenu = function (isTrue, x = 0, y = 0) {
-  let $rightMenu = $("#rightMenu");
-  $rightMenu.css("top", x + "px").css("left", y + "px");
-
-  if (isTrue) {
-    $rightMenu.show();
-  } else {
-    $rightMenu.hide();
-  }
-};
-rmf.switchDarkMode = function () {
-  const nowMode =
-    document.documentElement.getAttribute("data-theme") === "dark"
-      ? "dark"
-      : "light";
-  if (nowMode === "light") {
-    activateDarkMode();
-    saveToLocal.set("theme", "dark", 2);
-    GLOBAL_CONFIG.Snackbar !== undefined &&
-      btf.snackbarShow(GLOBAL_CONFIG.Snackbar.day_to_night);
-  } else {
-    activateLightMode();
-    saveToLocal.set("theme", "light", 2);
-    GLOBAL_CONFIG.Snackbar !== undefined &&
-      btf.snackbarShow(GLOBAL_CONFIG.Snackbar.night_to_day);
-  }
-  // handle some cases
-  typeof utterancesTheme === "function" && utterancesTheme();
-  typeof FB === "object" && window.loadFBComment();
-  window.DISQUS &&
-    document.getElementById("disqus_thread").children.length &&
-    setTimeout(() => window.disqusReset(), 200);
-};
-rmf.yinyong = function () {
-  var e = document.getElementsByClassName("el-textarea__inner")[0],
-    t = document.createEvent("HTMLEvents");
-  t.initEvent("input", !0, !0),
-    (e.value = d.value = "> " + getSelection().toString() + "\n\n"),
-    e.dispatchEvent(t);
-  console.log(getSelection().toString());
-  document.getElementsByClassName("el-textarea__inner")[0].value =
-    "> " + getSelection().toString() + "\n\n";
-  Snackbar.show({
-    text: "为保证最佳评论阅读体验，建议不要删除空行",
-    pos: "top-center",
-    showAction: false,
-  });
-};
-rmf.copyWordsLink = function () {
-  let url = window.location.href;
-  let txa = document.createElement("textarea");
-  txa.value = url;
-  document.body.appendChild(txa);
-  txa.select();
-  document.execCommand("Copy");
-  document.body.removeChild(txa);
-  Snackbar.show({
-    text: "链接复制成功！快去分享吧！",
-    pos: "top-right",
-    showAction: false,
-  });
-};
-rmf.switchReadMode = function () {
-  const $body = document.body;
-  $body.classList.add("read-mode");
-  const newEle = document.createElement("button");
-  newEle.type = "button";
-  newEle.className = "fas fa-sign-out-alt exit-readmode";
-  $body.appendChild(newEle);
-
-  function clickFn() {
-    $body.classList.remove("read-mode");
-    newEle.remove();
-    newEle.removeEventListener("click", clickFn);
+    const txa = document.createElement("textarea");
+    txa.value = text;
+    txa.style.position = "fixed";
+    txa.style.opacity = "0";
+    document.body.appendChild(txa);
+    txa.select();
+    document.execCommand("copy");
+    txa.remove();
   }
 
-  newEle.addEventListener("click", clickFn);
-};
-
-//复制选中文字
-rmf.copySelect = function () {
-  document.execCommand("Copy", false, null);
-  //这里可以写点东西提示一下 已复制
-};
-
-//回到顶部
-rmf.scrollToTop = function () {
-  document.getElementsByClassName("menus_items")[1].setAttribute("style", "");
-  document
-    .getElementById("name-container")
-    .setAttribute("style", "display:none");
-  btf.scrollToDest(0, 500);
-};
-rmf.translate = function () {
-  document.getElementById("translateLink").click();
-};
-rmf.searchinThisPage = () => {
-  document.body.removeChild(mask);
-  document.getElementsByClassName("local-search-box--input")[0].value = window
-    .getSelection()
-    .toString();
-  document.getElementsByClassName("search")[0].click();
-  var evt = document.createEvent("HTMLEvents");
-  evt.initEvent("input", false, false);
-  document
-    .getElementsByClassName("local-search-box--input")[0]
-    .dispatchEvent(evt);
-};
-document.body.addEventListener("touchmove", function (e) {}, {
-  passive: false,
-});
-function popupMenu() {
-  //window.oncontextmenu=function(){return false;}
-  window.oncontextmenu = function (event) {
-    if (event.ctrlKey) return true;
-
-    $(".rightMenu-group.hide").hide();
-    if (document.getSelection().toString()) {
-      $("#menu-text").show();
+  function showToast(text, pos) {
+    if (window.Snackbar && typeof Snackbar.show === "function") {
+      Snackbar.show({ text, pos: pos || "top-right", showAction: false });
+    } else if (window.btf && typeof btf.snackbarShow === "function") {
+      btf.snackbarShow(text);
     }
-    if (document.getElementById("post")) {
-      $("#menu-post").show();
+  }
+
+  function insertAtCursor(field, value) {
+    if (!field) return;
+
+    if (typeof field.selectionStart === "number") {
+      const startPos = field.selectionStart;
+      const endPos = field.selectionEnd;
+      const restoreTop = field.scrollTop;
+      field.value = field.value.slice(0, startPos) + value + field.value.slice(endPos);
+      field.scrollTop = restoreTop;
+      field.focus();
+      field.selectionStart = startPos + value.length;
+      field.selectionEnd = startPos + value.length;
+      return;
     }
-    if (document.getElementById("body-wrap")) {
-      $("#menu-post").show();
+
+    field.value += value;
+    field.focus();
+  }
+
+  function ensureMask() {
+    if (mask && document.body.contains(mask)) return mask;
+
+    mask = document.createElement("div");
+    mask.className = "rmMask";
+    mask.style.cssText =
+      "width:100vw;height:100vh;background:#fff;opacity:0;position:fixed;top:0;left:0;z-index:998;";
+    document.body.appendChild(mask);
+    mask.addEventListener("click", hideRightMenu, { signal });
+
+    const rightMenu = byId("rightMenu");
+    if (rightMenu) rightMenu.style.zIndex = "19198";
+
+    return mask;
+  }
+
+  function hideRightMenu() {
+    const rightMenu = byId("rightMenu");
+    if (rightMenu) rightMenu.style.display = "none";
+    if (mask && document.body.contains(mask)) mask.remove();
+  }
+
+  function showRightMenu(x, y) {
+    const rightMenu = byId("rightMenu");
+    if (!rightMenu) return;
+
+    rightMenu.style.display = "block";
+    rightMenu.style.top = `${y}px`;
+    rightMenu.style.left = `${x}px`;
+  }
+
+  function resetGroups() {
+    all(".rightMenu-group.hide").forEach(hide);
+  }
+
+  function isInternalLink(href) {
+    try {
+      return new URL(href, window.location.href).origin === window.location.origin;
+    } catch {
+      return false;
+    }
+  }
+
+  rmf.showRightMenu = function (isTrue, y = 0, x = 0) {
+    if (isTrue) showRightMenu(x, y);
+    else hideRightMenu();
+  };
+
+  rmf.switchDarkMode = function () {
+    const nowMode = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    if (nowMode === "light") {
+      btf.activateDarkMode();
+      btf.saveToLocal.set("theme", "dark", 2);
+      GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.day_to_night);
     } else {
-      if (document.getElementById("page")) {
-        $("#menu-post").show();
-      }
+      btf.activateLightMode();
+      btf.saveToLocal.set("theme", "light", 2);
+      GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.night_to_day);
     }
-    var el = window.document.body;
-    el = event.target;
-    var a =
-      /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
-    if (a.test(window.getSelection().toString()) && el.tagName != "A") {
-      $("#menu-too").show();
+
+    typeof utterancesTheme === "function" && utterancesTheme();
+    typeof FB === "object" && window.loadFBComment();
+    window.DISQUS &&
+      document.getElementById("disqus_thread").children.length &&
+      setTimeout(() => window.disqusReset(), 200);
+  };
+
+  rmf.yinyong = function () {
+    const textarea = document.getElementsByClassName("el-textarea__inner")[0];
+    if (!textarea) return;
+
+    textarea.value = `> ${getSelection().toString()}\n\n`;
+    textarea.dispatchEvent(new Event("input", { bubbles: true }));
+    showToast("为保证最佳评论阅读体验，建议不要删除空行", "top-center");
+  };
+
+  rmf.copyWordsLink = function () {
+    copyText(window.location.href);
+    showToast("链接复制成功！快去分享吧！");
+  };
+
+  rmf.switchReadMode = function () {
+    const body = document.body;
+    if (body.classList.contains("read-mode")) return;
+
+    body.classList.add("read-mode");
+    const newEle = document.createElement("button");
+    newEle.type = "button";
+    newEle.className = "fas fa-sign-out-alt exit-readmode";
+    body.appendChild(newEle);
+
+    newEle.addEventListener("click", function clickFn() {
+      body.classList.remove("read-mode");
+      newEle.remove();
+      newEle.removeEventListener("click", clickFn);
+    });
+  };
+
+  rmf.copySelect = function () {
+    copyText(window.getSelection().toString());
+  };
+
+  rmf.scrollToTop = function () {
+    const menuItems = document.getElementsByClassName("menus_items")[1];
+    const nameContainer = byId("name-container");
+    if (menuItems) menuItems.style.display = "";
+    if (nameContainer) nameContainer.style.display = "none";
+    btf.scrollToDest(0, 500);
+  };
+
+  rmf.translate = function () {
+    const translateLink = byId("translateLink");
+    if (translateLink) translateLink.click();
+  };
+
+  rmf.searchinThisPage = function () {
+    hideRightMenu();
+    const searchInput = document.getElementsByClassName("local-search-box--input")[0];
+    const searchButton = document.getElementsByClassName("search")[0];
+    if (!searchInput || !searchButton) return;
+
+    searchInput.value = window.getSelection().toString();
+    searchButton.click();
+    searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+
+  rmf.open = function () {
+    if (!currentTarget || currentTarget.tagName !== "A") return;
+    if (isInternalLink(currentTarget.href) && window.pjax) {
+      pjax.loadUrl(currentTarget.href);
+    } else {
+      window.location.href = currentTarget.href;
     }
-    if (el.tagName == "A") {
-      $("#menu-to").show();
-      rmf.open = function () {
-        if (
-          (el.href.indexOf("http://") == -1 &&
-            el.href.indexOf("https://") == -1) ||
-          el.href.indexOf("s1rius.space") != -1
-        ) {
-          pjax.loadUrl(el.href);
-        } else {
-          location.href = el.href;
-        }
-      };
-      rmf.openWithNewTab = function () {
-        window.open(el.href);
-        // window.location.reload();
-      };
-      rmf.copyLink = function () {
-        let url = el.href;
-        let txa = document.createElement("textarea");
-        txa.value = url;
-        document.body.appendChild(txa);
-        txa.select();
-        document.execCommand("Copy");
-        document.body.removeChild(txa);
-      };
+  };
+
+  rmf.openWithNewTab = function () {
+    if (!currentTarget) return;
+    const url = currentTarget.tagName === "IMG" ? currentTarget.src : currentTarget.href;
+    if (url) window.open(url);
+  };
+
+  rmf.copyLink = function () {
+    if (!currentTarget) return;
+    const url = currentTarget.tagName === "IMG" ? currentTarget.src : currentTarget.href;
+    if (url) copyText(url);
+  };
+
+  rmf.click = function () {
+    if (currentTarget) currentTarget.click();
+  };
+
+  rmf.saveAs = function () {
+    if (!currentTarget || currentTarget.tagName !== "IMG") return;
+    const a = document.createElement("a");
+    a.href = currentTarget.src;
+    a.download = currentTarget.src.split("/").pop() || "image";
+    a.click();
+  };
+
+  rmf.paste = function () {
+    if (!currentTarget || !["TEXTAREA", "INPUT"].includes(currentTarget.tagName)) return;
+
+    navigator.clipboard
+      .readText()
+      .then(text => insertAtCursor(currentTarget, text))
+      .catch(() => showToast("请允许读取剪贴板！", "top-center"));
+  };
+
+  window.RemoveRightMenu = hideRightMenu;
+
+  function showContextMenu(event) {
+    if (event.ctrlKey) return;
+
+    const rightMenu = byId("rightMenu");
+    if (!rightMenu) return;
+
+    currentTarget = event.target;
+    resetGroups();
+
+    const selection = window.getSelection().toString();
+    if (selection) show(byId("menu-text"));
+    if (byId("post") || byId("body-wrap") || byId("page")) show(byId("menu-post"));
+
+    const maybeUrl =
+      /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/;
+    if (selection && maybeUrl.test(selection) && currentTarget.tagName !== "A") {
+      show(byId("menu-too"));
     }
-    if (el.tagName == "IMG") {
-      $("#menu-img").show();
-      rmf.openWithNewTab = function () {
-        window.open(el.src);
-        // window.location.reload();
-      };
-      rmf.click = function () {
-        el.click();
-      };
-      rmf.copyLink = function () {
-        let url = el.src;
-        let txa = document.createElement("textarea");
-        txa.value = url;
-        document.body.appendChild(txa);
-        txa.select();
-        document.execCommand("Copy");
-        document.body.removeChild(txa);
-      };
-      rmf.saveAs = function () {
-        var a = document.createElement("a");
-        var url = el.src;
-        var filename = url.split("/")[-1];
-        a.href = url;
-        a.download = filename;
-        a.click();
-        window.URL.revokeObjectURL(url);
-      };
-    } else if (el.tagName == "TEXTAREA" || el.tagName == "INPUT") {
-      $("#menu-paste").show();
-      // rmf.paste=function(){
-      //     input.addEventListener('paste', async event => {
-      //         event.preventDefault();
-      //         const text = await navigator.clipboard.readText();
-      //         el.value+=text;
-      //       });
-      // }
-      rmf.paste = function () {
-        navigator.permissions
-          .query({
-            name: "clipboard-read",
-          })
-          .then((result) => {
-            if (result.state == "granted" || result.state == "prompt") {
-              //读取剪贴板
-              navigator.clipboard.readText().then((text) => {
-                console.log(text);
-                insertAtCursor(el, text);
-              });
-            } else {
-              Snackbar.show({
-                text: "请允许读取剪贴板！",
-                pos: "top-center",
-                showAction: false,
-              });
-            }
+
+    if (currentTarget.tagName === "A") show(byId("menu-to"));
+    if (currentTarget.tagName === "IMG") show(byId("menu-img"));
+    if (["TEXTAREA", "INPUT"].includes(currentTarget.tagName)) show(byId("menu-paste"));
+
+    rightMenu.style.display = "block";
+    const rect = rightMenu.getBoundingClientRect();
+    let x = event.clientX + 10;
+    let y = event.clientY;
+    if (x + rect.width > window.innerWidth) x -= rect.width + 10;
+    if (y + rect.height > window.innerHeight) y -= y + rect.height - window.innerHeight;
+
+    ensureMask();
+    showRightMenu(x, y);
+    event.preventDefault();
+  }
+
+  if (!mobileRe.test(navigator.userAgent)) {
+    window.addEventListener("contextmenu", showContextMenu, { signal });
+  } else {
+    let longPressTimer = 0;
+    let touchStartPoint = null;
+
+    document.documentElement.addEventListener(
+      "touchstart",
+      function (event) {
+        const touch = event.touches[0];
+        if (!touch) return;
+
+        touchStartPoint = {
+          x: touch.clientX,
+          y: touch.clientY,
+          target: event.target,
+        };
+
+        longPressTimer = window.setTimeout(function () {
+          if (!touchStartPoint) return;
+          showContextMenu({
+            ctrlKey: false,
+            target: touchStartPoint.target,
+            clientX: touchStartPoint.x,
+            clientY: touchStartPoint.y,
+            preventDefault: function () {
+              event.preventDefault();
+            },
           });
-      };
-    }
-    let pageX = event.clientX + 10;
-    let pageY = event.clientY;
-    let rmWidth = $("#rightMenu").width();
-    let rmHeight = $("#rightMenu").height();
-    if (pageX + rmWidth > window.innerWidth) {
-      pageX -= rmWidth + 10;
-    }
-    if (pageY + rmHeight > window.innerHeight) {
-      pageY -= pageY + rmHeight - window.innerHeight;
-    }
-    mask = setMask();
-    window.onscroll = () => {
-      rmf.showRightMenu(false);
-      window.onscroll = () => {};
-      //document.removeChild(mask);
-    };
-    $(".rightMenu-item").click(() => {
-      document.body.removeChild(mask);
-    });
-    $(window).resize(() => {
-      rmf.showRightMenu(false);
-      //document.body.removeChild(mask);
-    });
-    mask.onclick = () => {
-      document.body.removeChild(mask);
-    };
-    rmf.showRightMenu(true, pageY, pageX);
-    return false;
-  };
+          longPressTimer = 0;
+        }, 380);
+      },
+      { passive: false, signal }
+    );
 
-  window.addEventListener("click", function () {
-    rmf.showRightMenu(false);
-  });
-}
-if (
-  !navigator.userAgent.match(
-    /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-  )
-) {
-  popupMenu();
-}
-const box = document.documentElement;
+    document.documentElement.addEventListener(
+      "touchmove",
+      function () {
+        window.clearTimeout(longPressTimer);
+        longPressTimer = 0;
+        touchStartPoint = null;
+      },
+      { passive: true, signal }
+    );
 
-function addLongtabListener(target, callback) {
-  let timer = 0; // 初始化timer
+    document.documentElement.addEventListener(
+      "touchend",
+      function () {
+        window.clearTimeout(longPressTimer);
+        longPressTimer = 0;
+        touchStartPoint = null;
+      },
+      { passive: true, signal }
+    );
+  }
 
-  target.ontouchstart = () => {
-    timer = 0; // 重置timer
-    timer = setTimeout(() => {
-      callback();
-      timer = 0;
-    }, 380); // 超时器能成功执行，说明是长按
-  };
-
-  target.ontouchmove = () => {
-    clearTimeout(timer); // 如果来到这里，说明是滑动
-    timer = 0;
-  };
-
-  target.ontouchend = () => {
-    // 到这里如果timer有值，说明此触摸时间不足380ms，是点击
-    if (timer) {
-      clearTimeout(timer);
-    }
-  };
-}
-
-addLongtabListener(box, popupMenu);
+  window.addEventListener("click", hideRightMenu, { signal });
+  window.addEventListener("scroll", hideRightMenu, { passive: true, signal });
+  window.addEventListener("resize", hideRightMenu, { signal });
+  all(".rightMenu-item").forEach(item => item.addEventListener("click", hideRightMenu, { signal }));
+})();
