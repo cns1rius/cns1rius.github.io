@@ -358,8 +358,8 @@ ctfshow黑盒测试]]>
       <name>s1rius</name>
     </author>
     <category term="web" scheme="https://blog.s1rius.space/categories/web/"/>
-    <category term="unctf" scheme="https://blog.s1rius.space/tags/unctf/"/>
     <category term="web" scheme="https://blog.s1rius.space/tags/web/"/>
+    <category term="unctf" scheme="https://blog.s1rius.space/tags/unctf/"/>
     <category term="misc" scheme="https://blog.s1rius.space/tags/misc/"/>
     <category term="pwn" scheme="https://blog.s1rius.space/tags/pwn/"/>
     <category term="re" scheme="https://blog.s1rius.space/tags/re/"/>
@@ -401,15 +401,18 @@ xxe未完结草稿]]>
       <name>s1rius</name>
     </author>
     <category term="随笔" scheme="https://blog.s1rius.space/categories/%E9%9A%8F%E7%AC%94/"/>
+    <category term="22年10月末" scheme="https://blog.s1rius.space/tags/22%E5%B9%B410%E6%9C%88%E6%9C%AB/"/>
+    <category term="日记" scheme="https://blog.s1rius.space/tags/%E6%97%A5%E8%AE%B0/"/>
+    <category term="随笔" scheme="https://blog.s1rius.space/tags/%E9%9A%8F%E7%AC%94/"/>
     <content>
       <![CDATA[<p><img src="https://s1rius.space/img/cover/66eac6c9edc99.webp" alt="22年10月末" /></p>
-Here's something encrypted, password is required to continue reading.]]>
+22年10月末随笔]]>
     </content>
     <id>https://blog.s1rius.space/2022/10/22%E5%B9%B410%E6%9C%88%E6%9C%AB/</id>
     <link href="https://blog.s1rius.space/2022/10/22%E5%B9%B410%E6%9C%88%E6%9C%AB/" rel="alternate"/>
     <link href="https://s1rius.space/img/cover/66eac6c9edc99.webp" rel="enclosure" type="image/webp"/>
     <published>2022-10-30T16:00:00.000Z</published>
-    <summary>Here's something encrypted, password is required to continue reading.</summary>
+    <summary>22年10月末随笔</summary>
     <title>22年10月末</title>
     <updated>2022-10-30T16:00:00.000Z</updated>
   </entry>
