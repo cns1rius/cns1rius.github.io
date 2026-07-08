@@ -25,6 +25,7 @@ const getScript = (url, attr = {}) =>
 // 定义 runTrack 函数
 const runTrack = () => {
   const botMatch = navigator.userAgent.match(botPattern)?.[0];
+  console.log("botMatch: ", botMatch);
   if (botMatch) {
     const targetPath = (window.location.pathname + window.location.search + window.location.hash).substring(0, 499)
     umami.track('Crawler', {

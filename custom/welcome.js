@@ -19,7 +19,7 @@ if (sessionStorage.getItem("popCookieWindow") != welcomeFlag) {
   setTimeout(function () {
     btf.snackbarShow(
       "本站使用Cookie和本地/会话存储保证浏览体验和网站统计",
-      "bottom-right"
+      "bottom-right",
     );
   }, 5000);
 }
@@ -74,7 +74,7 @@ function browserVersion() {
 //2022-10-29修正了一个错误：过期时间应使用toGMTString()，而不是toUTCString()，否则实际过期时间在中国差了8小时
 function setCookies(obj, limitTime) {
   let data = new Date(
-    new Date().getTime() + limitTime * 24 * 60 * 60 * 1000
+    new Date().getTime() + limitTime * 24 * 60 * 60 * 1000,
   ).toGMTString();
   for (let i in obj) {
     document.cookie = i + "=" + obj[i] + ";expires=" + data;
@@ -91,7 +91,7 @@ if (getCookie("browsertc") != 1) {
     {
       browsertc: 1,
     },
-    1
+    1,
   );
   browserVersion();
 }
@@ -132,8 +132,8 @@ function createtime1() {
       "color:#00a3d9",
       "",
       "color:#00a3d9",
-      ""
-    )
+      "",
+    ),
   );
 
   setTimeout(
@@ -141,8 +141,8 @@ function createtime1() {
       console,
       "%c S013-782 %c 你现在正处于监控中",
       "color:white; background-color:#d9534f",
-      ""
-    )
+      "",
+    ),
   );
 }
 
