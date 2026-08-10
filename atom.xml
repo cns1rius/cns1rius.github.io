@@ -11,7 +11,28 @@
   <rights>All rights reserved 2026, s1rius</rights>
   <subtitle>天狼的个人空间</subtitle>
   <title>s1rius' space</title>
-  <updated>2026-07-07T09:21:00.000Z</updated>
+  <updated>2026-08-10T06:30:00.000Z</updated>
+  <entry>
+    <author>
+      <name>s1rius</name>
+    </author>
+    <category term="htb" scheme="https://blog.s1rius.space/categories/htb/"/>
+    <category term="web" scheme="https://blog.s1rius.space/tags/web/"/>
+    <category term="HackTheBox" scheme="https://blog.s1rius.space/tags/HackTheBox/"/>
+    <category term="htb-DarkZeroReturn" scheme="https://blog.s1rius.space/tags/htb-DarkZeroReturn/"/>
+    <category term="DarkZeroReturn" scheme="https://blog.s1rius.space/tags/DarkZeroReturn/"/>
+    <content>
+      <![CDATA[<p><img src="https://s1rius.space/img/cover/672110e9c9b55.webp" alt="htb-DarkZeroReturn" /></p>
+htb-DarkZeroReturn]]>
+    </content>
+    <id>https://blog.s1rius.space/2026/08/htb-DarkZeroReturns/</id>
+    <link href="https://blog.s1rius.space/2026/08/htb-DarkZeroReturns/" rel="alternate"/>
+    <link href="https://s1rius.space/img/cover/672110e9c9b55.webp" rel="enclosure" type="image/webp"/>
+    <published>2026-08-10T06:30:00.000Z</published>
+    <summary>htb-DarkZeroReturn</summary>
+    <title>htb-DarkZeroReturn</title>
+    <updated>2026-08-10T06:30:00.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>s1rius</name>
@@ -182,6 +203,26 @@ cloudever wp]]>
     <author>
       <name>s1rius</name>
     </author>
+    <category term="htb" scheme="https://blog.s1rius.space/categories/htb/"/>
+    <category term="web" scheme="https://blog.s1rius.space/tags/web/"/>
+    <category term="htb-Cat" scheme="https://blog.s1rius.space/tags/htb-Cat/"/>
+    <category term="HackTheBox" scheme="https://blog.s1rius.space/tags/HackTheBox/"/>
+    <content>
+      <![CDATA[<p><img src="https://s1rius.space/img/cover/672110e9c9b55.webp" alt="htb-Cat" /></p>
+htb-Cat]]>
+    </content>
+    <id>https://blog.s1rius.space/2025/02/htb-Cat/</id>
+    <link href="https://blog.s1rius.space/2025/02/htb-Cat/" rel="alternate"/>
+    <link href="https://s1rius.space/img/cover/672110e9c9b55.webp" rel="enclosure" type="image/webp"/>
+    <published>2025-02-19T16:00:00.000Z</published>
+    <summary>htb-Cat</summary>
+    <title>htb-Cat</title>
+    <updated>2025-02-19T16:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>s1rius</name>
+    </author>
     <category term="算法" scheme="https://blog.s1rius.space/categories/%E7%AE%97%E6%B3%95/"/>
     <category term="leetcode" scheme="https://blog.s1rius.space/tags/leetcode/"/>
     <category term="算法" scheme="https://blog.s1rius.space/tags/%E7%AE%97%E6%B3%95/"/>
@@ -195,26 +236,6 @@ cloudever wp]]>
     <published>2025-02-19T16:00:00.000Z</published>
     <summary>力扣 394.字符串解码 特殊解</summary>
     <title>力扣 394.字符串解码 特殊解</title>
-    <updated>2025-02-19T16:00:00.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>s1rius</name>
-    </author>
-    <category term="htb" scheme="https://blog.s1rius.space/categories/htb/"/>
-    <category term="web" scheme="https://blog.s1rius.space/tags/web/"/>
-    <category term="HackTheBox" scheme="https://blog.s1rius.space/tags/HackTheBox/"/>
-    <category term="htb-Cat" scheme="https://blog.s1rius.space/tags/htb-Cat/"/>
-    <content>
-      <![CDATA[<p><img src="https://s1rius.space/img/cover/672110e9c9b55.webp" alt="htb-Cat" /></p>
-htb-Cat]]>
-    </content>
-    <id>https://blog.s1rius.space/2025/02/htb-Cat/</id>
-    <link href="https://blog.s1rius.space/2025/02/htb-Cat/" rel="alternate"/>
-    <link href="https://s1rius.space/img/cover/672110e9c9b55.webp" rel="enclosure" type="image/webp"/>
-    <published>2025-02-19T16:00:00.000Z</published>
-    <summary>htb-Cat</summary>
-    <title>htb-Cat</title>
     <updated>2025-02-19T16:00:00.000Z</updated>
   </entry>
   <entry>
@@ -422,8 +443,8 @@ xxe未完结草稿]]>
     </author>
     <category term="htb" scheme="https://blog.s1rius.space/categories/htb/"/>
     <category term="web" scheme="https://blog.s1rius.space/tags/web/"/>
-    <category term="htb-Shoppy" scheme="https://blog.s1rius.space/tags/htb-Shoppy/"/>
     <category term="HackTheBox" scheme="https://blog.s1rius.space/tags/HackTheBox/"/>
+    <category term="htb-Shoppy" scheme="https://blog.s1rius.space/tags/htb-Shoppy/"/>
     <content>
       <![CDATA[<p><img src="https://s1rius.space/img/cover/img_162_1440x810_96_null_normal.webp" alt="htb-Shoppy" /></p>
 htb-Shoppy]]>
