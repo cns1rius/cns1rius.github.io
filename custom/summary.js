@@ -2,7 +2,7 @@
  * @Author: s1rius
  * @Date: 2025-06-13 16:36:19
  * @LastEditTime: 2025-06-13 16:44:06
- * @Description: https://s1rius.space/
+ * @Description: https://blog.s1rius.space/
  */
 // 打字机效果
 function typeTextMachineStyle(text, targetSelector, options = {}) {

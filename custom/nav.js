@@ -1,7 +1,7 @@
 /*
  * @Author: s1rius
  * @Date: 2025-01-22 08:59:05
- * @Description: https://s1rius.space/
+ * @Description: https://blog.s1rius.space/
  */
 (function () {
   let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;

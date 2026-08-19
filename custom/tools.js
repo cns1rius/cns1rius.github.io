@@ -2,7 +2,7 @@
  * @Author: s1rius
  * @Date: 2025-02-24 20:35:36
  * @LastEditTime: 2025-04-06 17:46:31
- * @Description: https://s1rius.space/
+ * @Description: https://blog.s1rius.space/
  */
 
 const option = null;
