@@ -1,1 +1,1 @@
-{"headers":[{"source":"/.*\\.(jpg|jpeg|png|gif|svg|ico|webp|avif|woff|woff2|ttf|eot)$","headers":[{"key":"Cache-Control","value":"public, max-age=315360000"}]},{"source":"/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=315360000, must-revalidate"}]}]}
+{"headers":[{"source":"/(.*)\\.(jpg|jpeg|png|gif|svg|ico|webp|avif|woff|woff2|ttf|eot)$","headers":[{"key":"Cache-Control","value":"public, max-age=315360000"}]},{"source":"/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=315360000, must-revalidate"}]}]}
