@@ -1,0 +1,25 @@
+<h1>bkcrack WASM 构建说明（A09 链）</h1><p>bkcrack = ZIP ZipCrypto 传统加密的已知明文攻击工具（Biham-Kocher）。 上游 <a href="https://github.com/kimci86/bkcrack">https://github.com/kimci86/bkcrack</a> ，<code>wasm</code> 分支专配 emscripten。</p><p>本次已在本机成功构建并产出，脚本见 <code>tools/build_bkcrack.sh</code>。本文档记录 决策与参数，供人工/CI 复现。</p><h2 id="产物">产物</h2><table><thead><tr><th>文件</th><th>大小</th><th>说明</th></tr></thead><tbody><tr><td><code>public/wasm/bkcrack.js</code></td><td>~89 KB</td><td>MODULARIZE ES6 胶水，默认导出 <code>Bkcrack</code></td></tr><tr><td><code>public/wasm/bkcrack.wasm</code></td><td>~370 KB</td><td>核心</td></tr><tr><td><code>public/wasm/bkcrack.license.txt</code></td><td>-</td><td>zlib/libpng，上游 license.txt</td></tr></tbody></table><p>版本：bkcrack 1.8.1 (2025-10-25)。无独立 <code>.worker.js</code>（新版 emscripten pthread 内联）。</p><h2 id="环境依赖">环境依赖</h2><ul><li>emscripten：emcc <strong>6.0.0</strong> 已验证。本机 <code>C:/Users/Operater/emsdk</code>。</li><li>cmake &gt;= 3.23 + ninja。本机无系统 cmake，用 pip 装： <code>py -m pip install cmake ninja</code>（装到 Python313/Scripts，需入 PATH）。</li><li>git。</li><li>toolchain：<code>$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake</code></li></ul><blockquote><p>注意：本机 emcmake/emcc 是 <code>.exe</code> 而非 <code>.bat</code>，<code>emcmake</code> wrapper 在 bash 下 找 <code>.bat</code> 会失败。脚本改为直接 <code>cmake -DCMAKE_TOOLCHAIN_FILE=...</code> 绕过 wrapper。</p></blockquote><h2 id="核心决策：pthread-关不掉">核心决策：pthread 关不掉</h2><p>bkcrack 的 <code>attack()</code>（src/bkcrack/Attack.cpp:194）和 <code>recoverPassword()</code> 无条件构造 <code>std::vector&lt;std::thread&gt;</code>，<strong>即使 jobs==1 也建线程</strong>，没有单线程 快路径。关掉 <code>-pthread</code> 会编译/链接失败或运行时 abort。因此：</p><ul><li><strong>保留</strong>上游 <code>src/bkcrack/CMakeLists.txt</code> 里 EMSCRIPTEN 分支的 <code>-fexceptions -pthread -sPTHREAD_POOL_SIZE=navigator.hardwareConcurrency -sINITIAL_MEMORY=64mb -sSTACK_SIZE=1mb</code>，原样不动。</li><li>pthread + wasm 意味着运行时需要 <strong>crossOriginIsolated</strong>（COOP/COEP 头）， 前端桥（A10）与部署需注意：页面必须带 <code>Cross-Origin-Opener-Policy: same-origin</code> + <code>Cross-Origin-Embedder-Policy: require-corp</code>，否则 <code>SharedArrayBuffer</code> 不可用，pthread 起不来。本项目 sw.js / <a href="http://bridge.py">bridge.py</a> 若要跑 bkcrack 需补这两个头。</li></ul><h2 id="唯一改动：cli-链接选项换成本项目范式">唯一改动：cli 链接选项换成本项目范式</h2><p>只改 <code>src/cli/CMakeLists.txt</code> 的 EMSCRIPTEN 分支。上游是 node 专用 (<code>-sEXECUTABLE -sENVIRONMENT=node -sNODERAWFS</code>)，换成对齐 <code>sevenzip.js</code> 的 浏览器懒加载形态：</p> <pre><code class="language-cmake">target_link_options(bkcrack PRIVATE
+    -sMODULARIZE=1
+    -sEXPORT_ES6=1
+    -sEXPORT_NAME=Bkcrack
+    -sALLOW_MEMORY_GROWTH=1
+    -sENVIRONMENT=web,worker,node
+    -sINVOKE_RUN=0
+    -sEXIT_RUNTIME=0
+    -sFORCE_FILESYSTEM=1
+    &quot;-sEXPORTED_RUNTIME_METHODS=FS,callMain,stringToUTF8,UTF8ToString,lengthBytesUTF8&quot;)
+</code></pre> <ul><li><code>NODERAWFS</code> 去掉（那是直读本机 fs 的 node 专用）；浏览器改用 MEMFS， 文件通过 <code>FS</code> 运行时 API 写入虚拟盘，故加 <code>FORCE_FILESYSTEM</code>。</li><li><code>INVOKE_RUN=0</code>（=noInitialRun）+ 导出 <code>callMain</code>：懒加载后手动传 argv 调用， 和 sevenzip.js 一致。</li><li><code>EXIT_RUNTIME=0</code>：callMain 后运行时保活，可多次调用。</li></ul><h2 id="复现步骤">复现步骤</h2> <pre><code class="language-bash">bash tools/build_bkcrack.sh
+# 或手动：
+EMSDK=C:/Users/Operater/emsdk
+git clone --depth 1 --branch wasm https://github.com/kimci86/bkcrack /tmp/bk
+# 按上节改 /tmp/bk/src/cli/CMakeLists.txt
+export PATH=&quot;$HOME/AppData/Local/Programs/Python/Python313/Scripts:$PATH&quot;
+cmake -S /tmp/bk -B /tmp/bk/build-wasm -G Ninja -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_TOOLCHAIN_FILE=$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake \
+  -DCMAKE_CROSSCOMPILING_EMULATOR=$EMSDK/node/22.16.0_64bit/bin/node.exe
+cmake --build /tmp/bk/build-wasm
+cp /tmp/bk/build-wasm/src/cli/bkcrack.{js,wasm} public/wasm/
+</code></pre> <h2 id="smoke-验证">smoke 验证</h2> <pre><code class="language-js">import Bkcrack from './public/wasm/bkcrack.js';
+const m = await Bkcrack({ print: console.log });
+m.callMain(['--version']);   // =&gt; bkcrack 1.8.1 - 2025-10-25
+</code></pre> <p>已在本机 node 22.16 通过（实例化 OK + 版本输出）。</p><h2 id="前端桥-A10-待办（本卡不做）">前端桥 A10 待办（本卡不做）</h2><ul><li>用法：<code>callMain</code> 传 bkcrack CLI 参数。典型已知明文攻击： <code>bkcrack -C cipher.zip -c inner.ext -p plain.bin</code> 得三个 key， 再 <code>bkcrack -C cipher.zip -k X Y Z -D out.zip</code> 解密。</li><li>文件经 <code>FS.writeFile</code> 写进 MEMFS 后再传路径给 callMain；产物用 <code>FS.readFile</code> 取回。</li><li>stdout/stderr 走 <code>print</code>/<code>printErr</code> 回调，需解析 “Keys” 行拿 X Y Z。</li><li>部署务必配 COOP/COEP（见上「pthread」节），否则 pthread 无法启动。</li></ul>

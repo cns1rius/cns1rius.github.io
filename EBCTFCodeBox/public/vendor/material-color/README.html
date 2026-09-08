@@ -1,0 +1,29 @@
+<h1>material-color-utilities</h1><p><a href="https://npmjs.com/package/@material/material-color-utilities"><img src="https://badgen.net/npm/v/@material/material-color-utilities" alt="npm package"></a></p><p>Algorithms and utilities that power the Material Design 3 (M3) color system, including choosing theme colors from images and creating tones of colors; all in a new color space.</p><p>See the main <a href="https://github.com/material-foundation/material-color-utilities#readme">README</a> for more information.</p><h2 id="Getting-started">Getting started</h2><p><code>npm i @material/material-color-utilities</code> or <code>yarn add @material/material-color-utilities</code></p> <pre><code class="language-typescript">import { Hct } from &quot;@material/material-color-utilities&quot;;
+
+// Simple demonstration of HCT.
+const color = Hct.fromInt(0xff4285f4);
+console.log(`Hue: ${color.hue}`);
+console.log(`Chrome: ${color.chroma}`);
+console.log(`Tone: ${color.tone}`);
+
+</code></pre> <h3 id="Theming">Theming</h3> <pre><code class="language-typescript">import { argbFromHex, themeFromSourceColor, applyTheme } from &quot;@material/material-color-utilities&quot;;
+
+// Get the theme from a hex color
+const theme = themeFromSourceColor(argbFromHex('#f82506'), [
+  {
+    name: &quot;custom-1&quot;,
+    value: argbFromHex(&quot;#ff0000&quot;),
+    blend: true,
+  },
+]);
+
+// Print out the theme as JSON
+console.log(JSON.stringify(theme, null, 2));
+
+// Check if the user has dark mode turned on
+const systemDark = window.matchMedia(&quot;(prefers-color-scheme: dark)&quot;).matches;
+
+// Apply the theme to the body by updating custom properties for material tokens
+applyTheme(theme, {target: document.body, dark: systemDark});
+
+</code></pre> <h2 id="Contributing">Contributing</h2><p>This repo is not accepting external contributions, but feature requests and bug reports are welcome on <a href="https://github.com/material-foundation/material-color-utilities/issues">GitHub</a>.</p>
