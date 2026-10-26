@@ -11,27 +11,7 @@
   <rights>All rights reserved 2026, s1rius</rights>
   <subtitle>天狼的个人空间</subtitle>
   <title>s1rius' space</title>
-  <updated>2026-10-25T09:11:00.000Z</updated>
-  <entry>
-    <author>
-      <name>s1rius</name>
-    </author>
-    <category term="pwn" scheme="https://blog.s1rius.space/categories/pwn/"/>
-    <category term="SparkCTF" scheme="https://blog.s1rius.space/tags/SparkCTF/"/>
-    <category term="2026" scheme="https://blog.s1rius.space/tags/2026/"/>
-    <category term="PWN" scheme="https://blog.s1rius.space/tags/PWN/"/>
-    <content>
-      <![CDATA[<p><img src="https://blog.s1rius.space/img/cover/4.webp" alt="SparkCTF 2026 PWN" /></p>
-SparkCTF 2026新生赛 PWN题WP]]>
-    </content>
-    <id>https://blog.s1rius.space/2026/10/SparkCTF%202026%20PWN/</id>
-    <link href="https://blog.s1rius.space/2026/10/SparkCTF%202026%20PWN/" rel="alternate"/>
-    <link href="https://blog.s1rius.space/img/cover/4.webp" rel="enclosure" type="image/webp"/>
-    <published>2026-10-25T09:11:00.000Z</published>
-    <summary>SparkCTF 2026新生赛 PWN题WP</summary>
-    <title>SparkCTF 2026 PWN</title>
-    <updated>2026-10-25T09:11:00.000Z</updated>
-  </entry>
+  <updated>2026-08-10T06:30:00.000Z</updated>
   <entry>
     <author>
       <name>s1rius</name>
